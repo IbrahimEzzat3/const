@@ -351,7 +351,7 @@ const Header = () => {
               className="flex items-center space-x-2 text-secondary-900 hover:text-primary-600 transition-colors duration-200"
             >
               <img
-                src="http://localhost:3000/images/logos/logo-shad.png"
+                src="https://const-is53.vercel.app/images/logos/logo-shad.png"
                 alt="Company Logo"
                 className="h-16 w-auto object-cover aspect-auto "
                 fetchpriority="high"
