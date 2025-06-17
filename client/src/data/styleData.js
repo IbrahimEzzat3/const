@@ -2,7 +2,7 @@ const styleData = {
   concept: {
     titleAr: "واي ساب: الجمال في عدم الكمال",
     titleEn: "Why Saab: Beauty in Imperfection",
-    mainImage: "/images/projects/main/feature2.webp", // Replace with actual image for Neo Classic Style
+    mainImage: "/public/images/projects/main/feature2.webp", // Replace with actual image for Neo Classic Style
     sections: [
       {
         headingAr: "ماذا عن ستايل اناس ساب؟",
@@ -41,7 +41,7 @@ const styleData = {
   modern: {
     titleAr: "الطراز الحديث",
     titleEn: "Modern Style",
-    mainImage: "/images/projects/main/feature2.webp", // Replace with actual image for Neo Classic Style
+    mainImage: "/public/images/projects/main/feature2.webp", // Replace with actual image for Neo Classic Style
     sections: [
       {
         headingAr: "مقدمة عن الطراز الحديث",
@@ -76,7 +76,7 @@ const styleData = {
   "neo-classic": {
     titleAr: "طراز نيو كلاسيك في التصميم الداخلي",
     titleEn: "Neo Classic Style in Interior Design",
-    mainImage: "/images/projects/main/feature2.webp", // Replace with actual image for Neo Classic Style
+    mainImage: "/public/images/projects/main/feature2.webp", // Replace with actual image for Neo Classic Style
     sections: [
       {
         headingAr: "مقدمة عن طراز نيو كلاسيك",
@@ -111,7 +111,7 @@ const styleData = {
   classic: {
     titleAr: "الطراز الكلاسيكي",
     titleEn: "Classic Style",
-    mainImage: "/images/projects/main/feature2.webp", // Replace with actual image for Neo Classic Style
+    mainImage: "/public/images/projects/main/feature2.webp", // Replace with actual image for Neo Classic Style
     sections: [
       {
         headingAr: "مقدمة عن الطراز الكلاسيكي",
@@ -146,7 +146,7 @@ const styleData = {
   industrial: {
     titleAr: "الطراز الصناعي",
     titleEn: "Industrial Style",
-    mainImage: "/images/projects/main/feature2.webp", // Replace with actual image for Neo Classic Style
+    mainImage: "/public/images/projects/main/feature2.webp", // Replace with actual image for Neo Classic Style
     sections: [
       {
         headingAr: "مقدمة عن الطراز الصناعي",
@@ -181,7 +181,7 @@ const styleData = {
   design: {
     titleAr: "أنواع الطراز في التصميم الداخلي",
     titleEn: "Types of Styles in Interior Design",
-    mainImage: "/images/projects/main/feature2.webp", // Replace with actual image for Neo Classic Style
+    mainImage: "/public/images/projects/main/feature2.webp", // Replace with actual image for Neo Classic Style
     sections: [
       {
         headingAr: "مقدمة عن أنواع الطراز في التصميم الداخلي",

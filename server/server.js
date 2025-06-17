@@ -25,18 +25,24 @@ app.use(helmet());
 app.use(compression());
 
 // CORS configuration
-const allowedOrigins = (process.env.CLIENT_URL || "").split(",");
+const allowedOrigins = (process.env.CLIENT_URL || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter((origin) => origin.length > 0)
+  .map((origin) => (origin.endsWith("/") ? origin.slice(0, -1) : origin));
 
 app.use(
   cors({
     origin: (origin, callback) => {
       console.log("Request Origin:", origin);
       console.log("Allowed Origins:", allowedOrigins);
+      console.log("Origin in allowed list:", allowedOrigins.includes(origin));
 
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         console.error("Blocked by CORS:", origin);
+        console.error("Available origins:", allowedOrigins);
         callback(new Error("Not allowed by CORS"));
       }
     },

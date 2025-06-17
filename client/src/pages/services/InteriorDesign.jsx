@@ -33,7 +33,7 @@ const InteriorDesign = () => {
 
           <section className="mb-8">
             <img
-              src="../images/projects/main/feature2.webp"
+              src="../public/images/projects/main/feature2.webp"
               alt="Interior Design"
               className="w-full h-auto rounded-lg shadow-lg"
               loading="lazy"
