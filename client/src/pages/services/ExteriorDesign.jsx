@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import usePageTitle from "../../shared/hooks/usePageTitle";
 import { Helmet } from "react-helmet-async";
+import { FEATURE2_IMAGE } from "../../constants/images";
 
 const ExteriorDesign = () => {
   const navigate = useNavigate();
@@ -39,9 +40,9 @@ const ExteriorDesign = () => {
               جميل ويناسب إحتياجات العملاء.
             </p>
             <p className="text-gray-600 mb-4">
-              من خلال التصميم الخارجي لشركة شاد، نستطيع بناء واجهة مميزة، كما
-              أن لدينا خبرة في اختيار المواد والتشطيبات لضمان أفضل النتائج.
-              "شاد" للتصميم الخارجي يقدم أحدث التصميمات والحلول.
+              من خلال التصميم الخارجي لشركة شاد، نستطيع بناء واجهة مميزة، كما أن
+              لدينا خبرة في اختيار المواد والتشطيبات لضمان أفضل النتائج. "شاد"
+              للتصميم الخارجي يقدم أحدث التصميمات والحلول.
             </p>
             <p className="text-gray-600">
               يساعدك في التصميم الخارجي بشكل محترف، ويضمن لك أن تصميمك النهائي
@@ -103,7 +104,7 @@ const ExteriorDesign = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="flex flex-col items-center">
                 <img
-                  src="https://const-ars6.vercel.app/public/images/projects/main/feature2.webp"
+                  src={FEATURE2_IMAGE}
                   alt="Placeholder"
                   className="mb-4"
                   loading="lazy"
@@ -114,11 +115,7 @@ const ExteriorDesign = () => {
                 </p>
               </div>
               <div className="flex flex-col items-center">
-                <img
-                  src="https://const-ars6.vercel.app/public/images/projects/main/feature2.webp"
-                  alt="Placeholder"
-                  className="mb-4"
-                />
+                <img src={FEATURE2_IMAGE} alt="Placeholder" className="mb-4" />
                 <p className="text-gray-600 text-center">
                   نقدم لك تصاميم عالية الجودة، نضمن تنفيذًا دقيقًا واستخدام أفضل
                   المواد. فريقنا يعمل باحترافية.
@@ -126,7 +123,7 @@ const ExteriorDesign = () => {
               </div>
               <div className="flex flex-col items-center">
                 <img
-                  src="https://const-ars6.vercel.app/public/images/projects/main/feature2.webp"
+                  src={FEATURE2_IMAGE}
                   alt="Placeholder"
                   className="mb-4"
                   loading="lazy"

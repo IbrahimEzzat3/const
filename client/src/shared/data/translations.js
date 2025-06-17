@@ -1,3 +1,5 @@
+import { FEATURE2_IMAGE } from "../../constants/images";
+
 export const translations = {
   en: {
     translation: {
@@ -457,7 +459,7 @@ export const translations = {
               title: "Modern Style",
               description:
                 "The credit for creating this style goes to a wide range of influences...",
-              image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+              image: FEATURE2_IMAGE,
               category: "modern",
             },
             {
@@ -465,7 +467,7 @@ export const translations = {
               title: "Neo Classic Style in Interior Design",
               description:
                 "Neo Classic style took its roots from 18th-century archaeological discoveries...",
-              image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+              image: FEATURE2_IMAGE,
               category: "neo-classic",
             },
             {
@@ -473,7 +475,7 @@ export const translations = {
               title: "Why Saab: Beauty in Imperfection",
               description:
                 "Why Saab | Nature fascinates us with its simplicity and beauty...",
-              image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+              image: FEATURE2_IMAGE,
               category: "concept",
             },
             {
@@ -481,7 +483,7 @@ export const translations = {
               title: "Types of Styles in Interior Design",
               description:
                 "Interior design is an art and taste that suits the owner's personality...",
-              image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+              image: FEATURE2_IMAGE,
               category: "design",
             },
             {
@@ -489,7 +491,7 @@ export const translations = {
               title: "Classic Style",
               description:
                 "Classic style is sophisticated and refined with a special character...",
-              image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+              image: FEATURE2_IMAGE,
               category: "classic",
             },
             {
@@ -497,7 +499,7 @@ export const translations = {
               title: "Industrial Style",
               description:
                 "This style began in the fifties and relies on raw materials...",
-              image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+              image: FEATURE2_IMAGE,
               category: "industrial",
             },
           ],
@@ -1024,7 +1026,7 @@ export const translations = {
               title: "الطراز الحديث",
               description:
                 "يعود الفضل في إنشاء هذا الطراز إلى مجموعة واسعة من المؤثرات...",
-              image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+              image: FEATURE2_IMAGE,
               category: "modern",
             },
             {
@@ -1032,14 +1034,14 @@ export const translations = {
               title: "طراز نيو كلاسيك في التصميم الداخلي",
               description:
                 "أخذ طراز نيو كلاسيك جذوره من الاكتشافات الأثرية في القرن الثامن عشر...",
-              image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+              image: FEATURE2_IMAGE,
               category: "neo-classic",
             },
             {
               id: 3,
               title: "واي ساب: الجمال في عدم الكمال",
               description: "واي ساب | تسحرنا الطبيعة ببساطتها وجمالها...",
-              image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+              image: FEATURE2_IMAGE,
               category: "concept",
             },
             {
@@ -1047,14 +1049,14 @@ export const translations = {
               title: "أنواع الطراز في التصميم الداخلي",
               description:
                 "يعتبر التصميم الداخلي فن وذوق يتناسب مع شخصية المالك...",
-              image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+              image: FEATURE2_IMAGE,
               category: "design",
             },
             {
               id: 5,
               title: "الطراز الكلاسيكي",
               description: "الطراز الكلاسيكي أسلوب راقٍ ومتطور وله طابع خاص...",
-              image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+              image: FEATURE2_IMAGE,
               category: "classic",
             },
             {
@@ -1062,7 +1064,7 @@ export const translations = {
               title: "الطراز الصناعي",
               description:
                 "بدأ استخدام هذا النمط في الخمسينات، ويعتمد على المواد الخام...",
-              image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+              image: FEATURE2_IMAGE,
               category: "industrial",
             },
           ],

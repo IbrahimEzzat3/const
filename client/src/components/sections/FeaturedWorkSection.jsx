@@ -1,18 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../shared/context/LanguageContext";
+import { FEATURE2_IMAGE } from "../../constants/images";
 
 const FeaturedWorkSection = () => {
   const { t, direction } = useLanguage();
   const projects = [
     {
-      image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+      image: FEATURE2_IMAGE,
       title: t("sections.featuredWork.projects.villa.title"),
       description: t("sections.featuredWork.projects.villa.description"),
       slug: "villa-riyadh",
     },
     {
-      image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+      image: FEATURE2_IMAGE,
       title: t("sections.featuredWork.projects.compound.title"),
       description: t("sections.featuredWork.projects.compound.description"),
       slug: "residential-compound-jeddah",

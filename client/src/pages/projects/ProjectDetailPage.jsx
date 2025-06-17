@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useLanguage } from "../../shared/context/LanguageContext";
 import usePageTitle from "../../shared/hooks/usePageTitle";
 import { Helmet } from "react-helmet-async";
+import { FEATURE2_IMAGE } from "../../constants/images";
 
 const translations = {
   ar: {
@@ -10,76 +11,44 @@ const translations = {
       furniture: {
         title: "مشروع أثاث",
         description: "وصف لمشروع الأثاث هنا.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       hospitality: {
         title: "مشروع ضيافة",
         description: "وصف لمشروع الضيافة هنا.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       residential: {
         title: "مشروع سكني",
         description: "وصف لمشروع سكني هنا.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       landscape: {
         title: "مشروع لاندسكيب",
         description: "وصف لمشروع لاندسكيب هنا.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       "villa-riyadh": {
         title: "فيلا فاخرة - الرياض",
         description:
           "تفاصيل تصميم وتنفيذ فيلا فاخرة بمساحة 850 م² في الرياض، مع تشطيبات لوكس وأنظمة ذكية متكاملة.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       "residential-compound-jeddah": {
         title: "مجمع سكني - جدة",
         description:
           "تفاصيل تصميم وتنفيذ مجمع سكني مكون من 12 فيلا بتصاميم متنوعة وحدائق مشتركة في جدة.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       commercial: {
         title: "مشروع تجاري",
         description: "وصف لمشروع تجاري هنا.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       "administrative-offices": {
         title: "مشروع مكاتب إدارية",
         description: "وصف لمشروع مكاتب إدارية هنا.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
     },
     backToHome: "العودة للرئيسية",
@@ -89,77 +58,45 @@ const translations = {
       furniture: {
         title: "Furniture Project",
         description: "Description for the furniture project goes here.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       hospitality: {
         title: "Hospitality Project",
         description: "Description for the hospitality project goes here.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       residential: {
         title: "Residential Project",
         description: "Description for the residential project goes here.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       landscape: {
         title: "Landscape Project",
         description: "Description for the landscape project goes here.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       "villa-riyadh": {
         title: "Luxury Villa - Riyadh",
         description:
           "Details of the design and execution of a luxury villa of 850 m² in Riyadh, with deluxe finishes and integrated smart systems.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       "residential-compound-jeddah": {
         title: "Residential Compound - Jeddah",
         description:
           "Details of the design and execution of a residential compound consisting of 12 villas with various designs and shared gardens in Jeddah.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       commercial: {
         title: "Commercial Project",
         description: "Description for the commercial project goes here.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
       "administrative-offices": {
         title: "Administrative Offices Project",
         description:
           "Description for the administrative offices project goes here.",
-        images: [
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-          "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
-        ],
+        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
       },
     },
     backToHome: "Back to Home",

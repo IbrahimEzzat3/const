@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import usePageTitle from "../../shared/hooks/usePageTitle";
 import { Helmet } from "react-helmet-async";
+import { FEATURE2_IMAGE } from "../../constants/images";
 
 const InteriorDesign = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const InteriorDesign = () => {
 
           <section className="mb-8">
             <img
-              src="https://const-ars6.vercel.app/public/images/projects/main/feature2.webp"
+              src={FEATURE2_IMAGE}
               alt="Interior Design"
               className="w-full h-auto rounded-lg shadow-lg"
               loading="lazy"

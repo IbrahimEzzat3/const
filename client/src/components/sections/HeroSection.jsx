@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../shared/context/LanguageContext";
 import { Button } from "../ui";
+import { FEATURE2_IMAGE } from "../../constants/images";
 
 const translations = {
   ar: {
@@ -9,32 +10,32 @@ const translations = {
       {
         id: 1,
         text: "الرمال ممكن أن تصبح جنة تستمتع بها",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
       },
       {
         id: 2,
         text: "تصميمات داخلية عصرية تناسب ذوقك",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
       },
       {
         id: 3,
         text: "خارجية مبهرة تعكس فخامة منزلك",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
       },
       {
         id: 4,
         text: "حدائق خضراء تصبح ملاذك الخاص",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
       },
       {
         id: 5,
         text: "نحول رؤيتك إلى واقع ملموس",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
       },
       {
         id: 6,
         text: "معنا، كل زاوية تحكي قصة",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
       },
     ],
     logos: [
@@ -63,37 +64,37 @@ const translations = {
       {
         id: 1,
         text: "اثاث",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
         link: "/projects/furniture",
       },
       {
         id: 2,
         text: "ضيافة",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
         link: "/projects/hospitality",
       },
       {
         id: 3,
         text: "سكني",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
         link: "/projects/residential",
       },
       {
         id: 4,
         text: "لاندسكيب",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
         link: "/projects/landscape",
       },
       {
         id: 5,
         text: "تجاري",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
         link: "/projects/commercial",
       },
       {
         id: 6,
         text: "مكاتب ادارية",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
         link: "/projects/administrative-offices",
       },
     ],
@@ -103,32 +104,32 @@ const translations = {
       {
         id: 1,
         text: "Sands can become a paradise you enjoy",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
       },
       {
         id: 2,
         text: "Modern interior designs to suit your taste",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
       },
       {
         id: 3,
         text: "Stunning exteriors that reflect the luxury of your home",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
       },
       {
         id: 4,
         text: "Green gardens become your private sanctuary",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
       },
       {
         id: 5,
         text: "We turn your vision into tangible reality",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
       },
       {
         id: 6,
         text: "With us, every corner tells a story",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
       },
     ],
     logos: [
@@ -157,37 +158,37 @@ const translations = {
       {
         id: 1,
         text: "furniture",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
         link: "/projects/furniture",
       },
       {
         id: 2,
         text: "hospitality",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
         link: "/projects/hospitality",
       },
       {
         id: 3,
         text: "residential",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
         link: "/projects/residential",
       },
       {
         id: 4,
         text: "Landscape",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
         link: "/projects/landscape",
       },
       {
         id: 5,
         text: "commercial",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
         link: "/projects/commercial",
       },
       {
         id: 6,
         text: "Administrative offices",
-        image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
+        image: FEATURE2_IMAGE,
         link: "/projects/administrative-offices",
       },
     ],
