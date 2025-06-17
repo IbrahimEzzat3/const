@@ -1,0 +1,10 @@
+
+<svg width="150" height="150" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#000" stroke-width="3" fill="none">
+    <path d="M40,110 L60,40 L70,45 L50,115 Z" fill="#c5a46d"/>
+    <circle cx="60" cy="30" r="10" fill="#c5a46d"/>
+    <path d="M55,40 L50,70 L30,110" />
+    <path d="M60,40 L80,90 L70,110" />
+  </g>
+  <text x="75" y="140" font-size="14" text-anchor="middle" fill="#c5a46d" font-family="Arial">التنفيذ والتأثيث</text>
+</svg>
