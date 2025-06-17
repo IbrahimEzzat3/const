@@ -10,9 +10,9 @@ const Blog = ({ blog }) => {
     if (!imagePath) return null;
     if (imagePath.startsWith("http")) return imagePath;
     if (imagePath.startsWith("/uploads")) {
-      return `${"http://localhost:5000"}${imagePath}`;
+      return `${"https://const-production.up.railway.app"}${imagePath}`;
     }
-    return `${"http://localhost:5000"}/uploads/${imagePath}`;
+    return `${"https://const-production.up.railway.app"}/uploads/${imagePath}`;
   };
 
   const imageUrl = getImageUrl(blog.coverImage);
@@ -98,7 +98,7 @@ const Blog = ({ blog }) => {
                 <div className="flex items-center gap-2">
                   <img
                     className="h-8 w-8 object-cover rounded-full"
-                    src={`http://localhost:5000/${blog.author?.avatar}`}
+                    src={`https://const-production.up.railway.app/${blog.author?.avatar}`}
                     alt={t("blogDetail.unknownAuthor")}
                     loading="lazy"
                     crossOrigin="anonymous"

@@ -1,6 +1,6 @@
 // API Configuration
 export const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  import.meta.env.VITE_API_URL || "https://const-production.up.railway.app/api";
 
 // Auth Configuration
 export const TOKEN_KEY = "token";

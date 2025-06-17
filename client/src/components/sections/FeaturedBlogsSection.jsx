@@ -33,9 +33,9 @@ const FeaturedBlogsSection = () => {
     if (!imagePath) return null;
     if (imagePath.startsWith("http")) return imagePath;
     if (imagePath.startsWith("/uploads")) {
-      return `${"http://localhost:5000"}${imagePath}`;
+      return `${"https://const-production.up.railway.app"}${imagePath}`;
     }
-    return `${"http://localhost:5000"}/uploads/${imagePath}`;
+    return `${"https://const-production.up.railway.app"}/uploads/${imagePath}`;
   };
 
   if (loading) {
@@ -159,8 +159,8 @@ const FeaturedBlogsSection = () => {
                         src={
                           blog.author?.avatar &&
                           blog.author?.avatar !== "public/images/default.png"
-                            ? `http://localhost:5000/${blog.author.avatar}`
-                            : `http://localhost:5000/public/images/default.png`
+                            ? `https://const-production.up.railway.app/${blog.author.avatar}`
+                            : `https://const-production.up.railway.app/public/images/default.png`
                         }
                         alt={blog.author?.name || t("blogDetail.unknownAuthor")}
                         loading="lazy"

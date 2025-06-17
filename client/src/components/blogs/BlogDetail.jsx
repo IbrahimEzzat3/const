@@ -79,9 +79,9 @@ const BlogDetail = () => {
     if (!imagePath) return null;
     if (imagePath.startsWith("http")) return imagePath;
     if (imagePath.startsWith("/uploads")) {
-      return `${"http://localhost:5000"}${imagePath}`;
+      return `${"https://const-production.up.railway.app"}${imagePath}`;
     }
-    return `${"http://localhost:5000"}/uploads/${imagePath}`;
+    return `${"https://const-production.up.railway.app"}/uploads/${imagePath}`;
   };
 
   const imageUrl = getImageUrl(blog?.coverImage);
@@ -195,8 +195,8 @@ const BlogDetail = () => {
                 src={
                   blog.author?.avatar &&
                   blog.author.avatar !== "public/images/default.png"
-                    ? `http://localhost:5000/${blog.author.avatar}`
-                    : `http://localhost:5000/public/images/default.png`
+                    ? `https://const-production.up.railway.app/${blog.author.avatar}`
+                    : `https://const-production.up.railway.app/public/images/default.png`
                 }
                 alt={blog.author.name || t("blogDetail.unknownAuthor")}
                 loading="lazy"
@@ -359,7 +359,7 @@ const BlogDetail = () => {
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
                         <img
-                          src={`http://localhost:5000/public/images/default.png`}
+                          src={`https://const-production.up.railway.app/public/images/default.png`}
                           alt={t("common.visitor")}
                           className="w-10 h-10 rounded-full"
                           loading="lazy"

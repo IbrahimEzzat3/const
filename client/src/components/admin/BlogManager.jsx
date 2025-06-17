@@ -39,11 +39,11 @@ const BlogManager = () => {
     let finalUrl;
     // Ensure proper URL construction
     if (imagePath.startsWith("/uploads/")) {
-      finalUrl = `http://localhost:5000${imagePath}`;
+      finalUrl = `https://const-production.up.railway.app${imagePath}`;
     } else if (imagePath.startsWith("uploads/")) {
-      finalUrl = `http://localhost:5000/${imagePath}`;
+      finalUrl = `https://const-production.up.railway.app/${imagePath}`;
     } else {
-      finalUrl = `http://localhost:5000/uploads/${imagePath}`;
+      finalUrl = `https://const-production.up.railway.app/uploads/${imagePath}`;
     }
 
     return finalUrl;

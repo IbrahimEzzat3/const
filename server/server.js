@@ -29,7 +29,7 @@ app.use(
   cors({
     origin: (origin, callback) => {
       const allowedOrigins = (
-        process.env.CLIENT_URL || "http://localhost:3000"
+        process.env.CLIENT_URL || "https://const-is53.vercel.app"
       ).split(",");
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);

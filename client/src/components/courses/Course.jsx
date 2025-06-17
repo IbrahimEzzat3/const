@@ -13,7 +13,7 @@ const Course = ({ course }) => {
       <div className="relative h-48 bg-gray-200">
         {course.coverImage ? (
           <img
-            src={`http://localhost:5000/uploads/${course.coverImage}`}
+            src={`https://const-production.up.railway.app/uploads/${course.coverImage}`}
             alt={course.title}
             className="h-full w-full object-cover rounded-md"
             loading="lazy"

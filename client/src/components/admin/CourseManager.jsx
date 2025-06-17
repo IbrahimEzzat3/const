@@ -288,7 +288,7 @@ const CourseManager = () => {
                 <div className="flex-shrink-0">
                   {course.coverImage ? (
                     <img
-                      src={`http://localhost:5000/uploads/${course.coverImage}`}
+                      src={`https://const-production.up.railway.app/uploads/${course.coverImage}`}
                       alt={course.title}
                       className="h-16 w-24 object-cover rounded-md"
                       loading="lazy"
@@ -383,7 +383,7 @@ const CourseManager = () => {
                     <div className="flex-shrink-0 h-16 w-24">
                       {course.coverImage ? (
                         <img
-                          src={`http://localhost:5000/uploads/${course.coverImage}`}
+                          src={`https://const-production.up.railway.app/uploads/${course.coverImage}`}
                           alt={course.title}
                           className="h-16 w-24 object-cover rounded-md"
                           loading="lazy"

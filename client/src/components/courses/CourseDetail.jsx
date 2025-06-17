@@ -426,8 +426,8 @@ const CourseDetail = () => {
                   src={
                     course.instructor?.avatar &&
                     course.instructor?.avatar !== "public/images/default.png"
-                      ? `http://localhost:5000/${course.instructor?.avatar}`
-                      : `http://localhost:5000/public/images/default.png`
+                      ? `https://const-production.up.railway.app/${course.instructor?.avatar}`
+                      : `https://const-production.up.railway.app/public/images/default.png`
                   }
                   alt={course.instructor?.name}
                   className="w-24 h-24 rounded-full object-cover ring-4 ring-primary-50"
@@ -488,7 +488,7 @@ const CourseDetail = () => {
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
                         <img
-                          src={`http://localhost:5000/public/images/default.png`}
+                          src={`https://const-production.up.railway.app/public/images/default.png`}
                           alt={t("common.visitor")}
                           className="w-10 h-10 rounded-full"
                           loading="lazy"
@@ -543,7 +543,7 @@ const CourseDetail = () => {
         <div className="relative h-80 sm:h-96 rounded-lg overflow-hidden mb-8">
           {course.coverImage ? (
             <img
-              src={`http://localhost:5000/uploads/${course.coverImage}`}
+              src={`https://const-production.up.railway.app/uploads/${course.coverImage}`}
               alt={course.title}
               className="h-full w-full object-cover rounded-md"
               loading="lazy"

@@ -351,7 +351,7 @@ const Header = () => {
               className="flex items-center space-x-2 text-secondary-900 hover:text-primary-600 transition-colors duration-200"
             >
               <img
-                src="https://const-is53.vercel.app/images/logos/logo-shad.png"
+                src="images/logos/logo-shad.png"
                 alt="Company Logo"
                 className="h-16 w-auto object-cover aspect-auto "
                 fetchpriority="high"
@@ -412,8 +412,8 @@ const Header = () => {
                         src={
                           user?.avatar &&
                           user.avatar !== "public/images/default.png"
-                            ? `http://localhost:5000/${user.avatar}`
-                            : `http://localhost:5000/public/images/default.png`
+                            ? `https://const-production.up.railway.app/${user.avatar}`
+                            : `https://const-production.up.railway.app/public/images/default.png`
                         }
                         alt=""
                         loading="lazy"
@@ -544,8 +544,8 @@ const Header = () => {
                             src={
                               user?.avatar &&
                               user.avatar !== "public/images/default.png"
-                                ? `http://localhost:5000/${user.avatar}`
-                                : `http://localhost:5000/public/images/default.png`
+                                ? `https://const-production.up.railway.app/${user.avatar}`
+                                : `https://const-production.up.railway.app/public/images/default.png`
                             }
                             alt=""
                             loading="lazy"
