@@ -1,0 +1,71 @@
+/* RTL specific styles */
+.rtl {
+  direction : rtl;
+  text-align: right;
+}
+
+.rtl .space-x-4> :not([hidden])~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+.rtl .space-x-2> :not([hidden])~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+.rtl .ml-2 {
+  margin-left : 0;
+  margin-right: 0.5rem;
+}
+
+.rtl-grid {
+  direction: rtl;
+}
+
+.rtl-list {
+  direction: rtl;
+}
+
+.rtl-list li {
+  text-align: right;
+}
+
+/* LTR specific styles */
+.ltr {
+  direction : ltr;
+  text-align: left;
+}
+
+.ltr .space-x-4> :not([hidden])~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+}
+
+.ltr .space-x-2> :not([hidden])~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+}
+
+.ltr-grid {
+  direction: ltr;
+}
+
+.ltr-list {
+  direction: ltr;
+}
+
+.ltr-list li {
+  text-align: left;
+}
+
+/* Direction neutral styles */
+.direction-neutral {
+  direction : inherit;
+  text-align: inherit;
+}
+
+/* Common styles for both RTL and LTR */
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-row {
+  flex-direction: row;
+}
