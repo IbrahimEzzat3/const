@@ -53,7 +53,15 @@ export const authService = {
   // Get current user
   getMe: async () => {
     try {
-      const response = await api.get("/me");
+      const response = await api.get("/me", {
+        headers: {
+          "Cache-Control":
+            "no-store, no-cache, must-revalidate, proxy-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+        withCredentials: true,
+      });
       return response.data.user;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -89,8 +97,6 @@ export const authService = {
       throw error.response?.data || error.message;
     }
   },
-
-
 
   // Update user details
   updateDetails: async (userData) => {
