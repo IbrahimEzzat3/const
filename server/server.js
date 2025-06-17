@@ -25,14 +25,13 @@ app.use(helmet());
 app.use(compression());
 
 // CORS configuration
+const allowedOrigins = (process.env.CLIENT_URL || "").split(",");
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      const allowedOrigins = (
-        process.env.CLIENT_URL || "https://const-is53.vercel.app"
-      ).split(",");
-
       console.log("Request Origin:", origin);
+      console.log("Allowed Origins:", allowedOrigins);
 
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
