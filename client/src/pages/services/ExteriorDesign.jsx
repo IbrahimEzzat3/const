@@ -103,7 +103,7 @@ const ExteriorDesign = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="flex flex-col items-center">
                 <img
-                  src="../public/images/projects/main/feature2.webp"
+                  src="https://const-ars6.vercel.app/public/images/projects/main/feature2.webp"
                   alt="Placeholder"
                   className="mb-4"
                   loading="lazy"
@@ -115,7 +115,7 @@ const ExteriorDesign = () => {
               </div>
               <div className="flex flex-col items-center">
                 <img
-                  src="../public/images/projects/main/feature2.webp"
+                  src="https://const-ars6.vercel.app/public/images/projects/main/feature2.webp"
                   alt="Placeholder"
                   className="mb-4"
                 />
@@ -126,7 +126,7 @@ const ExteriorDesign = () => {
               </div>
               <div className="flex flex-col items-center">
                 <img
-                  src="../public/images/projects/main/feature2.webp"
+                  src="https://const-ars6.vercel.app/public/images/projects/main/feature2.webp"
                   alt="Placeholder"
                   className="mb-4"
                   loading="lazy"

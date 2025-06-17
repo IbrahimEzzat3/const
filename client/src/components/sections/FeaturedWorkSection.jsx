@@ -6,13 +6,13 @@ const FeaturedWorkSection = () => {
   const { t, direction } = useLanguage();
   const projects = [
     {
-      image: "public/images/projects/main/feature2.webp",
+      image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
       title: t("sections.featuredWork.projects.villa.title"),
       description: t("sections.featuredWork.projects.villa.description"),
       slug: "villa-riyadh",
     },
     {
-      image: "public/images/projects/main/feature2.webp",
+      image: "https://const-ars6.vercel.app/public/images/projects/main/feature2.webp",
       title: t("sections.featuredWork.projects.compound.title"),
       description: t("sections.featuredWork.projects.compound.description"),
       slug: "residential-compound-jeddah",
