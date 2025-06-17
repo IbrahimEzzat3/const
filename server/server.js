@@ -31,9 +31,13 @@ app.use(
       const allowedOrigins = (
         process.env.CLIENT_URL || "https://const-is53.vercel.app"
       ).split(",");
+
+      console.log("Request Origin:", origin);
+
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
+        console.error("Blocked by CORS:", origin);
         callback(new Error("Not allowed by CORS"));
       }
     },
