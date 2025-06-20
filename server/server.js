@@ -25,7 +25,9 @@ app.use(helmet());
 app.use(compression());
 
 // CORS configuration
-const allowedOrigins = (process.env.CLIENT_URL || "")
+const allowedOrigins = (
+  process.env.CLIENT_URL || "https://const-is53.vercel.app"
+)
   .split(",")
   .map((origin) => origin.trim())
   .filter((origin) => origin.length > 0)
