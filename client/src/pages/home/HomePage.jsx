@@ -57,7 +57,7 @@ const HomePage = () => {
           property="og:description"
           content="Professional contracting and design services since 2003."
         />
-        <meta property="og:image" content="images/logos/logo-shad.png" />
+        <meta property="og:image" content="images/logos/logo.png" />
         <meta property="og:type" content="website" />
       </Helmet>
       <div className="min-h-screen bg-white">

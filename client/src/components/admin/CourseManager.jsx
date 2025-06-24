@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { courseService } from "../../shared/services/courseService";
 import debounce from "lodash/debounce";
 import CustomAlert from "../../shared/components/CustomAlert";
+import { useLanguage } from "../../shared/context/LanguageContext";
 
 const CourseManager = () => {
   const navigate = useNavigate();
@@ -164,6 +165,72 @@ const CourseManager = () => {
     }
   };
 
+  // VideoPreview component for per-video state
+  const VideoPreview = ({ video }) => {
+    const { t } = useLanguage();
+    const [videoError, setVideoError] = React.useState(false);
+    const [videoLoading, setVideoLoading] = React.useState(true);
+    const videoUrl = video
+      ? `https://const-production.up.railway.app/uploads/${video}`
+      : null;
+    const handleVideoError = () => {
+      setVideoError(true);
+      setVideoLoading(false);
+    };
+    const handleVideoLoad = () => {
+      setVideoLoading(false);
+      setVideoError(false);
+    };
+    if (!video) {
+      return (
+        <div className="w-full h-full flex items-center justify-center bg-indigo-100">
+          <span className="text-indigo-500 text-lg font-medium">
+            {t("courseDetail.noVideo")}
+          </span>
+        </div>
+      );
+    }
+    return (
+      <div className="relative h-16 w-24">
+        {videoLoading && !videoError && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-10">
+            <div className="text-gray-500">Loading video...</div>
+          </div>
+        )}
+        {videoError ? (
+          <div className="w-full h-full flex flex-col items-center justify-center bg-red-50 z-10">
+            <span className="text-red-500 text-sm font-medium mb-2">
+              Failed to load video
+            </span>
+            <a
+              href={videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 text-xs underline"
+            >
+              Try direct link
+            </a>
+          </div>
+        ) : (
+          <video
+            src={videoUrl}
+            controls
+            className="h-full w-full object-cover rounded-md"
+            preload="metadata"
+            onError={handleVideoError}
+            onLoadedData={handleVideoLoad}
+            onLoadStart={() => setVideoLoading(true)}
+            crossOrigin="anonymous"
+          >
+            <source src={videoUrl} type="video/mp4" />
+            <source src={videoUrl} type="video/webm" />
+            Your browser does not support the video tag.
+          </video>
+        )}
+      </div>
+    );
+  };
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
@@ -282,76 +349,62 @@ const CourseManager = () => {
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
         {/* Mobile Card View */}
         <div className="md:hidden divide-y divide-gray-200">
-          {courses.map((course) => (
-            <div key={course._id} className="p-4">
-              <div className="flex gap-4">
-                <div className="flex-shrink-0">
-                  {course.video ? (
-                    <video
-                      src={`https://const-production.up.railway.app/uploads/${course.video}`}
-                      controls
-                      className="h-16 w-24 object-cover rounded-md"
-                      preload="metadata"
-                    >
-                      <source
-                        src={`https://const-production.up.railway.app/uploads/${course.video}`}
-                      />
-                      Your browser does not support the video tag.
-                    </video>
-                  ) : (
-                    <div className="h-16 w-24 bg-gray-200 rounded-md flex items-center justify-center">
-                      <span className="text-gray-400 text-xs">No video</span>
-                    </div>
-                  )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-sm font-medium text-gray-900 truncate">
-                    {course.title}
-                  </h3>
-                  <p className="text-xs text-gray-500 mt-1">
-                    {course.category}
-                  </p>
-                  <p className="text-xs text-gray-500 mt-1 line-clamp-2">
-                    {course.shortDescription}
-                  </p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    <span className="text-xs text-gray-500">
-                      {course.enrolledUsers?.length || 0} students
-                    </span>
-                    <span className="text-xs text-gray-500">
-                      {new Date(course.createdAt).toLocaleDateString()}
-                    </span>
-                    <span
-                      className={`px-2 py-1 text-xs font-medium rounded-full ${
-                        course.isActive
-                          ? "bg-green-100 text-green-800"
-                          : "bg-gray-100 text-gray-800"
-                      }`}
-                    >
-                      {course.isActive ? "Active" : "Inactive"}
-                    </span>
+          {courses.map((course) => {
+            return (
+              <div key={course._id} className="p-4">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <VideoPreview video={course.video} />
                   </div>
-                  <div className="mt-3 flex gap-3">
-                    <button
-                      onClick={() =>
-                        navigate(`/admin/courses/${course._id}/edit`)
-                      }
-                      className="text-indigo-600 hover:text-indigo-900 text-sm"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(course._id)}
-                      disabled={isDeleting}
-                      className="text-red-600 hover:text-red-900 text-sm disabled:opacity-50"
-                    >
-                      Delete
-                    </button>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-sm font-medium text-gray-900 truncate">
+                      {course.title}
+                    </h3>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {course.category}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                      {course.shortDescription}
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      <span className="text-xs text-gray-500">
+                        {course.enrolledUsers?.length || 0} students
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        {new Date(course.createdAt).toLocaleDateString()}
+                      </span>
+                      <span
+                        className={`px-2 py-1 text-xs font-medium rounded-full ${
+                          course.isActive
+                            ? "bg-green-100 text-green-800"
+                            : "bg-gray-100 text-gray-800"
+                        }`}
+                      >
+                        {course.isActive ? "Active" : "Inactive"}
+                      </span>
+                    </div>
+                    <div className="mt-3 flex gap-3">
+                      <button
+                        onClick={() =>
+                          navigate(`/admin/courses/${course._id}/edit`)
+                        }
+                        className="text-indigo-600 hover:text-indigo-900 text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(course._id)}
+                        disabled={isDeleting}
+                        className="text-red-600 hover:text-red-900 text-sm disabled:opacity-50"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Desktop Table View */}
@@ -379,86 +432,70 @@ const CourseManager = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {courses.map((course) => (
-              <tr key={course._id}>
-                <td className="px-6 py-4">
-                  <div className="flex items-center">
-                    <div className="flex-shrink-0 h-16 w-24">
-                      {course.video ? (
-                        <video
-                          src={`https://const-production.up.railway.app/uploads/${course.video}`}
-                          controls
-                          className="h-16 w-24 object-cover rounded-md"
-                          preload="metadata"
-                        >
-                          <source
-                            src={`https://const-production.up.railway.app/uploads/${course.video}`}
-                          />
-                          Your browser does not support the video tag.
-                        </video>
-                      ) : (
-                        <div className="h-16 w-24 bg-gray-200 rounded-md flex items-center justify-center">
-                          <span className="text-gray-400 text-xs">
-                            No video
-                          </span>
+            {courses.map((course) => {
+              return (
+                <tr key={course._id}>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0 h-16 w-24">
+                        <VideoPreview video={course.video} />
+                      </div>
+                      <div className="ml-4">
+                        <div className="text-sm font-medium text-gray-900">
+                          {course.title}
                         </div>
-                      )}
-                    </div>
-                    <div className="ml-4">
-                      <div className="text-sm font-medium text-gray-900">
-                        {course.title}
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        {course.category}
+                        <div className="text-sm text-gray-500">
+                          {course.category}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="text-sm text-gray-900 max-w-md line-clamp-2">
-                    {course.shortDescription}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-500">
-                    {course.enrolledUsers?.length || 0} students
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-500">
-                    {new Date(course.createdAt).toLocaleDateString()}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      course.isActive
-                        ? "bg-green-100 text-green-800"
-                        : "bg-gray-100 text-gray-800"
-                    }`}
-                  >
-                    {course.isActive ? "Active" : "Inactive"}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <button
-                    onClick={() =>
-                      navigate(`/admin/courses/${course._id}/edit`)
-                    }
-                    className="text-indigo-600 hover:text-indigo-900 mr-4"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(course._id)}
-                    disabled={isDeleting}
-                    className="text-red-600 hover:text-red-900 disabled:opacity-50"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="text-sm text-gray-900 max-w-md line-clamp-2">
+                      {course.shortDescription}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-500">
+                      {course.enrolledUsers?.length || 0} students
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-500">
+                      {new Date(course.createdAt).toLocaleDateString()}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span
+                      className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                        course.isActive
+                          ? "bg-green-100 text-green-800"
+                          : "bg-gray-100 text-gray-800"
+                      }`}
+                    >
+                      {course.isActive ? "Active" : "Inactive"}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <button
+                      onClick={() =>
+                        navigate(`/admin/courses/${course._id}/edit`)
+                      }
+                      className="text-indigo-600 hover:text-indigo-900 mr-4"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(course._id)}
+                      disabled={isDeleting}
+                      className="text-red-600 hover:text-red-900 disabled:opacity-50"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
 

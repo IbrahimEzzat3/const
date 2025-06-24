@@ -202,7 +202,8 @@ const CourseDetail = () => {
     feedbackId: null,
   });
   const { t } = useLanguage();
-
+  const [videoError, setVideoError] = useState(false);
+  const [videoLoading, setVideoLoading] = useState(true);
   const fetchCourseData = useCallback(async () => {
     try {
       const data = await courseService.getCourse(courseId);
@@ -535,28 +536,65 @@ const CourseDetail = () => {
         return null;
     }
   };
+  const videoUrl = course.video
+    ? `https://const-production.up.railway.app/uploads/${course.video}`
+    : null;
 
+  const handleVideoError = (e) => {
+    console.error("Video failed to load:", e);
+    console.error("Attempted URL:", videoUrl);
+    setVideoError(true);
+    setVideoLoading(false);
+  };
+
+  const handleVideoLoad = () => {
+    setVideoLoading(false);
+    setVideoError(false);
+  };
   return (
     <>
       <div className="max-w-7xl mx-auto">
         {/* Course Header */}
         <div className="relative h-80 sm:h-96 rounded-lg overflow-hidden mb-8">
           {course.video ? (
-            <video
-              src={`https://const-production.up.railway.app/uploads/${course.video}`}
-              controls
-              className="h-full w-full object-cover rounded-md"
-              preload="metadata"
-              poster=""
-              loading="lazy"
-              crossOrigin="anonymous"
-              referrerPolicy="no-referrer"
-            >
-              <source
-                src={`https://const-production.up.railway.app/uploads/${course.video}`}
-              />
-              Your browser does not support the video tag.
-            </video>
+            <>
+              {videoLoading && !videoError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                  <div className="text-gray-500">Loading video...</div>
+                </div>
+              )}
+
+              {videoError ? (
+                <div className="w-full h-full flex flex-col items-center justify-center bg-red-50">
+                  <span className="text-red-500 text-sm font-medium mb-2">
+                    Failed to load video
+                  </span>
+                  <a
+                    href={videoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 text-xs underline"
+                  >
+                    Try direct link
+                  </a>
+                </div>
+              ) : (
+                <video
+                  src={videoUrl}
+                  controls
+                  className="h-full w-full object-cover rounded-md"
+                  preload="metadata"
+                  onError={handleVideoError}
+                  onLoadedData={handleVideoLoad}
+                  onLoadStart={() => setVideoLoading(true)}
+                  crossOrigin="anonymous"
+                >
+                  <source src={videoUrl} type="video/mp4" />
+                  <source src={videoUrl} type="video/webm" />
+                  Your browser does not support the video tag.
+                </video>
+              )}
+            </>
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-indigo-100">
               <span className="text-indigo-500 text-lg font-medium">
@@ -564,9 +602,8 @@ const CourseDetail = () => {
               </span>
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white">
-            <div className="flex flex-wrap items-center gap-2 mb-3">
+          <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white pointer-events-none">
+            <div className="flex flex-wrap items-center gap-2 mb-3 pointer-events-auto">
               <span className="px-3 py-1 bg-primary-600 rounded-full text-sm font-medium">
                 {course.category}
               </span>
@@ -574,10 +611,10 @@ const CourseDetail = () => {
                 {course.level}
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-bold mb-4">
+            <h1 className="text-3xl sm:text-4xl font-bold mb-4 pointer-events-auto">
               {course.title}
             </h1>
-            <div className="flex flex-wrap items-center gap-4 text-sm">
+            <div className="flex flex-wrap items-center gap-4 text-sm pointer-events-auto">
               <div className="flex items-center gap-2">
                 <ClockIcon className="h-4 w-4 text-primary-400" />
                 <span>
