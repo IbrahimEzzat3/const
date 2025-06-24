@@ -170,9 +170,7 @@ const CourseManager = () => {
     const { t } = useLanguage();
     const [videoError, setVideoError] = React.useState(false);
     const [videoLoading, setVideoLoading] = React.useState(true);
-    const videoUrl = video
-      ? `https://const-production.up.railway.app/uploads/${video}`
-      : null;
+    const videoUrl = video ? `/uploads/${video}` : null;
     const handleVideoError = () => {
       setVideoError(true);
       setVideoLoading(false);
@@ -452,7 +450,7 @@ const CourseManager = () => {
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-sm text-gray-900 max-w-md line-clamp-2">
-                      {course.shortDescription}
+                      {course.shortDescription.slice(0, 30)}...
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

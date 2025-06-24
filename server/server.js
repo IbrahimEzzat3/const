@@ -26,34 +26,9 @@ app.use(compression());
 console.log("CLIENT_URL from env:", process.env.CLIENT_URL);
 
 // CORS configuration
-let allowedOrigins = "https://const-ars6.vercel.app,http://localhost:3000";
-if (!Array.isArray(allowedOrigins)) {
-  allowedOrigins = allowedOrigins
-    .split(",")
-    .map((origin) => origin.trim())
-    .filter((origin) => origin.length > 0)
-    .map((origin) => (origin.endsWith("/") ? origin.slice(0, -1) : origin));
-}
-// Always allow localhost:3000 for development
-if (!allowedOrigins.includes("http://localhost:3000")) {
-  allowedOrigins.push("http://localhost:3000");
-}
-
 app.use(
   cors({
-    origin: (origin, callback) => {
-      console.log("Request Origin:", origin);
-      console.log("Allowed Origins:", allowedOrigins);
-      console.log("Origin in allowed list:", allowedOrigins.includes(origin));
-
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        console.error("Blocked by CORS:", origin);
-        console.error("Available origins:", allowedOrigins);
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: true,
     credentials: true,
   })
 );
