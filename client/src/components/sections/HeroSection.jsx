@@ -255,7 +255,7 @@ const HeroSection = ({ slides, loadingSlides }) => {
                   {/* Only allow edit for backend slides, not static */}
                   {isAdmin &&
                   editMode &&
-                  editIndex === index &&
+                  editIndex === index - staticSlides.length &&
                   !slide.isStatic ? (
                     <div className="flex flex-col items-center gap-4">
                       <input

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { courseService } from "../../shared/services/courseService";
 import debounce from "lodash/debounce";
 import CustomAlert from "../../shared/components/CustomAlert";
-import { useLanguage } from "../../shared/context/LanguageContext";
 
 const CourseManager = () => {
   const navigate = useNavigate();
