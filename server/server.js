@@ -27,7 +27,7 @@ console.log("CLIENT_URL from env:", process.env.CLIENT_URL);
 
 // CORS configuration
 const allowedOrigins = (
-  process.env.CLIENT_URL || "https://const-ars6.vercel.app"
+  process.env.CLIENT_URL || "https://const-is53.vercel.app"
 )
   .split(",")
   .map((origin) => origin.trim())
@@ -76,8 +76,27 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Serve uploaded files
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use(
+  "/uploads",
+  express.static("uploads", {
+    setHeaders: (res, path) => {
+      // Enable CORS for video files
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Access-Control-Allow-Methods", "GET");
+      res.setHeader("Access-Control-Allow-Headers", "Range");
+      res.setHeader("Accept-Ranges", "bytes");
 
+      // Set proper content type for video files
+      if (path.endsWith(".mp4")) {
+        res.setHeader("Content-Type", "video/mp4");
+      } else if (path.endsWith(".webm")) {
+        res.setHeader("Content-Type", "video/webm");
+      } else if (path.endsWith(".ogg")) {
+        res.setHeader("Content-Type", "video/ogg");
+      }
+    },
+  })
+);
 // Serve public assets
 app.use("/public", express.static(path.join(__dirname, "public")));
 
