@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../shared/context/LanguageContext";
 
@@ -6,21 +6,47 @@ const Course = ({ course }) => {
   const { t, direction } = useLanguage();
   const [videoError, setVideoError] = useState(false);
   const [videoLoading, setVideoLoading] = useState(true);
+  const videoRef = useRef(null);
 
   // Construct video URL
   const videoUrl = course.video
     ? `https://const-production.up.railway.app/uploads/${course.video}`
     : null;
 
+  useEffect(() => {
+    if (videoRef.current && videoUrl) {
+      // Reset states when video URL changes
+      setVideoError(false);
+      setVideoLoading(true);
+
+      // Force reload the video
+      videoRef.current.load();
+    }
+  }, [videoUrl]);
+
   const handleVideoError = (e) => {
     console.error("Video failed to load:", e);
     console.error("Attempted URL:", videoUrl);
+    console.error("Error code:", e.target.error?.code);
+    console.error("Error message:", e.target.error?.message);
     setVideoError(true);
     setVideoLoading(false);
   };
 
   const handleVideoLoad = () => {
+    console.log("Video loaded successfully");
     setVideoLoading(false);
+    setVideoError(false);
+  };
+
+  const handleCanPlay = () => {
+    console.log("Video can start playing");
+    setVideoLoading(false);
+  };
+
+  const handleLoadStart = () => {
+    console.log("Video started loading");
+    setVideoLoading(true);
     setVideoError(false);
   };
 
@@ -32,12 +58,6 @@ const Course = ({ course }) => {
       <div className="relative h-48 bg-gray-200">
         {course.video ? (
           <>
-            {videoLoading && !videoError && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-                <div className="text-gray-500">Loading video...</div>
-              </div>
-            )}
-
             {videoError ? (
               <div className="w-full h-full flex flex-col items-center justify-center bg-red-50">
                 <span className="text-red-500 text-sm font-medium mb-2">
@@ -53,20 +73,30 @@ const Course = ({ course }) => {
                 </a>
               </div>
             ) : (
-              <video
-                src={videoUrl}
-                controls
-                className="h-full w-full object-cover rounded-md"
-                preload="metadata"
-                onError={handleVideoError}
-                onLoadedData={handleVideoLoad}
-                onLoadStart={() => setVideoLoading(true)}
-                crossOrigin="anonymous"
-              >
-                <source src={videoUrl} type="video/mp4" />
-                <source src={videoUrl} type="video/webm" />
-                Your browser does not support the video tag.
-              </video>
+              <>
+                {videoLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-10">
+                    <div className="text-gray-500">Loading video...</div>
+                  </div>
+                )}
+
+                <video
+                  ref={videoRef}
+                  controls
+                  className="h-full w-full object-cover rounded-md"
+                  preload="metadata"
+                  onError={handleVideoError}
+                  onLoadedData={handleVideoLoad}
+                  onCanPlay={handleCanPlay}
+                  onLoadStart={handleLoadStart}
+                  playsInline
+                  muted={false}
+                  style={{ backgroundColor: "#f3f4f6" }}
+                >
+                  <source src={videoUrl} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </>
             )}
           </>
         ) : (
@@ -78,7 +108,7 @@ const Course = ({ course }) => {
         )}
 
         {course.isActive && (
-          <div className="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+          <div className="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium z-20">
             {t("courseDetail.status")}
           </div>
         )}

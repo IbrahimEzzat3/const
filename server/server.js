@@ -26,14 +26,16 @@ app.use(compression());
 console.log("CLIENT_URL from env:", process.env.CLIENT_URL);
 
 // CORS configuration
-const allowedOrigins = (
-  process.env.CLIENT_URL || "https://const-is53.vercel.app"
-)
-  .split(",")
-  .map((origin) => origin.trim())
-  .filter((origin) => origin.length > 0)
-  .map((origin) => (origin.endsWith("/") ? origin.slice(0, -1) : origin));
-
+let allowedOrigins =
+  process.env.CLIENT_URL ||
+  "https://const-ars6.vercel.app,http://localhost:3000";
+if (!Array.isArray(allowedOrigins)) {
+  allowedOrigins = allowedOrigins
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter((origin) => origin.length > 0)
+    .map((origin) => (origin.endsWith("/") ? origin.slice(0, -1) : origin));
+}
 // Always allow localhost:3000 for development
 if (!allowedOrigins.includes("http://localhost:3000")) {
   allowedOrigins.push("http://localhost:3000");
