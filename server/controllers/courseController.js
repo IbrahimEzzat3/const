@@ -238,16 +238,13 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
   // Handle video if uploaded
   if (req.file) {
     updatedFields.video = req.file.filename;
-  } else if (
-    updatedFields.video === "null" ||
-    updatedFields.video === null ||
-    (typeof updatedFields.video === "object" &&
-      Object.keys(updatedFields.video).length === 0)
-  ) {
+  } else if (updatedFields.video === "null") {
+    // If video is explicitly sent as "null" (e.g., on edit when removing video)
     updatedFields.video = null;
-  } else if (typeof updatedFields.video !== "string") {
-    // If video is not a string, remove it from update
-    delete updatedFields.video;
+  } else if (updatedFields.video === "undefined" && course.video) {
+    // This case handles when a video was previously present but no new video was uploaded and it's not explicitly null
+    // It indicates no change to the video, so we keep the existing one.
+    delete updatedFields.video; // Remove it from updatedFields so it's not set to undefined
   }
 
   // Convert string booleans to actual booleans
