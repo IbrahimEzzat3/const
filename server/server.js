@@ -26,9 +26,7 @@ app.use(compression());
 console.log("CLIENT_URL from env:", process.env.CLIENT_URL);
 
 // CORS configuration
-let allowedOrigins =
-  process.env.CLIENT_URL ||
-  "https://const-ars6.vercel.app,http://localhost:3000";
+let allowedOrigins = "https://const-ars6.vercel.app,http://localhost:3000";
 if (!Array.isArray(allowedOrigins)) {
   allowedOrigins = allowedOrigins
     .split(",")
