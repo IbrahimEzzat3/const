@@ -235,16 +235,32 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
   updatedFields.objectives = parseJsonField("objectives");
   updatedFields.modules = parseJsonField("modules");
 
-  // Handle video if uploaded
+  // Handle video field properly
   if (req.file) {
+    // New video file uploaded
     updatedFields.video = req.file.filename;
-  } else if (updatedFields.video === "null") {
-    // If video is explicitly sent as "null" (e.g., on edit when removing video)
+  } else if (
+    updatedFields.video === "" ||
+    updatedFields.video === "null" ||
+    updatedFields.video === null
+  ) {
+    // Video explicitly removed or empty
     updatedFields.video = null;
-  } else if (updatedFields.video === "undefined" && course.video) {
-    // This case handles when a video was previously present but no new video was uploaded and it's not explicitly null
-    // It indicates no change to the video, so we keep the existing one.
-    delete updatedFields.video; // Remove it from updatedFields so it's not set to undefined
+  } else if (
+    updatedFields.video === "undefined" ||
+    updatedFields.video === undefined
+  ) {
+    // No change to video - keep existing
+    delete updatedFields.video;
+  } else if (
+    typeof updatedFields.video === "string" &&
+    updatedFields.video.trim() !== ""
+  ) {
+    // Existing video URL or filename - keep as is
+    updatedFields.video = updatedFields.video.trim();
+  } else {
+    // Any other case (including objects) - remove from update
+    delete updatedFields.video;
   }
 
   // Convert string booleans to actual booleans
@@ -269,6 +285,7 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
       duration: module.duration ? parseInt(module.duration) : undefined,
     }));
   }
+
 
   course = await Course.findByIdAndUpdate(req.params.id, updatedFields, {
     new: true,

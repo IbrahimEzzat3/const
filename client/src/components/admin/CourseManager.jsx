@@ -167,7 +167,6 @@ const CourseManager = () => {
 
   // VideoPreview component for per-video state
   const VideoPreview = ({ video }) => {
-    const { t } = useLanguage();
     const [videoError, setVideoError] = React.useState(false);
     const [videoLoading, setVideoLoading] = React.useState(true);
     const videoUrl = video

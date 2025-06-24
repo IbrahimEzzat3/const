@@ -134,11 +134,20 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         // Handle video
         // Handle video
         if (values.video instanceof File) {
+          // New file selected
           formData.append("video", values.video);
-        } else if (typeof values.video === "string" && values.video) {
-          formData.append("video", values.video); // for existing video URL
+        } else if (
+          typeof values.video === "string" &&
+          values.video.trim() !== ""
+        ) {
+          // Existing video URL/filename
+          formData.append("video", values.video.trim());
+        } else if (values.video === null || values.video === "") {
+          // Explicitly removing video
+          formData.append("video", "");
         } else {
-          formData.append("video", ""); // send empty string if no video
+          // No video or undefined - don't append anything
+          // This will preserve existing video in edit mode
         }
 
         if (isEdit) {
