@@ -185,7 +185,7 @@ const CourseManager = () => {
       return (
         <div className="w-full h-full flex items-center justify-center bg-indigo-100">
           <span className="text-indigo-500 text-lg font-medium">
-            {t("courseDetail.noVideo")}
+            No Video
           </span>
         </div>
       );

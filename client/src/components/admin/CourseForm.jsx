@@ -82,7 +82,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         requirements: course.requirements || [],
         objectives: course.objectives || [],
         modules: course.modules || [],
-        video: null,
+        video: course.video || "",
         isActive: course.isActive ?? true,
       });
     } catch (error) {
@@ -132,8 +132,13 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         formData.append("modules", JSON.stringify(processedModules));
 
         // Handle video
+        // Handle video
         if (values.video instanceof File) {
           formData.append("video", values.video);
+        } else if (typeof values.video === "string" && values.video) {
+          formData.append("video", values.video); // for existing video URL
+        } else {
+          formData.append("video", ""); // send empty string if no video
         }
 
         if (isEdit) {

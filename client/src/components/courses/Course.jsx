@@ -6,7 +6,6 @@ const Course = ({ course }) => {
   const { t, direction } = useLanguage();
 
   const VideoPreview = ({ video }) => {
-    const { t } = useLanguage();
     const [videoError, setVideoError] = React.useState(false);
     const [videoLoading, setVideoLoading] = React.useState(true);
     const videoUrl = video
@@ -23,9 +22,7 @@ const Course = ({ course }) => {
     if (!video) {
       return (
         <div className="w-full h-full flex items-center justify-center bg-indigo-100">
-          <span className="text-indigo-500 text-lg font-medium">
-            {t("courseDetail.noVideo")}
-          </span>
+          <span className="text-indigo-500 text-lg font-medium">No Video</span>
         </div>
       );
     }
@@ -81,7 +78,7 @@ const Course = ({ course }) => {
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-indigo-100">
             <span className="text-indigo-500 text-lg font-medium">
-              {t("courseDetail.noVideo")}
+              No Video
             </span>
           </div>
         )}

@@ -537,7 +537,6 @@ const CourseDetail = () => {
   };
 
   const VideoPreview = ({ video }) => {
-    const { t } = useLanguage();
     const [videoError, setVideoError] = React.useState(false);
     const [videoLoading, setVideoLoading] = React.useState(true);
     const videoUrl = video
@@ -554,9 +553,7 @@ const CourseDetail = () => {
     if (!video) {
       return (
         <div className="w-full h-full flex items-center justify-center bg-indigo-100">
-          <span className="text-indigo-500 text-lg font-medium">
-            {t("courseDetail.noVideo")}
-          </span>
+          <span className="text-indigo-500 text-lg font-medium">No Video</span>
         </div>
       );
     }
@@ -611,7 +608,7 @@ const CourseDetail = () => {
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-indigo-100">
               <span className="text-indigo-500 text-lg font-medium">
-                {t("courseDetail.noVideo")}
+                No Video
               </span>
             </div>
           )}
