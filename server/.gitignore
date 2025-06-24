@@ -97,10 +97,6 @@ temp/
 ehthumbs.db
 Thumbs.db
 
-# Uploaded files (keep the directory but ignore contents)
-uploads/*
-!uploads/.gitkeep
-
 # Database files
 *.db
 *.sqlite
