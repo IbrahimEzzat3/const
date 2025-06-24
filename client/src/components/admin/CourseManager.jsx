@@ -286,18 +286,21 @@ const CourseManager = () => {
             <div key={course._id} className="p-4">
               <div className="flex gap-4">
                 <div className="flex-shrink-0">
-                  {course.coverImage ? (
-                    <img
-                      src={`https://const-production.up.railway.app/uploads/${course.coverImage}`}
-                      alt={course.title}
+                  {course.video ? (
+                    <video
+                      src={`https://const-production.up.railway.app/uploads/${course.video}`}
+                      controls
                       className="h-16 w-24 object-cover rounded-md"
-                      loading="lazy"
-                      crossOrigin="anonymous"
-                      referrerPolicy="no-referrer"
-                    />
+                      preload="metadata"
+                    >
+                      <source
+                        src={`https://const-production.up.railway.app/uploads/${course.video}`}
+                      />
+                      Your browser does not support the video tag.
+                    </video>
                   ) : (
                     <div className="h-16 w-24 bg-gray-200 rounded-md flex items-center justify-center">
-                      <span className="text-gray-400 text-xs">No image</span>
+                      <span className="text-gray-400 text-xs">No video</span>
                     </div>
                   )}
                 </div>
@@ -381,19 +384,22 @@ const CourseManager = () => {
                 <td className="px-6 py-4">
                   <div className="flex items-center">
                     <div className="flex-shrink-0 h-16 w-24">
-                      {course.coverImage ? (
-                        <img
-                          src={`https://const-production.up.railway.app/uploads/${course.coverImage}`}
-                          alt={course.title}
+                      {course.video ? (
+                        <video
+                          src={`https://const-production.up.railway.app/uploads/${course.video}`}
+                          controls
                           className="h-16 w-24 object-cover rounded-md"
-                          loading="lazy"
-                          crossOrigin="anonymous"
-                          referrerPolicy="no-referrer"
-                        />
+                          preload="metadata"
+                        >
+                          <source
+                            src={`https://const-production.up.railway.app/uploads/${course.video}`}
+                          />
+                          Your browser does not support the video tag.
+                        </video>
                       ) : (
                         <div className="h-16 w-24 bg-gray-200 rounded-md flex items-center justify-center">
                           <span className="text-gray-400 text-xs">
-                            No image
+                            No video
                           </span>
                         </div>
                       )}

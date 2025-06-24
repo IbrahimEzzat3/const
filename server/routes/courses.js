@@ -37,13 +37,13 @@ router.delete("/!*:id/unenroll", courseController.unenrollFromCourse);
 router.post(
   "/",
   authorize("admin"),
-  upload.single("coverImage"),
+  upload.single("video"),
   courseController.createCourse
 );
 router.put(
   "/:id",
   authorize("admin"),
-  upload.single("coverImage"),
+  upload.single("video"),
   courseController.updateCourse
 );
 router.delete("/:id", authorize("admin"), courseController.deleteCourse);

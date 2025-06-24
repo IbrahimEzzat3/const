@@ -9,17 +9,22 @@ const CallToActionSection = () => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    message: "",
+    type: "",
+    otherType: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Create the WhatsApp message with the form data
+    let typeText = formData.type;
+    if (formData.type === "أخرى" && formData.otherType) {
+      typeText = formData.otherType;
+    }
     const whatsappMessage =
       language === "ar"
-        ? `مرحباً، أنا ${formData.name}%0A%0Aرقم الجوال: ${formData.phone}%0A%0Aالرسالة: ${formData.message}`
-        : `Hello, I am ${formData.name}%0A%0APhone: ${formData.phone}%0A%0AMessage: ${formData.message}`;
+        ? `مرحباً، أنا ${formData.name}%0A%0Aرقم الجوال: ${formData.phone}%0A%0Aنوع الاستشارة: ${typeText}`
+        : `Hello, I am ${formData.name}%0A%0APhone: ${formData.phone}%0A%0AConsultation Type: ${typeText}`;
 
     // WhatsApp number (replace with your actual number)
     const whatsappNumber = "966558813386";
@@ -43,11 +48,14 @@ const CallToActionSection = () => {
   };
 
   const handleWhatsappConfirm = () => {
+    let typeText = formData.type;
+    if (formData.type === "أخرى" && formData.otherType) {
+      typeText = formData.otherType;
+    }
     const whatsappMessage =
       language === "ar"
-        ? `مرحباً، أنا ${formData.name}%0A%0Aرقم الجوال: ${formData.phone}%0A%0Aالرسالة: ${formData.message}`
-        : `Hello, I am ${formData.name}%0A%0APhone: ${formData.phone}%0A%0AMessage: ${formData.message}`;
-
+        ? `مرحباً، أنا ${formData.name}%0A%0Aرقم الجوال: ${formData.phone}%0A%0Aنوع الاستشارة: ${typeText}`
+        : `Hello, I am ${formData.name}%0A%0APhone: ${formData.phone}%0A%0AConsultation Type: ${typeText}`;
     const whatsappNumber = "966558813386";
     window.open(
       `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`,
@@ -134,15 +142,45 @@ const CallToActionSection = () => {
                   required
                 />
               </div>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder={t("sections.callToAction.getQuote.message")}
-                rows="3"
-                className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-white border-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:border-blue-500 mb-4"
-                required
-              ></textarea>
+              <div className="mb-4">
+                <select
+                  name="type"
+                  value={formData.type}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-white border-opacity-20 text-black focus:outline-none focus:border-blue-500"
+                  required
+                >
+                  <option value="" disabled>
+                    {t("sections.callToAction.getQuote.type")}
+                  </option>
+                  <option value="إنشائية">إنشائية</option>
+                  <option value="معمارية">معمارية</option>
+                  <option value="داخلية وتأثيث">داخلية وتأثيث</option>
+                  <option value="أنظمة الاستزراع المائي">
+                    أنظمة الاستزراع المائي
+                  </option>
+                  <option value="دراسة المشاريع القائمة">
+                    دراسة المشاريع القائمة
+                  </option>
+                  <option value="الأنظمة الذكية">الأنظمة الذكية</option>
+                  <option value="الواقع الافتراضي">الواقع الافتراضي</option>
+                  <option value="أخرى">أخرى</option>
+                </select>
+              </div>
+              {formData.type === "أخرى" && (
+                <textarea
+                  name="otherType"
+                  value={formData.otherType}
+                  onChange={handleChange}
+                  placeholder={t(
+                    "sections.callToAction.getQuote.otherTypePlaceholder",
+                    "حدد نوع الاستشارة"
+                  )}
+                  rows="2"
+                  className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-white border-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:border-blue-500 mb-4"
+                  required
+                ></textarea>
+              )}
               <button
                 type="submit"
                 className="w-full bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-full transition duration-300 flex items-center justify-center gap-2"

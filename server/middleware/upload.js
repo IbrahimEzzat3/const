@@ -30,6 +30,12 @@ const fileFilter = (req, file, cb) => {
     "image/png",
     "image/webp",
     "image/gif",
+    "video/mp4",
+    "video/webm",
+    "video/ogg",
+    "video/quicktime",
+    "video/x-msvideo",
+    "video/x-matroska",
   ];
 
   if (allowedTypes.includes(file.mimetype)) {
@@ -37,7 +43,7 @@ const fileFilter = (req, file, cb) => {
   } else {
     cb(
       new Error(
-        "Invalid file type. Only JPEG, PNG, WebP, and GIF images are allowed."
+        "Invalid file type. Only JPEG, PNG, WebP, GIF images and MP4, WebM, OGG, MOV, AVI, MKV videos are allowed."
       )
     );
   }

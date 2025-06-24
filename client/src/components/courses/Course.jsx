@@ -9,27 +9,31 @@ const Course = ({ course }) => {
     <div
       className={`bg-white rounded-lg shadow-md overflow-hidden ${direction}`}
     >
-      {/* Course Image */}
+      {/* Course Video */}
       <div className="relative h-48 bg-gray-200">
-        {course.coverImage ? (
-          <img
-            src={`https://const-production.up.railway.app/uploads/${course.coverImage}`}
-            alt={course.title}
+        {course.video ? (
+          <video
+            src={`https://const-production.up.railway.app/uploads/${course.video}`}
+            controls
             className="h-full w-full object-cover rounded-md"
-            loading="lazy"
-            crossOrigin="anonymous"
-            referrerPolicy="no-referrer"
-          />
+            preload="metadata"
+            poster=""
+          >
+            <source
+              src={`https://const-production.up.railway.app/uploads/${course.video}`}
+            />
+            Your browser does not support the video tag.
+          </video>
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-indigo-100">
             <span className="text-indigo-500 text-lg font-medium">
-              {t("courseDetail.noImage")}
+              {t("courseDetail.noVideo")}
             </span>
           </div>
         )}
         {course.isActive && (
           <div className="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium">
-            {t("status")}
+            {t("courseDetail.status")}
           </div>
         )}
       </div>

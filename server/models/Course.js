@@ -20,7 +20,7 @@ const courseSchema = new mongoose.Schema(
       type: String,
       maxlength: [200, "Short description cannot be more than 200 characters"],
     },
-    coverImage: {
+    video: {
       type: String,
       required: false,
       default: null,
@@ -157,12 +157,12 @@ courseSchema.pre("save", function (next) {
   next();
 });
 
-// Delete course image when course is deleted
+// Delete course video when course is deleted
 courseSchema.pre("remove", async function (next) {
   try {
-    if (this.coverImage && this.coverImage.filename) {
-      const uploadDir = path.join(__dirname, "../uploads/courses");
-      const filePath = path.join(uploadDir, this.coverImage.filename);
+    if (this.video) {
+      const uploadDir = path.join(__dirname, "../uploads");
+      const filePath = path.join(uploadDir, this.video);
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
       }
@@ -186,7 +186,7 @@ courseSchema.index({
 courseSchema.statics.getCoursesByCategory = async function (category) {
   return await this.find({ category, isPublished: true })
     .select(
-      "title slug shortDescription category level duration price discountPrice coverImage"
+      "title slug shortDescription category level duration price discountPrice video"
     )
     .populate("instructor", "name avatar")
     .sort("-createdAt");
@@ -196,7 +196,7 @@ courseSchema.statics.getCoursesByCategory = async function (category) {
 courseSchema.statics.getFeaturedCourses = async function (limit = 6) {
   return await this.find({ isPublished: true, isFeatured: true })
     .select(
-      "title slug shortDescription category level duration price discountPrice coverImage"
+      "title slug shortDescription category level duration price discountPrice video"
     )
     .populate("instructor", "name avatar")
     .limit(limit);
@@ -209,7 +209,7 @@ courseSchema.statics.searchCourses = async function (query) {
     { score: { $meta: "textScore" } }
   )
     .select(
-      "title slug shortDescription category level duration price discountPrice coverImage"
+      "title slug shortDescription category level duration price discountPrice video"
     )
     .populate("instructor", "name avatar")
     .sort({ score: { $meta: "textScore" } })

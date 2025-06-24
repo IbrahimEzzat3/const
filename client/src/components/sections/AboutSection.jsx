@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../../shared/context/LanguageContext";
 
 const AboutSection = () => {
   const { t, direction } = useLanguage();
   const [hoveredCard, setHoveredCard] = useState(null);
-  const navigate = useNavigate();
 
-  const handleCardClick = (category) => {
-    navigate(`/styles/${category}`);
-    window.scrollTo(0, 0);
+  const handleCardClick = (pdfUrl) => {
+    const link = document.createElement("a");
+    link.href = pdfUrl;
+    link.download = pdfUrl.split("/").pop();
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const projects = t("sections.about.projects", { returnObjects: true });
@@ -40,7 +42,7 @@ const AboutSection = () => {
               className="cursor-pointer group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105"
               onMouseEnter={() => setHoveredCard(project.id)}
               onMouseLeave={() => setHoveredCard(null)}
-              onClick={() => handleCardClick(project.category)}
+              onClick={() => handleCardClick(project.pdf)}
             >
               {/* Image Container */}
               <div className="relative h-64 overflow-hidden">

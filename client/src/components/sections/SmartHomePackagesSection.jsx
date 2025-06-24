@@ -6,7 +6,6 @@ const SmartHomePackagesSection = () => {
   const packages = [
     {
       title: t("sections.smartHomePackages.basic.title"),
-      price: "25,000",
       features: t("sections.smartHomePackages.basic.features", {
         returnObjects: true,
       }),
@@ -15,7 +14,6 @@ const SmartHomePackagesSection = () => {
     },
     {
       title: t("sections.smartHomePackages.advanced.title"),
-      price: "45,000",
       features: t("sections.smartHomePackages.advanced.features", {
         returnObjects: true,
       }),
@@ -24,8 +22,37 @@ const SmartHomePackagesSection = () => {
     },
     {
       title: t("sections.smartHomePackages.vip.title"),
-      price: "75,000",
       features: t("sections.smartHomePackages.vip.features", {
+        returnObjects: true,
+      }),
+      isPopular: false,
+      buttonClass: "bg-blue-100 hover:bg-blue-200",
+    },
+    {
+      title: t("sections.smartHomePackages.basicSuperVision.title"),
+      features: t("sections.smartHomePackages.basicSuperVision.features", {
+        returnObjects: true,
+      }),
+      notInclude: t("sections.smartHomePackages.basicSuperVision.notInclude", {
+        returnObjects: true,
+      }),
+      isPopular: false,
+      buttonClass: "bg-blue-100 hover:bg-blue-200",
+    },
+    {
+      title: t("sections.smartHomePackages.fullSuperVision.title"),
+      features: t("sections.smartHomePackages.fullSuperVision.features", {
+        returnObjects: true,
+      }),
+      notInclude: t("sections.smartHomePackages.fullSuperVision.notInclude", {
+        returnObjects: true,
+      }),
+      isPopular: true,
+      buttonClass: "bg-blue-600 hover:bg-blue-800",
+    },
+    {
+      title: t("sections.smartHomePackages.turnkeyProjectPackage.title"),
+      features: t("sections.smartHomePackages.turnkeyProjectPackage.features", {
         returnObjects: true,
       }),
       isPopular: false,
@@ -43,7 +70,7 @@ const SmartHomePackagesSection = () => {
           <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 max-w-5xl mx-auto">
           {packages.map((pkg, index) => (
             <article
               key={index}
@@ -67,16 +94,6 @@ const SmartHomePackagesSection = () => {
               >
                 {pkg.title}
               </h3>
-              <div
-                className={`${
-                  pkg.isPopular ? "text-white" : "text-blue-600"
-                } text-4xl font-bold mb-6`}
-              >
-                {pkg.price}{" "}
-                <span className="text-lg">
-                  {t("sections.smartHomePackages.currency")}
-                </span>
-              </div>
               <ul
                 className={`${
                   pkg.isPopular ? "" : "text-gray-600"
@@ -103,11 +120,37 @@ const SmartHomePackagesSection = () => {
                     <span className="mr-2">{feature}</span>
                   </li>
                 ))}
+                {pkg?.notInclude?.map((notInclude, idx) => (
+                  <li key={idx} className="flex items-center justify-start">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2.5}
+                      stroke="currentColor"
+                      className="w-5 h-5 text-red-600"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                    <span className="mr-2 text-red-600">{notInclude}</span>
+                  </li>
+                ))}
               </ul>
               <button
                 className={`w-full ${pkg.buttonClass} ${
                   pkg.isPopular ? "text-white" : "text-blue-900"
                 } font-bold py-3 px-4 rounded-full transition duration-300`}
+                onClick={() => {
+                  window.open(
+                    "https://wa.me/966558813386?text=I%20want%20to%20choose%20the%20package%20%23" +
+                      pkg.title,
+                    "_blank"
+                  );
+                }}
               >
                 {t("sections.smartHomePackages.choosePackage")}
               </button>

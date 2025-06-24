@@ -12,7 +12,7 @@ const FloatingButtons = () => {
       const scrollPosition = window.scrollY;
       setShowScrollTop(scrollPosition > 300);
       // Show WhatsApp message when scrolling down, hide when at top
-      setShowWhatsAppMessage(scrollPosition > 50 && scrollPosition < 9000);
+      setShowWhatsAppMessage(true);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -31,7 +31,9 @@ const FloatingButtons = () => {
   };
 
   const whatsappTooltip =
-    language === "ar" ? "تواصل معنا عن طريق واتساب" : "Contact us via WhatsApp";
+    language === "ar"
+      ? "ضيفنا الكريم نسعد بالتواصل معكم من خلال الواتساب"
+      : "Dear guest, we are pleased to communicate with you via WhatsApp.";
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4">

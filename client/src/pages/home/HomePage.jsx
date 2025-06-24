@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeroSection from "../../components/sections/HeroSection";
 import AboutSection from "../../components/sections/AboutSection";
 import FeaturedBlogsSection from "../../components/sections/FeaturedBlogsSection";
@@ -12,9 +12,33 @@ import CallToActionSection from "../../components/sections/CallToActionSection";
 import ContactSection from "../../components/sections/ContactSection";
 import usePageTitle from "../../shared/hooks/usePageTitle";
 import { Helmet } from "react-helmet-async";
+import { sliderService } from "../../shared/services/sliderService";
+import { useLanguage } from "../../shared/context/LanguageContext";
 
 const HomePage = () => {
   usePageTitle("home");
+  const { language } = useLanguage();
+  const [slides, setSlides] = useState([]);
+  const [loadingSlides, setLoadingSlides] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    setLoadingSlides(true);
+    sliderService
+      .getSliders(language)
+      .then((res) => {
+        if (isMounted) setSlides(res.data || []);
+      })
+      .catch(() => {
+        if (isMounted) setSlides([]);
+      })
+      .finally(() => {
+        if (isMounted) setLoadingSlides(false);
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, [language]);
 
   return (
     <>
@@ -38,11 +62,11 @@ const HomePage = () => {
       </Helmet>
       <div className="min-h-screen bg-white">
         <main>
-          <HeroSection />
-          <AboutSection />
+          <HeroSection slides={slides} loadingSlides={loadingSlides} />
           <ServicesSection />
-          <WhyChooseUsSection />
           <FeaturedWorkSection />
+          <AboutSection />
+          <WhyChooseUsSection />
           <SmartHomePackagesSection />
           <VRDemoSection />
           <FeaturedBlogsSection />

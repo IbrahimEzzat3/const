@@ -5,27 +5,31 @@ import { Helmet } from "react-helmet-async";
 import { useLanguage } from "../../shared/context/LanguageContext";
 
 const CostCalculator = () => {
-  const [area, setArea] = useState("");
-  const [finishType, setFinishType] = useState("normal");
   const [estimatedCost, setEstimatedCost] = useState(null);
+  const [areaPerFloor, setAreaPerFloor] = useState("");
+  const [numFloors, setNumFloors] = useState("");
+  const [areaAnnex, setAreaAnnex] = useState("");
   const navigate = useNavigate();
   const { t, direction } = useLanguage();
   usePageTitle("costCalculator");
 
   const calculateCost = () => {
-    const areaNum = parseFloat(area);
-    if (!areaNum || areaNum <= 0) {
+    const areaPerFloorNum = parseFloat(areaPerFloor);
+    const numFloorsNum = parseFloat(numFloors);
+    const areaAnnexNum = parseFloat(areaAnnex);
+    if ((!areaPerFloorNum && areaPerFloor !== "0") || areaPerFloorNum < 0) {
       alert(t("sections.services.costCalculator.invalidArea"));
       return;
     }
-
-    const rates = {
-      normal: 1200, // ريال للمتر المربع
-      luxury: 1800, // ريال للمتر المربع
-      premium: 2500, // ريال للمتر المربع
-    };
-
-    const cost = areaNum * rates[finishType];
+    if ((!numFloorsNum && numFloors !== "0") || numFloorsNum < 0) {
+      alert(t("sections.services.costCalculator.invalidArea"));
+      return;
+    }
+    if ((!areaAnnexNum && areaAnnex !== "0") || areaAnnexNum < 0) {
+      alert(t("sections.services.costCalculator.invalidArea"));
+      return;
+    }
+    const cost = 1800 * (areaPerFloorNum * numFloorsNum + areaAnnexNum);
     setEstimatedCost(cost);
   };
 
@@ -64,47 +68,66 @@ const CostCalculator = () => {
             <section className="bg-gray-50 p-6 rounded-lg mb-8">
               <div className="mb-6">
                 <label className="block text-blue-900 font-semibold mb-2">
-                  {t("sections.services.costCalculator.area")}
+                  {t("sections.services.costCalculator.areaPerFloor")}
                 </label>
                 <input
                   type="number"
-                  value={area}
+                  value={areaPerFloor}
                   onChange={(e) => {
                     const value = e.target.value;
-                    // Allow empty string or non-negative numbers
                     if (value === "" || parseFloat(value) >= 0) {
-                      setArea(value);
+                      setAreaPerFloor(value);
                     }
                   }}
                   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   placeholder={t(
-                    "sections.services.costCalculator.enterAreaPlaceholder"
+                    "sections.services.costCalculator.enterAreaPerFloorPlaceholder"
                   )}
                   min="0"
                   dir={direction}
                 />
               </div>
-
               <div className="mb-6">
                 <label className="block text-blue-900 font-semibold mb-2">
-                  {t("sections.services.costCalculator.finishType.title")}
+                  {t("sections.services.costCalculator.numFloors")}
                 </label>
-                <select
-                  value={finishType}
-                  onChange={(e) => setFinishType(e.target.value)}
+                <input
+                  type="number"
+                  value={numFloors}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value === "" || parseFloat(value) >= 0) {
+                      setNumFloors(value);
+                    }
+                  }}
                   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  placeholder={t(
+                    "sections.services.costCalculator.enterNumFloorsPlaceholder"
+                  )}
+                  min="0"
                   dir={direction}
-                >
-                  <option value="normal">
-                    {t("sections.services.costCalculator.finishType.normal")}
-                  </option>
-                  <option value="luxury">
-                    {t("sections.services.costCalculator.finishType.luxury")}
-                  </option>
-                  <option value="premium">
-                    {t("sections.services.costCalculator.finishType.premium")}
-                  </option>
-                </select>
+                />
+              </div>
+              <div className="mb-6">
+                <label className="block text-blue-900 font-semibold mb-2">
+                  {t("sections.services.costCalculator.areaAnnex")}
+                </label>
+                <input
+                  type="number"
+                  value={areaAnnex}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value === "" || parseFloat(value) >= 0) {
+                      setAreaAnnex(value);
+                    }
+                  }}
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  placeholder={t(
+                    "sections.services.costCalculator.enterAreaAnnexPlaceholder"
+                  )}
+                  min="0"
+                  dir={direction}
+                />
               </div>
 
               <button
@@ -115,7 +138,7 @@ const CostCalculator = () => {
               </button>
             </section>
 
-            {estimatedCost && (
+            {estimatedCost !== null && (
               <article
                 className={`bg-yellow-50 p-6 rounded-lg text-center ${
                   direction === "rtl" ? "text-right" : "text-left"
@@ -131,24 +154,11 @@ const CostCalculator = () => {
                 <p className="text-gray-600 mt-2">
                   {t("sections.services.costCalculator.disclaimer")}
                 </p>
+                <p className="text-red-600 mt-2 font-semibold">
+                  {t("sections.services.costCalculator.noteEstimationOnly")}
+                </p>
               </article>
             )}
-
-            <section className="mt-8 bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold text-blue-900 mb-3">
-                {t("sections.services.costCalculator.importantNotesTitle")}
-              </h3>
-              <ul
-                className={`list-disc list-inside text-gray-600 space-y-2 ${
-                  direction === "rtl" ? "list-disc-rtl" : ""
-                }`}
-              >
-                <li>{t("sections.services.costCalculator.note1")}</li>
-                <li>{t("sections.services.costCalculator.note2")}</li>
-                <li>{t("sections.services.costCalculator.note3")}</li>
-                <li>{t("sections.services.costCalculator.note4")}</li>
-              </ul>
-            </section>
           </section>
 
           <div className="text-center">

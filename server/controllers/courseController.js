@@ -125,12 +125,12 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
     req.body.objectives = parseJsonField("objectives");
     req.body.modules = parseJsonField("modules");
 
-    // Handle cover image if uploaded
+    // Handle video if uploaded
     if (req.file) {
-      req.body.coverImage = req.file.filename;
-    } else if (req.body.coverImage === "null") {
-      // If coverImage is explicitly sent as "null" (e.g., on edit when removing image)
-      req.body.coverImage = null;
+      req.body.video = req.file.filename;
+    } else if (req.body.video === "null") {
+      // If video is explicitly sent as "null" (e.g., on edit when removing video)
+      req.body.video = null;
     }
 
     // Convert string booleans to actual booleans
@@ -235,16 +235,16 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
   updatedFields.objectives = parseJsonField("objectives");
   updatedFields.modules = parseJsonField("modules");
 
-  // Handle cover image if uploaded
+  // Handle video if uploaded
   if (req.file) {
-    updatedFields.coverImage = req.file.filename;
-  } else if (updatedFields.coverImage === "null") {
-    // If coverImage is explicitly sent as "null" (e.g., on edit when removing image)
-    updatedFields.coverImage = null;
-  } else if (updatedFields.coverImage === "undefined" && course.coverImage) {
-    // This case handles when an image was previously present but no new image was uploaded and it's not explicitly null
-    // It indicates no change to the image, so we keep the existing one.
-    delete updatedFields.coverImage; // Remove it from updatedFields so it's not set to undefined
+    updatedFields.video = req.file.filename;
+  } else if (updatedFields.video === "null") {
+    // If video is explicitly sent as "null" (e.g., on edit when removing video)
+    updatedFields.video = null;
+  } else if (updatedFields.video === "undefined" && course.video) {
+    // This case handles when a video was previously present but no new video was uploaded and it's not explicitly null
+    // It indicates no change to the video, so we keep the existing one.
+    delete updatedFields.video; // Remove it from updatedFields so it's not set to undefined
   }
 
   // Convert string booleans to actual booleans

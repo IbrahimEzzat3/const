@@ -20,7 +20,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
     requirements: [],
     objectives: [],
     modules: [],
-    coverImage: null,
+    video: null,
     isActive: true,
   });
 
@@ -50,6 +50,14 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         videoUrl: Yup.string().url("Must be a valid URL").nullable(),
       })
     ),
+    video: Yup.mixed()
+      .nullable()
+      .test(
+        "fileType",
+        "Only video files are allowed",
+        (value) =>
+          !value || (value && value.type && value.type.startsWith("video/"))
+      ),
     isActive: Yup.boolean(),
   });
 
@@ -74,7 +82,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         requirements: course.requirements || [],
         objectives: course.objectives || [],
         modules: course.modules || [],
-        coverImage: null,
+        video: null,
         isActive: course.isActive ?? true,
       });
     } catch (error) {
@@ -123,9 +131,9 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
 
         formData.append("modules", JSON.stringify(processedModules));
 
-        // Handle cover image
-        if (values.coverImage instanceof File) {
-          formData.append("coverImage", values.coverImage);
+        // Handle video
+        if (values.video instanceof File) {
+          formData.append("video", values.video);
         }
 
         if (isEdit) {
@@ -209,27 +217,27 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
     }
   };
 
-  const handleImageChange = (event) => {
+  const handleVideoChange = (event) => {
     const file = event.currentTarget.files[0];
     if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        // 5MB limit
+      if (file.size > 50 * 1024 * 1024) {
+        // 50MB limit for video
         Swal.fire({
           icon: "error",
           title: "File too large",
-          text: "Please select an image smaller than 5MB",
+          text: "Please select a video smaller than 50MB",
         });
         return;
       }
-      if (!file.type.startsWith("image/")) {
+      if (!file.type.startsWith("video/")) {
         Swal.fire({
           icon: "error",
           title: "Invalid file type",
-          text: "Please select a valid image file",
+          text: "Please select a valid video file",
         });
         return;
       }
-      formik.setFieldValue("coverImage", file);
+      formik.setFieldValue("video", file);
     }
   };
 
@@ -513,22 +521,22 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           )}
         </div>
 
-        {/* Cover Image */}
+        {/* Video */}
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Cover Image
+            Course Video
           </label>
           <input
             type="file"
-            accept="image/*"
-            onChange={handleImageChange}
+            accept="video/*"
+            onChange={handleVideoChange}
             className={`mt-1 block w-full ${
-              backendErrors.coverImage ? "border-red-300" : ""
+              backendErrors.video ? "border-red-300" : ""
             }`}
           />
-          {backendErrors.coverImage && (
+          {backendErrors.video && (
             <div className="text-red-500 text-xs md:text-sm mt-1">
-              {backendErrors.coverImage}
+              {backendErrors.video}
             </div>
           )}
         </div>

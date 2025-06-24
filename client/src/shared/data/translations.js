@@ -1,4 +1,9 @@
-import { FEATURE2_IMAGE } from "../../constants/images";
+import {
+  FEATURE2_IMAGE,
+  classic,
+  modern,
+  trendy,
+} from "../../constants/images";
 
 export const translations = {
   en: {
@@ -216,6 +221,7 @@ export const translations = {
         noImage: "No Image",
         hoursOfContent: "{{count}} hours of content",
         studentsEnrolled: "{{count}} students enrolled",
+        status: "Active",
         tab: {
           overview: "Overview",
           curriculum: "Curriculum",
@@ -274,6 +280,29 @@ export const translations = {
             description:
               "Distinguished interior design that combines aesthetics and functionality, considering the latest trends in decoration.",
           },
+          engineeringDesigns: {
+            title: "Engineering Designs",
+            description:
+              "Engineering designs for various projects, including residential, commercial, and industrial.",
+          },
+          pimModeling: {
+            title: "PIM Modeling",
+            description: "PIM modeling for engineering projects.",
+          },
+          landscapeDesigns: {
+            title: "Landscape Designs",
+            description:
+              "Landscape design for various projects, including residential, commercial, and industrial.",
+          },
+          smartHomes: {
+            title: "Smart Homes",
+            description: "Smart home solutions and integrated smart systems.",
+          },
+          aquacultureProjects: {
+            title: "Aquaculture Projects",
+            description:
+              "Design and implementation of modern aquaculture projects.",
+          },
           exteriorDesign: {
             title: "Exterior Design",
             description:
@@ -295,12 +324,22 @@ export const translations = {
               "Specialized training programs in interior design and construction, presented by elite experts in the field.",
           },
           costCalculator: {
-            title: "Building Cost Calculator",
+            title: "Cost Calculator",
             description:
               "Get an initial estimate of your home construction cost based on area and type of finishing you want.",
             calculateButton: "Calculate Cost",
+            courseButton: "Training Courses",
             area: "Area in square meters",
             enterAreaPlaceholder: "Enter area in square meters",
+            areaRepeated: "Repeated Floors Area (m²)",
+            areaPerFloor: "Area per Floor (m²)",
+            numFloors: "Number of Floors",
+            areaAnnex: "Annex Floor Area (m²)",
+            enterAreaRepeatedPlaceholder:
+              "Enter total area of repeated floors (m²)",
+            enterAreaPerFloorPlaceholder: "Enter area of one floor (m²)",
+            enterNumFloorsPlaceholder: "Enter number of repeated floors",
+            enterAreaAnnexPlaceholder: "Enter area of annex floor (m²)",
             finishType: {
               title: "Finish Type",
               normal: "Normal Finish",
@@ -316,11 +355,13 @@ export const translations = {
             note3: "Cost can vary by location and specifications",
             note4: "For an accurate quote, please contact us",
             invalidArea: "Please enter a valid area",
+            noteEstimationOnly:
+              "This price is an estimated cost for construction works only and may increase or decrease by 25% depending on site conditions.",
           },
           moreDetails: "More Details",
         },
         whyChooseUs: {
-          title: "Why Choose Modern Construction Company?",
+          title: "Why Choose Ecosus?",
           localExperience: {
             title: "Local Experience",
             description:
@@ -361,37 +402,82 @@ export const translations = {
         smartHomePackages: {
           title: "Smart Home Packages",
           basic: {
-            title: "Basic Package",
+            title: "ECONOMY Package",
             features: [
-              "Smart lighting system",
-              "Curtain control",
-              "One surveillance camera",
-              "Technical support for 6 months",
+              "2D Furniture Layout Plan",
+              "Mood Board",
+              "3D Design",
+              "Plumbing Fixtures",
+              "Printed Copy with CD",
             ],
           },
           advanced: {
-            title: "Advanced Package",
+            title: "PREMIUM Package",
             features: [
-              "Smart lighting and curtain system",
-              "4 surveillance cameras",
-              "Integrated audio system",
-              "AC control",
-              "Technical support for 1 year",
+              "2D Furniture Layout Plan",
+              "Mood Board",
+              "3D Design",
+              "Design Working Drawings (Ceilings - Walls)",
+              "Plumbing Layout Plan",
+              "Materials and Quantities Schedule",
+              "Printed Copy with CD",
             ],
             popular: "Most Popular",
           },
           vip: {
-            title: "VIP Package",
+            title: "SIGNATURE Package",
             features: [
-              "All Advanced Package features",
-              "Integrated security system",
-              "Control of all devices",
-              "Central control screen",
-              "Technical support for 2 years",
-              "Custom control interface design",
+              "2D Furniture Layout Plan",
+              "Mood Board",
+              "3D Design with Navigation (360°)",
+              "Design Working Drawings (Ceilings - Walls - Floors)",
+              "Lighting and Air Conditioning Layout Plan",
+              "Electrical Switches and Sanitary Ware Layout Plan",
+              "Material and Furniture Schedules and Estimated Estimates",
+              "Printed Copy of Project Catalog with CD",
             ],
           },
-          currency: "SAR",
+          basicSuperVision: {
+            title: "Basic Super Vision",
+            features: [
+              "Scheduled field visits (once weekly)",
+              "Reviewing implementation work and ensuring its compliance with the design (specifying models only, not including redesign)",
+              "Review and manage contractors' accounts with the quantities implemented in nature.",
+              "Documenting site observations (photos + periodic reports)",
+              "Remote technical and advisory support for the client and contractor team",
+              "Partial and final receipt from the contractor of the completed work",
+            ],
+            notInclude: [
+              "Purchasing or supply management",
+              "Scheduling timelines",
+              "Final furniture or interior design",
+            ],
+          },
+          fullSuperVision: {
+            title: "Full Super Vision",
+            features: [
+              "All features of <<Basic Super Vision>>",
+              "Preparing a schedule for implementation phases",
+              "Preparing a schedule for the client with advance payments",
+              "Managing and supervising the work team and suppliers",
+              "Receiving materials and ensuring their compliance with approved technical specifications",
+              "Resolving discrepancies between implementation work and approved designs",
+              "Reviewing invoices, purchases, and contractor dues",
+              "Partial and final delivery of completed work to the client",
+            ],
+            notInclude: ["Buying furniture or interior design"],
+          },
+          turnkeyProjectPackage: {
+            title: "Turnkey Project Package",
+            features: [
+              "All the features of <<Basic and Comprehensive Supervision>>",
+              "Design/manufacture furniture to suit the client's spaces and required areas",
+              "Supply furniture and coordinate with suppliers",
+              "Coordination of accessories and final style",
+              "Professional photoshoot after final fit-out",
+              "Turn-key delivery of completed work",
+            ],
+          },
           choosePackage: "Choose Package",
         },
         vrDemo: {
@@ -408,7 +494,7 @@ export const translations = {
           videoNotSupported: "Your browser does not support video playback.",
         },
         callToAction: {
-          title: "Ready to Transform Your Home into a Smart Home?",
+          title: "Free consultation",
           subtitle:
             "Contact us now for a free consultation and assessment of your home needs",
           callUs: "Call Us",
@@ -419,8 +505,9 @@ export const translations = {
               "Leave your information and our team will contact you within 24 hours",
             name: "Name",
             phone: "Phone Number",
-            message: "Your Message",
+            type: "Type of Consultation",
             send: "Send Request",
+            otherTypePlaceholder: "Specify the type of consultation",
           },
         },
         contact: {
@@ -449,7 +536,7 @@ export const translations = {
           },
         },
         about: {
-          title: "Shd, the beauty icon",
+          title: "Ecosus, the beauty icon",
           subtitle: "With you from the idea until you receive the key",
           description: "Learn about the most popular and widely used models.",
           bottomText: "Innovative Designs for a Beautiful World",
@@ -506,9 +593,9 @@ export const translations = {
         },
         testimonials: {
           title: "Testimonials",
-          subtitle: "What Our Students Say",
+          subtitle: "What Our Clients Say",
           description:
-            "Hear from our community of learners about their experiences and success stories.",
+            "Hear from our community of clients about their experiences and success stories.",
           readFullStory: "Read Full Story",
           shareYourStory: "Share Your Story",
           loading: "Loading testimonials...",
@@ -787,6 +874,7 @@ export const translations = {
         noImage: "لا توجد صورة",
         hoursOfContent: "{{count}} ساعة من المحتوى",
         studentsEnrolled: "{{count}} طالب مسجل",
+        status: "نشط",
         tab: {
           overview: "نظرة عامة",
           curriculum: "المنهج الدراسي",
@@ -844,6 +932,27 @@ export const translations = {
             description:
               "تصميم داخلي متميز يجمع بين الجماليات والوظيفية، مع مراعاة أحدث الاتجاهات في عالم الديكور.",
           },
+          engineeringDesigns: {
+            title: "تصميمات هندسية",
+            description:
+              "تصميمات هندسية للمشاريع المختلفة، بما في ذلك المنازل والمباني التجارية والصناعية.",
+          },
+          pimModeling: {
+            title: "نمذجة معلومات المشاريع (PIM)",
+            description: "نمذجة معلومات المشاريع (PIM) للمشاريع الهندسية.",
+          },
+          landscapeDesigns: {
+            title: "تصميمات لاندسكيب",
+            description: "تصميم الحدائق والمساحات الخارجية.",
+          },
+          smartHomes: {
+            title: "المنازل الذكية",
+            description: "حلول المنازل الذكية والأنظمة الذكية المتكاملة.",
+          },
+          aquacultureProjects: {
+            title: "تصميم مشاريع الاستزراع المائي",
+            description: "تصميم وتنفيذ مشاريع الاستزراع المائي الحديثة.",
+          },
           exteriorDesign: {
             title: "التصميم الخارجي",
             description:
@@ -869,8 +978,18 @@ export const translations = {
             description:
               "احصل على تقدير أولي لتكلفة بناء منزلك بناءً على المساحة ونوع التشطيب الذي تريده.",
             calculateButton: "احسب التكلفة",
+            courseButton: "الدورات التدريبية",
             area: "المساحة بالمتر المربع",
             enterAreaPlaceholder: "أدخل المساحة بالمتر المربع",
+            areaRepeated: "مساحة الأدوار المتكررة (م²)",
+            areaPerFloor: "مساحة الدور الواحد (م²)",
+            numFloors: "عدد الأدوار المتكررة",
+            areaAnnex: "مساحة دور الملحق (م²)",
+            enterAreaRepeatedPlaceholder:
+              "أدخل إجمالي مساحة الأدوار المتكررة (م²)",
+            enterAreaPerFloorPlaceholder: "أدخل مساحة الدور الواحد (م²)",
+            enterNumFloorsPlaceholder: "أدخل عدد الأدوار المتكررة",
+            enterAreaAnnexPlaceholder: "أدخل مساحة دور الملحق (م²)",
             finishType: {
               title: "نوع التشطيب",
               normal: "تشطيب عادي",
@@ -884,16 +1003,17 @@ export const translations = {
             note2: "لا تشمل التكلفة الأرض والتراخيص",
             note3: "يمكن أن تختلف التكلفة حسب الموقع والمواصفات",
             note4: "للحصول على عرض سعر دقيق، يرجى التواصل معنا",
-            invalidArea: "الرجاء إدخال مساحة صحيحة",
+            noteEstimationOnly:
+              "هذا السعر تكلفة تقديرية للأعمال الإنشائية فقط وقد يزيد أو يقل بنسبة 25% حسب ظروف الموقع.",
           },
           moreDetails: "المزيد من التفاصيل",
         },
         whyChooseUs: {
-          title: "لماذا تختار شركة البناء الحديث؟",
+          title: "لماذا تختار Ecosus ؟",
           localExperience: {
             title: "خبرة محلية",
             description:
-              "12 عامًا من الخبرة في السوق المحلي، مع فهم عميق لاحتياجات العملاء السعوديين.",
+              "فريقنا يتمتع بخبرة واسعة وفهم عميق للسوق المحلي واحتياجات العملاء السعوديين، مما يضمن تقديم حلول مبتكرة وملائمة لكل مشروع.",
           },
           vrTech: {
             title: "تقنيات VR",
@@ -930,34 +1050,80 @@ export const translations = {
         smartHomePackages: {
           title: "باقات المنازل الذكية",
           basic: {
-            title: "الباقة الأساسية",
+            title: "الباقة Economy",
             features: [
-              "نظام إضاءة ذكي",
-              "تحكم في الستائر",
-              "كاميرا مراقبة واحدة",
-              "دعم فني لمدة 6 أشهر",
+              "مخطط توزيع أثاث 2D",
+              "Mood Board",
+              "تصميم ثلاثي الأبعاد 3D",
+              "مخطط توزيع الأدوات الصحية",
+              "نسخة مطبوعة للمشروع مع CD",
             ],
           },
           advanced: {
-            title: "الباقة المتقدمة",
+            title: "الباقة Premium",
             features: [
-              "نظام إضاءة وستائر ذكي",
-              "4 كاميرات مراقبة",
-              "نظام صوتي متكامل",
-              "تحكم في التكييف",
-              "دعم فني لمدة سنة",
+              "مخطط توزيع أثاث 2D",
+              "Mood Board",
+              "تصميم ثلاثي الأبعاد 3D",
+              "رسومات تنفيذية للتصميم (أسقف - حوائط)",
+              "مخطط توزيع الأدوات الصحية",
+              "جدول الخامات والكميات",
+              "نسخة مطبوعة للمشروع مع CD",
             ],
             popular: "الأكثر طلبًا",
           },
           vip: {
-            title: "الباقة VIP",
+            title: "الباقة Signature",
             features: [
-              "جميع مميزات الباقة المتقدمة",
-              "نظام أمان متكامل",
-              "تحكم في جميع الأجهزة",
-              "شاشة تحكم مركزية",
-              "دعم فني لمدة سنتين",
-              "تصميم مخصص لواجهة التحكم",
+              "مخطط توزيع أثاث 2D",
+              "Mood Board",
+              "تصميم ثلاثي الأبعاد 3D قابل للتجول (360°)",
+              "رسومات تنفيذية للتصميم (أسقف - حوائط - أرضيات)",
+              "مخطط توزيع إنارة وتوزيع تكييف",
+              "مخطط توزيع مفاتيح الكهرباء والأدوات الصحية",
+              "جداول الخامات وأثاث ومقايسة تقديرية",
+              "نسخة مطبوعة لكتالوج المشروع مع CD",
+            ],
+          },
+          basicSuperVision: {
+            title: "باقة الأشراف الأساسي",
+            features: [
+              "زيارات ميدانية مجدوله (مرة أسبوعيا)",
+              "مراجعة أعمال التنفيذ والتأكد من مطابقتها للتصميم (تحديد التعارضات فقط ولا يشمهل اعادة التصميم)",
+              "مراجعة وادارة حسابات المقاولين مع الكميات المنفذة بالطبيعة",
+              "توثيق ملاحظات الموقع (صور + تقارير دورية)",
+              "دعم فني واستشاري للعميل وفريق المقاول عن بعد",
+              "استلام جزئي ونهائي من المقاول بالأعمال المنجزة",
+            ],
+            notInclude: [
+              "إدارة المشتريات او التوريد",
+              "تنسيق الجداول الزمنية",
+              "تأثيث أو تجهيزات نهائية",
+            ],
+          },
+          fullSuperVision: {
+            title: "باقة الأشراف الشامل",
+            features: [
+              "كل مميزات <<الإشراف الأساسي>>",
+              "إعداد جدول زمني للمراحل التنفيذية",
+              "اعـــداد جــــدول زمنـــي للعميـــــل بالدفـــعات الماليـــــة المقدمـــة",
+              "الإدارة والإشـــــراف عـــلى فريــــــق العمل والموردين",
+              "استلام المـــواد والتأكــــد مــن مطابقتها للمواصفات الفنيــة المعتمدة",
+              "معالجة التعارضات بين أعمال التنفيذ والتصاميم المعتمدة",
+              "مراجعة الفواتير والمشتريات ومستحقات المقاولين",
+              "تسليم جزئي ونهائي للعميل بالأعمال المنجزة",
+            ],
+            notInclude: ["شراء الأثاث أو التنسيق الداخلي"],
+          },
+          turnkeyProjectPackage: {
+            title: "باقة تسليم المفتاح",
+            features: [
+              "كل مميزات <<الإشراف الأساسي والشامل>>",
+              "تصميم/تصنيع الأثاث بما يتناسب مع فراغات العميل والمساحات المطلوبة",
+              "توريد الأثاث والتنسيق مع الموردين",
+              "تنسيق الإكسسوارات والستايل النهائي",
+              "جلسة تصوير احترافية بعد التجهيز النهائي",
+              "تسليم مفتاح للأعمال المنفذة",
             ],
           },
           currency: "ريال",
@@ -976,7 +1142,7 @@ export const translations = {
           videoNotSupported: "متصفحك لا يدعم تشغيل الفيديو.",
         },
         callToAction: {
-          title: "جاهزون لتحويل منزلك إلى منزل ذكي؟",
+          title: "أستشاره مجانية",
           subtitle:
             "تواصل معنا الآن للحصول على استشارة مجانية وتقييم احتياجات منزلك",
           callUs: "اتصل بنا",
@@ -986,8 +1152,9 @@ export const translations = {
             subtitle: "اترك معلوماتك وسيتواصل معك فريقنا خلال 24 ساعة",
             name: "الاسم",
             phone: "رقم الجوال",
-            message: "رسالتك",
+            type: "نوع الأستشارة",
             send: "إرسال الطلب",
+            otherTypePlaceholder: "حدد نوع الاستشارة",
           },
         },
         contact: {
@@ -1016,63 +1183,44 @@ export const translations = {
           },
         },
         about: {
-          title: "شاد أيقونة الجمال",
+          title: "إيكوسوس أيقونة الجمال",
           subtitle: "معك من الفكرة حتى تستلم المفتاح",
           description: "تعرف على الطُرز الاشهر والاكثر استخداماً",
           bottomText: "تصاميم مبتكرة لعالم أجمل",
           projects: [
             {
               id: 1,
-              title: "الطراز الحديث",
+              title: "الطراز الكلاسيك",
               description:
-                "يعود الفضل في إنشاء هذا الطراز إلى مجموعة واسعة من المؤثرات...",
-              image: FEATURE2_IMAGE,
-              category: "modern",
+                "يتميز الطراز الكلاسيك بالفخامة والرقي، ويعتمد على التفاصيل الدقيقة والزخارف التقليدية ليضفي إحساساً بالأصالة والترف على المساحات.",
+              image: classic,
+              category: "classic",
+              pdf: "/pdf/كتالوج كلاسيك.pdf",
             },
             {
               id: 2,
-              title: "طراز نيو كلاسيك في التصميم الداخلي",
+              title: "الطراز الحديث",
               description:
-                "أخذ طراز نيو كلاسيك جذوره من الاكتشافات الأثرية في القرن الثامن عشر...",
-              image: FEATURE2_IMAGE,
-              category: "neo-classic",
+                "يركز الطراز الحديث على البساطة والعملية، مع خطوط واضحة وألوان محايدة، ويعتمد على استخدام المواد الحديثة والتقنيات المتطورة في التصميم.",
+              image: modern,
+              category: "modern",
+              pdf: "/pdf/كتالوج مودرن.pdf",
             },
             {
               id: 3,
-              title: "واي ساب: الجمال في عدم الكمال",
-              description: "واي ساب | تسحرنا الطبيعة ببساطتها وجمالها...",
-              image: FEATURE2_IMAGE,
-              category: "concept",
-            },
-            {
-              id: 4,
-              title: "أنواع الطراز في التصميم الداخلي",
+              title: "الطراز التريند",
               description:
-                "يعتبر التصميم الداخلي فن وذوق يتناسب مع شخصية المالك...",
-              image: FEATURE2_IMAGE,
-              category: "design",
-            },
-            {
-              id: 5,
-              title: "الطراز الكلاسيكي",
-              description: "الطراز الكلاسيكي أسلوب راقٍ ومتطور وله طابع خاص...",
-              image: FEATURE2_IMAGE,
-              category: "classic",
-            },
-            {
-              id: 6,
-              title: "الطراز الصناعي",
-              description:
-                "بدأ استخدام هذا النمط في الخمسينات، ويعتمد على المواد الخام...",
-              image: FEATURE2_IMAGE,
-              category: "industrial",
+                "يجمع الطراز التريند بين أحدث صيحات التصميم والابتكار، ويعكس الذوق العصري من خلال المزج بين الألوان الجريئة والخامات المتنوعة.",
+              image: trendy,
+              category: "trendy",
+              pdf: "/pdf/كتالوج رائجة.pdf",
             },
           ],
         },
         testimonials: {
           title: "آراء العملاء",
-          subtitle: "ماذا يقول طلابنا",
-          description: "استمع إلى تجارب وقصص نجاح مجتمعنا من المتعلمين.",
+          subtitle: "ماذا يقول عملائنا",
+          description: "استمع إلى تجارب وقصص نجاح مجتمعنا من العملاء.",
           readFullStory: "اقرأ القصة كاملة",
           shareYourStory: "شارك قصتك",
           loading: "جاري تحميل الآراء...",

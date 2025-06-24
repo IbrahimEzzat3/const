@@ -17,21 +17,27 @@ const testimonialRoutes = require("./routes/testimonials");
 const courseRoutes = require("./routes/courses");
 const consultationRoutes = require("./routes/consultations");
 const userRoutes = require("./routes/users");
-
+const sliderRoutes = require("./routes/sliders");
 const app = express();
 
 // Security middleware
 app.use(helmet());
 app.use(compression());
+console.log("CLIENT_URL from env:", process.env.CLIENT_URL);
 
 // CORS configuration
 const allowedOrigins = (
-  process.env.CLIENT_URL || "https://const-is53.vercel.app"
+  process.env.CLIENT_URL || "https://const-ars6.vercel.app"
 )
   .split(",")
   .map((origin) => origin.trim())
   .filter((origin) => origin.length > 0)
   .map((origin) => (origin.endsWith("/") ? origin.slice(0, -1) : origin));
+
+// Always allow localhost:3000 for development
+if (!allowedOrigins.includes("http://localhost:3000")) {
+  allowedOrigins.push("http://localhost:3000");
+}
 
 app.use(
   cors({
@@ -92,6 +98,7 @@ app.use("/api/testimonials", testimonialRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/consultations", consultationRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/sliders", sliderRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
