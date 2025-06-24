@@ -396,7 +396,7 @@ const Header = () => {
               className="flex items-center space-x-2 text-secondary-900 hover:text-primary-600 transition-colors duration-200"
             >
               <img
-                src="images/logos/logo.png"
+                src="/images/logos/logo.png"
                 alt="Company Logo"
                 className="h-16 w-auto object-cover aspect-auto "
                 fetchpriority="high"

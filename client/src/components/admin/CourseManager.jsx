@@ -170,7 +170,9 @@ const CourseManager = () => {
     const { t } = useLanguage();
     const [videoError, setVideoError] = React.useState(false);
     const [videoLoading, setVideoLoading] = React.useState(true);
-    const videoUrl = video ? `/uploads/${video}` : null;
+    const videoUrl = video
+      ? `https://const-production.up.railway.app/uploads/${video}`
+      : null;
     const handleVideoError = () => {
       setVideoError(true);
       setVideoLoading(false);

@@ -1,21 +1,74 @@
-import React, { useRef, useEffect } from "react";
+import React  from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../shared/context/LanguageContext";
 
 const Course = ({ course }) => {
   const { t, direction } = useLanguage();
-  const videoRef = useRef(null);
 
-  // Construct video URL
-  const videoUrl = course.video ? `/uploads/${course.video}` : null;
-
-  useEffect(() => {
-    if (videoRef.current && videoUrl) {
-      // Reset states when video URL changes
-      // Force reload the video
-      videoRef.current.load();
+  const VideoPreview = ({ video }) => {
+    const { t } = useLanguage();
+    const [videoError, setVideoError] = React.useState(false);
+    const [videoLoading, setVideoLoading] = React.useState(true);
+    const videoUrl = video
+      ? `https://const-production.up.railway.app/uploads/${video}`
+      : null;
+    const handleVideoError = () => {
+      setVideoError(true);
+      setVideoLoading(false);
+    };
+    const handleVideoLoad = () => {
+      setVideoLoading(false);
+      setVideoError(false);
+    };
+    if (!video) {
+      return (
+        <div className="w-full h-full flex items-center justify-center bg-indigo-100">
+          <span className="text-indigo-500 text-lg font-medium">
+            {t("courseDetail.noVideo")}
+          </span>
+        </div>
+      );
     }
-  }, [videoUrl]);
+    return (
+      <div className="relative h-full w-full">
+        {videoLoading && !videoError && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-10">
+            <div className="text-gray-500">Loading video...</div>
+          </div>
+        )}
+        {videoError ? (
+          <div className="w-full h-full flex flex-col items-center justify-center bg-red-50 z-10">
+            <span className="text-red-500 text-sm font-medium mb-2">
+              Failed to load video
+            </span>
+            <a
+              href={videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 text-xs underline"
+            >
+              Try direct link
+            </a>
+          </div>
+        ) : (
+          <video
+            src={videoUrl}
+            controls
+            className="h-full w-full object-cover rounded-md"
+            preload="metadata"
+            onError={handleVideoError}
+            onLoadedData={handleVideoLoad}
+            onLoadStart={() => setVideoLoading(true)}
+            crossOrigin="anonymous"
+          >
+            <source src={videoUrl} type="video/mp4" />
+            <source src={videoUrl} type="video/webm" />
+            Your browser does not support the video tag.
+          </video>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div
@@ -24,18 +77,7 @@ const Course = ({ course }) => {
       {/* Course Video */}
       <div className="relative h-48 bg-gray-200">
         {course.video ? (
-          <video
-            ref={videoRef}
-            controls
-            className="h-full w-full object-cover rounded-md"
-            preload="metadata"
-            playsInline
-            muted={false}
-            style={{ backgroundColor: "#f3f4f6" }}
-          >
-            <source src={videoUrl} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <VideoPreview video={course.video} />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-indigo-100">
             <span className="text-indigo-500 text-lg font-medium">

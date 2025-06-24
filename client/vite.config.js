@@ -20,12 +20,12 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: "http://const-production.up.railway.app",
+        target: "https://const-production.up.railway.app",
         changeOrigin: true,
         secure: false,
       },
       "/uploads": {
-        target: "http://const-production.up.railway.app",
+        target: "https://const-production.up.railway.app",
         changeOrigin: true,
         secure: false,
       },
