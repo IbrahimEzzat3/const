@@ -20,7 +20,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
     requirements: [],
     objectives: [],
     modules: [],
-    video: null,
+    video: null, // Change from null to null (already correct)
     isActive: true,
   });
 
@@ -72,20 +72,22 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
       const response = await courseService.getCourse(courseId);
       const course = response.data;
       setInitialValues({
-        title: course.title,
-        description: course.description,
-        shortDescription: course.shortDescription,
-        price: course.price,
-        duration: course.duration,
-        level: course.level,
-        category: course.category,
+        title: course.title || "",
+        description: course.description || "",
+        shortDescription: course.shortDescription || "",
+        price: course.price || "",
+        duration: course.duration || "",
+        level: course.level || "",
+        category: course.category || "",
         requirements: course.requirements || [],
         objectives: course.objectives || [],
         modules: course.modules || [],
-        video: course.video || "",
+        // Fix video field initialization
+        video: course.video || null, // Use null instead of empty string
         isActive: course.isActive ?? true,
       });
     } catch (error) {
+      console.error("Error fetching course:", error);
       navigate("/admin/courses");
     }
   };
@@ -94,6 +96,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
     initialValues,
     validationSchema,
     enableReinitialize: true,
+    // Replace your onSubmit function with this fixed version:
     onSubmit: async (values) => {
       try {
         setIsLoading(true);
@@ -131,23 +134,40 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
 
         formData.append("modules", JSON.stringify(processedModules));
 
-        // Handle video
-        // Handle video
+        // Handle video - FIXED VERSION
+        console.log("Video value:", values.video, "Type:", typeof values.video);
+
         if (values.video instanceof File) {
           // New file selected
           formData.append("video", values.video);
+          console.log("Appending new video file");
         } else if (
           typeof values.video === "string" &&
           values.video.trim() !== ""
         ) {
-          // Existing video URL/filename
+          // Existing video URL/filename - preserve it
           formData.append("video", values.video.trim());
-        } else if (values.video === null || values.video === "") {
-          // Explicitly removing video
-          formData.append("video", "");
+          console.log("Preserving existing video:", values.video.trim());
         } else {
-          // No video or undefined - don't append anything
-          // This will preserve existing video in edit mode
+          // No video, empty, null, or undefined
+          // In edit mode, we want to preserve existing video unless explicitly removing
+          // In create mode, we just don't send the video field
+          if (isEdit) {
+            // Don't append video field at all - this will preserve the existing video
+            console.log(
+              "Edit mode: Not sending video field to preserve existing"
+            );
+          } else {
+            // Create mode: explicitly send empty string if no video
+            formData.append("video", "");
+            console.log("Create mode: Sending empty video field");
+          }
+        }
+
+        // Debug: Log FormData contents
+        console.log("FormData contents:");
+        for (let [key, value] of formData.entries()) {
+          console.log(key, ":", value);
         }
 
         if (isEdit) {

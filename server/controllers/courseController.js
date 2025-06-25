@@ -227,7 +227,7 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
     return req.body[field] || [];
   };
 
-  // Create a new body object to avoid modifying req.body directly before mongoose update
+  // Create a new body object to avoid modifying req.body directly
   const updatedFields = { ...req.body };
 
   // Parse arrays
@@ -235,22 +235,53 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
   updatedFields.objectives = parseJsonField("objectives");
   updatedFields.modules = parseJsonField("modules");
 
-  // Handle video if uploaded
+  // IMPROVED VIDEO HANDLING
+  console.log(
+    "Video field received:",
+    req.body.video,
+    "Type:",
+    typeof req.body.video
+  );
+
   if (req.file) {
+    // New file uploaded
     updatedFields.video = req.file.filename;
-  } else if (updatedFields.video === "null") {
-    // If video is explicitly sent as "null" (e.g., on edit when removing video)
-    updatedFields.video = null;
-  } else if (updatedFields.video === "undefined" && course.video) {
-    // This case handles when a video was previously present but no new video was uploaded and it's not explicitly null
-    // It indicates no change to the video, so we keep the existing one.
-    delete updatedFields.video; // Remove it from updatedFields so it's not set to undefined
+    console.log("New video file uploaded:", req.file.filename);
+  } else if (req.body.hasOwnProperty("video")) {
+    // Video field was explicitly sent in the request
+    const videoValue = req.body.video;
+
+    if (videoValue === "" || videoValue === "null" || videoValue === null) {
+      // Explicitly removing video
+      updatedFields.video = null;
+      console.log("Removing video (set to null)");
+    } else if (typeof videoValue === "string" && videoValue.trim() !== "") {
+      // Preserving existing video filename
+      updatedFields.video = videoValue.trim();
+      console.log("Preserving existing video:", videoValue.trim());
+    } else if (typeof videoValue === "object") {
+      // Handle case where an object was accidentally sent
+      console.error("Error: Received object for video field:", videoValue);
+      // Don't update video field - preserve existing value
+      delete updatedFields.video;
+    } else {
+      // Any other unexpected value
+      console.error(
+        "Error: Unexpected video value:",
+        videoValue,
+        typeof videoValue
+      );
+      delete updatedFields.video;
+    }
+  } else {
+    // Video field not sent at all - preserve existing video
+    delete updatedFields.video;
+    console.log("Video field not sent, preserving existing video");
   }
 
   // Convert string booleans to actual booleans
   if (updatedFields.isActive === "true") updatedFields.isActive = true;
   if (updatedFields.isActive === "false") updatedFields.isActive = false;
-  // Add isPublished conversion as well, if it's sent from frontend
   if (updatedFields.isPublished === "true") updatedFields.isPublished = true;
   if (updatedFields.isPublished === "false") updatedFields.isPublished = false;
 
@@ -269,6 +300,8 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
       duration: module.duration ? parseInt(module.duration) : undefined,
     }));
   }
+
+  console.log("Final updatedFields:", updatedFields);
 
   course = await Course.findByIdAndUpdate(req.params.id, updatedFields, {
     new: true,
