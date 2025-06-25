@@ -111,7 +111,7 @@ const TestimonialsManager = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold"></div>
       </div>
     );
   }
@@ -122,7 +122,7 @@ const TestimonialsManager = () => {
         <p className="text-red-500 mb-4">{error}</p>
         <button
           onClick={fetchTestimonials}
-          className="text-indigo-600 hover:text-indigo-500"
+          className="text-accent-gold hover:text-accent-gold/90"
         >
           Try Again
         </button>
@@ -134,7 +134,7 @@ const TestimonialsManager = () => {
     <div className="space-y-4 md:space-y-6 px-2 md:px-0">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 md:gap-0">
-        <h2 className="text-xl md:text-2xl font-semibold">
+        <h2 className="text-xl md:text-2xl font-semibold text-accent-teal">
           Manage Testimonials
         </h2>
       </div>
@@ -146,7 +146,7 @@ const TestimonialsManager = () => {
           placeholder="Search testimonials..."
           value={searchTerm}
           onChange={handleSearch}
-          className="w-full px-3 md:px-4 py-2 pl-3 md:pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+          className="w-full px-3 md:px-4 py-2 pl-3 md:pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-transparent text-sm md:text-base"
         />
         <div className="absolute inset-y-0 right-0 pr-3 md:right-auto md:left-0 md:pl-3 flex items-center pointer-events-none">
           <svg
@@ -205,7 +205,7 @@ const TestimonialsManager = () => {
                   <button
                     onClick={() => handleDelete(testimonial._id)}
                     disabled={isDeleting}
-                    className="text-red-600 hover:text-red-900 text-sm disabled:opacity-50"
+                    className="text-accent-gold hover:text-accent-gold/90 text-sm disabled:opacity-50"
                   >
                     Delete
                   </button>
@@ -276,7 +276,7 @@ const TestimonialsManager = () => {
                   <button
                     onClick={() => handleDelete(testimonial._id)}
                     disabled={isDeleting}
-                    className="text-red-600 hover:text-red-900 disabled:opacity-50"
+                    className="text-accent-gold hover:text-accent-gold/90 disabled:opacity-50"
                   >
                     Delete
                   </button>

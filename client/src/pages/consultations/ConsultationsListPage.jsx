@@ -7,10 +7,10 @@ const ConsultationsListPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Consultations</h1>
+        <h1 className="text-3xl font-bold text-accent-teal">Consultations</h1>
         <Link
           to="/consultations/new"
-          className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          className="px-4 py-2 bg-accent-gold text-accent-teal rounded-md hover:bg-accent-gold/90 focus:outline-none focus:ring-2 focus:ring-accent-gold focus:ring-offset-2"
         >
           New Consultation
         </Link>

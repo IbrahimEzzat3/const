@@ -94,36 +94,17 @@ const Header = () => {
   const menuItems = [
     { label: t.home, path: "/" },
     {
-      label: t.about,
+      label: t.services,
       onClick: () => {
         if (location.pathname !== "/") {
           navigate("/");
-          setTimeout(() => scrollToSection("about"), 100);
+          setTimeout(() => scrollToSection("services"), 100);
         } else {
-          scrollToSection("about");
+          scrollToSection("services");
         }
       },
       isScrollLink: true,
     },
-    {
-      label: t.services,
-      path: "/#",
-      submenu: [
-        { label: t.interiorDesign, path: "/services/interior-design" },
-        { label: t.exteriorDesign, path: "/services/exterior-design" },
-        { label: t.gardenDesign, path: "/services/garden-design" },
-        { label: t.smartAutomation, path: "/services/smart-automation" },
-        {
-          label: t.decorationDesign,
-          path: "/services/decoration-design",
-        },
-        {
-          label: t.commercialDesign,
-          path: "/services/commercial-design",
-        },
-      ],
-    },
-    { label: t.courses, path: "/courses" },
     {
       label: t.featuredWork,
       onClick: () => {
@@ -136,6 +117,19 @@ const Header = () => {
       },
       isScrollLink: true,
     },
+    {
+      label: t.about,
+      onClick: () => {
+        if (location.pathname !== "/") {
+          navigate("/");
+          setTimeout(() => scrollToSection("about"), 100);
+        } else {
+          scrollToSection("about");
+        }
+      },
+      isScrollLink: true,
+    },
+    { label: t.courses, path: "/courses" },
     {
       label: t.waterFarmingAssociation,
       path: "https://www.aesweb.org/about",
@@ -177,7 +171,7 @@ const Header = () => {
             e.preventDefault();
             item.onClick();
           }}
-          className="relative px-3 py-2 text-sm font-medium transition-colors duration-200 text-secondary-600 hover:text-primary-600"
+          className="relative px-3 py-2 text-sm font-medium transition-colors duration-200 text-accent-gold"
         >
           {item.label}
         </Link>
@@ -191,7 +185,7 @@ const Header = () => {
           href={item.path}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative px-3 py-2 text-sm font-medium transition-colors duration-200 text-secondary-600 hover:text-primary-600"
+          className="relative px-3 py-2 text-sm font-medium transition-colors duration-200 text-accent-gold"
         >
           {item.label}
         </a>
@@ -203,10 +197,10 @@ const Header = () => {
         <div key={item.path} className="relative group">
           <Link
             to={item.path}
-            className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+            className={`relative text-accent-gold px-3 py-2 text-sm font-medium transition-colors duration-200 ${
               location.pathname.startsWith(item.path)
-                ? "text-primary-600"
-                : "text-secondary-600 hover:text-primary-600"
+                ? "text-accent-gold"
+                : "text-accent-teal hover:text-accent-gold"
             }`}
           >
             {item.label}
@@ -221,8 +215,8 @@ const Header = () => {
                 to={subItem.path}
                 className={`block px-4 py-2 text-sm ${
                   location.pathname === subItem.path
-                    ? "text-primary-600 bg-primary-50"
-                    : "text-secondary-700 hover:bg-secondary-50 hover:text-primary-600"
+                    ? "text-accent-gold bg-primary-50"
+                    : "text-accent-teal hover:bg-secondary-50 hover:text-accent-gold"
                 }`}
               >
                 {subItem.label}
@@ -238,15 +232,15 @@ const Header = () => {
       <Link
         key={item.path}
         to={item.path}
-        className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+        className={`relative text-accent-gold px-3 py-2 text-sm font-medium transition-colors duration-200 ${
           isActive
-            ? "text-primary-600"
-            : "text-secondary-600 hover:text-primary-600"
+            ? "text-accent-gold"
+            : "text-accent-gold hover:text-accent-gold"
         }`}
       >
         {item.label}
         {isActive && (
-          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary-600" />
+          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-gold" />
         )}
       </Link>
     );
@@ -257,7 +251,7 @@ const Header = () => {
       {item.isScrollLink ? (
         <button
           onClick={item.onClick}
-          className="block w-full px-3 py-2 text-base font-medium rounded-lg text-secondary-600 hover:bg-secondary-50 hover:text-primary-600 text-left"
+          className="block w-full px-3 py-2 text-base font-medium rounded-lg text-accent-gold hover:bg-accent-teal hover:text-white text-left"
         >
           {item.label}
         </button>
@@ -267,8 +261,8 @@ const Header = () => {
           onClick={() => setMobileMenuOpen(false)}
           className={`block px-3 py-2 text-base font-medium rounded-lg ${
             location.pathname === item.path
-              ? "bg-primary-50 text-primary-600"
-              : "text-secondary-600 hover:bg-secondary-50 hover:text-primary-600"
+              ? "bg-accent-gold text-accent-teal"
+              : "text-accent-teal hover:bg-accent-gold hover:text-accent-teal"
           }`}
         >
           {item.label}
@@ -283,8 +277,8 @@ const Header = () => {
               onClick={() => setMobileMenuOpen(false)}
               className={`block px-3 py-2 text-sm font-medium rounded-lg ${
                 location.pathname === subItem.path
-                  ? "bg-primary-50 text-primary-600"
-                  : "text-secondary-600 hover:bg-secondary-50 hover:text-primary-600"
+                  ? "bg-accent-gold text-accent-teal"
+                  : "text-accent-teal hover:bg-accent-gold hover:text-accent-teal"
               }`}
             >
               {subItem.label}
@@ -299,7 +293,7 @@ const Header = () => {
     <>
       {/* Top Bar */}
       <div
-        className={`bg-gray-100 py-2 px-4 ${
+        className={`bg-accent-green py-2 px-4 ${
           direction === "rtl" ? "rtl" : "ltr"
         }`}
       >
@@ -308,7 +302,7 @@ const Header = () => {
             <Button
               variant="ghost"
               onClick={handleConsultationClick}
-              className="text-center text-blue-900 bg-transparent hover:bg-blue-100 whitespace-nowrap"
+              className="text-center text-white bg-transparent hover:bg-accent-teal whitespace-nowrap"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -328,7 +322,7 @@ const Header = () => {
             </Button>
             <Link
               to="/services/cost-calculator"
-              className="text-center bg-transparent hover:bg-blue-100 text-blue-900 px-2 py-1 md:px-3 md:py-1 text-sm md:text-base rounded-full flex items-center justify-center whitespace-nowrap transition-colors duration-300"
+              className="text-center bg-transparent hover:bg-accent-teal hover:text-white text-white px-2 py-1 md:px-3 md:py-1 text-sm md:text-base rounded-full flex items-center justify-center whitespace-nowrap transition-colors duration-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -350,7 +344,7 @@ const Header = () => {
               href="https://wa.me/966558813386"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-center bg-transparent hover:bg-blue-100  text-blue-600 px-2 py-1 md:px-3 md:py-1 text-sm md:text-base rounded-full flex items-center justify-center whitespace-nowrap transition duration-300"
+              className="text-center bg-transparent hover:bg-accent-teal hover:text-white text-white px-2 py-1 md:px-3 md:py-1 text-sm md:text-base rounded-full flex items-center justify-center whitespace-nowrap transition duration-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -366,7 +360,7 @@ const Header = () => {
               href="https://wa.me/966558813386"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-center bg-transparent hover:bg-blue-100  text-blue-600 px-2 py-1 md:px-3 md:py-1 text-sm md:text-base rounded-full flex items-center justify-center whitespace-nowrap transition duration-300"
+              className="text-center bg-transparent hover:bg-accent-teal hover:text-white text-white px-2 py-1 md:px-3 md:py-1 text-sm md:text-base rounded-full flex items-center justify-center whitespace-nowrap transition duration-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -393,7 +387,7 @@ const Header = () => {
             {/* Logo */}
             <Link
               to="/"
-              className="flex items-center space-x-2 text-secondary-900 hover:text-primary-600 transition-colors duration-200"
+              className="flex items-center space-x-2 transition-colors duration-200"
             >
               <img
                 src="/images/logos/logo.png"
@@ -405,7 +399,7 @@ const Header = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex md:items-center md:space-x-1">
+            <div className="hidden text-accent-gold md:flex md:items-center md:space-x-1">
               {menuItems.map((item) => renderMenuItem(item))}
             </div>
 
@@ -415,7 +409,7 @@ const Header = () => {
                 <Button
                   variant="ghost"
                   onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
-                  className="text-secondary-600 bg-transparent hover:text-blue-600"
+                  className="text-accent-gold bg-transparent hover:text-accent-gold"
                   leftIcon={
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -443,7 +437,7 @@ const Header = () => {
                         toggleLanguage("ar");
                         setLanguageMenuOpen(false);
                       }}
-                      className="w-full justify-start bg-transparent text-secondary-600 hover:text-primary-600"
+                      className="w-full justify-start bg-transparent text-accent-teal hover:text-accent-gold"
                     >
                       العربية
                     </Button>
@@ -453,7 +447,7 @@ const Header = () => {
                         toggleLanguage("en");
                         setLanguageMenuOpen(false);
                       }}
-                      className="w-full justify-start bg-transparent text-secondary-600 hover:text-primary-600"
+                      className="w-full justify-start bg-transparent text-accent-teal hover:text-accent-gold"
                     >
                       English
                     </Button>
@@ -537,7 +531,7 @@ const Header = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-lg text-secondary-600 hover:text-primary-600 hover:bg-secondary-50"
+                className="inline-flex items-center justify-center p-2 rounded-lg text-accent-teal hover:text-accent-gold hover:bg-accent-teal"
               >
                 <span className="sr-only">Open main menu</span>
                 {mobileMenuOpen ? (

@@ -40,7 +40,7 @@ const FeaturedBlogsSection = () => {
 
   if (loading) {
     return (
-      <section className="bg-gradient-to-b from-gray-50 to-white py-16 sm:py-24">
+      <section className="bg-[#F5EFE6] py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="animate-pulse">
             <div className="h-4 bg-gray-200 rounded w-32 mx-auto"></div>
@@ -103,18 +103,19 @@ const FeaturedBlogsSection = () => {
   }
 
   return (
-    <section className="bg-gradient-to-b from-gray-50 to-white py-16 sm:py-24">
+    <section className="bg-[#F5EFE6] rounded-3xl mt-16 py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-base font-semibold text-primary-600 tracking-wide uppercase">
+          <h2 className="text-base font-semibold text-accent-teal tracking-wide uppercase">
             {t("featuredBlogs.latestArticles")}
           </h2>
-          <p className="mt-2 text-3xl font-display font-bold text-primary-900 sm:text-4xl">
+          <p className="mt-2 text-3xl font-display font-bold text-accent-teal sm:text-4xl">
             {t("featuredBlogs.fromOurBlog")}
           </p>
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-secondary-600">
+          <p className="mt-4 max-w-2xl mx-auto text-xl text-accent-teal">
             {t("featuredBlogs.tagline")}
           </p>
+          <div className="w-36 h-1 bg-accent-gold mt-4 mx-auto"></div>
         </div>
 
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -138,17 +139,17 @@ const FeaturedBlogsSection = () => {
                 </div>
                 <div className="flex-1 p-6">
                   <div className="flex items-center justify-between">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-accent-gold text-accent-teal">
                       {blog.category
                         .replace("-", " ")
                         .replace(/\b\w/g, (l) => l.toUpperCase())}
                     </span>
                   </div>
                   <Link to={`/blogs/${blog._id}`} className="block mt-4">
-                    <h3 className="text-xl font-semibold text-primary-900 group-hover:text-primary-600 transition-colors duration-300">
+                    <h3 className="text-xl font-semibold text-accent-teal group-hover:text-accent-gold transition-colors duration-300">
                       {blog.title}
                     </h3>
-                    <p className="mt-3 text-base text-secondary-600 line-clamp-2">
+                    <p className="mt-3 text-base text-accent-teal line-clamp-2">
                       {blog.excerpt}
                     </p>
                   </Link>
@@ -168,14 +169,14 @@ const FeaturedBlogsSection = () => {
                         referrerPolicy="no-referrer"
                       />
                       <div className="ml-3">
-                        <p className="text-sm font-medium text-primary-900">
+                        <p className="text-sm font-medium text-accent-teal">
                           {blog.author?.name || t("blogDetail.unknownAuthor")}
                         </p>
                       </div>
                     </div>
                     <Link
                       to={`/blogs/${blog._id}`}
-                      className="inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-500"
+                      className="inline-flex items-center text-sm font-medium text-accent-teal hover:text-accent-gold"
                       onClick={handleClick}
                     >
                       <span className="sr-only">
@@ -215,7 +216,7 @@ const FeaturedBlogsSection = () => {
         <div className="mt-12 text-center">
           <Link
             to="/blogs"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-300"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-accent-gold hover:bg-accent-gold/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-gold transition-colors duration-300"
           >
             {t("featuredBlogs.viewAllArticles")}
             <svg

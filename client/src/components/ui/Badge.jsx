@@ -8,6 +8,9 @@ const variants = {
   error: "bg-error-100 text-error-800",
   warning: "bg-warning-100 text-warning-800",
   info: "bg-primary-50 text-primary-700",
+  gold: "bg-accent-gold text-white",
+  green: "bg-accent-green text-white",
+  teal: "bg-accent-teal text-white",
 };
 
 const sizes = {

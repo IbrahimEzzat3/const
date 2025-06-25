@@ -99,7 +99,7 @@ const ConsultationDetail = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold"></div>
       </div>
     );
   }
@@ -110,7 +110,7 @@ const ConsultationDetail = () => {
         <p className="text-red-500 mb-4">{error || "Consultation not found"}</p>
         <button
           onClick={() => navigate("/consultations")}
-          className="text-indigo-600 hover:text-indigo-500"
+          className="text-accent-gold hover:text-accent-gold/90"
         >
           Back to Consultations
         </button>
@@ -163,7 +163,7 @@ const ConsultationDetail = () => {
       <div className="flex justify-end gap-4 mt-4">
         <button
           onClick={() => navigate(`/consultations/${consultationId}/edit`)}
-          className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 flex items-center gap-2"
+          className="px-4 py-2 bg-accent-gold text-accent-teal rounded-md hover:bg-accent-gold/90 flex items-center gap-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -19,19 +19,20 @@ const AboutSection = () => {
   return (
     <section
       id="about"
-      className={`py-16 bg-gray-100 min-h-screen rounded-3xl mb-6 ${direction}`}
+      className={`py-16 bg-[#F5EFE6] min-h-screen rounded-3xl mt-16 ${direction}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8rounded-3xl">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-8">
+          <h1 className="text-4xl md:text-6xl font-bold text-accent-teal mb-8">
             {t("sections.about.title")}
           </h1>
 
-          <div className="space-y-2 text-gray-600">
+          <div className="space-y-2 text-accent-teal">
             <p className="text-lg">{t("sections.about.subtitle")}</p>
             <p className="text-sm">{t("sections.about.description")}</p>
           </div>
+          <div className="w-36 h-1 bg-accent-gold mx-auto mt-4"></div>
         </div>
 
         {/* Projects Grid */}
@@ -46,7 +47,7 @@ const AboutSection = () => {
             >
               {/* Image Container */}
               <div className="relative h-64 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-accent-teal/70 via-accent-teal/20 to-transparent z-10"></div>
                 <img
                   src={project.image}
                   alt={project.title}
@@ -55,7 +56,7 @@ const AboutSection = () => {
 
                 {/* Hover Overlay */}
                 <div
-                  className={`absolute inset-0 bg-gradient-to-t from-blue-600/80 to-purple-600/80 z-20 flex items-center justify-center transition-opacity duration-300 ${
+                  className={`absolute inset-0 bg-gradient-to-t from-accent-teal/80 to-accent-teal/80 z-20 flex items-center justify-center transition-opacity duration-300 ${
                     hoveredCard === project.id ? "opacity-100" : "opacity-0"
                   }`}
                 >
@@ -68,43 +69,43 @@ const AboutSection = () => {
 
               {/* Content */}
               <div className="p-6">
-                <h2 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                <h2 className="text-lg font-semibold text-accent-teal mb-2 group-hover:text-accent-gold transition-colors duration-300">
                   {project.title}
                 </h2>
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-sm text-accent-teal leading-relaxed">
                   {project.description}
                 </p>
 
                 {/* Category Badge */}
                 <div className="mt-4">
-                  <span className="inline-block px-3 py-1 text-xs font-medium bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 rounded-full">
+                  <span className="inline-block px-3 py-1 text-xs font-medium bg-gradient-to-r from-accent-gold to-accent-gold text-[#F5EFE6] rounded-full">
                     {project.category}
                   </span>
                 </div>
               </div>
 
               {/* Decorative Elements */}
-              <div className="absolute top-4 right-4 w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
-              <div className="absolute bottom-4 left-4 w-12 h-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+              <div className="absolute top-4 right-4 w-8 h-8 bg-gradient-to-br from-accent-gold to-accent-gold rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+              <div className="absolute bottom-4 left-4 w-12 h-1 bg-gradient-to-r from-accent-gold to-accent-gold rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
             </div>
           ))}
         </div>
 
         {/* Bottom Section */}
         <div className="mt-20 text-center">
-          <div className="inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-full">
+          <div className="inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-accent-gold to-accent-gold rounded-full">
             <div className="flex gap-2">
-              <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
+              <div className="w-3 h-3 bg-accent-green rounded-full animate-pulse"></div>
               <div
-                className="w-3 h-3 bg-purple-400 rounded-full animate-pulse"
+                className="w-3 h-3 bg-accent-green rounded-full animate-pulse"
                 style={{ animationDelay: "0.2s" }}
               ></div>
               <div
-                className="w-3 h-3 bg-blue-600 rounded-full animate-pulse"
+                className="w-3 h-3 bg-accent-green rounded-full animate-pulse"
                 style={{ animationDelay: "0.4s" }}
               ></div>
             </div>
-            <p className="text-gray-600 font-medium">
+            <p className="text-[#F5EFE6] font-medium">
               {t("sections.about.bottomText")}
             </p>
           </div>

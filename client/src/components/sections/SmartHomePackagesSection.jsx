@@ -18,7 +18,7 @@ const SmartHomePackagesSection = () => {
         returnObjects: true,
       }),
       isPopular: true,
-      buttonClass: "bg-blue-600 hover:bg-blue-800",
+      buttonClass: "bg-accent-gold hover:bg-accent-gold/90",
     },
     {
       title: t("sections.smartHomePackages.vip.title"),
@@ -48,7 +48,7 @@ const SmartHomePackagesSection = () => {
         returnObjects: true,
       }),
       isPopular: true,
-      buttonClass: "bg-blue-600 hover:bg-blue-800",
+      buttonClass: "bg-accent-gold hover:bg-accent-gold/90",
     },
     {
       title: t("sections.smartHomePackages.turnkeyProjectPackage.title"),
@@ -61,13 +61,13 @@ const SmartHomePackagesSection = () => {
   ];
 
   return (
-    <section id="packages" className="py-16 bg-gray-100 rounded-3xl">
+    <section id="packages" className="py-16 mt-16 bg-[#F5EFE6] rounded-3xl">
       <div className="container mx-auto px-4">
         <header className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-accent-teal mb-4">
             {t("sections.smartHomePackages.title")}
           </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
+          <div className="w-24 h-1 bg-accent-gold mx-auto"></div>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 max-w-5xl mx-auto">
@@ -76,20 +76,20 @@ const SmartHomePackagesSection = () => {
               key={index}
               className={` ${
                 pkg.isPopular
-                  ? "bg-blue-900 rounded-3xl text-white"
+                  ? "bg-accent-teal rounded-3xl text-white"
                   : "bg-white rounded-3xl"
               } p-8 rounded-lg shadow-md text-center transform ${
                 pkg.isPopular ? "scale-105" : ""
               } transition duration-300 relative`}
             >
               {pkg.isPopular && (
-                <div className="absolute top-0 right-4 bg-blue-600 text-white font-bold px-3 py-1 rounded-b-lg">
+                <div className="absolute top-0 right-4 bg-accent-gold text-white font-bold px-3 py-1 rounded-b-lg">
                   {t("sections.smartHomePackages.advanced.popular")}
                 </div>
               )}
               <h3
                 className={`text-2xl font-bold ${
-                  pkg.isPopular ? "" : "text-blue-900"
+                  pkg.isPopular ? "" : "text-accent-teal"
                 } mb-4`}
               >
                 {pkg.title}
@@ -108,7 +108,7 @@ const SmartHomePackagesSection = () => {
                       strokeWidth={2.5}
                       stroke="currentColor"
                       className={`w-5 h-5 ${
-                        pkg.isPopular ? "text-blue-600" : "text-blue-600"
+                        pkg.isPopular ? "text-accent-gold" : "text-accent-gold"
                       }`}
                     >
                       <path
@@ -142,7 +142,7 @@ const SmartHomePackagesSection = () => {
               </ul>
               <button
                 className={`w-full ${pkg.buttonClass} ${
-                  pkg.isPopular ? "text-white" : "text-blue-900"
+                  pkg.isPopular ? "text-white" : "text-accent-teal"
                 } font-bold py-3 px-4 rounded-full transition duration-300`}
                 onClick={() => {
                   window.open(

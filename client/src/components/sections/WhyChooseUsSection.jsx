@@ -180,126 +180,75 @@ const WhyChooseUsSection = () => {
   ];
 
   return (
-    <section className="why-choose-us-section relative py-16 rounded-3xl text-white mb-28 overflow-hidden animate-fadein-up">
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 z-0 animate-gradient-move bg-gradient-to-tr from-blue-900 via-purple-800 to-blue-600 opacity-90"></div>
-      {/* Floating Blob */}
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-600 opacity-30 rounded-full blur-3xl animate-blob-float z-0"></div>
-      <div className="absolute -bottom-32 right-0 w-80 h-80 bg-gradient-to-tr from-blue-400 via-purple-300 to-blue-600 opacity-20 rounded-full blur-2xl animate-blob-float2 z-0"></div>
+    <section className="bg-primary-50 mt-16 relative py-16 rounded-3xl text-accent-teal  overflow-hidden animate-fadein-up">
       <div className="container mx-auto px-4 relative z-10">
-        <header
-          className="text-center mb-12 animate-fadein-up"
-          style={{ animationDelay: "0.1s" }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-300 via-purple-300 to-blue-100 bg-clip-text text-transparent">
-            {t("sections.whyChooseUs.title")}
-          </h2>
-          <div className="w-24 h-1 bg-blue-400 mx-auto"></div>
-        </header>
+        <div className="grid grid-cols-2 grid-rows-2 gap-8 min-h-[60vh]">
+          {/* Top Left: Image Placeholder */}
+          <div className="row-start-1 col-start-1 flex items-start justify-start">
+            {/* TODO: Replace with your image */}
+            <div className="w-full h-full bg-accent-green rounded-2xl flex items-center justify-center">
+              <img
+                src="/images/projects/main/feature2.webp"
+                alt="Why Choose Us"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
 
-        {/* Timeline */}
-        <div className="relative flex flex-col items-center">
-          {/* Vertical timeline line */}
-          <div className="hidden md:block absolute left-1/2 top-0 h-full w-1 bg-gradient-to-b from-blue-400 via-purple-400 to-blue-600 opacity-60 z-0 transform -translate-x-1/2"></div>
-          <div className="w-full flex flex-col gap-16">
-            {features.map((feature, index) => {
-              const isLeft = index % 2 === 0;
-              return (
-                <div
-                  key={index}
-                  className={`why-timeline-step group relative flex flex-col md:flex-row items-center md:justify-between animate-fadein-up ${
-                    isLeft ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                  style={{ animationDelay: `${0.2 + index * 0.15}s` }}
-                >
-                  {/* Content */}
-                  <div
-                    className={`w-full md:w-5/12 p-6 rounded-2xl bg-white/10 backdrop-blur-md shadow-xl transition-all duration-500 transform hover:scale-105 hover:shadow-2xl cursor-pointer z-10 ${
-                      isLeft
-                        ? "md:mr-auto md:text-right"
-                        : "md:ml-auto md:text-left"
-                    }`}
-                  >
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-blue-200 transition-colors duration-300">
+          {/* Top Right: Main Content */}
+          <div className="row-start-1 col-start-2 flex flex-col items-end justify-start text-right">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-accent-teal">
+              {t("sections.whyChooseUs.title")}
+            </h2>
+            <div className="w-24 h-1 bg-accent-gold mb-6 ml-auto"></div>
+            <div className="space-y-6 w-full max-w-md">
+              {features.map((feature, idx) => (
+                <div key={idx} className="flex items-center gap-4">
+                  <div className="bg-accent-gold/20 p-3 rounded-full">
+                    {feature.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-accent-gold mb-1">
                       {feature.title}
                     </h3>
-                    <p className="text-blue-100 group-hover:text-white transition-colors duration-300">
+                    <p className="text-accent-teal text-sm">
                       {feature.description}
                     </p>
                   </div>
-                  {/* Timeline Icon */}
-                  <div className="flex flex-col items-center z-20">
-                    <span className="icon-gradient group-hover:animate-icon-glow group-hover:shadow-blue-400/50 group-hover:shadow-lg transition-all duration-500 rounded-full p-2 border-4 border-white/30">
-                      {feature.icon}
-                    </span>
-                    {/* Connector line for mobile */}
-                    {index < features.length - 1 && (
-                      <span className="block md:hidden w-1 h-12 bg-gradient-to-b from-blue-400 via-purple-400 to-blue-600 opacity-60"></span>
-                    )}
-                  </div>
                 </div>
-              );
-            })}
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom Left: Secondary Content (Summary/CTA) */}
+          <div className="row-start-2 col-start-1 flex flex-col items-start justify-end text-left">
+            <div className="bg-accent-gold/10 p-6 rounded-2xl w-full max-w-md">
+              <h3 className="text-xl font-bold text-accent-gold mb-2">
+                {t("sections.whyChooseUs.summaryTitle")}
+              </h3>
+              <p className="text-accent-teal text-base">
+                {t("sections.whyChooseUs.summaryText")}
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom Right: Image Placeholder */}
+          <div className="row-start-2 col-start-2 flex items-end justify-end">
+            {/* TODO: Replace with your image */}
+            <div className="w-full h-full bg-accent-teal rounded-2xl flex items-center justify-center">
+              <img
+                src="/images/projects/main/feature2.webp"
+                alt="Why Choose Us"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
           </div>
         </div>
       </div>
-      {/* Custom Animations */}
-      <style>{`
-        @keyframes fadein-up {
-          0% { opacity: 0; transform: translateY(40px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadein-up {
-          animation: fadein-up 1s cubic-bezier(0.23, 1, 0.32, 1) both;
-        }
-        @keyframes gradient-move {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        .animate-gradient-move {
-          background-size: 200% 200%;
-          animation: gradient-move 8s ease-in-out infinite;
-        }
-        @keyframes blob-float {
-          0%, 100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(-30px) scale(1.1); }
-        }
-        .animate-blob-float {
-          animation: blob-float 7s ease-in-out infinite;
-        }
-        @keyframes blob-float2 {
-          0%, 100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(30px) scale(1.08); }
-        }
-        .animate-blob-float2 {
-          animation: blob-float2 9s ease-in-out infinite;
-        }
-        .why-timeline-step {
-          opacity: 0;
-          animation: fadein-up 1s cubic-bezier(0.23, 1, 0.32, 1) both;
-        }
-        .why-timeline-step[style*="animation-delay"] {
-          animation-delay: var(--delay, 0s);
-        }
-        .icon-gradient svg {
-          background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-          border-radius: 9999px;
-          box-shadow: 0 0 0 0 rgba(96,165,250,0.5);
-          transition: box-shadow 0.4s;
-        }
-        .group:hover .icon-gradient svg {
-          box-shadow: 0 0 24px 8px #60a5fa88, 0 0 40px 16px #a78bfa55;
-        }
-        .icon-gradient {
-          display: inline-block;
-          background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-          padding: 0.5rem;
-          border-radius: 9999px;
-        }
-        .group:hover .icon-gradient {
-          filter: brightness(1.2) saturate(1.3);
-        }
-      `}</style>
     </section>
   );
 };

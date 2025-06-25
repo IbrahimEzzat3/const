@@ -126,10 +126,10 @@ const Privacy = () => {
             us at:
           </p>
           <div className="bg-gray-50 p-4 rounded-md">
-            <p className="text-gray-600">Email: privacy@example.com</p>
-            <p className="text-gray-600">Phone: (123) 456-7890</p>
+            <p className="text-gray-600">Email: info@ecosus.com.sa</p>
+            <p className="text-gray-600">Phone: +966558813386</p>
             <p className="text-gray-600">
-              Address: 123 Privacy Street, City, Country
+              Address: Al-Riyadh, Saudi Arabia
             </p>
           </div>
         </section>

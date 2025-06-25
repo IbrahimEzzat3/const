@@ -382,6 +382,9 @@ export const translations = {
             description:
               "We provide custom design solutions that suit your taste and needs, while maintaining architectural identity.",
           },
+          summaryTitle: "Why Choose Ecosus?",
+          summaryText:
+            "We are a team of experienced professionals who are dedicated to providing the best possible service to our clients. We are committed to using the latest technology and design trends to create beautiful and functional spaces.",
         },
         featuredWork: {
           title: "Featured Work",
@@ -543,51 +546,27 @@ export const translations = {
           projects: [
             {
               id: 1,
-              title: "Modern Style",
-              description:
-                "The credit for creating this style goes to a wide range of influences...",
-              image: FEATURE2_IMAGE,
-              category: "modern",
-            },
-            {
-              id: 2,
-              title: "Neo Classic Style in Interior Design",
-              description:
-                "Neo Classic style took its roots from 18th-century archaeological discoveries...",
-              image: FEATURE2_IMAGE,
-              category: "neo-classic",
-            },
-            {
-              id: 3,
-              title: "Why Saab: Beauty in Imperfection",
-              description:
-                "Why Saab | Nature fascinates us with its simplicity and beauty...",
-              image: FEATURE2_IMAGE,
-              category: "concept",
-            },
-            {
-              id: 4,
-              title: "Types of Styles in Interior Design",
-              description:
-                "Interior design is an art and taste that suits the owner's personality...",
-              image: FEATURE2_IMAGE,
-              category: "design",
-            },
-            {
-              id: 5,
               title: "Classic Style",
               description:
-                "Classic style is sophisticated and refined with a special character...",
-              image: FEATURE2_IMAGE,
+                "The classic style is characterized by luxury and sophistication, relying on fine details and traditional decorations to add a sense of authenticity and luxury to spaces.",
+              image: classic,
               category: "classic",
             },
             {
-              id: 6,
-              title: "Industrial Style",
+              id: 2,
+              title: "Modern Style",
               description:
-                "This style began in the fifties and relies on raw materials...",
-              image: FEATURE2_IMAGE,
-              category: "industrial",
+                "Modern style focuses on simplicity and practicality, with clean lines and neutral colors, and relies on the use of modern materials and advanced design techniques.",
+              image: modern,
+              category: "modern",
+            },
+            {
+              id: 3,
+              title: "Trendy Style",
+              description:
+                "The trending style combines the latest design trends and innovation, reflecting contemporary taste by blending bold colors and diverse materials.",
+              image: trendy,
+              category: "trendy",
             },
           ],
         },
@@ -1030,6 +1009,9 @@ export const translations = {
             description:
               "نقدم حلولاً تصميمية مخصصة تناسب ذوقك واحتياجاتك، مع الحفاظ على الهوية المعمارية.",
           },
+          summaryTitle: "لماذا تختار Ecosus ؟ ",
+          summaryText:
+            "نحن فريق من الخبراء المؤهلين الذين يتمتعون بخبرة واسعة وفهم عميق للسوق المحلي واحتياجات العملاء السعوديين، مما يضمن تقديم حلول مبتكرة وملائمة لكل مشروع.",
         },
         featuredWork: {
           title: "أعمال مختارة",

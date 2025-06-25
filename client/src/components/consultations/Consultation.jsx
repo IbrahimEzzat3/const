@@ -54,7 +54,7 @@ const Consultation = ({ consultation }) => {
         <div className="flex items-center justify-between text-sm text-gray-500">
           <div className="flex items-center gap-4">
             {consultation.service && (
-              <span className="text-indigo-600">
+              <span className="text-accent-gold">
                 Service: {consultation.service}
               </span>
             )}
@@ -65,7 +65,7 @@ const Consultation = ({ consultation }) => {
         <div className="mt-4 flex items-center justify-between">
           <Link
             to={`/consultations/${consultation._id}`}
-            className="text-indigo-600 hover:text-indigo-500 font-medium text-sm"
+            className="text-accent-gold hover:text-accent-gold/90 font-medium text-sm"
           >
             View Details
           </Link>

@@ -17,7 +17,7 @@ const VRDemoSection = () => {
   return (
     <section
       id="vr-demo"
-      className={`py-12 bg-blue-900 text-white rounded-3xl mt-6 ${direction}`}
+      className={`py-12 bg-accent-teal text-white rounded-3xl mt-16 ${direction}`}
     >
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -36,7 +36,7 @@ const VRDemoSection = () => {
                     className="flex items-center gap-2 justify-start"
                   >
                     <div
-                      className={`w-2 h-2 bg-blue-600 rounded-full ${
+                      className={`w-2 h-2 bg-accent-gold rounded-full ${
                         direction === "rtl" ? "ml-2" : "mr-2"
                       }`}
                     ></div>
@@ -76,12 +76,12 @@ const VRDemoSection = () => {
 
           <div className="relative">
             <div
-              className="bg-gray-800 rounded-lg overflow-hidden relative flex items-center justify-center"
+              className="bg-accent-teal rounded-lg overflow-hidden relative flex items-center justify-center"
               style={{ minHeight: "300px" }}
             >
               {/* Video Demo Container */}
               <video
-                className="w-full h-64 rounded-lg bg-black"
+                className="w-full h-64 rounded-lg bg-accent-gold"
                 style={{ minHeight: "300px" }}
                 preload="none"
               >

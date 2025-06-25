@@ -248,7 +248,7 @@ const BlogForm = ({ isEdit = false, blogId = null }) => {
             id="title"
             name="title"
             {...formik.getFieldProps("title")}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-accent-gold focus:ring-accent-gold"
             aria-describedby="title-error"
           />
           {getErrorMessage("title")}
@@ -267,7 +267,7 @@ const BlogForm = ({ isEdit = false, blogId = null }) => {
             name="excerpt"
             {...formik.getFieldProps("excerpt")}
             rows="3"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-accent-gold focus:ring-accent-gold"
           ></textarea>
           {getErrorMessage("excerpt")}
         </div>
@@ -285,7 +285,7 @@ const BlogForm = ({ isEdit = false, blogId = null }) => {
             name="content"
             {...formik.getFieldProps("content")}
             rows="10"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-accent-gold focus:ring-accent-gold"
             aria-describedby="content-error"
           ></textarea>
           {getErrorMessage("content")}
@@ -303,7 +303,7 @@ const BlogForm = ({ isEdit = false, blogId = null }) => {
             id="category"
             name="category"
             {...formik.getFieldProps("category")}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-accent-gold focus:ring-accent-gold"
           >
             <option value="">Select a category</option>
             <option value="interior-design">Interior Design</option>
@@ -362,12 +362,12 @@ const BlogForm = ({ isEdit = false, blogId = null }) => {
               onChange={(e) => setTagInput(e.target.value)}
               onKeyPress={handleTagKeyPress}
               placeholder="Enter tag name"
-              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-accent-gold focus:ring-accent-gold sm:text-sm"
             />
             <button
               type="button"
               onClick={addTag}
-              className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+              className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent-gold focus:ring-offset-2"
             >
               Add
             </button>

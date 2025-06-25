@@ -10,6 +10,10 @@ const variants = {
   ghost: "text-primary-600 hover:bg-primary-50",
   danger: "bg-error-600 hover:bg-error-700 text-white",
   success: "bg-success-600 hover:bg-success-700 text-white",
+  gold: "bg-accent-gold hover:bg-accent-gold/90 text-white shadow-soft-xl hover:shadow-soft-2xl",
+  green:
+    "bg-accent-green hover:bg-accent-green/90 text-white shadow-soft-xl hover:shadow-soft-2xl",
+  teal: "bg-accent-teal hover:bg-accent-teal/90 text-white shadow-soft-xl hover:shadow-soft-2xl",
 };
 
 const sizes = {

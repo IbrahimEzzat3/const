@@ -183,7 +183,7 @@ const ConsultationForm = ({ isEdit = false }) => {
           value={formData.service}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-transparent"
         >
           <option value="">Select a service type</option>
           {serviceCategories.map((category) => (
@@ -208,7 +208,7 @@ const ConsultationForm = ({ isEdit = false }) => {
           value={formData.projectType}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-transparent"
         />
       </div>
 
@@ -228,7 +228,7 @@ const ConsultationForm = ({ isEdit = false }) => {
           rows="4"
           minLength="50"
           maxLength="1000"
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-transparent"
         />
         <p className="mt-1 text-sm text-gray-500">
           {formData.description.length}/1000 characters (minimum 50)
@@ -249,7 +249,7 @@ const ConsultationForm = ({ isEdit = false }) => {
           value={formData.location}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-transparent"
         />
       </div>
 
@@ -267,7 +267,7 @@ const ConsultationForm = ({ isEdit = false }) => {
           value={formData.preferredDate}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-transparent"
         />
       </div>
 
@@ -282,7 +282,7 @@ const ConsultationForm = ({ isEdit = false }) => {
         <button
           type="submit"
           disabled={isLoading}
-          className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 bg-accent-gold text-accent-teal rounded-md hover:bg-accent-gold/90 focus:outline-none focus:ring-2 focus:ring-accent-gold focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading
             ? "Saving..."

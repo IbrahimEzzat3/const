@@ -453,7 +453,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
             type="text"
             name="title"
             {...formik.getFieldProps("title")}
-            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm md:text-base ${
+            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
               getFieldError("title") ? "border-red-300" : "border-gray-300"
             }`}
           />
@@ -473,7 +473,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
             type="number"
             name="price"
             {...formik.getFieldProps("price")}
-            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm md:text-base ${
+            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
               getFieldError("price") ? "border-red-300" : "border-gray-300"
             }`}
           />
@@ -494,7 +494,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
             name="duration"
             {...formik.getFieldProps("duration")}
             placeholder="e.g., 100 hours"
-            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm md:text-base ${
+            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
               getFieldError("duration") ? "border-red-300" : "border-gray-300"
             }`}
           />
@@ -513,7 +513,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           <select
             name="level"
             {...formik.getFieldProps("level")}
-            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm md:text-base ${
+            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
               getFieldError("level") ? "border-red-300" : "border-gray-300"
             }`}
           >
@@ -537,7 +537,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           <select
             name="category"
             {...formik.getFieldProps("category")}
-            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm md:text-base ${
+            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
               getFieldError("category") ? "border-red-300" : "border-gray-300"
             }`}
           >
@@ -623,7 +623,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           name="shortDescription"
           {...formik.getFieldProps("shortDescription")}
           rows="2"
-          className={`mt-1 block w-full rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm md:text-base ${
+          className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
             getFieldError("shortDescription")
               ? "border-red-300"
               : "border-gray-300"
@@ -645,7 +645,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           name="description"
           {...formik.getFieldProps("description")}
           rows="4"
-          className={`mt-1 block w-full rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm md:text-base ${
+          className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
             getFieldError("description") ? "border-red-300" : "border-gray-300"
           }`}
         />
@@ -680,7 +680,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           <button
             type="button"
             onClick={() => addArrayItem("requirements")}
-            className="text-indigo-600 hover:text-indigo-500 text-sm md:text-base flex items-center gap-1"
+            className="text-accent-gold hover:text-accent-gold/90 text-sm md:text-base flex items-center gap-1"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -728,7 +728,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           <button
             type="button"
             onClick={() => addArrayItem("objectives")}
-            className="text-indigo-600 hover:text-indigo-500 text-sm md:text-base flex items-center gap-1"
+            className="text-accent-gold hover:text-accent-gold/90 text-sm md:text-base flex items-center gap-1"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -771,7 +771,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
                   <button
                     type="button"
                     onClick={() => editModule(index)}
-                    className="text-indigo-600 hover:text-indigo-500 text-xs md:text-sm px-2 py-1 bg-white rounded-md border border-indigo-200"
+                    className="text-accent-gold hover:text-accent-gold/90 text-xs md:text-sm px-2 py-1 bg-white rounded-md border border-accent-gold"
                   >
                     Edit
                   </button>
@@ -834,7 +834,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
                         href={module.videoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-indigo-500 hover:underline"
+                        className="text-accent-gold hover:underline"
                       >
                         Watch Video
                       </a>
@@ -847,7 +847,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           <button
             type="button"
             onClick={() => addModule()}
-            className="text-indigo-600 hover:text-indigo-500 flex items-center gap-1 text-sm md:text-base"
+            className="text-accent-gold hover:text-accent-gold/90 flex items-center gap-1 text-sm md:text-base"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -877,7 +877,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full md:w-auto px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 text-sm md:text-base"
+            className="w-full md:w-auto px-4 py-2 bg-accent-gold text-accent-teal rounded-md hover:bg-accent-gold/90 focus:outline-none focus:ring-2 focus:ring-accent-gold focus:ring-offset-2 disabled:opacity-50 text-sm md:text-base"
           >
             {isLoading
               ? "Saving..."
@@ -888,7 +888,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           <button
             type="button"
             onClick={() => navigate("/admin/courses")}
-            className="w-full md:w-auto px-4 py-2 border border-gray-300 text-white rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm md:text-base bg-indigo-600"
+            className="w-full md:w-auto px-4 py-2 border border-gray-300 text-accent-teal rounded-md hover:bg-accent-gold/90 focus:outline-none focus:ring-2 focus:ring-accent-gold focus:ring-offset-2 text-sm md:text-base bg-accent-gold"
           >
             Cancel
           </button>
@@ -898,7 +898,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
             type="button"
             onClick={handleDelete}
             disabled={isLoading}
-            className="w-full md:w-auto px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 text-sm md:text-base"
+            className="w-full md:w-auto px-4 py-2 bg-accent-gold text-accent-teal rounded-md hover:bg-accent-gold/90 focus:outline-none focus:ring-2 focus:ring-accent-gold focus:ring-offset-2 disabled:opacity-50 text-sm md:text-base"
           >
             Delete Course
           </button>

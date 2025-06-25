@@ -25,13 +25,16 @@ const FeaturedWorkSection = () => {
   };
 
   return (
-    <section id="featured-work" className="py-16 bg-white">
+    <section
+      id="featured-work"
+      className="py-16 mt-16 rounded-3xl bg-[#F5EFE6]"
+    >
       <div className="container mx-auto px-4">
         <header className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-accent-teal mb-4">
             {t("sections.featuredWork.title")}
           </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
+          <div className="w-24 h-1 bg-accent-gold mx-auto"></div>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
@@ -46,13 +49,13 @@ const FeaturedWorkSection = () => {
                 className="w-full h-96 object-cover transition duration-500 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition duration-300">
-                <h3 className="text-2xl font-bold text-white mb-2">
+                <h3 className="text-2xl font-bold text-accent-gold mb-2">
                   {project.title}
                 </h3>
-                <p className="text-blue-200 mb-4">{project.description}</p>
+                <p className="text-accent-gold mb-4">{project.description}</p>
                 <Link
                   to={`/projects/${project.slug}`}
-                  className="text-blue-400 font-medium flex items-center"
+                  className="text-accent-gold font-medium flex items-center"
                   onClick={handleClick}
                 >
                   {t("sections.featuredWork.viewDetails")}

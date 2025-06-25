@@ -44,7 +44,7 @@ const TestimonialsSection = () => {
   if (loading) {
     return (
       <section
-        className={`bg-gradient-to-b from-white to-gray-50 py-16 sm:py-24 ${direction}`}
+        className={`bg-[#F5EFE6] py-16 sm:py-24 ${direction}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="animate-pulse">
@@ -80,7 +80,7 @@ const TestimonialsSection = () => {
   if (error) {
     return (
       <section
-        className={`bg-gradient-to-b from-white to-gray-50 py-16 sm:py-24 ${direction}`}
+        className={`bg-[#F5EFE6] py-16 sm:py-24 ${direction}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-red-600 bg-red-50 p-4 rounded-lg">
@@ -106,19 +106,20 @@ const TestimonialsSection = () => {
 
   return (
     <section
-      className={`bg-gradient-to-b from-white to-gray-50 py-16 sm:py-24 ${direction}`}
+      className={`bg-[#F5EFE6] py-16 mt-16 rounded-3xl sm:py-24 ${direction}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-base font-semibold text-primary-600 tracking-wide uppercase">
+          <h2 className="text-base font-semibold text-accent-teal tracking-wide uppercase">
             {t("sections.testimonials.title")}
           </h2>
-          <p className="mt-2 text-3xl font-display font-bold text-primary-900 sm:text-4xl">
+          <p className="mt-2 text-3xl font-display font-bold text-accent-teal sm:text-4xl">
             {t("sections.testimonials.subtitle")}
           </p>
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-secondary-600">
+          <p className="mt-4 max-w-2xl mx-auto text-xl text-accent-teal">
             {t("sections.testimonials.description")}
           </p>
+          <div className="w-36 h-1 bg-accent-gold mt-4 mx-auto"></div>
         </div>
 
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -164,17 +165,17 @@ const TestimonialsSection = () => {
                     </div>
                   </div>
                   <div className="mt-4">
-                    <p className="text-base text-secondary-600 line-clamp-3">
+                    <p className="text-base text-accent-teal line-clamp-3">
                       {testimonial.content}
                     </p>
                   </div>
                   <div className="mt-6 flex items-center justify-between">
-                    <span className="text-sm text-secondary-500">
+                    <span className="text-sm text-accent-teal">
                       {formatDate(testimonial.createdAt)}
                     </span>
                     <Link
                       to={`/testimonials/${testimonial._id}`}
-                      className="inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-500"
+                      className="inline-flex items-center text-sm font-medium text-accent-teal hover:text-accent-gold"
                       onClick={handleClick}
                     >
                       {t("sections.testimonials.readFullStory")}
@@ -203,7 +204,7 @@ const TestimonialsSection = () => {
         <div className="mt-12 text-center">
           <Link
             to="/testimonials/new"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-300"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-accent-gold hover:bg-accent-gold/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-gold transition-colors duration-300"
             onClick={handleClick}
           >
             {t("sections.testimonials.shareYourStory")}

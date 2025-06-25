@@ -269,7 +269,7 @@ const ConsultationsManager = () => {
     return (
       <main className="flex justify-center items-center min-h-[400px]">
         <div
-          className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"
+          className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold"
           role="status"
           aria-label="Loading consultations"
         >
@@ -287,7 +287,7 @@ const ConsultationsManager = () => {
         </p>
         <button
           onClick={fetchConsultations}
-          className="text-indigo-600 hover:text-indigo-500"
+          className="text-accent-gold hover:text-accent-gold/90"
           aria-label="Retry loading consultations"
         >
           Try Again
@@ -299,7 +299,7 @@ const ConsultationsManager = () => {
   return (
     <main className="space-y-4 md:space-y-6 px-2 md:px-0">
       <header className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 md:gap-0">
-        <h1 className="text-xl md:text-2xl font-semibold">
+        <h1 className="text-xl md:text-2xl font-semibold text-accent-teal">
           Manage Consultations
         </h1>
         <nav aria-label="Consultation filters" className="w-full md:w-auto">
@@ -313,7 +313,7 @@ const ConsultationsManager = () => {
                 value={searchTerm}
                 onChange={handleSearch}
                 placeholder="Search consultations..."
-                className="w-full px-3 md:px-4 py-2 pl-3 md:pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+                className="w-full px-3 md:px-4 py-2 pl-3 md:pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-transparent text-sm md:text-base"
                 aria-label="Search consultations"
               />
               <div className="absolute inset-y-0 right-0 pr-3 md:right-auto md:left-0 md:pl-3 flex items-center pointer-events-none">
@@ -336,7 +336,7 @@ const ConsultationsManager = () => {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full px-3 md:px-8 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+                className="w-full px-3 md:px-8 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-transparent text-sm md:text-base"
                 aria-label="Filter by status"
               >
                 <option value="all">All Statuses</option>
@@ -365,7 +365,7 @@ const ConsultationsManager = () => {
                 <div key={consultation._id} className="p-4">
                   <div className="space-y-3">
                     <div>
-                      <h3 className="text-sm font-medium text-gray-900">
+                      <h3 className="text-sm font-medium text-accent-teal">
                         {consultation.user?.name}
                       </h3>
                       <p className="text-xs text-gray-500 mt-1">
@@ -373,10 +373,10 @@ const ConsultationsManager = () => {
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-900">
+                      <p className="text-sm text-accent-teal">
                         Service: {consultation.service}
                       </p>
-                      <p className="text-sm text-gray-900 mt-1">
+                      <p className="text-sm text-accent-teal mt-1">
                         Project: {consultation.projectType}
                       </p>
                     </div>
@@ -410,7 +410,7 @@ const ConsultationsManager = () => {
                     <div className="flex justify-end">
                       <button
                         onClick={() => handleDelete(consultation._id)}
-                        className="text-red-600 hover:text-red-900 text-sm"
+                        className="text-accent-gold hover:text-accent-gold/90 text-sm"
                         disabled={isDeleting}
                         aria-label={`Delete consultation for ${consultation.user?.name}`}
                       >
@@ -428,31 +428,31 @@ const ConsultationsManager = () => {
                 <tr>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-accent-teal uppercase tracking-wider"
                   >
                     Client
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-accent-teal uppercase tracking-wider"
                   >
                     Service
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-accent-teal uppercase tracking-wider"
                   >
                     Project Type
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-accent-teal uppercase tracking-wider"
                   >
                     Status
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-accent-teal uppercase tracking-wider"
                   >
                     Actions
                   </th>
@@ -462,20 +462,20 @@ const ConsultationsManager = () => {
                 {filteredConsultations.map((consultation) => (
                   <tr key={consultation._id}>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">
+                      <div className="text-sm font-medium text-accent-teal">
                         {consultation.user?.name}
                       </div>
-                      <div className="text-sm text-gray-500">
+                      <div className="text-sm text-accent-teal">
                         {consultation.user?.email}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">
+                      <div className="text-sm text-accent-teal">
                         {consultation.service}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">
+                      <div className="text-sm text-accent-teal">
                         {consultation.projectType.substring(0, 10)}...
                       </div>
                     </td>
@@ -509,7 +509,7 @@ const ConsultationsManager = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <button
                         onClick={() => handleDelete(consultation._id)}
-                        className="text-red-600 hover:text-red-900"
+                        className="text-accent-gold hover:text-accent-gold/90"
                         disabled={isDeleting}
                         aria-label={`Delete consultation for ${consultation.user?.name}`}
                       >

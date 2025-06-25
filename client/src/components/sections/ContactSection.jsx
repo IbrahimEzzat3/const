@@ -101,26 +101,26 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className={`py-16 bg-gray-50 ${direction}`}>
+    <section id="contact" className={`py-16 bg-[#F5EFE6] mt-16 rounded-3xl ${direction}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-accent-teal mb-4">
             {t("sections.contact.title")}
           </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
+          <div className="w-24 h-1 bg-accent-gold mx-auto"></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           <div className="bg-white rounded-lg shadow-md p-8">
-            <h3 className="text-2xl font-bold text-blue-900 mb-6">
+            <h3 className="text-2xl font-bold text-accent-teal mb-6">
               {t("sections.contact.contactInfo.title")}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {contactInfo.map((info, index) => (
                 <div key={index} className="flex items-start gap-4">
-                  <div className="text-blue-600 mt-1">{info.icon}</div>
+                  <div className="text-accent-gold mt-1">{info.icon}</div>
                   <div>
-                    <h4 className="font-bold text-blue-900 mb-2">
+                    <h4 className="font-bold text-accent-teal mb-2">
                       {info.title}
                     </h4>
                     {info.details.map((detail, idx) => (
@@ -143,7 +143,7 @@ const ContactSection = () => {
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-8">
-            <h3 className="text-2xl font-bold text-blue-900 mb-6">
+            <h3 className="text-2xl font-bold text-accent-teal mb-6">
               {t("sections.contact.location.title")}
             </h3>
             <div className="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden">

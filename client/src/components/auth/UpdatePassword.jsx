@@ -66,10 +66,10 @@ const UpdatePassword = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen rounded-3xl bg-gradient-to-br from-primary-50 to-secondary-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md mx-auto">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900">
+          <h2 className="text-3xl font-extrabold text-accent-teal">
             Update Password
           </h2>
           <p className="mt-2 text-sm text-gray-600">
@@ -82,7 +82,7 @@ const UpdatePassword = () => {
             <div>
               <label
                 htmlFor="currentPassword"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-accent-teal"
               >
                 Current Password
               </label>
@@ -93,14 +93,14 @@ const UpdatePassword = () => {
                 required
                 value={formData.currentPassword}
                 onChange={handleChange}
-                className="mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-accent-teal focus:outline-none focus:ring-accent-gold focus:border-accent-gold focus:z-10 sm:text-sm"
               />
             </div>
 
             <div>
               <label
                 htmlFor="newPassword"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-accent-teal"
               >
                 New Password
               </label>
@@ -111,14 +111,14 @@ const UpdatePassword = () => {
                 required
                 value={formData.newPassword}
                 onChange={handleChange}
-                className="mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-accent-teal focus:outline-none focus:ring-accent-gold focus:border-accent-gold focus:z-10 sm:text-sm"
               />
             </div>
 
             <div>
               <label
                 htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-accent-teal"
               >
                 Confirm New Password
               </label>
@@ -129,7 +129,7 @@ const UpdatePassword = () => {
                 required
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-accent-teal focus:outline-none focus:ring-accent-gold focus:border-accent-gold focus:z-10 sm:text-sm"
               />
             </div>
           </div>
@@ -145,14 +145,14 @@ const UpdatePassword = () => {
             <button
               type="button"
               onClick={() => navigate("/profile")}
-              className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+              className="text-sm font-medium text-accent-gold hover:text-accent-gold/90"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+              className="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-accent-gold hover:bg-accent-gold/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-gold disabled:opacity-50"
             >
               {isLoading ? "Updating..." : "Update Password"}
             </button>

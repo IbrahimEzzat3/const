@@ -55,7 +55,7 @@ const ConsultationsList = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold"></div>
       </div>
     );
   }
@@ -66,7 +66,7 @@ const ConsultationsList = () => {
         <p className="text-red-500 mb-4">{error}</p>
         <button
           onClick={() => window.location.reload()}
-          className="text-indigo-600 hover:text-indigo-500"
+          className="text-accent-gold hover:text-accent-gold/90"
         >
           Try Again
         </button>
@@ -82,7 +82,7 @@ const ConsultationsList = () => {
           <select
             value={category}
             onChange={(e) => handleCategoryChange(e.target.value)}
-            className="w-full px-4 py-2 border ltr border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-4 py-2 border ltr border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-transparent"
           >
             {serviceCategories.map((cat) => (
               <option key={cat.value} value={cat.value}>

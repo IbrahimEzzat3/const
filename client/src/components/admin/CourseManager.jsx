@@ -255,10 +255,10 @@ const CourseManager = () => {
     <div className="space-y-4 md:space-y-6 px-2 md:px-0">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 md:gap-0">
-        <h2 className="text-xl md:text-2xl font-semibold">Manage Courses</h2>
+        <h2 className="text-xl md:text-2xl font-semibold text-accent-teal">Manage Courses</h2>
         <button
           onClick={() => navigate("/admin/courses/new")}
-          className="w-full md:w-auto px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-sm md:text-base"
+            className="w-full md:w-auto px-4 py-2 bg-accent-gold text-accent-teal rounded-md hover:bg-accent-gold/90 focus:outline-none focus:ring-2 focus:ring-accent-gold focus:ring-offset-2 text-sm md:text-base"
         >
           Create New Course
         </button>
@@ -277,7 +277,7 @@ const CourseManager = () => {
             id="category-filter"
             value={selectedCategory}
             onChange={handleCategoryChange}
-            className="w-full px-3 md:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+            className="w-full px-3 md:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-transparent text-sm md:text-base"
           >
             <option value="">All Categories</option>
             <option value="construction-basics">Construction Basics</option>
@@ -292,7 +292,7 @@ const CourseManager = () => {
             onClick={() => {
               setSelectedCategory("");
             }}
-            className="w-full md:w-auto px-4 py-2 text-gray-600 hover:text-gray-800 text-sm md:text-base border border-gray-300 rounded-md hover:bg-gray-50"
+            className="w-full md:w-auto px-4 py-2 text-accent-teal hover:text-accent-teal/90 text-sm md:text-base border border-gray-300 rounded-md hover:bg-gray-50"
           >
             Clear Filter
           </button>
@@ -307,7 +307,7 @@ const CourseManager = () => {
             placeholder="Search courses..."
             value={searchTerm}
             onChange={handleSearch}
-            className="w-full px-3 md:px-4 py-2 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+            className="w-full px-3 md:px-4 py-2 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-transparent text-sm md:text-base"
           />
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
             <svg
@@ -327,7 +327,7 @@ const CourseManager = () => {
         </div>
         {isSearching && (
           <div className="flex items-center justify-center md:px-4">
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-indigo-600"></div>
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-accent-gold"></div>
           </div>
         )}
         {searchTerm && !isSearching && (
@@ -336,7 +336,7 @@ const CourseManager = () => {
               setSearchTerm("");
               fetchCourses();
             }}
-            className="w-full md:w-auto px-4 py-2 text-gray-600 hover:text-gray-800 text-sm md:text-base border border-gray-300 rounded-md hover:bg-gray-50"
+            className="w-full md:w-auto px-4 py-2 text-accent-teal hover:text-accent-teal/90 text-sm md:text-base border border-gray-300 rounded-md hover:bg-gray-50"
           >
             Clear
           </button>
@@ -386,14 +386,14 @@ const CourseManager = () => {
                         onClick={() =>
                           navigate(`/admin/courses/${course._id}/edit`)
                         }
-                        className="text-indigo-600 hover:text-indigo-900 text-sm"
+                        className="text-accent-gold hover:text-accent-gold/90 text-sm"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => handleDelete(course._id)}
                         disabled={isDeleting}
-                        className="text-red-600 hover:text-red-900 text-sm disabled:opacity-50"
+                        className="text-accent-gold hover:text-accent-gold/90 text-sm disabled:opacity-50"
                       >
                         Delete
                       </button>
@@ -479,14 +479,14 @@ const CourseManager = () => {
                       onClick={() =>
                         navigate(`/admin/courses/${course._id}/edit`)
                       }
-                      className="text-indigo-600 hover:text-indigo-900 mr-4"
+                      className="text-accent-gold hover:text-accent-gold/90 mr-4"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(course._id)}
                       disabled={isDeleting}
-                      className="text-red-600 hover:text-red-900 disabled:opacity-50"
+                      className="text-accent-gold hover:text-accent-gold/90 disabled:opacity-50"
                     >
                       Delete
                     </button>
@@ -568,7 +568,7 @@ const CourseManager = () => {
                     onClick={() => handlePageChange(index + 1)}
                     className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                       currentPage === index + 1
-                        ? "z-10 bg-indigo-50 border-indigo-500 text-indigo-600"
+                        ? "z-10 bg-accent-gold border-accent-gold text-accent-teal"
                         : "bg-white border-gray-300 text-gray-500 hover:bg-gray-50"
                     }`}
                   >

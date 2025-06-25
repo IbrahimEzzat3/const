@@ -60,7 +60,7 @@ const HomePage = () => {
         <meta property="og:image" content="images/logos/logo.png" />
         <meta property="og:type" content="website" />
       </Helmet>
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-homebg">
         <main>
           <HeroSection slides={slides} loadingSlides={loadingSlides} />
           <ServicesSection />

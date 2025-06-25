@@ -162,7 +162,7 @@ const Footer = () => {
 
   return (
     <footer
-      className={`bg-gray-900 text-gray-200 py-8 md:py-12 ${
+      className={`bg-accent-teal text-accent-gold py-8 md:py-12 mt-16 rounded-t-3xl ${
         direction === "rtl" ? "rtl" : "ltr"
       }`}
     >
@@ -179,7 +179,7 @@ const Footer = () => {
             } space-y-4`}
           >
             <h4 className="text-lg md:text-xl font-bold">{t.aboutCompany}</h4>
-            <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+            <p className="text-accent-gold leading-relaxed text-sm md:text-base">
               {t.companyDescription}
             </p>
             <div
@@ -193,7 +193,7 @@ const Footer = () => {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-yellow-400 transition-colors duration-200 p-1"
+                  className="text-accent-gold hover:text-accent-gold/90 transition-colors duration-200 p-1"
                   aria-label={link.label}
                 >
                   {link.icon}
@@ -222,7 +222,7 @@ const Footer = () => {
                 }`}
               >
                 <MapMarkerIcon className="flex-shrink-0 mt-1" />
-                <span className="text-gray-300">{t.riyadhAddress}</span>
+                <span className="text-accent-gold">{t.riyadhAddress}</span>
               </li>
 
               <li
@@ -233,7 +233,7 @@ const Footer = () => {
                 }`}
               >
                 <PhoneIcon className="flex-shrink-0" />
-                <span className="text-gray-300">{t.phone}: +966558813386</span>
+                <span className="text-accent-gold">{t.phone}: +966558813386</span>
               </li>
               <li
                 className={`flex items-center ${
@@ -243,7 +243,7 @@ const Footer = () => {
                 }`}
               >
                 <EnvelopeIcon className="flex-shrink-0" />
-                <span className="text-gray-300">
+                <span className="text-accent-gold">
                   {t.email}: info@ecosus.com.sa
                 </span>
               </li>
@@ -260,7 +260,7 @@ const Footer = () => {
             <ul className="space-y-3 text-sm md:text-base">
               {latestBlogs.map((article) => (
                 <li key={article._id} className="mb-3 last:mb-0">
-                  <div className="text-gray-400 text-xs mb-1">
+                  <div className="text-accent-gold text-xs mb-1">
                     {new Date(article.publishedAt).toLocaleDateString(
                       language === "ar" ? "ar-EG" : "en-US"
                     )}
@@ -268,7 +268,7 @@ const Footer = () => {
                   <RouterLink
                     to={`/blogs/${article._id}`}
                     onClick={handleLinkClick}
-                    className="text-gray-300 hover:text-yellow-400 leading-relaxed line-clamp-2"
+                    className="text-accent-gold hover:text-accent-gold/90 leading-relaxed line-clamp-2"
                   >
                     {language === "ar" ? article.title : article.title}
                   </RouterLink>
@@ -293,7 +293,7 @@ const Footer = () => {
                     <RouterLink
                       to={link.to}
                       onClick={handleLinkClick}
-                      className="text-gray-300 hover:text-yellow-400 block py-1"
+                      className="text-accent-gold hover:text-accent-gold/90 block py-1"
                     >
                       {link.text}
                     </RouterLink>
@@ -310,7 +310,7 @@ const Footer = () => {
                     <RouterLink
                       to={link.to}
                       onClick={handleLinkClick}
-                      className="text-gray-300 hover:text-yellow-400 block py-1"
+                      className="text-accent-gold hover:text-accent-gold/90 block py-1"
                     >
                       {link.text}
                     </RouterLink>
@@ -326,7 +326,7 @@ const Footer = () => {
             direction === "rtl" ? "justify-end" : "justify-center"
           }`}
         >
-          <p className="text-gray-400 text-xs md:text-sm text-center">
+          <p className="text-accent-gold text-xs md:text-sm text-center">
             &copy; {new Date().getFullYear()} شركة شاد. {t.allRightsReserved}
           </p>
         </div>

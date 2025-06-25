@@ -17,7 +17,7 @@ const AppLayout = ({ children }) => {
 
   return (
     <div
-      className={`min-h-screen flex flex-col bg-secondary-50 ${direction}`}
+      className={`min-h-screen flex flex-col bg-homebg ${direction}`}
       dir={direction}
     >
       <Header />

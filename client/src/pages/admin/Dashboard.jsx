@@ -231,7 +231,7 @@ const Dashboard = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold"></div>
       </div>
     );
   }
@@ -242,7 +242,7 @@ const Dashboard = () => {
         <p className="text-red-500 mb-4">{error}</p>
         <button
           onClick={fetchDashboardData}
-          className="text-indigo-600 hover:text-indigo-500"
+          className="text-accent-gold hover:text-accent-gold/90"
         >
           Try Again
         </button>
@@ -253,20 +253,20 @@ const Dashboard = () => {
   const StatCard = ({ title, icon: Icon, stats, link }) => (
     <div className="bg-white rounded-lg shadow-md p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-        {Icon && <Icon className="h-6 w-6 text-indigo-600" />}
+        <h3 className="text-lg font-semibold text-accent-teal">{title}</h3>
+        {Icon && <Icon className="h-6 w-6 text-accent-gold" />}
       </div>
       <div className="grid grid-cols-2 gap-4 mb-4">
         {Object.entries(stats).map(([key, value]) => (
           <div key={key} className="text-center">
-            <p className="text-2xl font-bold text-gray-900">{value}</p>
-            <p className="text-sm text-gray-500 capitalize">{key}</p>
+            <p className="text-2xl font-bold text-accent-teal">{value}</p>
+            <p className="text-sm text-accent-teal capitalize">{key}</p>
           </div>
         ))}
       </div>
       <Link
         to={link}
-        className="block text-center text-indigo-600 hover:text-indigo-500 text-sm font-medium"
+        className="block text-center text-accent-gold hover:text-accent-gold/90 text-sm font-medium"
       >
         View All
       </Link>
@@ -279,7 +279,7 @@ const Dashboard = () => {
         <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
         <Link
           to={link}
-          className="text-indigo-600 hover:text-indigo-500 text-sm font-medium"
+          className="text-accent-gold hover:text-accent-gold/90 text-sm font-medium"
         >
           View All
         </Link>
@@ -291,12 +291,12 @@ const Dashboard = () => {
             className="flex items-center justify-between p-3 bg-gray-50 rounded-md"
           >
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">
+              <p className="text-sm font-medium text-accent-teal truncate">
                 {item.title ||
                   item.projectType ||
                   `${item.content.substring(0, 10)}...`}
               </p>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-accent-teal">
                 {type === "blogs" && item.publishedAt
                   ? new Date(item.publishedAt).toLocaleDateString()
                   : new Date(item.createdAt).toLocaleDateString()}
@@ -305,14 +305,14 @@ const Dashboard = () => {
             <div className="flex space-x-2 ml-4">
               <Link
                 to={`/admin/${type}/${item._id}/edit`}
-                className="text-indigo-600 hover:text-indigo-500"
+                className="text-accent-gold hover:text-accent-gold/90"
                 title="Edit"
               >
                 <EditIcon className="h-4 w-4" />
               </Link>
               <Link
                 to={`/${type}/${item._id}`}
-                className="text-gray-600 hover:text-gray-500"
+                className="text-accent-teal hover:text-accent-teal/90"
                 title="View"
                 // target="_blank"
               >
@@ -322,7 +322,7 @@ const Dashboard = () => {
           </div>
         ))}
         {items.length === 0 && (
-          <p className="text-sm text-gray-500 text-center py-2">
+          <p className="text-sm text-accent-teal text-center py-2">
             No {type} found
           </p>
         )}
@@ -333,7 +333,7 @@ const Dashboard = () => {
   const QuickActionButton = ({ to, icon: Icon, label }) => (
     <Link
       to={to}
-      className="flex items-center justify-center space-x-2 px-4 py-2 bg-indigo-50 text-indigo-700 rounded-md hover:bg-indigo-100 transition-colors"
+      className="flex items-center justify-center space-x-2 px-4 py-2 bg-accent-gold text-accent-teal rounded-md hover:bg-accent-gold/90 transition-colors"
     >
       {Icon && <Icon className="h-5 w-5" />}
       <span className="font-medium">{label}</span>
@@ -344,7 +344,7 @@ const Dashboard = () => {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+        <h1 className="text-2xl font-bold text-accent-teal">Admin Dashboard</h1>
         <div className="flex space-x-4">
           <QuickActionButton
             to="/admin/blogs/new"
@@ -389,7 +389,7 @@ const Dashboard = () => {
 
       {/* Quick Links */}
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        <h3 className="text-lg font-semibold text-accent-gold mb-4">
           Quick Links
         </h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -397,8 +397,8 @@ const Dashboard = () => {
             to="/admin/users"
             className="flex items-center space-x-2 p-3 bg-gray-50 rounded-md hover:bg-gray-100"
           >
-            <UsersIcon className="h-5 w-5 text-indigo-600" />
-            <span className="text-sm font-medium text-gray-900">
+            <UsersIcon className="h-5 w-5 text-accent-gold" />
+            <span className="text-sm font-medium text-accent-teal">
               Manage Users
             </span>
           </Link>
@@ -406,8 +406,8 @@ const Dashboard = () => {
             to="/admin/blogs"
             className="flex items-center space-x-2 p-3 bg-gray-50 rounded-md hover:bg-gray-100"
           >
-            <BlogIcon className="h-5 w-5 text-indigo-600" />
-            <span className="text-sm font-medium text-gray-900">
+            <BlogIcon className="h-5 w-5 text-accent-gold" />
+            <span className="text-sm font-medium text-accent-teal">
               Manage Blogs
             </span>
           </Link>
@@ -415,8 +415,8 @@ const Dashboard = () => {
             to="/admin/courses"
             className="flex items-center space-x-2 p-3 bg-gray-50 rounded-md hover:bg-gray-100"
           >
-            <GraduationCapIcon className="h-5 w-5 text-indigo-600" />
-            <span className="text-sm font-medium text-gray-900">
+            <GraduationCapIcon className="h-5 w-5 text-accent-gold" />
+            <span className="text-sm font-medium text-accent-teal">
               Manage Courses
             </span>
           </Link>
@@ -424,8 +424,8 @@ const Dashboard = () => {
             to="/admin/consultations"
             className="flex items-center space-x-2 p-3 bg-gray-50 rounded-md hover:bg-gray-100"
           >
-            <CommentsIcon className="h-5 w-5 text-indigo-600" />
-            <span className="text-sm font-medium text-gray-900">
+            <CommentsIcon className="h-5 w-5 text-accent-gold" />
+            <span className="text-sm font-medium text-accent-teal">
               Manage Consultations
             </span>
           </Link>
@@ -433,8 +433,8 @@ const Dashboard = () => {
             to="/admin/testimonials"
             className="flex items-center space-x-2 p-3 bg-gray-50 rounded-md hover:bg-gray-100"
           >
-            <StarIcon className="h-5 w-5 text-indigo-600" />
-            <span className="text-sm font-medium text-gray-900">
+              <StarIcon className="h-5 w-5 text-accent-gold" />
+            <span className="text-sm font-medium text-accent-teal">
               Manage Testimonials
             </span>
           </Link>

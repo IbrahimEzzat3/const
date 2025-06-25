@@ -66,21 +66,22 @@ const CallToActionSection = () => {
   return (
     <section
       id="cta"
-      className={`py-16 bg-blue-900 text-white rounded-3xl ${direction}`}
+      className={`py-16 bg-[#F5EFE6] mt-16  rounded-3xl ${direction}`}
     >
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-accent-teal">
             {t("sections.callToAction.title")}
           </h2>
-          <p className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-accent-teal mb-8 max-w-2xl mx-auto">
             {t("sections.callToAction.subtitle")}
           </p>
+          <div className="w-36 h-1 bg-accent-gold mt-4 mb-8 mx-auto"></div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-xl mx-auto">
             <button
               onClick={() => setShowCallAlert(true)}
-              className="bg-white text-blue-900 font-bold py-4 px-6 rounded-full transition duration-300 flex items-center justify-center gap-3 hover:bg-gray-100"
+              className="bg-white text-accent-teal font-bold py-4 px-6 rounded-full transition duration-300 flex items-center justify-center gap-3 hover:bg-gray-100"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +101,7 @@ const CallToActionSection = () => {
             </button>
             <button
               onClick={() => setShowWhatsappAlert(true)}
-              className="bg-blue-600 text-white font-bold py-4 px-6 rounded-full transition duration-300 flex items-center justify-center gap-3 hover:bg-blue-700"
+              className="bg-accent-gold text-accent-teal font-bold py-4 px-6 rounded-full transition duration-300 flex items-center justify-center gap-3 hover:bg-accent-gold/90"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +119,7 @@ const CallToActionSection = () => {
             <h3 className="text-xl font-bold mb-4">
               {t("sections.callToAction.getQuote.title")}
             </h3>
-            <p className="text-gray-200 mb-6">
+            <p className="text-accent-teal mb-6">
               {t("sections.callToAction.getQuote.subtitle")}
             </p>
             <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
@@ -129,7 +130,7 @@ const CallToActionSection = () => {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder={t("sections.callToAction.getQuote.name")}
-                  className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-white border-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-3 rounded-lg bg-white  border border-white text-accent-teal placeholder-gray-300 focus:outline-none focus:border-accent-gold"
                   required
                 />
                 <input
@@ -138,7 +139,7 @@ const CallToActionSection = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder={t("sections.callToAction.getQuote.phone")}
-                  className={` ${direction} w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-white border-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:border-blue-500`}
+                  className={` ${direction} w-full px-4 py-3 rounded-lg bg-white  border border-white text-accent-teal placeholder-gray-300 focus:outline-none focus:border-accent-gold`}
                   required
                 />
               </div>
@@ -147,7 +148,7 @@ const CallToActionSection = () => {
                   name="type"
                   value={formData.type}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-white border-opacity-20 text-black focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-3 rounded-lg bg-white  border border-white text-accent-teal focus:outline-none focus:border-accent-gold"
                   required
                 >
                   <option value="" disabled>
@@ -177,13 +178,13 @@ const CallToActionSection = () => {
                     "حدد نوع الاستشارة"
                   )}
                   rows="2"
-                  className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-white border-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:border-blue-500 mb-4"
+                  className="w-full px-4 py-3 rounded-lg  bg-white  border border-white text-accent-teal placeholder-gray-300 focus:outline-none focus:border-accent-gold mb-4"
                   required
                 ></textarea>
               )}
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-full transition duration-300 flex items-center justify-center gap-2"
+                className="w-full bg-accent-gold hover:bg-accent-gold/90 text-accent-teal font-bold py-3 px-6 rounded-full transition duration-300 flex items-center justify-center gap-2"
               >
                 <span>{t("sections.callToAction.getQuote.send")}</span>
                 <svg

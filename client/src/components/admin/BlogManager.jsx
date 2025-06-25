@@ -178,7 +178,7 @@ const BlogManager = () => {
     return (
       <main className="flex justify-center items-center min-h-[400px]">
         <div
-          className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"
+          className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold"
           role="status"
           aria-label="Loading blogs"
         >
@@ -196,7 +196,7 @@ const BlogManager = () => {
         </p>
         <button
           onClick={fetchBlogs}
-          className="text-indigo-600 hover:text-indigo-500"
+          className="text-accent-gold hover:text-accent-gold/90"
           aria-label="Retry loading blogs"
         >
           Try Again
@@ -208,7 +208,7 @@ const BlogManager = () => {
   return (
     <main className="space-y-4 md:space-y-6 px-2 md:px-0">
       <header className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 md:gap-0">
-        <h1 className="text-xl md:text-2xl font-semibold">Manage Blogs</h1>
+        <h1 className="text-xl md:text-2xl font-semibold text-accent-teal">Manage Blogs</h1>
         <Button
           variant="primary"
           onClick={() => navigate("/admin/blogs/new")}
@@ -235,7 +235,7 @@ const BlogManager = () => {
               id="category-filter"
               value={selectedCategory}
               onChange={handleCategoryChange}
-              className="w-full px-3 md:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+              className="w-full px-3 md:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-transparent text-sm md:text-base"
               aria-label="Filter blogs by category"
             >
               <option value="">All Categories</option>
@@ -250,7 +250,7 @@ const BlogManager = () => {
           {selectedCategory && (
             <button
               onClick={() => setSelectedCategory("")}
-              className="w-full md:w-auto px-4 py-2 text-gray-600 hover:text-gray-800 text-sm md:text-base border border-gray-300 rounded-md hover:bg-gray-50"
+              className="w-full md:w-auto px-4 py-2 text-accent-teal hover:text-accent-teal/90 text-sm md:text-base border border-gray-300 rounded-md hover:bg-gray-50"
               aria-label="Clear category filter"
             >
               Clear Filter
@@ -303,7 +303,7 @@ const BlogManager = () => {
                           onClick={() =>
                             navigate(`/admin/blogs/${blog._id}/edit`)
                           }
-                          className="text-indigo-600 hover:text-indigo-900 text-sm"
+                          className="text-accent-gold hover:text-accent-gold/90 text-sm"
                           aria-label={`Edit blog post: ${blog.title}`}
                         >
                           Edit
@@ -394,14 +394,14 @@ const BlogManager = () => {
                         onClick={() =>
                           navigate(`/admin/blogs/${blog._id}/edit`)
                         }
-                        className="text-indigo-600 hover:text-indigo-900 mr-4"
+                        className="text-accent-gold hover:text-accent-gold/90 mr-4"
                         aria-label={`Edit blog post: ${blog.title}`}
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => handleDelete(blog._id)}
-                        className="text-red-600 hover:text-red-900"
+                        className="text-accent-gold hover:text-accent-gold/90"
                         disabled={isDeleting}
                         aria-label={`Delete blog post: ${blog.title}`}
                       >

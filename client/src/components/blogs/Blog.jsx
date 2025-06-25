@@ -46,7 +46,7 @@ const Blog = ({ blog }) => {
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-indigo-100">
               <span className="text-indigo-500 text-lg font-medium">
-                {t("blogDetail.noImage")}
+                No Image
               </span>
             </div>
           )}
@@ -59,7 +59,7 @@ const Blog = ({ blog }) => {
           <div className="flex items-center gap-2 mb-3 flex-wrap">
             {blog.category && (
               <span className="px-3 py-1 bg-primary-100 text-primary-800 text-sm rounded-full font-medium">
-                {t(`blogCategory.${blog.category}`)}
+                {blog.category}
               </span>
             )}
             {blog.tags &&

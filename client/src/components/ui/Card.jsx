@@ -17,6 +17,9 @@ const Card = React.forwardRef(
       primary: "bg-primary-50",
       secondary: "bg-secondary-50",
       dark: "bg-secondary-900 text-white",
+      gold: "bg-accent-gold text-white",
+      green: "bg-accent-green text-white",
+      teal: "bg-accent-teal text-white",
     };
 
     const baseStyles = "rounded-xl shadow-soft-xl transition-all duration-200";

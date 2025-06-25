@@ -18,7 +18,7 @@ const CoursesPage = () => {
             direction === "rtl" ? "rtl" : "ltr"
           }`}
         >
-          <h1 className="text-3xl sm:text-4xl font-display font-bold text-primary-900">
+          <h1 className="text-3xl sm:text-4xl font-display font-bold text-accent-teal">
             {t("coursesList.allCourses")}
           </h1>
           <p className="mt-2 text-lg text-secondary-600 max-w-2xl">
