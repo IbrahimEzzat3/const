@@ -686,7 +686,6 @@ const CourseDetail = () => {
           <div className="lg:col-span-1">
             <div className="sticky top-6 space-y-6">
               <div className="bg-white border border-gray-100 rounded-lg p-6 shadow-sm">
-
                 <Button
                   variant={isEnrolled ? "danger" : "primary"}
                   onClick={handleEnroll}
@@ -709,14 +708,6 @@ const CourseDetail = () => {
                     <span className="text-secondary-600">
                       {t("courseDetail.hoursOfContent", {
                         count: course.duration,
-                      })}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                    <UsersIcon className="h-5 w-5 text-primary-600" />
-                    <span className="text-secondary-600">
-                      {t("courseDetail.studentsEnrolled", {
-                        count: course.enrolledUsers?.length || 0,
                       })}
                     </span>
                   </div>

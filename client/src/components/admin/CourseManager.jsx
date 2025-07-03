@@ -151,71 +151,6 @@ const CourseManager = () => {
     }
   };
 
-  // VideoPreview component for per-video state
-  const VideoPreview = ({ video }) => {
-    const [videoError, setVideoError] = React.useState(false);
-    const [videoLoading, setVideoLoading] = React.useState(true);
-    const videoUrl = video
-      ? `/uploads/${video}`
-      : null;
-    const handleVideoError = () => {
-      setVideoError(true);
-      setVideoLoading(false);
-    };
-    const handleVideoLoad = () => {
-      setVideoLoading(false);
-      setVideoError(false);
-    };
-    if (!video) {
-      return (
-        <div className="w-full h-full flex items-center justify-center bg-indigo-100">
-          <span className="text-indigo-500 text-lg font-medium">
-            No Video
-          </span>
-        </div>
-      );
-    }
-    return (
-      <div className="relative h-16 w-24">
-        {videoLoading && !videoError && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-10">
-            <div className="text-gray-500">Loading video...</div>
-          </div>
-        )}
-        {videoError ? (
-          <div className="w-full h-full flex flex-col items-center justify-center bg-red-50 z-10">
-            <span className="text-red-500 text-sm font-medium mb-2">
-              Failed to load video
-            </span>
-            <a
-              href={videoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-accent-gold text-xs underline"
-            >
-              Try direct link
-            </a>
-          </div>
-        ) : (
-          <video
-            src={videoUrl}
-            controls
-            className="h-full w-full object-cover rounded-md"
-            preload="metadata"
-            onError={handleVideoError}
-            onLoadedData={handleVideoLoad}
-            onLoadStart={() => setVideoLoading(true)}
-            crossOrigin="anonymous"
-          >
-            <source src={videoUrl} type="video/mp4" />
-            <source src={videoUrl} type="video/webm" />
-            Your browser does not support the video tag.
-          </video>
-        )}
-      </div>
-    );
-  };
-
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
@@ -242,16 +177,16 @@ const CourseManager = () => {
     <div className="space-y-4 md:space-y-6 px-2 md:px-0">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 md:gap-0">
-        <h2 className="text-xl md:text-2xl font-semibold text-accent-teal">Manage Courses</h2>
+        <h2 className="text-xl md:text-2xl font-semibold text-accent-teal">
+          Manage Courses
+        </h2>
         <button
           onClick={() => navigate("/admin/courses/new")}
-            className="w-full md:w-auto px-4 py-2 bg-accent-gold text-accent-teal rounded-md hover:bg-accent-gold/90 focus:outline-none focus:ring-2 focus:ring-accent-gold focus:ring-offset-2 text-sm md:text-base"
+          className="w-full md:w-auto px-4 py-2 bg-accent-gold text-accent-teal rounded-md hover:bg-accent-gold/90 focus:outline-none focus:ring-2 focus:ring-accent-gold focus:ring-offset-2 text-sm md:text-base"
         >
           Create New Course
         </button>
       </div>
-
-    
 
       {/* Search */}
       <div className="flex flex-col md:flex-row gap-3 md:gap-2">
@@ -305,11 +240,12 @@ const CourseManager = () => {
             return (
               <div key={course._id} className="p-4">
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <VideoPreview video={course.video} />
-                  </div>
                   <div className="flex-shrink-0 h-16 w-24">
-                    <img src={course.instructor.avatar} alt={course.instructor.name} className="h-full w-full object-cover rounded-md" />
+                    <img
+                      src={course.instructor.avatar}
+                      alt={course.instructor.name}
+                      className="h-full w-full object-cover rounded-md"
+                    />
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="text-sm font-medium text-gray-900 truncate">
@@ -322,9 +258,6 @@ const CourseManager = () => {
                       {course.shortDescription}
                     </p>
                     <div className="mt-2 flex flex-wrap gap-2">
-                      <span className="text-xs text-gray-500">
-                        {course.enrolledUsers?.length || 0} students
-                      </span>
                       <span className="text-xs text-gray-500">
                         {new Date(course.createdAt).toLocaleDateString()}
                       </span>
@@ -367,13 +300,13 @@ const CourseManager = () => {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Course
+                Image
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Title
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Short Description
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Enrolled Students
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Created
@@ -392,30 +325,24 @@ const CourseManager = () => {
                 <tr key={course._id}>
                   <td className="px-6 py-4">
                     <div className="flex items-center">
-                      <div className="flex-shrink-0 h-16 w-24">
-                        <VideoPreview video={course.video} />
-                      </div>
-                      <div className="flex-shrink-0 h-16 w-24">
-                        <img src={course.instructor.avatar} alt={course.instructor.name} className="h-full w-full object-cover rounded-md" />
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">
-                          {course.title}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          {course.instructor.name}
-                        </div>
-                      </div>
+                      <img
+                        src={course.photo || "/default-course.jpg"}
+                        alt={course.title}
+                        className="h-14 w-24 object-cover rounded-md border"
+                      />
+                    </div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="text-sm font-medium text-gray-900">
+                      {course.title}
                     </div>
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-sm text-gray-900 max-w-md line-clamp-2">
-                      {course.shortDescription.slice(0, 30)}...
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">
-                      {course.enrolledUsers?.length || 0} students
+                      {course.shortDescription
+                        ? course.shortDescription.slice(0, 60) +
+                          (course.shortDescription.length > 60 ? "..." : "")
+                        : ""}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

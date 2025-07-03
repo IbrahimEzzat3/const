@@ -37,13 +37,19 @@ router.delete("/!*:id/unenroll", courseController.unenrollFromCourse);
 router.post(
   "/",
   authorize("admin"),
-  upload.single("video"),
+  upload.fields([
+    { name: "video", maxCount: 1 },
+    { name: "photo", maxCount: 1 },
+  ]),
   courseController.createCourse
 );
 router.put(
   "/:id",
   authorize("admin"),
-  upload.single("video"),
+  upload.fields([
+    { name: "video", maxCount: 1 },
+    { name: "photo", maxCount: 1 },
+  ]),
   courseController.updateCourse
 );
 router.delete("/:id", authorize("admin"), courseController.deleteCourse);
