@@ -24,19 +24,19 @@ export const createProject = async ({ images, slug }) => {
   return res.data.data;
 };
 
-// Update project (id, { images, slug })
-export const updateProject = async (id, { images, slug }) => {
+// Update project (projectSlug, { images, slug })
+export const updateProject = async (projectSlug, { images, slug }) => {
   const formData = new FormData();
   images.forEach((img) => formData.append("images", img));
   if (slug) formData.append("slug", slug);
-  const res = await api.put(`/projects/${id}`, formData, {
+  const res = await api.put(`/projects/${projectSlug}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return res.data.data;
 };
 
 // Delete project
-export const deleteProject = async (id) => {
-  const res = await api.delete(`/projects/${id}`);
+export const deleteProject = async (projectSlug) => {
+  const res = await api.delete(`/projects/${projectSlug}`);
   return res.data.data;
 };
