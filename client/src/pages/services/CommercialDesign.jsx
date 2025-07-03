@@ -29,12 +29,12 @@ const CommercialDesign = () => {
       <div className="container mx-auto px-4 py-16 rtl">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold text-blue-900 mb-8 text-center">
-            يشمل التصميم التجاري في شركة شاد :
+            يشمل التصميم التجاري في شركة Ecosus:
           </h1>
 
           <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
             <p className="text-gray-600 mb-4">
-              نقدم في شركة شاد للتصميم الداخلي لمسة سحرية للواجهة التجارية،
+              نقدم في شركة Ecosusللتصميم الداخلي لمسة سحرية للواجهة التجارية،
               لتكون ممتعة وتجذب العملاء. نستخدم أحدث التقنيات والبرامج لتصميم
               الديكورات الداخلية والخارجية.
             </p>
@@ -50,7 +50,7 @@ const CommercialDesign = () => {
 
           <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
             <h2 className="text-2xl font-semibold text-blue-900 mb-4 text-center">
-              ما هي خطوات التصميم التجاري التي تستخدمها شاد؟
+              ما هي خطوات التصميم التجاري التي تستخدمها Ecosus؟
             </h2>
             <ol className="list-decimal list-inside text-gray-600 space-y-4">
               <li>
@@ -76,18 +76,18 @@ const CommercialDesign = () => {
               </li>
             </ol>
             <p className="text-gray-600 mt-4">
-              في "شاد للتصميم"، نضمن لك حديقة جميلة وعملية. فريقنا من المتخصصين
-              يعملون بجد لتحقيق رؤيتك. نقدم لك أفضل الخدمات.
+              في "Ecosusللتصميم"، نضمن لك حديقة جميلة وعملية. فريقنا من
+              المتخصصين يعملون بجد لتحقيق رؤيتك. نقدم لك أفضل الخدمات.
             </p>
           </div>
 
           <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
             <h2 className="text-2xl font-semibold text-blue-900 mb-4">
-              الثقة بين شركة شاد للتصميم التجاري والعملاء
+              الثقة بين شركة Ecosusللتصميم التجاري والعملاء
             </h2>
             <p className="text-gray-600 mb-4">
-              "شاد للتصميم" تهتم ببناء علاقات قوية مع عملائها. نقدم خدمات شفافة
-              ومهنية. نضمن رضا العملاء عن النتائج.
+              "Ecosusللتصميم" تهتم ببناء علاقات قوية مع عملائها. نقدم خدمات
+              شفافة ومهنية. نضمن رضا العملاء عن النتائج.
             </p>
             <p className="text-gray-600 mb-4">
               فريقنا من المصممين والمهندسين يعمل بجد لتقديم أفضل الحلول. نلتزم

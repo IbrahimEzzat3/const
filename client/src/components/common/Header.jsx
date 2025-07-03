@@ -478,8 +478,8 @@ const Header = () => {
                         src={
                           user?.avatar &&
                           user.avatar !== "public/images/default.png"
-                            ? `https://const-production.up.railway.app/${user.avatar}`
-                            : `https://const-production.up.railway.app/public/images/default.png`
+                            ? `/${user.avatar}`
+                            : `/public/images/default.png`
                         }
                         alt=""
                         loading="lazy"
@@ -597,8 +597,8 @@ const Header = () => {
                             src={
                               user?.avatar &&
                               user.avatar !== "public/images/default.png"
-                                ? `https://const-production.up.railway.app/${user.avatar}`
-                                : `https://const-production.up.railway.app/public/images/default.png`
+                                ? `/${user.avatar}`
+                                : `/public/images/default.png`
                             }
                             alt=""
                             loading="lazy"

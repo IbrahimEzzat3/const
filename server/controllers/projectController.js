@@ -58,13 +58,22 @@ exports.updateProject = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Delete project
-// @route   DELETE /api/projects/:id
+// @route   DELETE /api/projects/:projectSlug
 // @access  Private/Admin
 exports.deleteProject = asyncHandler(async (req, res, next) => {
-  const project = await Project.findOne({ slug: req.params.projectSlug });
-  if (!project) {
-    return next(new ErrorResponse("Project not found", 404));
+  try {
+    console.log("Received projectSlug:", req.params.projectSlug);
+    const project = await Project.findOne({ slug: req.params.projectSlug });
+    console.log("Project found:", project);
+    if (!project) {
+      return next(new ErrorResponse("Project not found", 404));
+    }
+    const deleted = await Project.findOneAndDelete({
+      slug: req.params.projectSlug,
+    });
+    res.status(200).json({ success: true, data: deleted });
+  } catch (err) {
+    console.error("Error deleting project:", err);
+    return next(new ErrorResponse("Server error: " + err.message, 500));
   }
-  await project.remove();
-  res.status(200).json({ success: true, data: {} });
 });

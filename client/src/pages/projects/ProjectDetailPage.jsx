@@ -165,7 +165,6 @@ const ProjectDetailPage = () => {
         })
         .catch(() => setNotFound(true))
         .finally(() => setLoading(false));
-      console.log(projectSlug);
     }
     // eslint-disable-next-line
   }, [projectSlug, language]);

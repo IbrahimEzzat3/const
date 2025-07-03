@@ -67,9 +67,9 @@ const ProjectManager = () => {
     }
   };
 
-  const handleEdit = (id) => {
-    setEditId(id);
-    const project = projects.find((p) => p._id === id);
+  const handleEdit = (slug) => {
+    setEditId(slug);
+    const project = projects.find((p) => p.slug === slug);
     setSlug(project?.slug || "");
   };
 
@@ -98,7 +98,7 @@ const ProjectManager = () => {
     }
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (slug) => {
     setAlert({
       isOpen: true,
       type: "warning",
@@ -107,7 +107,7 @@ const ProjectManager = () => {
       showCancelButton: true,
       onConfirm: async () => {
         try {
-          await deleteProject(id);
+          await deleteProject(slug);
           fetchProjects();
           setAlert({
             isOpen: true,
@@ -195,13 +195,13 @@ const ProjectManager = () => {
               <div className="flex gap-2 mt-2">
                 <button
                   className="btn btn-warning"
-                  onClick={() => handleEdit(project._id)}
+                  onClick={() => handleEdit(project.slug)}
                 >
                   Edit
                 </button>
                 <button
                   className="btn btn-danger"
-                  onClick={() => handleDelete(project._id)}
+                  onClick={() => handleDelete(project.slug)}
                 >
                   Delete
                 </button>

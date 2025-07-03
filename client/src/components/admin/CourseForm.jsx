@@ -135,40 +135,31 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         formData.append("modules", JSON.stringify(processedModules));
 
         // Handle video - FIXED VERSION
-        console.log("Video value:", values.video, "Type:", typeof values.video);
 
         if (values.video instanceof File) {
           // New file selected
           formData.append("video", values.video);
-          console.log("Appending new video file");
         } else if (
           typeof values.video === "string" &&
           values.video.trim() !== ""
         ) {
           // Existing video URL/filename - preserve it
           formData.append("video", values.video.trim());
-          console.log("Preserving existing video:", values.video.trim());
         } else {
           // No video, empty, null, or undefined
           // In edit mode, we want to preserve existing video unless explicitly removing
           // In create mode, we just don't send the video field
           if (isEdit) {
             // Don't append video field at all - this will preserve the existing video
-            console.log(
-              "Edit mode: Not sending video field to preserve existing"
-            );
+          
           } else {
             // Create mode: explicitly send empty string if no video
             formData.append("video", "");
-            console.log("Create mode: Sending empty video field");
           }
         }
 
         // Debug: Log FormData contents
-        console.log("FormData contents:");
-        for (let [key, value] of formData.entries()) {
-          console.log(key, ":", value);
-        }
+      
 
         if (isEdit) {
           await courseService.updateCourse(courseId, formData);

@@ -236,17 +236,11 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
   updatedFields.modules = parseJsonField("modules");
 
   // IMPROVED VIDEO HANDLING
-  console.log(
-    "Video field received:",
-    req.body.video,
-    "Type:",
-    typeof req.body.video
-  );
+ 
 
   if (req.file) {
     // New file uploaded
     updatedFields.video = req.file.filename;
-    console.log("New video file uploaded:", req.file.filename);
   } else if (req.body.hasOwnProperty("video")) {
     // Video field was explicitly sent in the request
     const videoValue = req.body.video;
@@ -254,11 +248,9 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
     if (videoValue === "" || videoValue === "null" || videoValue === null) {
       // Explicitly removing video
       updatedFields.video = null;
-      console.log("Removing video (set to null)");
     } else if (typeof videoValue === "string" && videoValue.trim() !== "") {
       // Preserving existing video filename
       updatedFields.video = videoValue.trim();
-      console.log("Preserving existing video:", videoValue.trim());
     } else if (typeof videoValue === "object") {
       // Handle case where an object was accidentally sent
       console.error("Error: Received object for video field:", videoValue);
@@ -276,7 +268,6 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
   } else {
     // Video field not sent at all - preserve existing video
     delete updatedFields.video;
-    console.log("Video field not sent, preserving existing video");
   }
 
   // Convert string booleans to actual booleans
@@ -301,7 +292,6 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
     }));
   }
 
-  console.log("Final updatedFields:", updatedFields);
 
   course = await Course.findByIdAndUpdate(req.params.id, updatedFields, {
     new: true,

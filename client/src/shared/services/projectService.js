@@ -9,7 +9,6 @@ export const getProjects = async () => {
 // Get single project
 export const getProject = async (projectSlug) => {
   const res = await api.get(`/projects/${projectSlug}`);
-  console.log(res.data.data);
   return res.data.data;
 };
 

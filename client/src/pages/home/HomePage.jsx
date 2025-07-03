@@ -43,16 +43,16 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Shad - Home</title>
+        <title>Ecosus- Home</title>
         <meta
           name="description"
-          content="Professional contracting and design services since 2003. Shad specializes in interior, exterior, and smart automation projects."
+          content="Professional contracting and design services since 2003. Ecosusspecializes in interior, exterior, and smart automation projects."
         />
         <meta
           name="keywords"
           content="Shad, contracting, interior design, exterior design, smart automation, Saudi Arabia"
         />
-        <meta property="og:title" content="Shad - Home" />
+        <meta property="og:title" content="Ecosus- Home" />
         <meta
           property="og:description"
           content="Professional contracting and design services since 2003."
