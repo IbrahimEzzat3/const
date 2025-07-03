@@ -6,7 +6,7 @@ const { protect, authorize } = require("../middleware/auth");
 
 // Public routes
 router.get("/", projectController.getProjects);
-router.get("/:slug", projectController.getProject);
+router.get("/:projectSlug", projectController.getProject);
 
 // Admin routes
 router.post(
@@ -17,14 +17,14 @@ router.post(
   projectController.createProject
 );
 router.put(
-  "/:slug",
+  "/:projectSlug",
   protect,
   authorize("admin"),
   upload.array("images", 10),
   projectController.updateProject
 );
 router.delete(
-  "/:slug",
+  "/:projectSlug",
   protect,
   authorize("admin"),
   projectController.deleteProject

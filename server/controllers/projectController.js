@@ -16,7 +16,7 @@ exports.getProjects = asyncHandler(async (req, res, next) => {
 // @route   GET /api/projects/:id
 // @access  Public
 exports.getProject = asyncHandler(async (req, res, next) => {
-  const project = await Project.findById(req.params.id);
+  const project = await Project.findOne({ slug: req.params.projectSlug });
   if (!project) {
     return next(new ErrorResponse("Project not found", 404));
   }
@@ -42,7 +42,7 @@ exports.createProject = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/projects/:id
 // @access  Private/Admin
 exports.updateProject = asyncHandler(async (req, res, next) => {
-  const project = await Project.findById(req.params.id);
+  const project = await Project.findOne({ slug: req.params.projectSlug });
   if (!project) {
     return next(new ErrorResponse("Project not found", 404));
   }
@@ -61,7 +61,7 @@ exports.updateProject = asyncHandler(async (req, res, next) => {
 // @route   DELETE /api/projects/:id
 // @access  Private/Admin
 exports.deleteProject = asyncHandler(async (req, res, next) => {
-  const project = await Project.findById(req.params.id);
+  const project = await Project.findOne({ slug: req.params.projectSlug });
   if (!project) {
     return next(new ErrorResponse("Project not found", 404));
   }

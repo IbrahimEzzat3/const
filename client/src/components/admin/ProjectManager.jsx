@@ -22,6 +22,7 @@ const ProjectManager = () => {
     showCancelButton: false,
     onConfirm: null,
   });
+  const [slug, setSlug] = useState("");
 
   useEffect(() => {
     fetchProjects();
@@ -44,10 +45,11 @@ const ProjectManager = () => {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    if (!selectedImages.length) return;
+    if (!selectedImages.length || !slug) return;
     try {
-      await createProject(selectedImages);
+      await createProject({ images: selectedImages, slug });
       setSelectedImages([]);
+      setSlug("");
       fetchProjects();
       setAlert({
         isOpen: true,
@@ -67,15 +69,18 @@ const ProjectManager = () => {
 
   const handleEdit = (id) => {
     setEditId(id);
+    const project = projects.find((p) => p._id === id);
+    setSlug(project?.slug || "");
   };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    if (!selectedImages.length || !editId) return;
+    if (!selectedImages.length || !editId || !slug) return;
     try {
-      await updateProject(editId, selectedImages);
+      await updateProject(editId, { images: selectedImages, slug });
       setEditId(null);
       setSelectedImages([]);
+      setSlug("");
       fetchProjects();
       setAlert({
         isOpen: true,
@@ -148,6 +153,14 @@ const ProjectManager = () => {
           accept="image/*"
           onChange={handleImageChange}
         />
+        <input
+          type="text"
+          placeholder="Slug"
+          value={slug}
+          onChange={(e) => setSlug(e.target.value)}
+          className="input input-bordered"
+          required
+        />
         <button type="submit" className="btn btn-primary">
           {editId ? "Update Project" : "Add Project"}
         </button>
@@ -158,6 +171,7 @@ const ProjectManager = () => {
             onClick={() => {
               setEditId(null);
               setSelectedImages([]);
+              setSlug("");
             }}
           >
             Cancel
