@@ -25,17 +25,6 @@ const courseSchema = new mongoose.Schema(
       required: false,
       default: null,
     },
-    category: {
-      type: String,
-      required: [true, "Please add a category"],
-      enum: [
-        "construction-basics",
-        "project-management",
-        "safety-training",
-        "technical-skills",
-        "certification",
-      ],
-    },
     level: {
       type: String,
       required: [true, "Please add a level"],
@@ -46,19 +35,27 @@ const courseSchema = new mongoose.Schema(
       required: [true, "Please add course duration"],
       min: [1, "Duration must be at least 1 hour"],
     },
-    price: {
-      type: Number,
-      required: [true, "Please add a price"],
-      min: [0, "Price cannot be negative"],
-    },
-    discountPrice: {
-      type: Number,
-      min: [0, "Discount price cannot be negative"],
+    photo: {
+      type: String,
+      required: false,
+      default: null,
     },
     instructor: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
+      name: {
+        type: String,
+        required: [true, "Please add instructor name"],
+        trim: true,
+      },
+      email: {
+        type: String,
+        required: false,
+        trim: true,
+      },
+      avatar: {
+        type: String,
+        required: false,
+        default: null,
+      },
     },
     modules: [
       {
@@ -186,7 +183,7 @@ courseSchema.index({
 courseSchema.statics.getCoursesByCategory = async function (category) {
   return await this.find({ category, isPublished: true })
     .select(
-      "title slug shortDescription category level duration price discountPrice video"
+      "title slug shortDescription  level duration instructor video photo"
     )
     .populate("instructor", "name avatar")
     .sort("-createdAt");
@@ -196,7 +193,7 @@ courseSchema.statics.getCoursesByCategory = async function (category) {
 courseSchema.statics.getFeaturedCourses = async function (limit = 6) {
   return await this.find({ isPublished: true, isFeatured: true })
     .select(
-      "title slug shortDescription category level duration price discountPrice video"
+      "title slug shortDescription  level duration instructor video photo"
     )
     .populate("instructor", "name avatar")
     .limit(limit);
@@ -209,7 +206,7 @@ courseSchema.statics.searchCourses = async function (query) {
     { score: { $meta: "textScore" } }
   )
     .select(
-      "title slug shortDescription category level duration price discountPrice video"
+      "title slug shortDescription  level duration instructor video photo"
     )
     .populate("instructor", "name avatar")
     .sort({ score: { $meta: "textScore" } })
@@ -219,8 +216,8 @@ courseSchema.statics.searchCourses = async function (query) {
 // Virtual for related courses
 courseSchema.virtual("relatedCourses", {
   ref: "Course",
-  localField: "category",
-  foreignField: "category",
+  localField: "instructor",
+  foreignField: "instructor",
   justOne: false,
   options: { limit: 3 },
 });

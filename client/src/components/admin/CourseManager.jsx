@@ -12,7 +12,6 @@ const CourseManager = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalCourses, setTotalCourses] = useState(0);
@@ -50,20 +49,9 @@ const CourseManager = () => {
     []
   );
 
-  const handleCategoryChange = (e) => {
-    const category = e.target.value;
-    setSelectedCategory(category);
-    setCurrentPage(1); // Reset to first page when category changes
-  };
-
-  // Effect to fetch courses when category changes
   useEffect(() => {
     fetchCourses();
-  }, [selectedCategory, currentPage]);
-
-  useEffect(() => {
-    fetchCourses();
-  }, []);
+  }, [currentPage]);
 
   // Effect to trigger search when searchTerm changes
   useEffect(() => {
@@ -77,7 +65,6 @@ const CourseManager = () => {
       const params = {
         page: currentPage,
         limit: itemsPerPage,
-        ...(selectedCategory && { category: selectedCategory }),
       };
       const response = await courseService.getAllCourses(params);
 
@@ -169,7 +156,7 @@ const CourseManager = () => {
     const [videoError, setVideoError] = React.useState(false);
     const [videoLoading, setVideoLoading] = React.useState(true);
     const videoUrl = video
-      ? `https://const-production.up.railway.app/uploads/${video}`
+      ? `/uploads/${video}`
       : null;
     const handleVideoError = () => {
       setVideoError(true);
@@ -204,7 +191,7 @@ const CourseManager = () => {
               href={videoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-500 text-xs underline"
+              className="text-accent-gold text-xs underline"
             >
               Try direct link
             </a>
@@ -232,7 +219,7 @@ const CourseManager = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold"></div>
       </div>
     );
   }
@@ -243,7 +230,7 @@ const CourseManager = () => {
         <p className="text-red-500 mb-4">{error}</p>
         <button
           onClick={fetchCourses}
-          className="text-indigo-600 hover:text-indigo-500"
+          className="text-accent-gold hover:text-accent-gold/90"
         >
           Try Again
         </button>
@@ -264,40 +251,7 @@ const CourseManager = () => {
         </button>
       </div>
 
-      {/* Filters */}
-      <div className="flex flex-col md:flex-row gap-3 md:gap-4">
-        <div className="w-full md:w-64">
-          <label
-            htmlFor="category-filter"
-            className="block text-sm font-medium text-gray-700 mb-1 md:mb-0 md:sr-only"
-          >
-            Filter by category
-          </label>
-          <select
-            id="category-filter"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            className="w-full px-3 md:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-transparent text-sm md:text-base"
-          >
-            <option value="">All Categories</option>
-            <option value="construction-basics">Construction Basics</option>
-            <option value="project-management">Project Management</option>
-            <option value="safety-training">Safety Training</option>
-            <option value="technical-skills">Technical Skills</option>
-            <option value="certification">Certification</option>
-          </select>
-        </div>
-        {selectedCategory && (
-          <button
-            onClick={() => {
-              setSelectedCategory("");
-            }}
-            className="w-full md:w-auto px-4 py-2 text-accent-teal hover:text-accent-teal/90 text-sm md:text-base border border-gray-300 rounded-md hover:bg-gray-50"
-          >
-            Clear Filter
-          </button>
-        )}
-      </div>
+    
 
       {/* Search */}
       <div className="flex flex-col md:flex-row gap-3 md:gap-2">
@@ -354,12 +308,15 @@ const CourseManager = () => {
                   <div className="flex-shrink-0">
                     <VideoPreview video={course.video} />
                   </div>
+                  <div className="flex-shrink-0 h-16 w-24">
+                    <img src={course.instructor.avatar} alt={course.instructor.name} className="h-full w-full object-cover rounded-md" />
+                  </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="text-sm font-medium text-gray-900 truncate">
                       {course.title}
                     </h3>
                     <p className="text-xs text-gray-500 mt-1">
-                      {course.category}
+                      {course.instructor.name}
                     </p>
                     <p className="text-xs text-gray-500 mt-1 line-clamp-2">
                       {course.shortDescription}
@@ -438,12 +395,15 @@ const CourseManager = () => {
                       <div className="flex-shrink-0 h-16 w-24">
                         <VideoPreview video={course.video} />
                       </div>
+                      <div className="flex-shrink-0 h-16 w-24">
+                        <img src={course.instructor.avatar} alt={course.instructor.name} className="h-full w-full object-cover rounded-md" />
+                      </div>
                       <div className="ml-4">
                         <div className="text-sm font-medium text-gray-900">
                           {course.title}
                         </div>
                         <div className="text-sm text-gray-500">
-                          {course.category}
+                          {course.instructor.name}
                         </div>
                       </div>
                     </div>
@@ -620,9 +580,7 @@ const CourseManager = () => {
                 No courses found
               </p>
               <p className="text-sm mt-1">
-                {selectedCategory
-                  ? `No courses found in the "${selectedCategory}" category.`
-                  : "Get started by creating your first course."}
+                Get started by creating your first course.
               </p>
             </div>
           </div>

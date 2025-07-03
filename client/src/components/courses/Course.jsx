@@ -147,15 +147,7 @@ const Course = ({ course }) => {
           >
             {t("readMore")}
           </Link>
-          {course.price ? (
-            <span className="text-gray-900 font-semibold">
-              ${course.price.toFixed(2)}
-            </span>
-          ) : (
-            <span className="text-blue-600 font-semibold">
-              {t("courseDetail.free")}
-            </span>
-          )}
+          
         </div>
       </div>
     </div>

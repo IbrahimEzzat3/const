@@ -26,7 +26,6 @@ exports.searchCourses = asyncHandler(async (req, res, next) => {
     ],
   })
     .populate("instructor", "name email avatar")
-    .populate("category", "name")
     .sort({ createdAt: -1 });
 
   res.status(200).json({
@@ -48,10 +47,6 @@ exports.getAllCourses = asyncHandler(async (req, res, next) => {
     // Build query object
     const query = {};
 
-    // Add category filter if provided
-    if (req.query.category) {
-      query.category = req.query.category;
-    }
 
     const courses = await Course.find(query)
       .populate("instructor", "name email avatar")
@@ -85,7 +80,6 @@ exports.getAllCourses = asyncHandler(async (req, res, next) => {
 exports.getCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findById(req.params.id)
     .populate("instructor", "name email avatar")
-    .populate("category", "name");
 
   if (!course) {
     return next(
@@ -105,7 +99,11 @@ exports.getCourse = asyncHandler(async (req, res, next) => {
 exports.createCourse = asyncHandler(async (req, res, next) => {
   try {
     // Add instructor to req.body
-    req.body.instructor = req.user.id;
+    req.body.instructor = {
+      name: req.user.name,
+      email: req.user.email,
+      avatar: req.user.avatar,
+    };
 
     // Helper to parse JSON string fields
     const parseJsonField = (field) => {
@@ -139,11 +137,7 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
     // Add isPublished conversion as well, if it's sent from frontend
     if (req.body.isPublished === "true") req.body.isPublished = true;
     if (req.body.isPublished === "false") req.body.isPublished = false;
-
-    // Convert price and duration to numbers
-    if (req.body.price && typeof req.body.price === "string") {
-      req.body.price = parseFloat(req.body.price);
-    }
+ 
     if (req.body.duration && typeof req.body.duration === "string") {
       req.body.duration = parseInt(req.body.duration);
     }
@@ -203,7 +197,7 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
 
   // Make sure user is course instructor or admin
   if (
-    course.instructor.toString() !== req.user.id &&
+    course.instructor.email !== req.user.email &&
     req.user.role !== "admin"
   ) {
     return next(
@@ -276,10 +270,7 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
   if (updatedFields.isPublished === "true") updatedFields.isPublished = true;
   if (updatedFields.isPublished === "false") updatedFields.isPublished = false;
 
-  // Convert price and duration to numbers
-  if (updatedFields.price && typeof updatedFields.price === "string") {
-    updatedFields.price = parseFloat(updatedFields.price);
-  }
+
   if (updatedFields.duration && typeof updatedFields.duration === "string") {
     updatedFields.duration = parseInt(updatedFields.duration);
   }
@@ -318,7 +309,7 @@ exports.deleteCourse = asyncHandler(async (req, res, next) => {
 
   // Make sure user is course instructor or admin
   if (
-    course.instructor.toString() !== req.user.id &&
+    course.instructor.email !== req.user.email &&
     req.user.role !== "admin"
   ) {
     return next(

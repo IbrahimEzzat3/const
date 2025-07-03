@@ -30,11 +30,7 @@ const CoursesList = () => {
     const matchesSearch = course.title
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-    const matchesFilter =
-      filter === "all" ||
-      (filter === "active" && course.isActive) ||
-      (filter === "free" && !course.price) ||
-      (filter === "paid" && course.price);
+    const matchesFilter = filter === "all" || (filter === "active" && course.isActive);
     return matchesSearch && matchesFilter;
   });
 

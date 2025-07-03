@@ -686,24 +686,6 @@ const CourseDetail = () => {
           <div className="lg:col-span-1">
             <div className="sticky top-6 space-y-6">
               <div className="bg-white border border-gray-100 rounded-lg p-6 shadow-sm">
-                <div className="mb-6">
-                  {course.discountPrice ? (
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-3xl font-bold text-primary-600">
-                        ${course.discountPrice}
-                      </span>
-                      <span className="text-lg text-secondary-500 line-through">
-                        ${course.price}
-                      </span>
-                    </div>
-                  ) : (
-                    <span className="text-3xl font-bold text-primary-600">
-                      {course.price
-                        ? `$${course.price}`
-                        : t("courseDetail.free")}
-                    </span>
-                  )}
-                </div>
 
                 <Button
                   variant={isEnrolled ? "danger" : "primary"}

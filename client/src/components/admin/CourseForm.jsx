@@ -13,15 +13,19 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
     title: "",
     description: "",
     shortDescription: "",
-    price: "",
     duration: "",
     level: "",
-    category: "",
     requirements: [],
     objectives: [],
     modules: [],
-    video: null, // Change from null to null (already correct)
+    video: null,
+    photo: null,
     isActive: true,
+    instructor: {
+      name: "",
+      email: "",
+      avatar: null,
+    },
   });
 
   const validationSchema = Yup.object({
@@ -32,14 +36,10 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
     shortDescription: Yup.string()
       .required("Short description is required")
       .max(200, "Short description must not exceed 200 characters"),
-    price: Yup.number()
-      .min(0, "Price must be positive")
-      .required("Price is required"),
     duration: Yup.number()
       .min(1, "Duration must be at least 1 hour")
       .required("Duration is required"),
     level: Yup.string().required("Level is required"),
-    category: Yup.string().required("Category is required"),
     requirements: Yup.array().of(Yup.string()),
     objectives: Yup.array().of(Yup.string()),
     modules: Yup.array().of(
@@ -59,6 +59,12 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           !value || (value && value.type && value.type.startsWith("video/"))
       ),
     isActive: Yup.boolean(),
+    instructor: Yup.object().shape({
+      name: Yup.string().required("Instructor name is required"),
+      email: Yup.string().email("Invalid email address").nullable(),
+      avatar: Yup.mixed().nullable(),
+    }),
+    photo: Yup.mixed().nullable(),
   });
 
   useEffect(() => {
@@ -75,16 +81,19 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         title: course.title || "",
         description: course.description || "",
         shortDescription: course.shortDescription || "",
-        price: course.price || "",
         duration: course.duration || "",
         level: course.level || "",
-        category: course.category || "",
         requirements: course.requirements || [],
         objectives: course.objectives || [],
         modules: course.modules || [],
-        // Fix video field initialization
-        video: course.video || null, // Use null instead of empty string
+        video: course.video || null,
+        photo: course.photo || null,
         isActive: course.isActive ?? true,
+        instructor: course.instructor || {
+          name: "",
+          email: "",
+          avatar: null,
+        },
       });
     } catch (error) {
       console.error("Error fetching course:", error);
@@ -108,11 +117,17 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         formData.append("title", values.title);
         formData.append("description", values.description);
         formData.append("shortDescription", values.shortDescription);
-        formData.append("price", Number(values.price));
         formData.append("duration", Number(values.duration));
         formData.append("level", values.level);
-        formData.append("category", values.category);
         formData.append("isActive", values.isActive);
+
+        // Handle instructor
+        formData.append("instructor", JSON.stringify(values.instructor));
+
+        // Handle photo
+        if (values.photo instanceof File) {
+          formData.append("photo", values.photo);
+        }
 
         // Handle arrays - ensure they're properly stringified
         formData.append(
@@ -151,7 +166,6 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           // In create mode, we just don't send the video field
           if (isEdit) {
             // Don't append video field at all - this will preserve the existing video
-          
           } else {
             // Create mode: explicitly send empty string if no video
             formData.append("video", "");
@@ -159,7 +173,6 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         }
 
         // Debug: Log FormData contents
-      
 
         if (isEdit) {
           await courseService.updateCourse(courseId, formData);
@@ -455,24 +468,50 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           )}
         </div>
 
-        {/* Price */}
+        {/* Instructor */}
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Price
+            Instructor
           </label>
           <input
-            type="number"
-            name="price"
-            {...formik.getFieldProps("price")}
+            type="text"
+            name="instructor.name"
+            placeholder="Instructor Name"
+            {...formik.getFieldProps("instructor.name")}
             className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
-              getFieldError("price") ? "border-red-300" : "border-gray-300"
+              getFieldError("instructor.name")
+                ? "border-red-300"
+                : "border-gray-300"
             }`}
           />
-          {getFieldError("price") && (
+          {getFieldError("instructor.name") && (
             <div className="text-red-500 text-xs md:text-sm mt-1">
-              {getErrorMessage("price")}
+              {getErrorMessage("instructor.name")}
             </div>
           )}
+          <input
+            type="text"
+            name="instructor.email"
+            placeholder="Instructor Email"
+            {...formik.getFieldProps("instructor.email")}
+            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
+              getFieldError("instructor.email") ? "border-red-300" : "border-gray-300"
+            }`}
+          />
+          {getFieldError("instructor.email") && (
+            <div className="text-red-500 text-xs md:text-sm mt-1">
+              {getErrorMessage("instructor.email")}
+            </div>
+          )}
+          <input
+            type="file"
+            name="instructor.avatar"
+            placeholder="Instructor Avatar"
+            {...formik.getFieldProps("instructor.avatar")}
+            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
+                getFieldError("instructor.avatar") ? "border-red-300" : "border-gray-300"
+            }`}
+          />
         </div>
 
         {/* Duration */}
@@ -481,7 +520,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
             Duration
           </label>
           <input
-            type="text"
+            type="number"
             name="duration"
             {...formik.getFieldProps("duration")}
             placeholder="e.g., 100 hours"
@@ -520,28 +559,22 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           )}
         </div>
 
-        {/* Category */}
+        {/* Photo */}
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Category
+            Photo
           </label>
-          <select
-            name="category"
-            {...formik.getFieldProps("category")}
+          <input
+            type="file"
+            name="photo"
+            {...formik.getFieldProps("photo")}
             className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
-              getFieldError("category") ? "border-red-300" : "border-gray-300"
+              getFieldError("photo") ? "border-red-300" : "border-gray-300"
             }`}
-          >
-            <option value="">Select Category</option>
-            <option value="construction-basics">construction-basics</option>
-            <option value="project-management">project-management</option>
-            <option value="safety-training">safety-training</option>
-            <option value="technical-skills">technical-skills</option>
-            <option value="certification">certification</option>
-          </select>
-          {getFieldError("category") && (
+          />
+          {getFieldError("photo") && (
             <div className="text-red-500 text-xs md:text-sm mt-1">
-              {getErrorMessage("category")}
+              {getErrorMessage("photo")}
             </div>
           )}
         </div>
