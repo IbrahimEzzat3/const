@@ -17,9 +17,9 @@ const VRDemoSection = () => {
   return (
     <section
       id="vr-demo"
-      className={`py-12 bg-accent-teal text-white rounded-3xl mt-16 ${direction}`}
+      className={`py-12 bg-accent-teal text-white  mt-16 ${direction}`}
     >
-      <div className="container mx-auto px-4">
+      <div className="w-full px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className={direction === "rtl" ? "text-right" : "text-left"}>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
@@ -80,13 +80,12 @@ const VRDemoSection = () => {
               style={{ minHeight: "300px" }}
             >
               {/* Video Demo Container */}
-              <video
-                className="w-full h-64 rounded-lg bg-accent-gold"
+              <img
+                className="w-full h-64 rounded-lg"
                 style={{ minHeight: "300px" }}
-                preload="none"
-              >
-                {t("sections.vrDemo.videoNotSupported")}
-              </video>
+                src="/images/vr-demo.png"
+                alt="VR Demo"
+              />
             </div>
           </div>
         </div>

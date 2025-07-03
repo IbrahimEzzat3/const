@@ -34,19 +34,8 @@ const ContactSection = () => {
     },
     {
       icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.391c0-.853-.342-1.615-.986-2.15l-1.423-1.243A3.375 3.375 0 0019.5 12h-1.653c-.715 0-1.395-.311-1.854-.854L14.234 9c-.86-1.084-2.29-1.722-3.806-1.722H9.75c-.75 0-1.44.364-1.886.938L6.423 11.25H2.25z"
-          />
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
         </svg>
       ),
       title: t("sections.contact.contactInfo.phone.title"),
@@ -101,7 +90,7 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className={`py-16 bg-[#F5EFE6] mt-16 rounded-3xl ${direction}`}>
+    <section id="contact" className={`py-16 bg-[#F5EFE6] mt-16 ${direction}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-accent-teal mb-4">
@@ -148,14 +137,12 @@ const ContactSection = () => {
             </h3>
             <div className="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.671565356092!2d46.6752773!3d24.7135517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDQyJzQ4LjgiTiA0NsKwNDAnMzEuMCJF!5e0!3m2!1sen!2ssa!4v1234567890"
-                width="100%"
-                height="100%"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5561.634353191113!2d39.20222534907363!3d21.509848873335592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3cf441b743755%3A0xcef07b4313c04941!2zRWNvc3VzINij2LXZiNmEINin2YTYp9iz2KrYr9in2YXYqQ!5e0!3m2!1sar!2seg!4v1751473625446!5m2!1sar!2seg"
+                width="600"
+                height="450"
                 style={{ border: 0 }}
-                allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Google Map of Shad's Location"
               ></iframe>
             </div>
           </div>

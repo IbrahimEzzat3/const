@@ -66,9 +66,9 @@ const CallToActionSection = () => {
   return (
     <section
       id="cta"
-      className={`py-16 bg-[#F5EFE6] mt-16  rounded-3xl ${direction}`}
+      className={`py-16 bg-[#F5EFE6] mt-16  ${direction}`}
     >
-      <div className="container mx-auto px-4">
+      <div className="w-full px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-accent-teal">
             {t("sections.callToAction.title")}

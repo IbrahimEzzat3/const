@@ -24,13 +24,11 @@ const AppLayout = ({ children }) => {
       <main
         className={`flex-grow ${
           isAuthPage
-            ? "flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-            : "container mx-auto px-4 sm:px-6 lg:px-8 py-8"
+            ? "flex items-center justify-center w-screen py-12 "
+            : ""
         }`}
       >
-        <div className={isAuthPage ? "w-full max-w-md" : "w-full"}>
-          {children}
-        </div>
+        <div className={isAuthPage ? "w-screen" : "w-screen"}>{children}</div>
       </main>
       <Footer />
       <FloatingButtons />

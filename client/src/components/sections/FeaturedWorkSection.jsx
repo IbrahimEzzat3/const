@@ -1,22 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLanguage } from "../../shared/context/LanguageContext";
-import { FEATURE2_IMAGE } from "../../constants/images";
+import { Main1_Project, Main2_Project } from "../../constants/images";
 
 const FeaturedWorkSection = () => {
   const { t, direction } = useLanguage();
+  const navigate = useNavigate();
   const projects = [
     {
-      image: FEATURE2_IMAGE,
+      image: Main1_Project,
       title: t("sections.featuredWork.projects.villa.title"),
       description: t("sections.featuredWork.projects.villa.description"),
-      slug: "villa-riyadh",
+      slug: "project1",
     },
     {
-      image: FEATURE2_IMAGE,
+      image: Main2_Project,
       title: t("sections.featuredWork.projects.compound.title"),
       description: t("sections.featuredWork.projects.compound.description"),
-      slug: "residential-compound-jeddah",
+      slug: "project2",
     },
   ];
 
@@ -24,12 +25,14 @@ const FeaturedWorkSection = () => {
     window.scrollTo(0, 0);
   };
 
+  const handleClick2 = () => {
+    navigate("/projects");
+    window.scrollTo(0, 0);
+  };
+
   return (
-    <section
-      id="featured-work"
-      className="py-16 mt-16 rounded-3xl bg-[#F5EFE6]"
-    >
-      <div className="container mx-auto px-4">
+    <section id="featured-work" className="py-16 mt-16  bg-[#F5EFE6]">
+      <div className="w-full px-4">
         <header className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-accent-teal mb-4">
             {t("sections.featuredWork.title")}
@@ -49,10 +52,6 @@ const FeaturedWorkSection = () => {
                 className="w-full h-96 object-cover transition duration-500 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition duration-300">
-                <h3 className="text-2xl font-bold text-accent-gold mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-accent-gold mb-4">{project.description}</p>
                 <Link
                   to={`/projects/${project.slug}`}
                   className="text-accent-gold font-medium flex items-center"
@@ -81,6 +80,14 @@ const FeaturedWorkSection = () => {
               </div>
             </article>
           ))}
+        </div>
+        <div className="flex justify-center mb-8">
+          <button
+            onClick={handleClick2}
+            className="bg-accent-gold text-white px-4 py-2 rounded-md"
+          >
+            {t("sections.featuredWork.viewAll")}
+          </button>
         </div>
       </div>
     </section>

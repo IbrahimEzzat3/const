@@ -158,94 +158,81 @@ const WhyChooseUsSection = () => {
   const { t } = useLanguage();
   const features = [
     {
-      icon: <AwardIcon />,
+      icon: <AwardIcon className="w-12 h-12" />,
       title: t("sections.whyChooseUs.localExperience.title"),
       description: t("sections.whyChooseUs.localExperience.description"),
     },
     {
-      icon: <VRCardboardIcon />,
+      icon: <VRCardboardIcon className="w-12 h-12" />,
       title: t("sections.whyChooseUs.vrTech.title"),
       description: t("sections.whyChooseUs.vrTech.description"),
     },
     {
-      icon: <HeadsetIcon />,
+      icon: <HeadsetIcon className="w-12 h-12" />,
       title: t("sections.whyChooseUs.support.title"),
       description: t("sections.whyChooseUs.support.description"),
     },
     {
-      icon: <PencilRulerIcon />,
+      icon: <PencilRulerIcon className="w-12 h-12" />,
       title: t("sections.whyChooseUs.customDesign.title"),
       description: t("sections.whyChooseUs.customDesign.description"),
     },
   ];
 
   return (
-    <section className="bg-primary-50 mt-16 relative py-16 rounded-3xl text-accent-teal  overflow-hidden animate-fadein-up">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-2 grid-rows-2 gap-8 min-h-[60vh]">
-          {/* Top Left: Image Placeholder */}
-          <div className="row-start-1 col-start-1 flex items-start justify-start">
-            {/* TODO: Replace with your image */}
-            <div className="w-full h-full bg-accent-green rounded-2xl flex items-center justify-center">
-              <img
-                src="/images/projects/main/feature2.webp"
-                alt="Why Choose Us"
-                className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+    <section className="bg-primary-50 mt-16 relative py-20 text-accent-teal overflow-hidden animate-fadein-up">
+      {/* Decorative gold accent behind title */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-accent-gold/10 rounded-full blur-2xl z-0" />
+      <div className="container mx-auto px-4 relative z-10 flex flex-col lg:flex-row items-center gap-12">
+        {/* Left: Main Image */}
+        <div className="flex-1 flex justify-center items-center w-full max-w-lg">
+          <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-accent-gold/30">
+            <img
+              src="/images/projects/main/feature2.webp"
+              alt="Why Choose Us"
+              className="w-full h-full object-cover object-center scale-105 hover:scale-110 transition-transform duration-700"
+              loading="lazy"
+              decoding="async"
+            />
+            {/* Decorative overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-accent-teal/30 to-transparent" />
           </div>
-
-          {/* Top Right: Main Content */}
-          <div className="row-start-1 col-start-2 flex flex-col items-end justify-start text-right">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-accent-teal">
+        </div>
+        {/* Right: Content */}
+        <div className="flex-1 flex flex-col items-end w-full max-w-2xl">
+          <div className="w-full flex flex-col items-end text-right mb-8">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-2 text-accent-teal relative z-10">
               {t("sections.whyChooseUs.title")}
             </h2>
-            <div className="w-24 h-1 bg-accent-gold mb-6 ml-auto"></div>
-            <div className="space-y-6 w-full max-w-md">
-              {features.map((feature, idx) => (
-                <div key={idx} className="flex items-center gap-4">
-                  <div className="bg-accent-gold/20 p-3 rounded-full">
-                    {feature.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-accent-gold mb-1">
-                      {feature.title}
-                    </h3>
-                    <p className="text-accent-teal text-sm">
-                      {feature.description}
-                    </p>
-                  </div>
+            <div className="w-32 h-2 bg-accent-gold rounded-full mb-6 ml-auto" />
+          </div>
+          {/* Features as glassy cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+            {features.map((feature, idx) => (
+              <div
+                key={idx}
+                className="group bg-white/60 backdrop-blur-lg border border-accent-gold/20 rounded-2xl shadow-xl p-6 flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl hover:bg-white/80"
+              >
+                <div className="mb-3 text-accent-gold group-hover:scale-110 transition-transform duration-300">
+                  {feature.icon}
                 </div>
-              ))}
-            </div>
+                <h3 className="text-lg font-bold text-accent-gold mb-1">
+                  {feature.title}
+                </h3>
+                <p className="text-accent-teal text-sm">
+                  {feature.description}
+                </p>
+              </div>
+            ))}
           </div>
-
-          {/* Bottom Left: Secondary Content (Summary/CTA) */}
-          <div className="row-start-2 col-start-1 flex flex-col items-start justify-end text-left">
-            <div className="bg-accent-gold/10 p-6 rounded-2xl w-full max-w-md">
-              <h3 className="text-xl font-bold text-accent-gold mb-2">
-                {t("sections.whyChooseUs.summaryTitle")}
-              </h3>
-              <p className="text-accent-teal text-base">
-                {t("sections.whyChooseUs.summaryText")}
-              </p>
-            </div>
-          </div>
-
-          {/* Bottom Right: Image Placeholder */}
-          <div className="row-start-2 col-start-2 flex items-end justify-end">
-            {/* TODO: Replace with your image */}
-            <div className="w-full h-full bg-accent-teal rounded-2xl flex items-center justify-center">
-              <img
-                src="/images/projects/main/feature2.webp"
-                alt="Why Choose Us"
-                className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+          {/* Summary/CTA */}
+          <div className="bg-accent-gold/10 p-8 rounded-2xl w-full mt-10 shadow-md">
+            <h3 className="text-2xl font-bold text-accent-gold mb-2">
+              {t("sections.whyChooseUs.summaryTitle")}
+            </h3>
+            <p className="text-accent-teal text-base">
+              {t("sections.whyChooseUs.summaryText")}
+            </p>
           </div>
         </div>
       </div>

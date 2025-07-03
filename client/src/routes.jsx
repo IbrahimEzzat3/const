@@ -53,6 +53,7 @@ import TestimonialsListPage from "./pages/testimonials/TestimonialsListPage";
 
 // Project Pages
 import ProjectDetailPage from "./pages/projects/ProjectDetailPage";
+import ProjectsPage from "./pages/projects/ProjectsPage";
 
 // Legal Pages
 import Terms from "./pages/Terms";
@@ -66,7 +67,6 @@ const AppRoutes = () => {
     <Routes>
       {/* Public Routes */}
       <Route path="/" element={<HomePage />} />
-   
 
       {/* Service Routes */}
       <Route path="/services/interior-design" element={<InteriorDesign />} />
@@ -85,7 +85,7 @@ const AppRoutes = () => {
 
       {/* Project Routes */}
       <Route path="/projects/:projectSlug" element={<ProjectDetailPage />} />
-
+      <Route path="/projects" element={<ProjectsPage />} />
       {/* Auth Routes */}
       <Route
         path="/login"

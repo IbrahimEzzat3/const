@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { useLanguage } from "../../shared/context/LanguageContext";
 import { blogService } from "../../shared/services/blogService";
+import CustomAlert from "../../shared/components/CustomAlert";
 
 // SVG Icons
 const SnapchatIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.902 2.168-2.902 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.347-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.163-1.510-.7-2.448-2.78-2.448-4.583 0-3.747 2.721-7.191 7.835-7.191 4.115 0 7.31 2.934 7.31 6.855 0 4.094-2.582 7.376-6.166 7.376-1.209 0-2.357-.629-2.746-1.378l-.753 2.87c-.283 1.102-1.047 2.482-1.555 3.322 1.139.35 2.341.535 3.588.535 6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z" />
+  <svg width="18" height="17" viewBox="0 0 24 24" fill="currentColor">
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+    />
   </svg>
 );
 
@@ -49,9 +54,55 @@ const TiktokIcon = () => (
 const Footer = () => {
   const { language, direction } = useLanguage();
   const [latestBlogs, setLatestBlogs] = useState([]);
+  const [alertConfig, setAlertConfig] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "info",
+    confirmButtonText: "",
+    onConfirm: null,
+  });
 
   const handleLinkClick = () => {
     window.scrollTo(0, 0);
+  };
+
+  const handlePhoneClick = (e) => {
+    e.preventDefault();
+    setAlertConfig({
+      isOpen: true,
+      title: language === "ar" ? "الاتصال بالرقم" : "Call Phone Number",
+      message:
+        language === "ar"
+          ? "هل تريد الاتصال بالرقم +966558813386؟"
+          : "Do you want to call +966558813386?",
+      type: "info",
+      confirmButtonText: language === "ar" ? "اتصال" : "Call",
+      onConfirm: () => {
+        window.location.href = "tel:+966558813386";
+      },
+    });
+  };
+
+  const handleEmailClick = (e) => {
+    e.preventDefault();
+    setAlertConfig({
+      isOpen: true,
+      title: language === "ar" ? "إرسال بريد إلكتروني" : "Send Email",
+      message:
+        language === "ar"
+          ? "هل تريد إرسال بريد إلكتروني إلى info@ecosus.com.sa؟"
+          : "Do you want to send an email to info@ecosus.com.sa?",
+      type: "info",
+      confirmButtonText: language === "ar" ? "إرسال" : "Send",
+      onConfirm: () => {
+        window.location.href = "mailto:info@ecosus.com.sa";
+      },
+    });
+  };
+
+  const closeAlert = () => {
+    setAlertConfig({ ...alertConfig, isOpen: false });
   };
 
   useEffect(() => {
@@ -75,7 +126,7 @@ const Footer = () => {
     ar: {
       aboutCompany: "عن الشركة",
       companyDescription:
-        "شركة شاد هي شركة مقاولات احترافية منذ 2003 تبدأ من التصميم مروراً بالتشطيب الى التأثيث تحت مظلة واحدة، ومتخصصة في الديكور. وفي شاد تعتبر مشاريع عملائنا سكني كان أو تجاري هي في الأساس محور عملنا سنوات طويلة، لذا نحاول دائماً أن نكون في مستوى تطلعات وأحلام عملائنا.",
+        "شركة Ecosus هي شركة مقاولات احترافية تبدأ من التصميم مروراً بالتشطيب الى التأثيث تحت مظلة واحدة، ومتخصصة في الديكور. وفي Ecosus تعتبر مشاريع عملائنا سكني كان أو تجاري هي في الأساس محور عملنا سنوات طويلة، لذا نحاول دائماً أن نكون في مستوى تطلعات وأحلام عملائنا.",
       contactUs: "تواصل معنا",
       riyadhAddress:
         "الرياض . حي الربيع . طريق الامير محمد بن سلمان . ابراج الربيع . الدور الثالث . المملكة العربية السعودية",
@@ -99,7 +150,7 @@ const Footer = () => {
     en: {
       aboutCompany: "About the Company",
       companyDescription:
-        "Shad Company is a professional contracting company since 2003, starting from design through finishing to furnishing under one umbrella, specializing in interior design. In Shad, our clients' residential or commercial projects are essentially the focus of our long-term work, so we always strive to be at the level of their aspirations and dreams.",
+        "Ecosus Company is a professional contracting company, starting from design through finishing to furnishing under one umbrella, specializing in interior design. In Ecosus, our clients' residential or commercial projects are essentially the focus of our long-term work, so we always strive to be at the level of their aspirations and dreams.",
       contactUs: "Contact Us",
       riyadhAddress:
         "Riyadh. Al Rabie District. Prince Mohammed bin Salman Road. Al Rabie Towers. 3rd Floor. Kingdom of Saudi Arabia",
@@ -165,8 +216,21 @@ const Footer = () => {
       className={`bg-accent-teal text-accent-gold py-8 md:py-12 mt-16 rounded-t-3xl ${
         direction === "rtl" ? "rtl" : "ltr"
       }`}
+      style={{
+        backgroundImage: 'url("/images/footer.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        position: "relative",
+      }}
     >
-      <div className="container mx-auto px-4">
+      {/* Dark overlay for better text readability */}
+      <div
+        className="absolute inset-0 bg-accent-teal bg-opacity-40 rounded-t-3xl"
+        style={{ zIndex: 0 }}
+      ></div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <div
           className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 ${
             direction === "rtl" ? "rtl-grid" : "ltr-grid"
@@ -233,7 +297,13 @@ const Footer = () => {
                 }`}
               >
                 <PhoneIcon className="flex-shrink-0" />
-                <span className="text-accent-gold">{t.phone}: +966558813386</span>
+                <a
+                  href="#"
+                  onClick={handlePhoneClick}
+                  className="text-accent-gold hover:underline"
+                >
+                  {t.phone}: +966558813386
+                </a>
               </li>
               <li
                 className={`flex items-center ${
@@ -243,9 +313,13 @@ const Footer = () => {
                 }`}
               >
                 <EnvelopeIcon className="flex-shrink-0" />
-                <span className="text-accent-gold">
+                <a
+                  href="#"
+                  onClick={handleEmailClick}
+                  className="text-accent-gold hover:underline"
+                >
                   {t.email}: info@ecosus.com.sa
-                </span>
+                </a>
               </li>
             </ul>
           </div>
@@ -327,10 +401,23 @@ const Footer = () => {
           }`}
         >
           <p className="text-accent-gold text-xs md:text-sm text-center">
-            &copy; {new Date().getFullYear()} شركة شاد. {t.allRightsReserved}
+            &copy; {new Date().getFullYear()} شركة Ecosus. {t.allRightsReserved}
           </p>
         </div>
       </div>
+
+      {/* Custom Alert */}
+      <CustomAlert
+        isOpen={alertConfig.isOpen}
+        onClose={closeAlert}
+        title={alertConfig.title}
+        message={alertConfig.message}
+        type={alertConfig.type}
+        showCancelButton={true}
+        confirmButtonText={alertConfig.confirmButtonText}
+        cancelButtonText={language === "ar" ? "إلغاء" : "Cancel"}
+        onConfirm={alertConfig.onConfirm}
+      />
     </footer>
   );
 };

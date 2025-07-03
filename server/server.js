@@ -18,6 +18,7 @@ const courseRoutes = require("./routes/courses");
 const consultationRoutes = require("./routes/consultations");
 const userRoutes = require("./routes/users");
 const sliderRoutes = require("./routes/sliders");
+const projectRoutes = require("./routes/projects");
 const app = express();
 
 // Security middleware
@@ -93,6 +94,7 @@ app.use("/api/courses", courseRoutes);
 app.use("/api/consultations", consultationRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/sliders", sliderRoutes);
+app.use("/api/projects", projectRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

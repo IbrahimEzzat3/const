@@ -19,9 +19,9 @@ const AboutSection = () => {
   return (
     <section
       id="about"
-      className={`py-16 bg-[#F5EFE6] min-h-screen rounded-3xl mt-16 ${direction}`}
+      className={`py-16 bg-[#F5EFE6] min-h-screen mt-16 ${direction}`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8rounded-3xl">
+      <div className="w-full px-4 sm:px-6 lg:px-8 rounded-3xl">
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-bold text-accent-teal mb-8">

@@ -375,72 +375,81 @@ const CourseDetail = () => {
                 </ul>
               </div>
             )}
-          </div>
-        );
 
-      case "curriculum":
-        return (
-          <div className="space-y-6">
-            {course.modules && course.modules.length > 0 ? (
-              course.modules.map((module, index) => (
-                <div
-                  key={index}
-                  className="bg-white border border-gray-100 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
-                >
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-lg font-semibold text-primary-900">
-                      {module.title}
-                    </h3>
-                    {module.duration && (
-                      <span className="text-sm text-secondary-500 bg-secondary-50 px-3 py-1 rounded-full">
-                        {t("courseDetail.minutes", { count: module.duration })}
-                      </span>
-                    )}
-                  </div>
-                  {module.description && (
-                    <p className="text-secondary-600 mb-4">
-                      {module.description}
-                    </p>
-                  )}
-                  {module.videoUrl && (
-                    <a target="_blank" href={module.videoUrl}>
-                      {t("courseDetail.videoLink")}
-                    </a>
-                  )}
-                </div>
-              ))
-            ) : (
-              <p className="text-secondary-500 text-center py-8 bg-white rounded-lg shadow-sm">
-                {t("courseDetail.noCurriculum")}
-              </p>
-            )}
-          </div>
-        );
-
-      case "instructor":
-        return (
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <div className="flex items-start gap-6">
-              <div className="flex-shrink-0">
-                <img
-                  src={
-                    course.instructor?.avatar &&
-                    course.instructor?.avatar !== "public/images/default.png"
-                      ? `https://const-production.up.railway.app/${course.instructor?.avatar}`
-                      : `https://const-production.up.railway.app/public/images/default.png`
-                  }
-                  alt={course.instructor?.name}
-                  className="w-24 h-24 rounded-full object-cover ring-4 ring-primary-50"
-                  loading="lazy"
-                  crossOrigin="anonymous"
-                  referrerPolicy="no-referrer"
-                />
+            {/* Curriculum Section (moved from curriculum tab) */}
+            <div>
+              <h3 className="text-xl font-semibold text-primary-900 mb-4">
+                {t("courseDetail.tab.curriculum")}
+              </h3>
+              <div className="space-y-6">
+                {course.modules && course.modules.length > 0 ? (
+                  course.modules.map((module, index) => (
+                    <div
+                      key={index}
+                      className="bg-white border border-gray-100 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
+                    >
+                      <div className="flex justify-between items-center mb-4">
+                        <h3 className="text-lg font-semibold text-primary-900">
+                          {module.title}
+                        </h3>
+                        {module.duration && (
+                          <span className="text-sm text-secondary-500 bg-secondary-50 px-3 py-1 rounded-full">
+                            {t("courseDetail.minutes", {
+                              count: module.duration,
+                            })}
+                          </span>
+                        )}
+                      </div>
+                      {module.description && (
+                        <p className="text-secondary-600 mb-4">
+                          {module.description}
+                        </p>
+                      )}
+                      {module.videoUrl && (
+                        <a target="_blank" href={module.videoUrl}>
+                          {t("courseDetail.videoLink")}
+                        </a>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-secondary-500 text-center py-8 bg-white rounded-lg shadow-sm">
+                    {t("courseDetail.noCurriculum")}
+                  </p>
+                )}
               </div>
-              <div>
-                <h3 className="text-xl font-semibold text-primary-900 mb-2">
-                  {course.instructor?.name ||
-                    t("courseDetail.unknownInstructor")}
-                </h3>
+            </div>
+
+            {/* Instructor Section (moved from instructor tab) */}
+            <div>
+              <h3 className="text-xl font-semibold text-primary-900 mb-4">
+                {t("courseDetail.tab.instructor")}
+              </h3>
+              <div className="bg-white rounded-lg shadow-sm p-6">
+                <div className="flex items-start gap-6">
+                  <div className="flex-shrink-0">
+                    <img
+                      src={
+                        course.instructor?.avatar &&
+                        course.instructor?.avatar !==
+                          "public/images/default.png"
+                          ? `https://const-production.up.railway.app/${course.instructor?.avatar}`
+                          : `https://const-production.up.railway.app/public/images/default.png`
+                      }
+                      alt={course.instructor?.name}
+                      className="w-24 h-24 rounded-full object-cover ring-4 ring-primary-50"
+                      loading="lazy"
+                      crossOrigin="anonymous"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-primary-900 mb-2">
+                      {course.instructor?.name ||
+                        t("courseDetail.unknownInstructor")}
+                    </h3>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -651,21 +660,19 @@ const CourseDetail = () => {
             {/* Tabs */}
             <div className="border-b border-gray-200 mb-8">
               <nav className="flex gap-10 space-x-8">
-                {["overview", "curriculum", "instructor", "feedback"].map(
-                  (tab) => (
-                    <button
-                      key={tab}
-                      onClick={() => setActiveTab(tab)}
-                      className={`py-4 px-1 border-b-2  transition-colors duration-200 ${
-                        activeTab === tab
-                          ? "border-primary-500 text-primary-600"
-                          : "border-transparent text-secondary-500 hover:text-secondary-700 hover:border-secondary-300"
-                      }`}
-                    >
-                      {t(`courseDetail.tab.${tab}`)}
-                    </button>
-                  )
-                )}
+                {["overview", "feedback"].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`py-4 px-1 border-b-2  transition-colors duration-200 ${
+                      activeTab === tab
+                        ? "border-primary-500 text-primary-600"
+                        : "border-transparent text-secondary-500 hover:text-secondary-700 hover:border-secondary-300"
+                    }`}
+                  >
+                    {t(`courseDetail.tab.${tab}`)}
+                  </button>
+                ))}
               </nav>
             </div>
 

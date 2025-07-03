@@ -41,7 +41,7 @@ const FeaturedBlogsSection = () => {
   if (loading) {
     return (
       <section className="bg-[#F5EFE6] py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="animate-pulse">
             <div className="h-4 bg-gray-200 rounded w-32 mx-auto"></div>
             <div className="h-8 bg-gray-200 rounded w-64 mx-auto mt-4"></div>
@@ -76,7 +76,7 @@ const FeaturedBlogsSection = () => {
   if (error) {
     return (
       <section className="bg-gradient-to-b from-gray-50 to-white py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="text-center text-red-600 bg-red-50 p-4 rounded-lg">
             <svg
               className="h-6 w-6 mx-auto mb-2"
@@ -103,8 +103,8 @@ const FeaturedBlogsSection = () => {
   }
 
   return (
-    <section className="bg-[#F5EFE6] rounded-3xl mt-16 py-16 sm:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#F5EFE6] mt-16 py-16 sm:py-24">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-base font-semibold text-accent-teal tracking-wide uppercase">
             {t("featuredBlogs.latestArticles")}

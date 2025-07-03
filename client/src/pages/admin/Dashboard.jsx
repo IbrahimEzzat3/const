@@ -5,6 +5,7 @@ import { courseService } from "../../shared/services/courseService";
 import { consultationService } from "../../shared/services/consultationsService";
 import { testimonialService } from "../../shared/services/testimonialService";
 import usePageTitle from "../../shared/hooks/usePageTitle";
+import ProjectManager from "../../components/admin/ProjectManager";
 
 // Custom SVG Icons
 const BlogIcon = ({ className = "w-6" }) => (
@@ -433,7 +434,7 @@ const Dashboard = () => {
             to="/admin/testimonials"
             className="flex items-center space-x-2 p-3 bg-gray-50 rounded-md hover:bg-gray-100"
           >
-              <StarIcon className="h-5 w-5 text-accent-gold" />
+            <StarIcon className="h-5 w-5 text-accent-gold" />
             <span className="text-sm font-medium text-accent-teal">
               Manage Testimonials
             </span>
@@ -468,6 +469,9 @@ const Dashboard = () => {
           link="/admin/testimonials"
         />
       </div>
+
+      {/* Project Manager Section */}
+      <ProjectManager />
     </div>
   );
 };

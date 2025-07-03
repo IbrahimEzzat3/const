@@ -3,100 +3,139 @@ import { useParams } from "react-router-dom";
 import { useLanguage } from "../../shared/context/LanguageContext";
 import usePageTitle from "../../shared/hooks/usePageTitle";
 import { Helmet } from "react-helmet-async";
-import { FEATURE2_IMAGE } from "../../constants/images";
+import {
+  inside1_1,
+  inside2_1,
+  inside3_1,
+  inside4_1,
+  inside5_1,
+  inside6_1,
+  inside1_2,
+  inside2_2,
+  inside3_2,
+  inside4_2,
+  inside5_2,
+  inside6_2,
+  inside7_2,
+  inside8_2,
+  inside1_3,
+  inside2_3,
+  inside3_3,
+  inside4_3,
+  inside5_3,
+  inside6_3,
+  inside7_3,
+  inside8_3,
+  inside9_3,
+  inside10_3,
+  inside11_3,
+  inside12_3,
+  inside13_3,
+} from "../../constants/images";
 
 const translations = {
   ar: {
     projects: {
-      furniture: {
-        title: "مشروع أثاث",
-        description: "وصف لمشروع الأثاث هنا.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
-      },
-      hospitality: {
-        title: "مشروع ضيافة",
-        description: "وصف لمشروع الضيافة هنا.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
-      },
-      residential: {
-        title: "مشروع سكني",
-        description: "وصف لمشروع سكني هنا.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
-      },
-      landscape: {
-        title: "مشروع لاندسكيب",
-        description: "وصف لمشروع لاندسكيب هنا.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
-      },
-      "villa-riyadh": {
+      project1: {
         title: "فيلا فاخرة - الرياض",
         description:
           "تفاصيل تصميم وتنفيذ فيلا فاخرة بمساحة 850 م² في الرياض، مع تشطيبات لوكس وأنظمة ذكية متكاملة.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
+        images: [
+          inside1_1,
+          inside2_1,
+          inside3_1,
+          inside4_1,
+          inside5_1,
+          inside6_1,
+        ],
       },
-      "residential-compound-jeddah": {
+      project2: {
         title: "مجمع سكني - جدة",
         description:
           "تفاصيل تصميم وتنفيذ مجمع سكني مكون من 12 فيلا بتصاميم متنوعة وحدائق مشتركة في جدة.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
+        images: [
+          inside1_2,
+          inside2_2,
+          inside3_2,
+          inside4_2,
+          inside5_2,
+          inside6_2,
+          inside7_2,
+          inside8_2,
+        ],
       },
-      commercial: {
-        title: "مشروع تجاري",
-        description: "وصف لمشروع تجاري هنا.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
-      },
-      "administrative-offices": {
-        title: "مشروع مكاتب إدارية",
-        description: "وصف لمشروع مكاتب إدارية هنا.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
+      project3: {
+        title: "مجمع سكني - جدة",
+        description:
+          "تفاصيل تصميم وتنفيذ مجمع سكني مكون من 12 فيلا بتصاميم متنوعة وحدائق مشتركة في جدة.",
+        images: [
+          inside1_3,
+          inside2_3,
+          inside3_3,
+          inside4_3,
+          inside5_3,
+          inside6_3,
+          inside7_3,
+          inside8_3,
+          inside9_3,
+          inside10_3,
+          inside11_3,
+          inside12_3,
+          inside13_3,
+        ],
       },
     },
     backToHome: "العودة للرئيسية",
   },
   en: {
     projects: {
-      furniture: {
-        title: "Furniture Project",
-        description: "Description for the furniture project goes here.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
-      },
-      hospitality: {
-        title: "Hospitality Project",
-        description: "Description for the hospitality project goes here.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
-      },
-      residential: {
-        title: "Residential Project",
-        description: "Description for the residential project goes here.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
-      },
-      landscape: {
-        title: "Landscape Project",
-        description: "Description for the landscape project goes here.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
-      },
-      "villa-riyadh": {
+      project1: {
         title: "Luxury Villa - Riyadh",
         description:
           "Details of the design and execution of a luxury villa of 850 m² in Riyadh, with deluxe finishes and integrated smart systems.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
+        images: [
+          inside1_1,
+          inside2_1,
+          inside3_1,
+          inside4_1,
+          inside5_1,
+          inside6_1,
+        ],
       },
-      "residential-compound-jeddah": {
+      project2: {
         title: "Residential Compound - Jeddah",
         description:
           "Details of the design and execution of a residential compound consisting of 12 villas with various designs and shared gardens in Jeddah.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
+        images: [
+          inside1_2,
+          inside2_2,
+          inside3_2,
+          inside4_2,
+          inside5_2,
+          inside6_2,
+          inside7_2,
+          inside8_2,
+        ],
       },
-      commercial: {
-        title: "Commercial Project",
-        description: "Description for the commercial project goes here.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
-      },
-      "administrative-offices": {
-        title: "Administrative Offices Project",
+      project3: {
+        title: "مجمع سكني - جدة",
         description:
-          "Description for the administrative offices project goes here.",
-        images: [FEATURE2_IMAGE, FEATURE2_IMAGE, FEATURE2_IMAGE],
+          "تفاصيل تصميم وتنفيذ مجمع سكني مكون من 12 فيلا بتصاميم متنوعة وحدائق مشتركة في جدة.",
+        images: [
+          inside1_3,
+          inside2_3,
+          inside3_3,
+          inside4_3,
+          inside5_3,
+          inside6_3,
+          inside7_3,
+          inside8_3,
+          inside9_3,
+          inside10_3,
+          inside11_3,
+          inside12_3,
+          inside13_3,
+        ],
       },
     },
     backToHome: "Back to Home",
@@ -154,13 +193,6 @@ const ProjectDetailPage = () => {
         />
       </Helmet>
       <div className="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-6 text-center">
-          {projectData.title}
-        </h1>
-        <p className="text-lg text-gray-700 mb-10 text-center max-w-2xl mx-auto">
-          {projectData.description}
-        </p>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {projectData.images.map((image, index) => (
             <div

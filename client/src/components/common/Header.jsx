@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLanguage } from "../../shared/context/LanguageContext";
 import { useAuth } from "../../shared/context/AuthContext";
 import { Button } from "../ui";
-
 const translations = {
   ar: {
     home: "الرئيسية",
@@ -308,16 +307,17 @@ const Header = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                strokeWidth={1.5}
+                stroke-width="1.5"
                 stroke="currentColor"
-                className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2"
+                class="size-6"
               >
                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8.625 12h.025m3.175 0h.025m3.175 0h.025M12 21.75c-6.219 0-11.25-4.717-11.25-10.5S5.781 0.75 12 0.75s11.25 4.717 11.25 10.5S18.219 21.75 12 21.75zM12 18a6 6 0 100-12 6 6 0 000 12z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
                 />
               </svg>
+
               {t.freeConsultation}
             </Button>
             <Link
@@ -328,16 +328,17 @@ const Header = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                strokeWidth={1.5}
+                stroke-width="1.5"
                 stroke="currentColor"
-                className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2"
+                class="size-6"
               >
                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 16.5V2.25m8.49 10.5L12 14.25m8.25-4.5h-16.5m16.5 0h-16.5M12 21.75c-3.79 0-6.9-2.584-7.854-6.075C3.39 12.333 4.8 9.75 6.75 8.25M12 21.75c3.79 0 6.9-2.584 7.854-6.075C20.61 12.333 19.2 9.75 17.25 8.25m-1.5 6.75L12 14.25m-1.5 6.75L12 14.25"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z"
                 />
               </svg>
+
               {t.costCalculator}
             </Link>
             <a
@@ -360,16 +361,13 @@ const Header = () => {
               href="https://wa.me/966558813386"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-center bg-transparent hover:bg-accent-teal hover:text-white text-white px-2 py-1 md:px-3 md:py-1 text-sm md:text-base rounded-full flex items-center justify-center whitespace-nowrap transition duration-300"
+              className="text-center  hover:bg-accent-teal hover:text-white text-white px-2 py-1 md:px-3 md:py-1 text-sm md:text-base rounded-full flex items-center justify-center whitespace-nowrap transition duration-300"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-6 h-6 mr-2"
-              >
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-              </svg>
+              <img
+                src="/images/wired-outline-955-demand-morph-coin.svg"
+                alt="Request Price"
+                className="w-6 h-6 mr-2 text-accent-gold"
+              />
               {t.requestPrice}
             </a>
           </div>
@@ -378,7 +376,7 @@ const Header = () => {
 
       {/* Existing Header */}
       <header
-        className={`bg-white rounded-b-full shadow-sm ${
+        className={`bg-white rounded-b-3xl shadow-sm ${
           direction === "rtl" ? "rtl" : "ltr"
         }`}
       >
@@ -422,13 +420,26 @@ const Header = () => {
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        d="M10.5 21l-7.5-7.5m10.5-1.5L21 6m-17.25 1.5L21 6m-17.25 1.5v7.5m-16.5 0h16.5M3.75 12h16.5m-16.5 5.25h16.5m-16.5 0v-7.5m16.5 0v7.5M10.5 21l-7.5-7.5m10.5-1.5L21 6m-17.25 1.5L21 6m-17.25 1.5v7.5m-16.5 0h16.5M3.75 12h16.5m-16.5 5.25h16.5m-16.5 0v-7.5m16.5 0v7.5"
+                        d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3.6 9h16.8M3.6 15h16.8"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 3a15 15 0 0 1 0 18"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 3a15 15 0 0 0 0 18"
                       />
                     </svg>
                   }
-                >
-                  {language === "ar" ? "العربية" : "English"}
-                </Button>
+                ></Button>
                 {languageMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 rounded-lg bg-white py-1 shadow-soft-2xl ring-1 ring-black ring-opacity-5">
                     <Button
@@ -673,7 +684,22 @@ const Header = () => {
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          d="M10.5 21l-7.5-7.5m10.5-1.5L21 6m-17.25 1.5L21 6m-17.25 1.5v7.5m-16.5 0h16.5M3.75 12h16.5m-16.5 5.25h16.5m-16.5 0v-7.5m16.5 0v7.5M10.5 21l-7.5-7.5m10.5-1.5L21 6m-17.25 1.5L21 6m-17.25 1.5v7.5m-16.5 0h16.5M3.75 12h16.5m-16.5 5.25h16.5m-16.5 0v-7.5m16.5 0v7.5"
+                          d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M3.6 9h16.8M3.6 15h16.8"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 3a15 15 0 0 1 0 18"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 3a15 15 0 0 0 0 18"
                         />
                       </svg>
                     }

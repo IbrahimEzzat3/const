@@ -165,7 +165,7 @@ const HeroSection = ({ slides, loadingSlides }) => {
   };
 
   return (
-    <section className="w-full mt-20">
+    <section className="w-screen mt-16">
       {/* Always show the slider, but only static slides while loading */}
       <>
         {isAdmin && !addMode && (
@@ -186,14 +186,14 @@ const HeroSection = ({ slides, loadingSlides }) => {
               value={newSlide.text}
               onChange={handleNewSlideChange}
               placeholder="Slide text"
-              className="text-black rounded-lg px-4 py-2 text-xl font-bold w-full"
+              className="text-black rounded-lg px-4 py-2 text-xl font-bold w-screen "
               required
             />
             <input
               type="file"
               accept="image/*"
               onChange={handleNewSlideImage}
-              className="w-full"
+              className="w-screen "
               required
             />
             {newSlide.image && (
@@ -242,13 +242,13 @@ const HeroSection = ({ slides, loadingSlides }) => {
             {allSlides.map((slide, index) => (
               <figure
                 key={slide.id}
-                className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white"
+                className="absolute top-0 left-0 w-screen  h-full flex items-center justify-center text-white"
                 style={{ transform: `translateX(${index * 100}%)` }}
               >
                 <img
                   src={slide.image}
                   alt={slide.text}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-screen  h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-50"></div>
                 <figcaption className="relative z-10 text-center px-4">
@@ -262,7 +262,7 @@ const HeroSection = ({ slides, loadingSlides }) => {
                         type="text"
                         value={slide.text}
                         onChange={(e) => handleEditChange(e, "text")}
-                        className="text-black rounded-lg px-4 py-2 text-xl font-bold mb-2 w-full max-w-lg"
+                        className="text-black rounded-lg px-4 py-2 text-xl font-bold mb-2 w-screen  max-w-lg"
                       />
                       <input
                         type="file"

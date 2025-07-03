@@ -389,6 +389,7 @@ export const translations = {
         featuredWork: {
           title: "Featured Work",
           viewDetails: "View Details",
+          viewAll: "View All",
           projects: {
             villa: {
               title: "Luxury Villa - Riyadh",
@@ -519,7 +520,9 @@ export const translations = {
             title: "Contact Information",
             address: {
               title: "Address",
-              details: ["Riyadh, Al-Nakheel District", "P.O. Box 12345"],
+              details: [
+                "Emaar Square, Tower E10, King Abdullah Road, Al Fayhaa, Jeddah 22241, Saudi Arabia",
+              ],
             },
             phone: {
               title: "Call Us",
@@ -531,7 +534,7 @@ export const translations = {
             },
             hours: {
               title: "Working Hours",
-              details: ["Saturday - Thursday: 9 AM - 6 PM", "Friday: Closed"],
+              details: ["Saturday - Thursday: 9 AM - 5 PM", "Friday: Closed"],
             },
           },
           location: {
@@ -1016,6 +1019,7 @@ export const translations = {
         featuredWork: {
           title: "أعمال مختارة",
           viewDetails: "عرض التفاصيل",
+          viewAll: "عرض الكل",
           projects: {
             villa: {
               title: "فيلا فاخرة - الرياض",
@@ -1145,7 +1149,9 @@ export const translations = {
             title: "معلومات الاتصال",
             address: {
               title: "العنوان",
-              details: ["الرياض، حي النخيل", "ص.ب 12345"],
+              details: [
+                "اعمار سكوير، برج E10، طريق الملك عبدالله، الفيحاء، جدة 22241، المملكة العربية السعودية",
+              ],
             },
             phone: {
               title: "اتصل بنا",
@@ -1157,7 +1163,7 @@ export const translations = {
             },
             hours: {
               title: "ساعات العمل",
-              details: ["السبت - الخميس: 9 صباحاً - 6 مساءً", "الجمعة: مغلق"],
+              details: ["السبت - الخميس: 9 صباحاً - 5 مساءً", "الجمعة: مغلق"],
             },
           },
           location: {
@@ -1165,7 +1171,7 @@ export const translations = {
           },
         },
         about: {
-          title: "إيكوسوس أيقونة الجمال",
+          title: "Ecosus أيقونة الجمال",
           subtitle: "معك من الفكرة حتى تستلم المفتاح",
           description: "تعرف على الطُرز الاشهر والاكثر استخداماً",
           bottomText: "تصاميم مبتكرة لعالم أجمل",

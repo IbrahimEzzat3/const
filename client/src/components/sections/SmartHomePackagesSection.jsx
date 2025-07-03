@@ -61,8 +61,8 @@ const SmartHomePackagesSection = () => {
   ];
 
   return (
-    <section id="packages" className="py-16 mt-16 bg-[#F5EFE6] rounded-3xl">
-      <div className="container mx-auto px-4">
+    <section id="packages" className="py-16 mt-16 bg-[#F5EFE6] ">
+      <div className="w-full px-4">
         <header className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-accent-teal mb-4">
             {t("sections.smartHomePackages.title")}
@@ -80,7 +80,7 @@ const SmartHomePackagesSection = () => {
                   : "bg-white rounded-3xl"
               } p-8 rounded-lg shadow-md text-center transform ${
                 pkg.isPopular ? "scale-105" : ""
-              } transition duration-300 relative`}
+              } transition duration-300 relative flex flex-col`}
             >
               {pkg.isPopular && (
                 <div className="absolute top-0 right-4 bg-accent-gold text-white font-bold px-3 py-1 rounded-b-lg">
@@ -97,7 +97,7 @@ const SmartHomePackagesSection = () => {
               <ul
                 className={`${
                   pkg.isPopular ? "" : "text-gray-600"
-                } mb-8 space-y-3`}
+                } mb-8 space-y-3 flex-grow`}
               >
                 {pkg.features.map((feature, idx) => (
                   <li key={idx} className="flex items-center justify-start">
@@ -128,7 +128,7 @@ const SmartHomePackagesSection = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={2.5}
                       stroke="currentColor"
-                      className="w-5 h-5 text-red-600"
+                      className="w-5 h-5 text-orange-600"
                     >
                       <path
                         strokeLinecap="round"
@@ -136,24 +136,26 @@ const SmartHomePackagesSection = () => {
                         d="M6 18L18 6M6 6l12 12"
                       />
                     </svg>
-                    <span className="mr-2 text-red-600">{notInclude}</span>
+                    <span className="mr-2 text-orange-600">{notInclude}</span>
                   </li>
                 ))}
               </ul>
-              <button
-                className={`w-full ${pkg.buttonClass} ${
-                  pkg.isPopular ? "text-white" : "text-accent-teal"
-                } font-bold py-3 px-4 rounded-full transition duration-300`}
-                onClick={() => {
-                  window.open(
-                    "https://wa.me/966558813386?text=I%20want%20to%20choose%20the%20package%20%23" +
-                      pkg.title,
-                    "_blank"
-                  );
-                }}
-              >
-                {t("sections.smartHomePackages.choosePackage")}
-              </button>
+              <div className="mt-auto">
+                <button
+                  className={`w-full ${pkg.buttonClass} ${
+                    pkg.isPopular ? "text-white" : "text-accent-teal"
+                  } font-bold py-3 px-4 rounded-full transition duration-300 h-12`}
+                  onClick={() => {
+                    window.open(
+                      "https://wa.me/966558813386?text=I%20want%20to%20choose%20the%20package%20%23" +
+                        pkg.title,
+                      "_blank"
+                    );
+                  }}
+                >
+                  {t("sections.smartHomePackages.choosePackage")}
+                </button>
+              </div>
             </article>
           ))}
         </div>
