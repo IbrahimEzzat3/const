@@ -47,7 +47,6 @@ exports.getAllCourses = asyncHandler(async (req, res, next) => {
     // Build query object
     const query = {};
 
-
     const courses = await Course.find(query)
       .populate("instructor", "name email avatar")
       .sort("-createdAt")
@@ -78,8 +77,10 @@ exports.getAllCourses = asyncHandler(async (req, res, next) => {
 // @route   GET /api/courses/:id
 // @access  Public
 exports.getCourse = asyncHandler(async (req, res, next) => {
-  const course = await Course.findById(req.params.id)
-    .populate("instructor", "name email avatar")
+  const course = await Course.findById(req.params.id).populate(
+    "instructor",
+    "name email avatar"
+  );
 
   if (!course) {
     return next(
@@ -123,12 +124,16 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
     req.body.objectives = parseJsonField("objectives");
     req.body.modules = parseJsonField("modules");
 
-    // Handle video if uploaded
-    if (req.file) {
-      req.body.video = req.file.filename;
+    // Handle video and photo if uploaded
+    if (req.files && req.files.video && req.files.video[0]) {
+      req.body.video = req.files.video[0].filename;
     } else if (req.body.video === "null") {
-      // If video is explicitly sent as "null" (e.g., on edit when removing video)
       req.body.video = null;
+    }
+    if (req.files && req.files.photo && req.files.photo[0]) {
+      req.body.photo = req.files.photo[0].filename;
+    } else if (req.body.photo === "null") {
+      req.body.photo = null;
     }
 
     // Convert string booleans to actual booleans
@@ -137,7 +142,7 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
     // Add isPublished conversion as well, if it's sent from frontend
     if (req.body.isPublished === "true") req.body.isPublished = true;
     if (req.body.isPublished === "false") req.body.isPublished = false;
- 
+
     if (req.body.duration && typeof req.body.duration === "string") {
       req.body.duration = parseInt(req.body.duration);
     }
@@ -196,10 +201,7 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user is course instructor or admin
-  if (
-    course.instructor.email !== req.user.email &&
-    req.user.role !== "admin"
-  ) {
+  if (course.instructor.email !== req.user.email && req.user.role !== "admin") {
     return next(
       new ErrorResponse(
         `User ${req.user.id} is not authorized to update this course`,
@@ -229,39 +231,38 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
   updatedFields.objectives = parseJsonField("objectives");
   updatedFields.modules = parseJsonField("modules");
 
-  // IMPROVED VIDEO HANDLING
- 
-
-  if (req.file) {
-    // New file uploaded
-    updatedFields.video = req.file.filename;
+  // Handle video and photo if uploaded
+  if (req.files && req.files.video && req.files.video[0]) {
+    updatedFields.video = req.files.video[0].filename;
   } else if (req.body.hasOwnProperty("video")) {
-    // Video field was explicitly sent in the request
     const videoValue = req.body.video;
-
     if (videoValue === "" || videoValue === "null" || videoValue === null) {
-      // Explicitly removing video
       updatedFields.video = null;
     } else if (typeof videoValue === "string" && videoValue.trim() !== "") {
-      // Preserving existing video filename
       updatedFields.video = videoValue.trim();
     } else if (typeof videoValue === "object") {
-      // Handle case where an object was accidentally sent
-      console.error("Error: Received object for video field:", videoValue);
-      // Don't update video field - preserve existing value
       delete updatedFields.video;
     } else {
-      // Any other unexpected value
-      console.error(
-        "Error: Unexpected video value:",
-        videoValue,
-        typeof videoValue
-      );
       delete updatedFields.video;
     }
   } else {
-    // Video field not sent at all - preserve existing video
     delete updatedFields.video;
+  }
+  if (req.files && req.files.photo && req.files.photo[0]) {
+    updatedFields.photo = req.files.photo[0].filename;
+  } else if (req.body.hasOwnProperty("photo")) {
+    const photoValue = req.body.photo;
+    if (photoValue === "" || photoValue === "null" || photoValue === null) {
+      updatedFields.photo = null;
+    } else if (typeof photoValue === "string" && photoValue.trim() !== "") {
+      updatedFields.photo = photoValue.trim();
+    } else if (typeof photoValue === "object") {
+      delete updatedFields.photo;
+    } else {
+      delete updatedFields.photo;
+    }
+  } else {
+    delete updatedFields.photo;
   }
 
   // Convert string booleans to actual booleans
@@ -269,7 +270,6 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
   if (updatedFields.isActive === "false") updatedFields.isActive = false;
   if (updatedFields.isPublished === "true") updatedFields.isPublished = true;
   if (updatedFields.isPublished === "false") updatedFields.isPublished = false;
-
 
   if (updatedFields.duration && typeof updatedFields.duration === "string") {
     updatedFields.duration = parseInt(updatedFields.duration);
@@ -282,7 +282,6 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
       duration: module.duration ? parseInt(module.duration) : undefined,
     }));
   }
-
 
   course = await Course.findByIdAndUpdate(req.params.id, updatedFields, {
     new: true,
@@ -308,10 +307,7 @@ exports.deleteCourse = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user is course instructor or admin
-  if (
-    course.instructor.email !== req.user.email &&
-    req.user.role !== "admin"
-  ) {
+  if (course.instructor.email !== req.user.email && req.user.role !== "admin") {
     return next(
       new ErrorResponse(
         `User ${req.user.id} is not authorized to delete this course`,

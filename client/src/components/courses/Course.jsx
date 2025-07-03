@@ -5,7 +5,7 @@ import { useLanguage } from "../../shared/context/LanguageContext";
 const Course = ({ course }) => {
   const { direction } = useLanguage();
 
-  console.log(course);
+  console.log(course.photo);
 
   return (
     <div
