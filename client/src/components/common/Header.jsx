@@ -478,7 +478,7 @@ const Header = () => {
                         src={
                           user?.avatar &&
                           user.avatar !== "public/images/default.png"
-                            ? `/${user.avatar}`
+                            ? `https://const-production.up.railway.app/${user.avatar}`
                             : `/public/images/default.png`
                         }
                         alt=""
@@ -597,7 +597,7 @@ const Header = () => {
                             src={
                               user?.avatar &&
                               user.avatar !== "public/images/default.png"
-                                ? `/${user.avatar}`
+                                ? `https://const-production.up.railway.app/${user.avatar}`
                                 : `/public/images/default.png`
                             }
                             alt=""

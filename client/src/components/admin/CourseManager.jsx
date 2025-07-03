@@ -333,6 +333,9 @@ const CourseManager = () => {
                         }
                         alt={course.title}
                         className="h-14 w-24 object-cover rounded-md border"
+                        loading="lazy"
+                        crossOrigin="anonymous"
+                        referrerPolicy="no-referrer"
                       />
                     </div>
                   </td>
