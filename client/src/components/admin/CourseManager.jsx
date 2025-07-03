@@ -326,7 +326,11 @@ const CourseManager = () => {
                   <td className="px-6 py-4">
                     <div className="flex items-center">
                       <img
-                        src={course.photo || "/default-course.jpg"}
+                        src={
+                          course.photo
+                            ? `https://const-production.up.railway.app/uploads/${course.photo}`
+                            : "/default-course.jpg"
+                        }
                         alt={course.title}
                         className="h-14 w-24 object-cover rounded-md border"
                       />

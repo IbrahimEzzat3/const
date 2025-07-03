@@ -5,8 +5,6 @@ import { useLanguage } from "../../shared/context/LanguageContext";
 const Course = ({ course }) => {
   const { direction } = useLanguage();
 
-  console.log(course.photo);
-
   return (
     <div
       className={`bg-white rounded-lg shadow-md overflow-hidden ${direction}`}
@@ -14,9 +12,16 @@ const Course = ({ course }) => {
       {/* Course Image */}
       <div className="relative h-48 bg-gray-200 flex items-center justify-center">
         <img
-          src={course.photo || "/default-course.jpg"}
+          src={
+            course.photo
+              ? `https://const-production.up.railway.app/uploads/${course.photo}`
+              : "/default-course.jpg"
+          }
           alt={course.title}
           className="h-full w-full object-cover rounded-t-lg"
+          loading="lazy"
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
         />
         {course.isActive && (
           <div className="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium z-20">

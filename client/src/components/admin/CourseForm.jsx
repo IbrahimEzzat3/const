@@ -101,6 +101,55 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
     }
   };
 
+  const handlePhotoChange = (event) => {
+    const file = event.currentTarget.files[0];
+    console.log("PHOTO FILE SELECTED:", file);
+
+    if (file) {
+      if (!file.type.startsWith("image/")) {
+        Swal.fire({
+          icon: "error",
+          title: "Invalid file type",
+          text: "Please select a valid image file",
+        });
+        return;
+      }
+      formik.setFieldValue("photo", file);
+    }
+  };
+
+  const handleRemovePhoto = () => {
+    formik.setFieldValue("photo", null);
+  };
+
+  const handleVideoChange = (event) => {
+    const file = event.currentTarget.files[0];
+    if (file) {
+      if (file.size > 50 * 1024 * 1024) {
+        // 50MB limit for video
+        Swal.fire({
+          icon: "error",
+          title: "File too large",
+          text: "Please select a video smaller than 50MB",
+        });
+        return;
+      }
+      if (!file.type.startsWith("video/")) {
+        Swal.fire({
+          icon: "error",
+          title: "Invalid file type",
+          text: "Please select a valid video file",
+        });
+        return;
+      }
+      formik.setFieldValue("video", file);
+    }
+  };
+
+  const handleRemoveVideo = () => {
+    formik.setFieldValue("video", null);
+  };
+
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -173,6 +222,9 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         }
 
         // Debug: Log FormData contents
+        for (let pair of formData.entries()) {
+          console.log("FORMDATA:", pair[0], pair[1]);
+        }
 
         if (isEdit) {
           await courseService.updateCourse(courseId, formData);
@@ -252,30 +304,6 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
       } finally {
         setIsLoading(false);
       }
-    }
-  };
-
-  const handleVideoChange = (event) => {
-    const file = event.currentTarget.files[0];
-    if (file) {
-      if (file.size > 50 * 1024 * 1024) {
-        // 50MB limit for video
-        Swal.fire({
-          icon: "error",
-          title: "File too large",
-          text: "Please select a video smaller than 50MB",
-        });
-        return;
-      }
-      if (!file.type.startsWith("video/")) {
-        Swal.fire({
-          icon: "error",
-          title: "Invalid file type",
-          text: "Please select a valid video file",
-        });
-        return;
-      }
-      formik.setFieldValue("video", file);
     }
   };
 
@@ -495,7 +523,9 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
             placeholder="Instructor Email"
             {...formik.getFieldProps("instructor.email")}
             className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
-              getFieldError("instructor.email") ? "border-red-300" : "border-gray-300"
+              getFieldError("instructor.email")
+                ? "border-red-300"
+                : "border-gray-300"
             }`}
           />
           {getFieldError("instructor.email") && (
@@ -509,7 +539,9 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
             placeholder="Instructor Avatar"
             {...formik.getFieldProps("instructor.avatar")}
             className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
-                getFieldError("instructor.avatar") ? "border-red-300" : "border-gray-300"
+              getFieldError("instructor.avatar")
+                ? "border-red-300"
+                : "border-gray-300"
             }`}
           />
         </div>
@@ -564,10 +596,33 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           <label className="block text-sm font-medium text-gray-700">
             Photo
           </label>
+          {isEdit &&
+            initialValues.photo &&
+            typeof initialValues.photo === "string" && (
+              <div className="mb-2 flex items-center gap-2">
+                <img
+                  src={
+                    initialValues.photo.startsWith("http")
+                      ? initialValues.photo
+                      : `/uploads/${initialValues.photo}`
+                  }
+                  alt="Current Course Photo"
+                  className="h-16 w-24 object-cover rounded border"
+                />
+                <button
+                  type="button"
+                  onClick={handleRemovePhoto}
+                  className="text-red-500 hover:text-red-700 text-xs px-2 py-1 border border-red-200 rounded"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
           <input
             type="file"
             name="photo"
-            {...formik.getFieldProps("photo")}
+            accept="image/*"
+            onChange={handlePhotoChange}
             className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
               getFieldError("photo") ? "border-red-300" : "border-gray-300"
             }`}
@@ -584,6 +639,28 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           <label className="block text-sm font-medium text-gray-700">
             Course Video
           </label>
+          {isEdit &&
+            initialValues.video &&
+            typeof initialValues.video === "string" && (
+              <div className="mb-2 flex items-center gap-2">
+                <video
+                  src={
+                    initialValues.video.startsWith("http")
+                      ? initialValues.video
+                      : `/uploads/${initialValues.video}`
+                  }
+                  controls
+                  className="h-16 w-24 object-cover rounded border"
+                />
+                <button
+                  type="button"
+                  onClick={handleRemoveVideo}
+                  className="text-red-500 hover:text-red-700 text-xs px-2 py-1 border border-red-200 rounded"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
           <input
             type="file"
             accept="video/*"

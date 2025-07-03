@@ -40,6 +40,7 @@ router.post(
   upload.fields([
     { name: "video", maxCount: 1 },
     { name: "photo", maxCount: 1 },
+    { name: "instructor.avatar", maxCount: 1 },
   ]),
   courseController.createCourse
 );
@@ -49,6 +50,7 @@ router.put(
   upload.fields([
     { name: "video", maxCount: 1 },
     { name: "photo", maxCount: 1 },
+    { name: "instructor.avatar", maxCount: 1 },
   ]),
   courseController.updateCourse
 );
