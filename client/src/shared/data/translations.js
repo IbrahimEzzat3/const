@@ -243,6 +243,7 @@ export const translations = {
         dateFormat: "{{date}}",
       },
       courseDetail: {
+        enrollSuccessTitle:"Success",
         loadError: "Failed to load course details",
         enrollError: "Failed to update enrollment status",
         feedbackError: "Failed to submit feedback",

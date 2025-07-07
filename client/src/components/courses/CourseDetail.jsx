@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { courseService } from "../../shared/services/courseService";
 import { useAuth } from "../../shared/context/AuthContext";
@@ -207,9 +207,6 @@ const CourseDetail = () => {
     startDate: "",
     courseLanguage: "",
     package: "",
-    exam: "",
-    inSite: "",
-    expect: "",
     // Personal Info
     fullNameAr: user?.name || "",
     fullNameEn: "",
@@ -235,6 +232,9 @@ const CourseDetail = () => {
     agree: false,
   });
   const [enrollFieldErrors, setEnrollFieldErrors] = useState({});
+  const enrollFormRef = useRef(null);
+  const [enrollSuccess, setEnrollSuccess] = useState(false);
+  const [enrollError, setEnrollError] = useState("");
 
   const fetchCourseData = useCallback(async () => {
     try {
@@ -310,9 +310,6 @@ const CourseDetail = () => {
     if (!enrollFields.courseLanguage)
       errors.courseLanguage = t("common.required");
     if (!enrollFields.package) errors.package = t("common.required");
-    if (!enrollFields.exam) errors.exam = t("common.required");
-    if (!enrollFields.inSite) errors.inSite = t("common.required");
-    if (!enrollFields.expect) errors.expect = t("common.required");
     if (!enrollFields.fullNameAr) errors.fullNameAr = t("common.required");
     if (!enrollFields.fullNameEn) errors.fullNameEn = t("common.required");
     if (!enrollFields.birthDate) errors.birthDate = t("common.required");
@@ -338,18 +335,35 @@ const CourseDetail = () => {
       errors.paymentMethod = t("common.required");
     if (!enrollFields.agree) errors.agree = t("common.required");
     setEnrollFieldErrors(errors);
-    if (Object.keys(errors).length > 0) return;
+    if (Object.keys(errors).length > 0) {
+      // Scroll to form and focus first error field
+      if (enrollFormRef.current) {
+        enrollFormRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        const firstErrorField = Object.keys(errors)[0];
+        const errorInput = enrollFormRef.current.querySelector(
+          `[name="${firstErrorField}"]`
+        );
+        if (errorInput) errorInput.focus();
+      }
+      return;
+    }
     setIsEnrolling(true);
+    setEnrollSuccess(false);
+    setEnrollError("");
     try {
       await courseService.enrollInCourse(courseId, enrollFields);
+      console.log(courseId);
+      console.log(enrollFields);
+
       setShowEnrollForm(false);
+      setEnrollSuccess(true);
       setEnrollFields({
         startDate: "",
         courseLanguage: "",
         package: "",
-        exam: "",
-        inSite: "",
-        expect: "",
         fullNameAr: user?.name || "",
         fullNameEn: "",
         birthDate: "",
@@ -372,7 +386,13 @@ const CourseDetail = () => {
     } catch (err) {
       const errorMessage =
         err?.response?.data?.error || t("courseDetail.enrollError");
-      setError(errorMessage);
+      setEnrollError(errorMessage);
+      if (enrollFormRef.current) {
+        enrollFormRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
     } finally {
       setIsEnrolling(false);
     }
@@ -544,16 +564,16 @@ const CourseDetail = () => {
                 <div className="flex items-start gap-6">
                   <div className="flex-shrink-0">
                     <img
-                      src={
-                        course.instructor?.avatar
-                          ? `https://const-production.up.railway.app/uploads/${course.instructor.avatar}`
-                          : `https://const-production.up.railway.app/public/images/default.png`
-                      }
+                      src="https://const-production.up.railway.app/uploads/I751720566010-116248244.jpg"
                       alt={course.instructor?.name}
                       className="w-24 h-24 rounded-full object-cover ring-4 ring-primary-50"
                       loading="lazy"
                       crossOrigin="anonymous"
                       referrerPolicy="no-referrer"
+                      // onError={(e) => {
+                      //   e.target.src =
+                      //     "https://const-production.up.railway.app/public/images/default.png";
+                      // }}
                     />
                   </div>
                   <div>
@@ -813,9 +833,15 @@ const CourseDetail = () => {
                         ×
                       </button>
                       <form
+                        ref={enrollFormRef}
                         className="space-y-4 max-h-[80vh] overflow-y-auto"
                         onSubmit={handleEnrollFormSubmit}
                       >
+                        {enrollError && (
+                          <div className="text-red-600 bg-red-50 p-2 rounded mb-2 text-center">
+                            {enrollError}
+                          </div>
+                        )}
                         <div>
                           <label>{t("common.startDate")}</label>
                           <select
@@ -825,9 +851,13 @@ const CourseDetail = () => {
                             className="w-full border rounded px-2 py-1 ltr"
                           >
                             <option value="">{t("common.pleaseSelect")}</option>
-                            <option value="June">{t("common.June")}</option>
-                            <option value="Oct">{t("common.Oct")}</option>
-                            <option value="Feb">{t("common.Feb")}</option>
+                            <option value="June,1st">{t("common.June")}</option>
+                            <option value="October,1st">
+                              {t("common.Oct")}
+                            </option>
+                            <option value="February,1st">
+                              {t("common.Feb")}
+                            </option>
                           </select>
                           {enrollFieldErrors.startDate && (
                             <div className="text-red-500 text-xs">
@@ -845,8 +875,8 @@ const CourseDetail = () => {
                             className="w-full border rounded px-2 py-1 ltr"
                           >
                             <option value="">{t("common.pleaseSelect")}</option>
-                            <option value="ar">{t("common.ar")}</option>
-                            <option value="en">{t("common.en")}</option>
+                            <option value="arabic">{t("common.ar")}</option>
+                            <option value="english">{t("common.en")}</option>
                           </select>
                           {enrollFieldErrors.courseLanguage && (
                             <div className="text-red-500 text-xs">
@@ -1134,13 +1164,13 @@ const CourseDetail = () => {
                             className="w-full border rounded px-2 py-1 ltr"
                           >
                             <option value="">{t("common.pleaseSelect")}</option>
-                            <option value="bank">
+                            <option value="bankTransfer">
                               {t("common.bankTransfer")}
                             </option>
                             <option value="installment">
                               {t("common.installment")}
                             </option>
-                            <option value="company">
+                            <option value="companyDelivery">
                               {t("common.companyDelivery")}
                             </option>
                           </select>
@@ -1223,6 +1253,22 @@ const CourseDetail = () => {
         cancelButtonText={t("common.cancel")}
         onConfirm={handleConfirmDelete}
       />
+
+      {enrollSuccess && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-8 text-center">
+            <h2 className="text-2xl font-bold mb-4 text-green-700">
+              Enrollment Successful!
+            </h2>
+            <p className="mb-6 text-green-700">
+              "You have been enrolled successfully."
+            </p>
+            <Button onClick={() => setEnrollSuccess(false)} variant="primary">
+              OK
+            </Button>
+          </div>
+        </div>
+      )}
     </>
   );
 };

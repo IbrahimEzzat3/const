@@ -19,6 +19,7 @@ const consultationRoutes = require("./routes/consultations");
 const userRoutes = require("./routes/users");
 const sliderRoutes = require("./routes/sliders");
 const projectRoutes = require("./routes/projects");
+const enrollmentRoutes = require("./routes/enrollments");
 const app = express();
 
 // Security middleware
@@ -52,27 +53,33 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Serve uploaded files
-app.use(
-  "/uploads",
-  express.static("uploads", {
-    setHeaders: (res, path) => {
-      // Enable CORS for video files
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.setHeader("Access-Control-Allow-Methods", "GET");
-      res.setHeader("Access-Control-Allow-Headers", "Range");
-      res.setHeader("Accept-Ranges", "bytes");
+// app.use(
+//   "/uploads",
+//   express.static("uploads", {
+//     setHeaders: (res, path) => {
+//       // Enable CORS for video files
+//       res.setHeader("Access-Control-Allow-Origin", "*");
+//       res.setHeader("Access-Control-Allow-Methods", "GET");
+//       res.setHeader("Access-Control-Allow-Headers", "Range");
+//       res.setHeader("Accept-Ranges", "bytes");
 
-      // Set proper content type for video files
-      if (path.endsWith(".mp4")) {
-        res.setHeader("Content-Type", "video/mp4");
-      } else if (path.endsWith(".webm")) {
-        res.setHeader("Content-Type", "video/webm");
-      } else if (path.endsWith(".ogg")) {
-        res.setHeader("Content-Type", "video/ogg");
-      }
-    },
-  })
-);
+//       // Set proper content type for video files
+//       if (path.endsWith(".mp4")) {
+//         res.setHeader("Content-Type", "video/mp4");
+//       } else if (path.endsWith(".webm")) {
+//         res.setHeader("Content-Type", "video/webm");
+//       } else if (path.endsWith(".ogg")) {
+//         res.setHeader("Content-Type", "video/ogg");
+//       }
+//     },
+//   })
+// );
+app.get("/debug/uploads", (req, res) => {
+  const files = fs.readdirSync(path.join(__dirname, "uploads"));
+  res.json(files);
+});
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // Serve public assets
 app.use("/public", express.static(path.join(__dirname, "public")));
 
@@ -95,7 +102,7 @@ app.use("/api/consultations", consultationRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/sliders", sliderRoutes);
 app.use("/api/projects", projectRoutes);
-app.use("/api/enrollments", require("./routes/enrollments"));
+app.use("/api/enrollments", enrollmentRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

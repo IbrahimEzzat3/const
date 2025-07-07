@@ -129,4 +129,17 @@ export const courseService = {
       throw error;
     }
   },
+  getEnrollmentById: async (id) => {
+    try {
+      const response = await api.get(`/enrollments/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error in getEnrollmentById (courseService):", {
+        status: error.response?.status,
+        data: error.response?.data,
+        message: error.message,
+      });
+      throw error;
+    }
+  },
 };

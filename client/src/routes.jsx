@@ -35,6 +35,8 @@ import CreateCoursePage from "./pages/admin/CreateCoursePage";
 import EditCoursePage from "./pages/admin/EditCoursePage";
 import CreateBlogPage from "./pages/admin/CreateBlogPage";
 import EditBlogPage from "./pages/admin/EditBlogPage";
+import EnrollmentsManagerPage from "./pages/admin/EnrollmentsManagerPage";
+import EnrollmentDetailPage from "./pages/admin/EnrollmentDetailPage";
 
 // User Pages
 import ConsultationsListPage from "./pages/consultations/ConsultationsListPage";
@@ -269,7 +271,22 @@ const AppRoutes = () => {
           </AdminRoute>
         }
       />
-
+      <Route
+        path="/admin/enrollments"
+        element={
+          <AdminRoute>
+            <EnrollmentsManagerPage />
+          </AdminRoute>
+        }
+      />
+      <Route
+        path="/admin/enrollments/:id"
+        element={
+          <AdminRoute>
+            <EnrollmentDetailPage />
+          </AdminRoute>
+        }
+      />
       {/* Legal Routes */}
       <Route path="/terms" element={<Terms />} />
       <Route path="/privacy" element={<Privacy />} />
