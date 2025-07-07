@@ -116,20 +116,14 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
     req.body.instructor = {
       name: instructorData.name || req.user.name,
       email: instructorData.email || req.user.email,
-      avatar: req.user.avatar
-        ? req.user.avatar.replace(/^uploads[\\/]/, "")
-        : null,
     };
 
     // Handle uploaded instructor avatar
-    if (
-      req.files &&
-      req.files["avatar"] &&
-      req.files["avatar"][0]
-    ) {
-      const avatarFile = req.files["avatar"][0];
-      console.log("Avatar file received:", avatarFile.filename);
-      req.body.avatar = avatarFile.filename;
+    if (req.files && req.files.avatar && req.files.avatar[0]) {
+      console.log("Avatar file received:", req.files.avatar[0].filename);
+      req.body.avatar = req.files.avatar[0].filename;
+    } else if (req.body.avatar === "null" || req.body.avatar === "") {
+      req.body.avatar = null;
     }
 
     // Handle video

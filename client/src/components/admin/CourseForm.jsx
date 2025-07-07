@@ -118,6 +118,23 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
     }
   };
 
+  const handleAvatarChange = (event) => {
+    const file = event.currentTarget.files[0];
+    console.log("Avatar FILE SELECTED:", file);
+
+    if (file) {
+      if (!file.type.startsWith("image/")) {
+        Swal.fire({
+          icon: "error",
+          title: "Invalid file type",
+          text: "Please select a valid image file",
+        });
+        return;
+      }
+      formik.setFieldValue("avatar", file);
+    }
+  };
+
   const handleRemovePhoto = () => {
     formik.setFieldValue("photo", null);
   };
@@ -511,7 +528,6 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           </label>
           {/* Show instructor avatar if exists */}
           {isEdit &&
-            initialValues.instructor &&
             initialValues.avatar &&
             typeof initialValues.avatar === "string" && (
               <div className="mb-2 flex items-center gap-2">
@@ -569,12 +585,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
             type="file"
             name="avatar"
             accept="image/*"
-            onChange={(e) => {
-              const file = e.target.files[0];
-              if (file) {
-                formik.setFieldValue("avatar", file);
-              }
-            }}
+            onChange={handleAvatarChange}
             placeholder="Instructor Avatar"
             className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
               getFieldError("avatar") ? "border-red-300" : "border-gray-300"
