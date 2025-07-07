@@ -178,6 +178,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
 
         if (values.instructor.avatar instanceof File) {
           formData.append("instructor.avatar", values.instructor.avatar);
+          console.log("Avatar file appended:", values.instructor.avatar);
         }
 
         // Handle photo
@@ -569,8 +570,14 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           <input
             type="file"
             name="instructor.avatar"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                formik.setFieldValue("instructor.avatar", file);
+              }
+            }}
             placeholder="Instructor Avatar"
-            {...formik.getFieldProps("instructor.avatar")}
             className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
               getFieldError("instructor.avatar")
                 ? "border-red-300"

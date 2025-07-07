@@ -99,6 +99,9 @@ exports.getCourse = asyncHandler(async (req, res, next) => {
 // @access  Private/Admin
 exports.createCourse = asyncHandler(async (req, res, next) => {
   try {
+    console.log("=== FILES DEBUG ===");
+    console.log("All files:", req.files);
+
     // Parse instructor data
     let instructorData = {};
     if (req.body.instructor) {
@@ -109,13 +112,13 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
       }
     }
 
-    // Add instructor to req.body with user data
+    // Set instructor with default values
     req.body.instructor = {
       name: instructorData.name || req.user.name,
       email: instructorData.email || req.user.email,
       avatar: req.user.avatar
         ? req.user.avatar.replace(/^uploads[\\/]/, "")
-        : undefined,
+        : null,
     };
 
     // Handle uploaded instructor avatar
@@ -124,57 +127,65 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
       req.files["instructor.avatar"] &&
       req.files["instructor.avatar"][0]
     ) {
-      req.body.instructor.avatar = req.files["instructor.avatar"][0].filename;
+      const avatarFile = req.files["instructor.avatar"][0];
+      console.log("Avatar file received:", avatarFile.filename);
+      req.body.instructor.avatar = avatarFile.filename;
     }
 
-    // Helper to parse JSON string fields
+    // Handle video
+    if (req.files && req.files.video && req.files.video[0]) {
+      console.log("Video file received:", req.files.video[0].filename);
+      req.body.video = req.files.video[0].filename;
+    } else if (req.body.video === "null" || req.body.video === "") {
+      req.body.video = null;
+    }
+
+    // Handle photo
+    if (req.files && req.files.photo && req.files.photo[0]) {
+      console.log("Photo file received:", req.files.photo[0].filename);
+      req.body.photo = req.files.photo[0].filename;
+    } else if (req.body.photo === "null" || req.body.photo === "") {
+      req.body.photo = null;
+    }
+
+    // Parse other fields
     const parseJsonField = (field) => {
       if (typeof req.body[field] === "string") {
         try {
           return JSON.parse(req.body[field]);
         } catch (e) {
-          console.error(`Error parsing ${field}:`, e);
           return [];
         }
       }
       return req.body[field] || [];
     };
 
-    // Parse arrays
     req.body.requirements = parseJsonField("requirements");
     req.body.objectives = parseJsonField("objectives");
     req.body.modules = parseJsonField("modules");
 
-    // Handle video and photo
-    if (req.files && req.files.video && req.files.video[0]) {
-      req.body.video = req.files.video[0].filename;
-    } else if (req.body.video === "null") {
-      req.body.video = null;
-    }
-
-    if (req.files && req.files.photo && req.files.photo[0]) {
-      req.body.photo = req.files.photo[0].filename;
-    } else if (req.body.photo === "null") {
-      req.body.photo = null;
-    }
-
-    // Convert string booleans to actual booleans
+    // Convert booleans
     if (req.body.isActive === "true") req.body.isActive = true;
     if (req.body.isActive === "false") req.body.isActive = false;
-    if (req.body.isPublished === "true") req.body.isPublished = true;
-    if (req.body.isPublished === "false") req.body.isPublished = false;
 
+    // Convert duration
     if (req.body.duration && typeof req.body.duration === "string") {
       req.body.duration = parseInt(req.body.duration);
     }
 
-    // Convert module durations to numbers
+    // Convert module durations
     if (req.body.modules && Array.isArray(req.body.modules)) {
       req.body.modules = req.body.modules.map((module) => ({
         ...module,
         duration: module.duration ? parseInt(module.duration) : undefined,
       }));
     }
+
+    console.log("Final data before save:", {
+      instructor: req.body.instructor,
+      video: req.body.video,
+      photo: req.body.photo,
+    });
 
     const course = await Course.create(req.body);
 
@@ -342,8 +353,6 @@ exports.deleteCourse = asyncHandler(async (req, res, next) => {
     data: {},
   });
 });
-
-
 
 // @desc    Add feedback to a course
 // @route   POST /api/courses/:id/feedback

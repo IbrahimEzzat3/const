@@ -575,6 +575,7 @@ const CourseDetail = () => {
                       crossOrigin="anonymous"
                       referrerPolicy="no-referrer"
                       // onError={(e) => {
+                      //   console.log("Image failed to load:", e.target.src);
                       //   e.target.src =
                       //     "https://const-production.up.railway.app/public/images/default.png";
                       // }}
