@@ -20,11 +20,11 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
     modules: [],
     video: null,
     photo: null,
+    avatar: null,
     isActive: true,
     instructor: {
       name: "",
       email: "",
-      avatar: null,
     },
   });
 
@@ -62,8 +62,8 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
     instructor: Yup.object().shape({
       name: Yup.string().required("Instructor name is required"),
       email: Yup.string().email("Invalid email address").nullable(),
-      avatar: Yup.mixed().nullable(),
     }),
+    avatar: Yup.mixed().nullable(),
     photo: Yup.mixed().nullable(),
   });
 
@@ -88,11 +88,11 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         modules: course.modules || [],
         video: course.video || null,
         photo: course.photo || null,
+        avatar: course.avatar || null,
         isActive: course.isActive ?? true,
         instructor: course.instructor || {
           name: "",
           email: "",
-          avatar: null,
         },
       });
     } catch (error) {
@@ -526,9 +526,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
                 />
                 <button
                   type="button"
-                  onClick={() =>
-                    formik.setFieldValue("avatar", null)
-                  }
+                  onClick={() => formik.setFieldValue("avatar", null)}
                   className="text-red-500 hover:text-red-700 text-xs px-2 py-1 border border-red-200 rounded"
                 >
                   Remove
@@ -579,9 +577,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
             }}
             placeholder="Instructor Avatar"
             className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
-              getFieldError("avatar")
-                ? "border-red-300"
-                : "border-gray-300"
+              getFieldError("avatar") ? "border-red-300" : "border-gray-300"
             }`}
           />
         </div>
