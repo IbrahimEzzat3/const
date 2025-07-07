@@ -52,24 +52,6 @@ export const courseService = {
     return response.data;
   },
 
-  // Enroll in course
-  enrollInCourse: async (id) => {
-    const response = await api.post(`/courses/${id}/enroll`);
-    return response.data;
-  },
-
-  // Get enrolled users (admin only)
-  getEnrolledUsers: async (id) => {
-    const response = await api.get(`/courses/${id}/enrolled-users`);
-    return response.data;
-  },
-
-  // Unenroll from course
-  unenrollFromCourse: async (id) => {
-    const response = await api.delete(`/courses/${id}/unenroll`);
-    return response.data;
-  },
-
   addFeedback: async (courseId, feedbackData) => {
     try {
       const response = await api.post(
@@ -109,6 +91,37 @@ export const courseService = {
       return response.data;
     } catch (error) {
       console.error("Error in deleteFeedback (courseService):", {
+        status: error.response?.status,
+        data: error.response?.data,
+        message: error.message,
+      });
+      throw error;
+    }
+  },
+
+  enrollInCourse: async (courseId, enrollData) => {
+    try {
+      const response = await api.post("/enrollments", {
+        course: courseId,
+        ...enrollData,
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error in enrollInCourse (courseService):", {
+        status: error.response?.status,
+        data: error.response?.data,
+        message: error.message,
+      });
+      throw error;
+    }
+  },
+
+  getAllEnrollments: async () => {
+    try {
+      const response = await api.get("/enrollments");
+      return response.data;
+    } catch (error) {
+      console.error("Error in getAllEnrollments (courseService):", {
         status: error.response?.status,
         data: error.response?.data,
         message: error.message,

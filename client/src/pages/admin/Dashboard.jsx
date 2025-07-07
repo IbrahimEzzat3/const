@@ -154,6 +154,7 @@ const Dashboard = () => {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [enrollments, setEnrollments] = useState([]);
   usePageTitle("dashboard");
   useEffect(() => {
     fetchDashboardData();
@@ -165,13 +166,19 @@ const Dashboard = () => {
       setError("");
 
       // Option 1: Use high limit to fetch all data (your current backend supports this)
-      const [blogsData, coursesData, consultationsData, testimonialsData] =
-        await Promise.all([
-          blogService.getAllBlogs({ page: 1, limit: 1000 }),
-          courseService.getAllCourses({ page: 1, limit: 1000 }),
-          consultationService.getAllConsultations(),
-          testimonialService.getAllTestimonials(),
-        ]);
+      const [
+        blogsData,
+        coursesData,
+        consultationsData,
+        testimonialsData,
+        enrollmentsData,
+      ] = await Promise.all([
+        blogService.getAllBlogs({ page: 1, limit: 1000 }),
+        courseService.getAllCourses({ page: 1, limit: 1000 }),
+        consultationService.getAllConsultations(),
+        testimonialService.getAllTestimonials(),
+        courseService.getAllEnrollments(),
+      ]);
 
       // Now we have all the data, so we can filter accurately
       const blogs = blogsData.data;
@@ -221,6 +228,8 @@ const Dashboard = () => {
         consultations: consultations.slice(0, 3),
         testimonials: testimonials.slice(0, 3),
       });
+
+      setEnrollments(enrollmentsData);
     } catch (err) {
       setError("Failed to load dashboard data");
       console.error("Dashboard data error:", err);
@@ -361,7 +370,7 @@ const Dashboard = () => {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
         <StatCard
           title="Blogs"
           icon={BlogIcon}
@@ -385,6 +394,12 @@ const Dashboard = () => {
           icon={StarIcon}
           stats={stats.testimonials}
           link="/admin/testimonials"
+        />
+        <StatCard
+          title="Enrollments"
+          icon={UsersIcon}
+          stats={{ total: enrollments.length }}
+          link="/admin/enrollments"
         />
       </div>
 
@@ -468,6 +483,52 @@ const Dashboard = () => {
           type="testimonials"
           link="/admin/testimonials"
         />
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900">
+              Recent Enrollments
+            </h3>
+            <Link
+              to="/admin/enrollments"
+              className="text-accent-gold hover:text-accent-gold/90 text-sm font-medium"
+            >
+              View All
+            </Link>
+          </div>
+          <div className="space-y-4">
+            {enrollments.slice(0, 3).map((enroll) => (
+              <div
+                key={enroll._id}
+                className="flex items-center justify-between p-3 bg-gray-50 rounded-md"
+              >
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-accent-teal truncate">
+                    {enroll.fullNameEn || enroll.fullNameAr || enroll.email}
+                  </p>
+                  <p className="text-xs text-accent-teal">
+                    {enroll.createdAt
+                      ? new Date(enroll.createdAt).toLocaleDateString()
+                      : ""}
+                  </p>
+                </div>
+                <div className="flex space-x-2 ml-4">
+                  <Link
+                    to={`/admin/enrollments/${enroll._id}`}
+                    className="text-accent-teal hover:text-accent-teal/90"
+                    title="View"
+                  >
+                    <EyeIcon className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+            {enrollments.length === 0 && (
+              <p className="text-sm text-accent-teal text-center py-2">
+                No enrollments found
+              </p>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Project Manager Section */}

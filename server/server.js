@@ -95,6 +95,7 @@ app.use("/api/consultations", consultationRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/sliders", sliderRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/enrollments", require("./routes/enrollments"));
 
 // Error handling middleware
 app.use((err, req, res, next) => {

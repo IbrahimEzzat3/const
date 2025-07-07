@@ -103,7 +103,9 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
     req.body.instructor = {
       name: req.user.name,
       email: req.user.email,
-      avatar: req.user.avatar,
+      avatar: req.user.avatar
+        ? req.user.avatar.replace(/^uploads[\\/]/, "")
+        : undefined,
     };
 
     // Helper to parse JSON string fields
@@ -324,106 +326,7 @@ exports.deleteCourse = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc    Enroll in course
-// @route   POST /api/courses/:id/enroll
-// @access  Private
-exports.enrollInCourse = asyncHandler(async (req, res, next) => {
-  const course = await Course.findById(req.params.id);
 
-  if (!course) {
-    return next(
-      new ErrorResponse(`Course not found with id of ${req.params.id}`, 404)
-    );
-  }
-
-  // Check if user is already enrolled
-  const isEnrolled = course.enrolledUsers.some(
-    (enrollment) => enrollment.user.toString() === req.user.id
-  );
-
-  if (isEnrolled) {
-    return next(
-      new ErrorResponse("User is already enrolled in this course", 400)
-    );
-  }
-
-  // Add user to enrolled users with enrollment data
-  course.enrolledUsers.push({
-    user: req.user.id,
-    enrolledAt: Date.now(),
-    progress: 0,
-    completedModules: [],
-  });
-
-  await course.save();
-
-  // Add course to user's enrolled courses
-  await User.findByIdAndUpdate(req.user.id, {
-    $push: { enrolledCourses: course._id },
-  });
-
-  res.status(200).json({
-    success: true,
-    data: course,
-  });
-});
-
-// @desc    Get enrolled users
-// @route   GET /api/courses/:id/enrolled-users
-// @access  Private/Admin
-exports.getEnrolledUsers = asyncHandler(async (req, res, next) => {
-  const course = await Course.findById(req.params.id).populate({
-    path: "enrolledUsers.user",
-    select: "name email",
-  });
-
-  if (!course) {
-    return next(
-      new ErrorResponse(`Course not found with id of ${req.params.id}`, 404)
-    );
-  }
-
-  res.status(200).json({
-    success: true,
-    data: course.enrolledUsers,
-  });
-});
-
-// @desc    Unenroll from course
-// @route   DELETE /api/courses/:id/unenroll
-// @access  Private
-exports.unenrollFromCourse = asyncHandler(async (req, res, next) => {
-  const course = await Course.findById(req.params.id);
-
-  if (!course) {
-    return next(
-      new ErrorResponse(`Course not found with id of ${req.params.id}`, 404)
-    );
-  }
-
-  // Check if user is enrolled
-  const enrollmentIndex = course.enrolledUsers.findIndex(
-    (enrollment) => enrollment.user.toString() === req.user.id
-  );
-
-  if (enrollmentIndex === -1) {
-    return next(new ErrorResponse("User is not enrolled in this course", 400));
-  }
-
-  // Remove user from enrolled users
-  course.enrolledUsers.splice(enrollmentIndex, 1);
-  await course.save();
-
-  // Remove course from user's enrolled courses
-  await User.findByIdAndUpdate(req.user.id, {
-    $pull: { enrolledCourses: course._id },
-  });
-
-  res.status(200).json({
-    success: true,
-    data: {},
-  });
-});
 
 // @desc    Add feedback to a course
 // @route   POST /api/courses/:id/feedback

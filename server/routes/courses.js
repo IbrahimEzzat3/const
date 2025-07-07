@@ -24,15 +24,6 @@ router.delete(
 // Protected routes
 router.use(protect);
 
-// Course enrollment routes (protected)
-router.post("/:id/enroll", courseController.enrollInCourse);
-router.get(
-  "/:id/enrolled-users",
-  authorize("admin"),
-  courseController.getEnrolledUsers
-);
-router.delete("/!*:id/unenroll", courseController.unenrollFromCourse);
-
 // Admin routes
 router.post(
   "/",

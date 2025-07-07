@@ -202,6 +202,39 @@ const CourseDetail = () => {
     feedbackId: null,
   });
   const { t } = useLanguage();
+  const [showEnrollForm, setShowEnrollForm] = useState(false);
+  const [enrollFields, setEnrollFields] = useState({
+    startDate: "",
+    courseLanguage: "",
+    package: "",
+    exam: "",
+    inSite: "",
+    expect: "",
+    // Personal Info
+    fullNameAr: user?.name || "",
+    fullNameEn: "",
+    birthDate: "",
+    email: user?.email || "",
+    phone: user?.phone || "",
+    nationality: "",
+    city: "",
+    // Academic Qualifications
+    degree: "",
+    major: "",
+    university: "",
+    // Work Experience
+    currentJob: "",
+    company: "",
+    yearsExperience: "",
+    // Scholarship
+    wantScholarship: "",
+    scholarshipReason: "",
+    // Payment
+    paymentMethod: "",
+    // Agreement
+    agree: false,
+  });
+  const [enrollFieldErrors, setEnrollFieldErrors] = useState({});
 
   const fetchCourseData = useCallback(async () => {
     try {
@@ -240,19 +273,101 @@ const CourseDetail = () => {
   }, [fetchCourseData]);
 
   const handleEnroll = async () => {
-    if (!course || !user) {
-      navigate("/login");
+    if (!course) {
+      navigate("/");
       return;
     }
-
+    if (!isEnrolled) {
+      setShowEnrollForm(true);
+      return;
+    }
     setIsEnrolling(true);
     try {
-      if (isEnrolled) {
-        await courseService.unenrollFromCourse(courseId);
-      } else {
-        await courseService.enrollInCourse(courseId);
-      }
-      // Fetch fresh course data after enrollment/unenrollment
+      await courseService.unenrollFroCourse(courseId);
+      await fetchCourseData();
+    } catch (err) {
+      const errorMessage =
+        err?.response?.data?.error || t("courseDetail.enrollError");
+      setError(errorMessage);
+    } finally {
+      setIsEnrolling(false);
+    }
+  };
+
+  const handleEnrollFormChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setEnrollFields((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleEnrollFormSubmit = async (e) => {
+    e.preventDefault();
+    // Manual validation
+    const errors = {};
+    if (!enrollFields.startDate) errors.startDate = t("common.required");
+    if (!enrollFields.courseLanguage)
+      errors.courseLanguage = t("common.required");
+    if (!enrollFields.package) errors.package = t("common.required");
+    if (!enrollFields.exam) errors.exam = t("common.required");
+    if (!enrollFields.inSite) errors.inSite = t("common.required");
+    if (!enrollFields.expect) errors.expect = t("common.required");
+    if (!enrollFields.fullNameAr) errors.fullNameAr = t("common.required");
+    if (!enrollFields.fullNameEn) errors.fullNameEn = t("common.required");
+    if (!enrollFields.birthDate) errors.birthDate = t("common.required");
+    if (!enrollFields.email) errors.email = t("common.required");
+    if (!enrollFields.phone) errors.phone = t("common.required");
+    if (!enrollFields.nationality) errors.nationality = t("common.required");
+    if (!enrollFields.city) errors.city = t("common.required");
+    if (!enrollFields.degree) errors.degree = t("common.required");
+    if (!enrollFields.major) errors.major = t("common.required");
+    if (!enrollFields.university) errors.university = t("common.required");
+    if (!enrollFields.currentJob) errors.currentJob = t("common.required");
+    if (!enrollFields.company) errors.company = t("common.required");
+    if (!enrollFields.yearsExperience)
+      errors.yearsExperience = t("common.required");
+    if (!enrollFields.wantScholarship)
+      errors.wantScholarship = t("common.required");
+    if (
+      enrollFields.wantScholarship === "yes" &&
+      !enrollFields.scholarshipReason
+    )
+      errors.scholarshipReason = t("common.required");
+    if (!enrollFields.paymentMethod)
+      errors.paymentMethod = t("common.required");
+    if (!enrollFields.agree) errors.agree = t("common.required");
+    setEnrollFieldErrors(errors);
+    if (Object.keys(errors).length > 0) return;
+    setIsEnrolling(true);
+    try {
+      await courseService.enrollInCourse(courseId, enrollFields);
+      setShowEnrollForm(false);
+      setEnrollFields({
+        startDate: "",
+        courseLanguage: "",
+        package: "",
+        exam: "",
+        inSite: "",
+        expect: "",
+        fullNameAr: user?.name || "",
+        fullNameEn: "",
+        birthDate: "",
+        email: user?.email || "",
+        phone: "",
+        nationality: "",
+        city: "",
+        degree: "",
+        major: "",
+        university: "",
+        currentJob: "",
+        company: "",
+        yearsExperience: "",
+        wantScholarship: "",
+        scholarshipReason: "",
+        paymentMethod: "",
+        agree: false,
+      });
       await fetchCourseData();
     } catch (err) {
       const errorMessage =
@@ -430,10 +545,8 @@ const CourseDetail = () => {
                   <div className="flex-shrink-0">
                     <img
                       src={
-                        course.instructor?.avatar &&
-                        course.instructor?.avatar !==
-                          "public/images/default.png"
-                          ? `https://const-production.up.railway.app/${course.instructor?.avatar}`
+                        course.instructor?.avatar
+                          ? `https://const-production.up.railway.app/uploads/${course.instructor.avatar}`
                           : `https://const-production.up.railway.app/public/images/default.png`
                       }
                       alt={course.instructor?.name}
@@ -611,7 +724,7 @@ const CourseDetail = () => {
     <>
       <div className="max-w-7xl mx-auto">
         {/* Course Header */}
-        <div className="relative h-80 sm:h-96 rounded-lg overflow-hidden mb-8">
+        <div className="relative h-80 sm:h-[42rem] rounded-lg overflow-hidden mb-8">
           {course.video ? (
             <VideoPreview video={course.video} />
           ) : (
@@ -639,14 +752,6 @@ const CourseDetail = () => {
                 <ClockIcon className="h-4 w-4 text-primary-400" />
                 <span>
                   {t("courseDetail.hoursOfContent", { count: course.duration })}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <UsersIcon className="h-4 w-4 text-primary-400" />
-                <span>
-                  {t("courseDetail.studentsEnrolled", {
-                    count: course.enrolledUsers?.length || 0,
-                  })}
                 </span>
               </div>
             </div>
@@ -695,13 +800,394 @@ const CourseDetail = () => {
                 >
                   {isEnrolled
                     ? t("courseDetail.unenrollButton")
-                    : !course.isActive
-                    ? t("courseDetail.notAvailableButton")
-                    : !user
-                    ? t("courseDetail.loginToEnrollButton")
                     : t("courseDetail.enrollNowButton")}
                 </Button>
+                {showEnrollForm && !isEnrolled && (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+                    <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6 relative">
+                      <button
+                        className="absolute top-[-15px] right-[-10px] text-gray-500 hover:text-red-500 text-2xl w-22 h-22 bg-transparent font-bold"
+                        onClick={() => setShowEnrollForm(false)}
+                        type="button"
+                      >
+                        ×
+                      </button>
+                      <form
+                        className="space-y-4 max-h-[80vh] overflow-y-auto"
+                        onSubmit={handleEnrollFormSubmit}
+                      >
+                        <div>
+                          <label>{t("common.startDate")}</label>
+                          <select
+                            name="startDate"
+                            value={enrollFields.startDate}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1 ltr"
+                          >
+                            <option value="">{t("common.pleaseSelect")}</option>
+                            <option value="June">{t("common.June")}</option>
+                            <option value="Oct">{t("common.Oct")}</option>
+                            <option value="Feb">{t("common.Feb")}</option>
+                          </select>
+                          {enrollFieldErrors.startDate && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.startDate}
+                            </div>
+                          )}
+                        </div>
 
+                        <div>
+                          <label>{t("common.courseLanguage")}</label>
+                          <select
+                            name="courseLanguage"
+                            value={enrollFields.courseLanguage}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1 ltr"
+                          >
+                            <option value="">{t("common.pleaseSelect")}</option>
+                            <option value="ar">{t("common.ar")}</option>
+                            <option value="en">{t("common.en")}</option>
+                          </select>
+                          {enrollFieldErrors.courseLanguage && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.courseLanguage}
+                            </div>
+                          )}
+                        </div>
+
+                        <div>
+                          <label>{t("common.package")}</label>
+                          <select
+                            name="package"
+                            value={enrollFields.package}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1 ltr"
+                          >
+                            <option value="">{t("common.pleaseSelect")}</option>
+                            <option value="basic">{t("common.basic")}</option>
+                            <option value="advanced">
+                              {t("common.advanced")}
+                            </option>
+                            <option value="premium">
+                              {t("common.premium")}
+                            </option>
+                          </select>
+                          {enrollFieldErrors.package && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.package}
+                            </div>
+                          )}
+                        </div>
+
+                        <a
+                          href="https://drive.google.com/file/d/1CysQ-QJZIRpaslFggV-mIgYmHSBefBxV/view"
+                          target="_blank"
+                          className="text-black underline"
+                        >
+                          {t("common.details")}
+                        </a>
+
+                        {/* Personal Info */}
+                        <h3 className="font-bold text-lg mb-2">
+                          {t("common.personalInfo")}
+                        </h3>
+                        <div>
+                          <label>{t("common.fullNameAr")}</label>
+                          <input
+                            name="fullNameAr"
+                            value={enrollFields.fullNameAr}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1"
+                          />
+                          {enrollFieldErrors.fullNameAr && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.fullNameAr}
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <label>{t("common.fullNameEn")}</label>
+                          <input
+                            name="fullNameEn"
+                            value={enrollFields.fullNameEn}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1"
+                          />
+                          {enrollFieldErrors.fullNameEn && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.fullNameEn}
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <label>{t("common.birthDate")}</label>
+                          <input
+                            name="birthDate"
+                            type="date"
+                            value={enrollFields.birthDate}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1"
+                          />
+                          {enrollFieldErrors.birthDate && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.birthDate}
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <label>{t("common.email")}</label>
+                          <input
+                            name="email"
+                            type="email"
+                            value={enrollFields.email}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1"
+                          />
+                          {enrollFieldErrors.email && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.email}
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <label>{t("common.phone")}</label>
+                          <input
+                            name="phone"
+                            value={enrollFields.phone}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1"
+                          />
+                          {enrollFieldErrors.phone && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.phone}
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <label>{t("common.nationality")}</label>
+                          <input
+                            name="nationality"
+                            value={enrollFields.nationality}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1"
+                          />
+                          {enrollFieldErrors.nationality && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.nationality}
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <label>{t("common.city")}</label>
+                          <input
+                            name="city"
+                            value={enrollFields.city}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1"
+                          />
+                          {enrollFieldErrors.city && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.city}
+                            </div>
+                          )}
+                        </div>
+                        {/* Academic Qualifications */}
+                        <h3 className="font-bold text-lg mt-4 mb-2">
+                          {t("common.academicQualifications")}
+                        </h3>
+                        <div>
+                          <label>{t("common.degree")}</label>
+                          <input
+                            name="degree"
+                            value={enrollFields.degree}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1"
+                          />
+                          {enrollFieldErrors.degree && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.degree}
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <label>{t("common.major")}</label>
+                          <input
+                            name="major"
+                            value={enrollFields.major}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1"
+                          />
+                          {enrollFieldErrors.major && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.major}
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <label>{t("common.university")}</label>
+                          <input
+                            name="university"
+                            value={enrollFields.university}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1"
+                          />
+                          {enrollFieldErrors.university && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.university}
+                            </div>
+                          )}
+                        </div>
+                        {/* Work Experience */}
+                        <h3 className="font-bold text-lg mt-4 mb-2">
+                          {t("common.workExperience")}
+                        </h3>
+                        <div>
+                          <label>{t("common.currentJob")}</label>
+                          <input
+                            name="currentJob"
+                            value={enrollFields.currentJob}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1"
+                          />
+                          {enrollFieldErrors.currentJob && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.currentJob}
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <label>{t("common.company")}</label>
+                          <input
+                            name="company"
+                            value={enrollFields.company}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1"
+                          />
+                          {enrollFieldErrors.company && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.company}
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <label>{t("common.yearsExperience")}</label>
+                          <input
+                            name="yearsExperience"
+                            value={enrollFields.yearsExperience}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1"
+                          />
+                          {enrollFieldErrors.yearsExperience && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.yearsExperience}
+                            </div>
+                          )}
+                        </div>
+                        {/* Scholarship */}
+                        <h3 className="font-bold text-lg mt-4 mb-2">
+                          {t("common.scholarship")}
+                        </h3>
+                        <div>
+                          <label>{t("common.wantScholarship")}</label>
+                          <select
+                            name="wantScholarship"
+                            value={enrollFields.wantScholarship}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1 ltr"
+                          >
+                            <option value="">{t("common.pleaseSelect")}</option>
+                            <option value="yes">{t("common.yes")}</option>
+                            <option value="no">{t("common.no")}</option>
+                          </select>
+                          {enrollFieldErrors.wantScholarship && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.wantScholarship}
+                            </div>
+                          )}
+                        </div>
+                        {enrollFields.wantScholarship === "yes" && (
+                          <div>
+                            <label>{t("common.scholarshipReason")}</label>
+                            <textarea
+                              name="scholarshipReason"
+                              value={enrollFields.scholarshipReason}
+                              onChange={handleEnrollFormChange}
+                              className="w-full border rounded px-2 py-1 "
+                            />
+                            {enrollFieldErrors.scholarshipReason && (
+                              <div className="text-red-500 text-xs">
+                                {enrollFieldErrors.scholarshipReason}
+                              </div>
+                            )}
+                          </div>
+                        )}
+                        {/* Payment */}
+                        <h3 className="font-bold text-lg mt-4 mb-2">
+                          {t("common.payment")}
+                        </h3>
+                        <div>
+                          <label>{t("common.paymentMethod")}</label>
+                          <select
+                            name="paymentMethod"
+                            value={enrollFields.paymentMethod}
+                            onChange={handleEnrollFormChange}
+                            className="w-full border rounded px-2 py-1 ltr"
+                          >
+                            <option value="">{t("common.pleaseSelect")}</option>
+                            <option value="bank">
+                              {t("common.bankTransfer")}
+                            </option>
+                            <option value="installment">
+                              {t("common.installment")}
+                            </option>
+                            <option value="company">
+                              {t("common.companyDelivery")}
+                            </option>
+                          </select>
+                          {enrollFieldErrors.paymentMethod && (
+                            <div className="text-red-500 text-xs">
+                              {enrollFieldErrors.paymentMethod}
+                            </div>
+                          )}
+                        </div>
+                        {/* Agreement */}
+                        <div className="flex items-center mt-4">
+                          <input
+                            type="checkbox"
+                            name="agree"
+                            checked={enrollFields.agree}
+                            onChange={handleEnrollFormChange}
+                            className="mr-2"
+                          />
+                          <label>{t("common.agreeTerms")}</label>
+                          {enrollFieldErrors.agree && (
+                            <div className="text-red-500 text-xs ml-2">
+                              {enrollFieldErrors.agree}
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex gap-2 mt-4">
+                          <Button
+                            type="submit"
+                            variant="primary"
+                            isLoading={isEnrolling}
+                            disabled={isEnrolling}
+                          >
+                            {t("courseDetail.enrollNowButton")}
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="secondary"
+                            onClick={() => setShowEnrollForm(false)}
+                            disabled={isEnrolling}
+                          >
+                            {t("common.cancel")}
+                          </Button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                )}
                 <div className="mt-8 space-y-4">
                   <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                     <ClockIcon className="h-5 w-5 text-primary-600" />

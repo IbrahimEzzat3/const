@@ -241,7 +241,7 @@ const HeroSection = ({ slides, loadingSlides }) => {
           >
             {allSlides.map((slide, index) => (
               <figure
-                key={slide.id}
+                key={slide.id || slide._id || index}
                 className="absolute top-0 left-0 w-screen  h-full flex items-center justify-center text-white"
                 style={{ transform: `translateX(${index * 100}%)` }}
               >

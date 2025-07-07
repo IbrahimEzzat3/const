@@ -501,6 +501,30 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           <label className="block text-sm font-medium text-gray-700">
             Instructor
           </label>
+          {/* Show instructor avatar if exists */}
+          {isEdit &&
+            initialValues.instructor &&
+            initialValues.instructor.avatar &&
+            typeof initialValues.instructor.avatar === "string" && (
+              <div className="mb-2 flex items-center gap-2">
+                <img
+                  src={
+                    initialValues.instructor.avatar.startsWith("http")
+                      ? initialValues.instructor.avatar
+                      : `https://const-production.up.railway.app/uploads/${initialValues.instructor.avatar}`
+                  }
+                  alt="Instructor Avatar"
+                  className="h-16 w-16 object-cover rounded-full border"
+                />
+                <button
+                  type="button"
+                  onClick={() => formik.setFieldValue("instructor.avatar", null)}
+                  className="text-red-500 hover:text-red-700 text-xs px-2 py-1 border border-red-200 rounded"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
           <input
             type="text"
             name="instructor.name"
