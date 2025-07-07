@@ -40,6 +40,11 @@ const courseSchema = new mongoose.Schema(
       required: false,
       default: null,
     },
+    avatar: {
+      type: String,
+      required: false,
+      default: null,
+    },
     instructor: {
       name: {
         type: String,
@@ -50,11 +55,6 @@ const courseSchema = new mongoose.Schema(
         type: String,
         required: false,
         trim: true,
-      },
-      avatar: {
-        type: String,
-        required: false,
-        default: null,
       },
     },
     modules: [

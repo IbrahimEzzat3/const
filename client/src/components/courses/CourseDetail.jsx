@@ -565,8 +565,8 @@ const CourseDetail = () => {
                   <div className="flex-shrink-0">
                     <img
                       src={
-                        course.instructor?.avatar
-                          ? `https://const-production.up.railway.app/uploads/${course.instructor.avatar}`
+                        course?.avatar
+                          ? `https://const-production.up.railway.app/uploads/${course.avatar}`
                           : `https://const-production.up.railway.app/public/images/default.png`
                       }
                       alt={course.instructor?.name}

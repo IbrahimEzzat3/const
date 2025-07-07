@@ -242,7 +242,7 @@ const CourseManager = () => {
                 <div className="flex gap-4">
                   <div className="flex-shrink-0 h-16 w-24">
                     <img
-                      src={course.instructor.avatar}
+                      src={course.avatar}
                       alt={course.instructor.name}
                       className="h-full w-full object-cover rounded-md"
                     />

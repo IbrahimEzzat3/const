@@ -176,9 +176,9 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         };
         formData.append("instructor", JSON.stringify(instructorData));
 
-        if (values.instructor.avatar instanceof File) {
-          formData.append("instructor.avatar", values.instructor.avatar);
-          console.log("Avatar file appended:", values.instructor.avatar);
+        if (values.avatar instanceof File) {
+          formData.append("avatar", values.avatar);
+          console.log("Avatar file appended:", values.avatar);
         }
 
         // Handle photo
@@ -512,14 +512,14 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           {/* Show instructor avatar if exists */}
           {isEdit &&
             initialValues.instructor &&
-            initialValues.instructor.avatar &&
-            typeof initialValues.instructor.avatar === "string" && (
+            initialValues.avatar &&
+            typeof initialValues.avatar === "string" && (
               <div className="mb-2 flex items-center gap-2">
                 <img
                   src={
-                    initialValues.instructor.avatar.startsWith("http")
-                      ? initialValues.instructor.avatar
-                      : `https://const-production.up.railway.app/uploads/${initialValues.instructor.avatar}`
+                    initialValues.avatar.startsWith("http")
+                      ? initialValues.avatar
+                      : `https://const-production.up.railway.app/uploads/${initialValues.avatar}`
                   }
                   alt="Instructor Avatar"
                   className="h-16 w-16 object-cover rounded-full border"
@@ -527,7 +527,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
                 <button
                   type="button"
                   onClick={() =>
-                    formik.setFieldValue("instructor.avatar", null)
+                    formik.setFieldValue("avatar", null)
                   }
                   className="text-red-500 hover:text-red-700 text-xs px-2 py-1 border border-red-200 rounded"
                 >
@@ -569,17 +569,17 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           )}
           <input
             type="file"
-            name="instructor.avatar"
+            name="avatar"
             accept="image/*"
             onChange={(e) => {
               const file = e.target.files[0];
               if (file) {
-                formik.setFieldValue("instructor.avatar", file);
+                formik.setFieldValue("avatar", file);
               }
             }}
             placeholder="Instructor Avatar"
             className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
-              getFieldError("instructor.avatar")
+              getFieldError("avatar")
                 ? "border-red-300"
                 : "border-gray-300"
             }`}
