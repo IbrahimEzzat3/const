@@ -99,14 +99,33 @@ exports.getCourse = asyncHandler(async (req, res, next) => {
 // @access  Private/Admin
 exports.createCourse = asyncHandler(async (req, res, next) => {
   try {
-    // Add instructor to req.body
+    // Parse instructor data
+    let instructorData = {};
+    if (req.body.instructor) {
+      try {
+        instructorData = JSON.parse(req.body.instructor);
+      } catch (e) {
+        instructorData = req.body.instructor;
+      }
+    }
+
+    // Add instructor to req.body with user data
     req.body.instructor = {
-      name: req.user.name,
-      email: req.user.email,
+      name: instructorData.name || req.user.name,
+      email: instructorData.email || req.user.email,
       avatar: req.user.avatar
         ? req.user.avatar.replace(/^uploads[\\/]/, "")
         : undefined,
     };
+
+    // Handle uploaded instructor avatar
+    if (
+      req.files &&
+      req.files["instructor.avatar"] &&
+      req.files["instructor.avatar"][0]
+    ) {
+      req.body.instructor.avatar = req.files["instructor.avatar"][0].filename;
+    }
 
     // Helper to parse JSON string fields
     const parseJsonField = (field) => {
@@ -126,12 +145,13 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
     req.body.objectives = parseJsonField("objectives");
     req.body.modules = parseJsonField("modules");
 
-    // Handle video and photo if uploaded
+    // Handle video and photo
     if (req.files && req.files.video && req.files.video[0]) {
       req.body.video = req.files.video[0].filename;
     } else if (req.body.video === "null") {
       req.body.video = null;
     }
+
     if (req.files && req.files.photo && req.files.photo[0]) {
       req.body.photo = req.files.photo[0].filename;
     } else if (req.body.photo === "null") {
@@ -141,7 +161,6 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
     // Convert string booleans to actual booleans
     if (req.body.isActive === "true") req.body.isActive = true;
     if (req.body.isActive === "false") req.body.isActive = false;
-    // Add isPublished conversion as well, if it's sent from frontend
     if (req.body.isPublished === "true") req.body.isPublished = true;
     if (req.body.isPublished === "false") req.body.isPublished = false;
 
@@ -166,7 +185,6 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
   } catch (error) {
     console.error("Backend: Error creating course:", error);
 
-    // Send detailed error information
     if (error.name === "ValidationError") {
       const errors = Object.values(error.errors).map((err) => ({
         path: err.path,
@@ -189,7 +207,6 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
     });
   }
 });
-
 // @desc    Update course
 // @route   PUT /api/courses/:id
 // @access  Private/Admin

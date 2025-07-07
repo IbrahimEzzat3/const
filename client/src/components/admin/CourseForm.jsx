@@ -170,19 +170,16 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         formData.append("level", values.level);
         formData.append("isActive", values.isActive);
 
-        // Handle instructor
-        formData.append("instructor", JSON.stringify(values.instructor));
-        formData.append(
-          "instructor.avatar",
-          JSON.stringify(values.instructor.avatar)
-        );
+        const instructorData = {
+          name: values.instructor.name,
+          email: values.instructor.email,
+        };
+        formData.append("instructor", JSON.stringify(instructorData));
 
-        if (values.instructor.avatar instanceof File) {
-          formData.append("avatar", values.instructor.avatar);
-        }
         if (values.instructor.avatar instanceof File) {
           formData.append("instructor.avatar", values.instructor.avatar);
         }
+
         // Handle photo
         if (values.photo instanceof File) {
           formData.append("photo", values.photo);
