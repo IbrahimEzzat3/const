@@ -74,11 +74,18 @@ if (process.env.NODE_ENV === "development") {
 //     },
 //   })
 // );
+
+const fs = require("fs");
+
 app.get("/debug/uploads", (req, res) => {
   const files = fs.readdirSync(path.join(__dirname, "uploads"));
   res.json(files);
 });
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+
+
+
 
 // Serve public assets
 app.use("/public", express.static(path.join(__dirname, "public")));

@@ -564,7 +564,11 @@ const CourseDetail = () => {
                 <div className="flex items-start gap-6">
                   <div className="flex-shrink-0">
                     <img
-                      src="https://const-production.up.railway.app/uploads/I751720566010-116248244.jpg"
+                      src={
+                        course.instructor?.avatar
+                          ? `https://const-production.up.railway.app/uploads/${course.instructor.avatar}`
+                          : `https://const-production.up.railway.app/public/images/default.png`
+                      }
                       alt={course.instructor?.name}
                       className="w-24 h-24 rounded-full object-cover ring-4 ring-primary-50"
                       loading="lazy"
