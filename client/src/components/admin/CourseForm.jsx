@@ -172,7 +172,17 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
 
         // Handle instructor
         formData.append("instructor", JSON.stringify(values.instructor));
+        formData.append(
+          "instructor.avatar",
+          JSON.stringify(values.instructor.avatar)
+        );
 
+        if (values.instructor.avatar instanceof File) {
+          formData.append("avatar", values.instructor.avatar);
+        }
+        if (values.instructor.avatar instanceof File) {
+          formData.append("instructor.avatar", values.instructor.avatar);
+        }
         // Handle photo
         if (values.photo instanceof File) {
           formData.append("photo", values.photo);
@@ -518,7 +528,9 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
                 />
                 <button
                   type="button"
-                  onClick={() => formik.setFieldValue("instructor.avatar", null)}
+                  onClick={() =>
+                    formik.setFieldValue("instructor.avatar", null)
+                  }
                   className="text-red-500 hover:text-red-700 text-xs px-2 py-1 border border-red-200 rounded"
                 >
                   Remove
