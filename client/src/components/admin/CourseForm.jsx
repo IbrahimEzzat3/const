@@ -243,8 +243,6 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           }
         }
 
-   
-
         if (isEdit) {
           await courseService.updateCourse(courseId, formData);
         } else {
@@ -978,7 +976,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
                         rel="noopener noreferrer"
                         className="text-accent-gold hover:underline"
                       >
-                        Watch Video
+                        Watch Video or PDF
                       </a>
                     </div>
                   )}
