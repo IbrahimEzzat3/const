@@ -17,7 +17,7 @@ const VRDemoSection = () => {
   return (
     <section
       id="vr-demo"
-      className={`py-12 bg-accent-teal text-white  mt-16 ${direction}`}
+      className={`py-12 bg-accent-teal text-white h-[600px]  mt-16 ${direction}`}
     >
       <div className="w-full px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -77,13 +77,13 @@ const VRDemoSection = () => {
           <div className="relative">
             <div
               className="bg-accent-teal rounded-lg overflow-hidden relative flex items-center justify-center"
-              style={{ minHeight: "300px" }}
+              style={{ minHeight: "500px" }}
             >
               {/* Video Demo Container */}
               <img
                 className="w-full h-64 rounded-lg"
-                style={{ minHeight: "300px" }}
-                src="/images/vr-demo.png"
+                style={{ minHeight: "500px" }}
+                src="/images/vr.png"
                 alt="VR Demo"
               />
             </div>

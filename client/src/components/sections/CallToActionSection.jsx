@@ -148,7 +148,7 @@ const CallToActionSection = () => {
                   name="type"
                   value={formData.type}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-white  border border-white text-accent-teal focus:outline-none focus:border-accent-gold"
+                  className="w-full px-4 py-3 ltr rounded-lg bg-white  border border-white text-accent-teal focus:outline-none focus:border-accent-gold"
                   required
                 >
                   <option value="" disabled>

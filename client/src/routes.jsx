@@ -6,14 +6,8 @@ import AdminRoute from "./components/auth/AdminRoute";
 // Public Pages
 import HomePage from "./pages/home/HomePage";
 
-// Service Pages
-import InteriorDesign from "./pages/services/InteriorDesign";
-import ExteriorDesign from "./pages/services/ExteriorDesign";
-import GardenDesign from "./pages/services/GardenDesign";
-import SmartAutomation from "./pages/services/SmartAutomation";
+//Services Pages
 import CostCalculator from "./pages/services/CostCalculator";
-import DecorationDesign from "./pages/services/DecorationDesign";
-import CommercialDesign from "./pages/services/CommercialDesign";
 
 // Auth Pages
 import LoginPage from "./pages/auth/LoginPage";
@@ -71,18 +65,6 @@ const AppRoutes = () => {
       <Route path="/" element={<HomePage />} />
 
       {/* Service Routes */}
-      <Route path="/services/interior-design" element={<InteriorDesign />} />
-      <Route path="/services/exterior-design" element={<ExteriorDesign />} />
-      <Route path="/services/garden-design" element={<GardenDesign />} />
-      <Route path="/services/smart-automation" element={<SmartAutomation />} />
-      <Route
-        path="/services/decoration-design"
-        element={<DecorationDesign />}
-      />
-      <Route
-        path="/services/commercial-design"
-        element={<CommercialDesign />}
-      />
       <Route path="/services/cost-calculator" element={<CostCalculator />} />
 
       {/* Project Routes */}

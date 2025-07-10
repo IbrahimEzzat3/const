@@ -43,7 +43,7 @@ const courseSchema = new mongoose.Schema(
     avatar: {
       type: String,
       required: false,
-      default: null,
+      default: "public/images/defaultCourse.png",
     },
     instructor: {
       name: {

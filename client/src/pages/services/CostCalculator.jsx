@@ -53,12 +53,12 @@ const CostCalculator = () => {
       </Helmet>
       <main className={`container mx-auto px-4 py-16 ${direction}`}>
         <section className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-blue-900 mb-8 text-center">
+          <h1 className="text-4xl font-bold text-accent-gold mb-8 text-center">
             {t("sections.services.costCalculator.title")}
           </h1>
 
           <section className="bg-white rounded-lg shadow-lg p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-blue-900 mb-4">
+            <h2 className="text-2xl font-semibold text-accent-gold mb-4">
               {t("sections.services.costCalculator.title")}
             </h2>
             <p className="text-gray-600 mb-6">
@@ -67,7 +67,7 @@ const CostCalculator = () => {
 
             <section className="bg-gray-50 p-6 rounded-lg mb-8">
               <div className="mb-6">
-                <label className="block text-blue-900 font-semibold mb-2">
+                <label className="block text-accent-gold font-semibold mb-2">
                   {t("sections.services.costCalculator.areaPerFloor")}
                 </label>
                 <input
@@ -88,7 +88,7 @@ const CostCalculator = () => {
                 />
               </div>
               <div className="mb-6">
-                <label className="block text-blue-900 font-semibold mb-2">
+                <label className="block text-accent-gold font-semibold mb-2">
                   {t("sections.services.costCalculator.numFloors")}
                 </label>
                 <input
@@ -109,7 +109,7 @@ const CostCalculator = () => {
                 />
               </div>
               <div className="mb-6">
-                <label className="block text-blue-900 font-semibold mb-2">
+                <label className="block text-accent-gold font-semibold mb-2">
                   {t("sections.services.costCalculator.areaAnnex")}
                 </label>
                 <input
@@ -132,7 +132,7 @@ const CostCalculator = () => {
 
               <button
                 onClick={calculateCost}
-                className="w-full bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-lg transition duration-300"
+                className="w-full bg-accent-gold hover:bg-accent-gold/80 text-white font-bold py-3 px-8 rounded-lg transition duration-300"
               >
                 {t("sections.services.costCalculator.calculateButton")}
               </button>
@@ -144,10 +144,10 @@ const CostCalculator = () => {
                   direction === "rtl" ? "text-right" : "text-left"
                 }`}
               >
-                <h3 className="text-xl font-semibold text-blue-900 mb-3">
+                <h3 className="text-xl font-semibold text-accent-gold mb-3">
                   {t("sections.services.costCalculator.estimatedCostTitle")}
                 </h3>
-                <p className="text-2xl font-bold text-blue-900">
+                <p className="text-2xl font-bold text-accent-gold">
                   {estimatedCost.toLocaleString()}{" "}
                   {t("sections.smartHomePackages.currency")}
                 </p>
@@ -164,7 +164,7 @@ const CostCalculator = () => {
           <div className="text-center">
             <button
               onClick={handleContactClick}
-              className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-lg transition duration-300"
+              className="bg-accent-gold hover:bg-accent-gold/80 text-white font-bold py-3 px-8 rounded-lg transition duration-300"
             >
               {t("sections.services.costCalculator.calculateButton")}
             </button>

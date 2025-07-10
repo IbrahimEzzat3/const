@@ -62,9 +62,7 @@ exports.updateProject = asyncHandler(async (req, res, next) => {
 // @access  Private/Admin
 exports.deleteProject = asyncHandler(async (req, res, next) => {
   try {
-    console.log("Received projectSlug:", req.params.projectSlug);
     const project = await Project.findOne({ slug: req.params.projectSlug });
-    console.log("Project found:", project);
     if (!project) {
       return next(new ErrorResponse("Project not found", 404));
     }

@@ -30,7 +30,6 @@ const AboutSection = () => {
 
           <div className="space-y-2 text-accent-teal">
             <p className="text-lg">{t("sections.about.subtitle")}</p>
-            <p className="text-sm">{t("sections.about.description")}</p>
           </div>
           <div className="w-36 h-1 bg-accent-gold mx-auto mt-4"></div>
         </div>

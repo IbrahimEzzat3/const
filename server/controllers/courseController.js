@@ -99,8 +99,7 @@ exports.getCourse = asyncHandler(async (req, res, next) => {
 // @access  Private/Admin
 exports.createCourse = asyncHandler(async (req, res, next) => {
   try {
-    console.log("=== FILES DEBUG ===");
-    console.log("All files:", req.files);
+ 
 
     // Parse instructor data
     let instructorData = {};
@@ -120,7 +119,6 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
 
     // Handle uploaded instructor avatar
     if (req.files && req.files.avatar && req.files.avatar[0]) {
-      console.log("Avatar file received:", req.files.avatar[0].filename);
       req.body.avatar = req.files.avatar[0].filename;
     } else if (req.body.avatar === "null" || req.body.avatar === "") {
       req.body.avatar = null;
@@ -128,7 +126,6 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
 
     // Handle video
     if (req.files && req.files.video && req.files.video[0]) {
-      console.log("Video file received:", req.files.video[0].filename);
       req.body.video = req.files.video[0].filename;
     } else if (req.body.video === "null" || req.body.video === "") {
       req.body.video = null;
@@ -136,7 +133,6 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
 
     // Handle photo
     if (req.files && req.files.photo && req.files.photo[0]) {
-      console.log("Photo file received:", req.files.photo[0].filename);
       req.body.photo = req.files.photo[0].filename;
     } else if (req.body.photo === "null" || req.body.photo === "") {
       req.body.photo = null;
@@ -174,12 +170,7 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
         duration: module.duration ? parseInt(module.duration) : undefined,
       }));
     }
-
-    console.log("Final data before save:", {
-      instructor: req.body.instructor,
-      video: req.body.video,
-      photo: req.body.photo,
-    });
+ 
 
     const course = await Course.create(req.body);
 

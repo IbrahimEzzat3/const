@@ -243,7 +243,7 @@ export const translations = {
         dateFormat: "{{date}}",
       },
       courseDetail: {
-        enrollSuccessTitle:"Success",
+        enrollSuccessTitle: "Success",
         loadError: "Failed to load course details",
         enrollError: "Failed to update enrollment status",
         feedbackError: "Failed to submit feedback",
@@ -327,8 +327,8 @@ export const translations = {
               "Engineering designs for various projects, including residential, commercial, and industrial.",
           },
           pimModeling: {
-            title: "PIM Modeling",
-            description: "PIM modeling for engineering projects.",
+            title: "BIM Modeling",
+            description: "BIM modeling for engineering projects.",
           },
           landscapeDesigns: {
             title: "Landscape Designs",
@@ -402,7 +402,7 @@ export const translations = {
           moreDetails: "More Details",
         },
         whyChooseUs: {
-          title: "Why Choose Ecosus?",
+          title: "Why Choose ECOSUS?",
           localExperience: {
             title: "Local Experience",
             description:
@@ -423,7 +423,7 @@ export const translations = {
             description:
               "We provide custom design solutions that suit your taste and needs, while maintaining architectural identity.",
           },
-          summaryTitle: "Why Choose Ecosus?",
+          summaryTitle: "Why Choose ECOSUS?",
           summaryText:
             "We are a team of experienced professionals who are dedicated to providing the best possible service to our clients. We are committed to using the latest technology and design trends to create beautiful and functional spaces.",
         },
@@ -445,7 +445,8 @@ export const translations = {
           },
         },
         smartHomePackages: {
-          title: "Smart Home Packages",
+          title: "Design Packages",
+          title2: "Supervision Packages",
           basic: {
             title: "ECONOMY Package",
             features: [
@@ -583,9 +584,8 @@ export const translations = {
           },
         },
         about: {
-          title: "Ecosus, the beauty icon",
+          title: "ECOSUS, A partner you can depend on",
           subtitle: "With you from the idea until you receive the key",
-          description: "Learn about the most popular and widely used models.",
           bottomText: "Innovative Designs for a Beautiful World",
           projects: [
             {
@@ -1001,8 +1001,8 @@ export const translations = {
               "تصميمات هندسية للمشاريع المختلفة، بما في ذلك المنازل والمباني التجارية والصناعية.",
           },
           pimModeling: {
-            title: "نمذجة معلومات المشاريع (PIM)",
-            description: "نمذجة معلومات المشاريع (PIM) للمشاريع الهندسية.",
+            title: "نمذجة معلومات المشاريع (BIM)",
+            description: "نمذجة معلومات المشاريع (BIM) للمشاريع الهندسية.",
           },
           landscapeDesigns: {
             title: "تصميمات لاندسكيب",
@@ -1072,7 +1072,7 @@ export const translations = {
           moreDetails: "المزيد من التفاصيل",
         },
         whyChooseUs: {
-          title: "لماذا تختار Ecosus ؟",
+          title: "لماذا تختار ECOSUS ؟",
           localExperience: {
             title: "خبرة محلية",
             description:
@@ -1093,7 +1093,7 @@ export const translations = {
             description:
               "نقدم حلولاً تصميمية مخصصة تناسب ذوقك واحتياجاتك، مع الحفاظ على الهوية المعمارية.",
           },
-          summaryTitle: "لماذا تختار Ecosus ؟ ",
+          summaryTitle: "لماذا تختار ECOSUS ؟ ",
           summaryText:
             "نحن فريق من الخبراء المؤهلين الذين يتمتعون بخبرة واسعة وفهم عميق للسوق المحلي واحتياجات العملاء السعوديين، مما يضمن تقديم حلول مبتكرة وملائمة لكل مشروع.",
         },
@@ -1115,7 +1115,8 @@ export const translations = {
           },
         },
         smartHomePackages: {
-          title: "باقات المنازل الذكية",
+          title: "باقات التصاميم",
+          title2: "باقات الاشراف",
           basic: {
             title: "الباقة Economy",
             features: [
@@ -1244,7 +1245,10 @@ export const translations = {
             },
             hours: {
               title: "ساعات العمل",
-              details: ["السبت - الخميس: 9 صباحاً - 5 مساءً", "الجمعة: مغلق"],
+              details: [
+                "الأحد - الخميس: 9 صباحاً - 5 مساءً",
+                "الجمعة والسبت : مغلق ",
+              ],
             },
           },
           location: {
@@ -1252,9 +1256,8 @@ export const translations = {
           },
         },
         about: {
-          title: "Ecosus أيقونة الجمال",
-          subtitle: "معك من الفكرة حتى تستلم المفتاح",
-          description: "تعرف على الطُرز الاشهر والاكثر استخداماً",
+          title: "ECOSUS، شريك يمكنك الاعتماد عليه",
+          subtitle: "معك من الفكرة حتى تسليم المفتاح",
           bottomText: "تصاميم مبتكرة لعالم أجمل",
           projects: [
             {

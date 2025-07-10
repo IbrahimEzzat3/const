@@ -103,7 +103,6 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
 
   const handlePhotoChange = (event) => {
     const file = event.currentTarget.files[0];
-    console.log("PHOTO FILE SELECTED:", file);
 
     if (file) {
       if (!file.type.startsWith("image/")) {
@@ -120,7 +119,6 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
 
   const handleAvatarChange = (event) => {
     const file = event.currentTarget.files[0];
-    console.log("Avatar FILE SELECTED:", file);
 
     if (file) {
       if (!file.type.startsWith("image/")) {
@@ -195,7 +193,6 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
 
         if (values.avatar instanceof File) {
           formData.append("avatar", values.avatar);
-          console.log("Avatar file appended:", values.avatar);
         }
 
         // Handle photo
@@ -246,10 +243,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           }
         }
 
-        // Debug: Log FormData contents
-        for (let pair of formData.entries()) {
-          console.log("FORMDATA:", pair[0], pair[1]);
-        }
+   
 
         if (isEdit) {
           await courseService.updateCourse(courseId, formData);

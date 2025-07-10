@@ -355,8 +355,6 @@ const CourseDetail = () => {
     setEnrollError("");
     try {
       await courseService.enrollInCourse(courseId, enrollFields);
-      console.log(courseId);
-      console.log(enrollFields);
 
       setShowEnrollForm(false);
       setEnrollSuccess(true);
@@ -434,6 +432,41 @@ const CourseDetail = () => {
       setDeleteAlert({ isOpen: false, feedbackId: null });
     }
   };
+
+    const Button = ({
+      type,
+      variant,
+      isLoading,
+      disabled,
+      onClick,
+      children,
+    }) => {
+      const baseClasses =
+        "px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed";
+      const variants = {
+        primary:
+          "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700",
+        secondary: "bg-gray-200 text-gray-700 hover:bg-gray-300",
+      };
+
+      return (
+        <button
+          type={type}
+          disabled={disabled || isLoading}
+          onClick={onClick}
+          className={`${baseClasses} ${variants[variant]}`}
+        >
+          {isLoading ? (
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+              Loading...
+            </div>
+          ) : (
+            children
+          )}
+        </button>
+      );
+    };
 
   if (isLoading) {
     return (
@@ -567,18 +600,17 @@ const CourseDetail = () => {
                       src={
                         course?.avatar
                           ? `https://const-production.up.railway.app/uploads/${course.avatar}`
-                          : `https://const-production.up.railway.app/public/images/default.png`
+                          : `https://const-production.up.railway.app/public/images/defaultCourse.png`
                       }
                       alt={course.instructor?.name}
                       className="w-24 h-24 rounded-full object-cover ring-4 ring-primary-50"
                       loading="lazy"
                       crossOrigin="anonymous"
                       referrerPolicy="no-referrer"
-                      // onError={(e) => {
-                      //   console.log("Image failed to load:", e.target.src);
-                      //   e.target.src =
-                      //     "https://const-production.up.railway.app/public/images/default.png";
-                      // }}
+                      onError={(e) => {
+                        e.target.src =
+                          "https://const-production.up.railway.app/public/images/defaultCourse.png";
+                      }}
                     />
                   </div>
                   <div>
@@ -839,369 +871,485 @@ const CourseDetail = () => {
                       </button>
                       <form
                         ref={enrollFormRef}
-                        className="space-y-4 max-h-[80vh] overflow-y-auto"
+                        className="space-y-6 max-h-[80vh] overflow-y-auto bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-white/20"
                         onSubmit={handleEnrollFormSubmit}
                       >
                         {enrollError && (
-                          <div className="text-red-600 bg-red-50 p-2 rounded mb-2 text-center">
+                          <div className="text-red-600 bg-red-50 border border-red-200 p-4 rounded-lg mb-4 text-center shadow-sm">
                             {enrollError}
                           </div>
                         )}
-                        <div>
-                          <label>{t("common.startDate")}</label>
-                          <select
-                            name="startDate"
-                            value={enrollFields.startDate}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1 ltr"
-                          >
-                            <option value="">{t("common.pleaseSelect")}</option>
-                            <option value="June,1st">{t("common.June")}</option>
-                            <option value="October,1st">
-                              {t("common.Oct")}
-                            </option>
-                            <option value="February,1st">
-                              {t("common.Feb")}
-                            </option>
-                          </select>
-                          {enrollFieldErrors.startDate && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.startDate}
-                            </div>
-                          )}
-                        </div>
 
-                        <div>
-                          <label>{t("common.courseLanguage")}</label>
-                          <select
-                            name="courseLanguage"
-                            value={enrollFields.courseLanguage}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1 ltr"
-                          >
-                            <option value="">{t("common.pleaseSelect")}</option>
-                            <option value="arabic">{t("common.ar")}</option>
-                            <option value="english">{t("common.en")}</option>
-                          </select>
-                          {enrollFieldErrors.courseLanguage && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.courseLanguage}
+                        {/* Course Selection Section */}
+                        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-100">
+                          <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                            Course Selection
+                          </h2>
+                          <div className="grid md:grid-cols-3 gap-4">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.startDate")}
+                              </label>
+                              <select
+                                name="startDate"
+                                value={enrollFields.startDate}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 ltr bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              >
+                                <option value="">
+                                  {t("common.pleaseSelect")}
+                                </option>
+                                <option value="June,1st">
+                                  {t("common.June")}
+                                </option>
+                                <option value="October,1st">
+                                  {t("common.Oct")}
+                                </option>
+                                <option value="February,1st">
+                                  {t("common.Feb")}
+                                </option>
+                              </select>
+                              {enrollFieldErrors.startDate && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.startDate}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
 
-                        <div>
-                          <label>{t("common.package")}</label>
-                          <select
-                            name="package"
-                            value={enrollFields.package}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1 ltr"
-                          >
-                            <option value="">{t("common.pleaseSelect")}</option>
-                            <option value="basic">{t("common.basic")}</option>
-                            <option value="advanced">
-                              {t("common.advanced")}
-                            </option>
-                            <option value="premium">
-                              {t("common.premium")}
-                            </option>
-                          </select>
-                          {enrollFieldErrors.package && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.package}
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.courseLanguage")}
+                              </label>
+                              <select
+                                name="courseLanguage"
+                                value={enrollFields.courseLanguage}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 ltr bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              >
+                                <option value="">
+                                  {t("common.pleaseSelect")}
+                                </option>
+                                <option value="arabic">{t("common.ar")}</option>
+                                <option value="english">
+                                  {t("common.en")}
+                                </option>
+                              </select>
+                              {enrollFieldErrors.courseLanguage && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.courseLanguage}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
 
-                        <a
-                          href="https://drive.google.com/file/d/1CysQ-QJZIRpaslFggV-mIgYmHSBefBxV/view"
-                          target="_blank"
-                          className="text-black underline"
-                        >
-                          {t("common.details")}
-                        </a>
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.package")}
+                              </label>
+                              <select
+                                name="package"
+                                value={enrollFields.package}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 ltr bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              >
+                                <option value="">
+                                  {t("common.pleaseSelect")}
+                                </option>
+                                <option value="basic">
+                                  {t("common.basic")}
+                                </option>
+                                <option value="advanced">
+                                  {t("common.advanced")}
+                                </option>
+                                <option value="premium">
+                                  {t("common.premium")}
+                                </option>
+                              </select>
+                              {enrollFieldErrors.package && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.package}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          <a
+                            href="https://drive.google.com/file/d/1CysQ-QJZIRpaslFggV-mIgYmHSBefBxV/view"
+                            target="_blank"
+                            className="inline-block mt-4 text-blue-600 hover:text-blue-800 transition-colors duration-200 font-medium underline decoration-2 underline-offset-2"
+                          >
+                            {t("common.details")}
+                          </a>
+                        </div>
 
                         {/* Personal Info */}
-                        <h3 className="font-bold text-lg mb-2">
-                          {t("common.personalInfo")}
-                        </h3>
-                        <div>
-                          <label>{t("common.fullNameAr")}</label>
-                          <input
-                            name="fullNameAr"
-                            value={enrollFields.fullNameAr}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1"
-                          />
-                          {enrollFieldErrors.fullNameAr && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.fullNameAr}
+                        <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6 border border-green-100">
+                          <h3 className="font-bold text-xl mb-4 text-gray-800 flex items-center gap-2">
+                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                            {t("common.personalInfo")}
+                          </h3>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.fullNameAr")}
+                              </label>
+                              <input
+                                name="fullNameAr"
+                                value={enrollFields.fullNameAr}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              />
+                              {enrollFieldErrors.fullNameAr && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.fullNameAr}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        <div>
-                          <label>{t("common.fullNameEn")}</label>
-                          <input
-                            name="fullNameEn"
-                            value={enrollFields.fullNameEn}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1"
-                          />
-                          {enrollFieldErrors.fullNameEn && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.fullNameEn}
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.fullNameEn")}
+                              </label>
+                              <input
+                                name="fullNameEn"
+                                value={enrollFields.fullNameEn}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              />
+                              {enrollFieldErrors.fullNameEn && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.fullNameEn}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        <div>
-                          <label>{t("common.birthDate")}</label>
-                          <input
-                            name="birthDate"
-                            type="date"
-                            value={enrollFields.birthDate}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1"
-                          />
-                          {enrollFieldErrors.birthDate && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.birthDate}
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.birthDate")}
+                              </label>
+                              <input
+                                name="birthDate"
+                                type="date"
+                                value={enrollFields.birthDate}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              />
+                              {enrollFieldErrors.birthDate && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.birthDate}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        <div>
-                          <label>{t("common.email")}</label>
-                          <input
-                            name="email"
-                            type="email"
-                            value={enrollFields.email}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1"
-                          />
-                          {enrollFieldErrors.email && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.email}
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.email")}
+                              </label>
+                              <input
+                                name="email"
+                                type="email"
+                                value={enrollFields.email}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              />
+                              {enrollFieldErrors.email && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.email}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        <div>
-                          <label>{t("common.phone")}</label>
-                          <input
-                            name="phone"
-                            value={enrollFields.phone}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1"
-                          />
-                          {enrollFieldErrors.phone && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.phone}
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.phone")}
+                              </label>
+                              <input
+                                name="phone"
+                                value={enrollFields.phone}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              />
+                              {enrollFieldErrors.phone && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.phone}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        <div>
-                          <label>{t("common.nationality")}</label>
-                          <input
-                            name="nationality"
-                            value={enrollFields.nationality}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1"
-                          />
-                          {enrollFieldErrors.nationality && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.nationality}
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.nationality")}
+                              </label>
+                              <input
+                                name="nationality"
+                                value={enrollFields.nationality}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              />
+                              {enrollFieldErrors.nationality && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.nationality}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        <div>
-                          <label>{t("common.city")}</label>
-                          <input
-                            name="city"
-                            value={enrollFields.city}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1"
-                          />
-                          {enrollFieldErrors.city && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.city}
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.city")}
+                              </label>
+                              <input
+                                name="city"
+                                value={enrollFields.city}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              />
+                              {enrollFieldErrors.city && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.city}
+                                </div>
+                              )}
                             </div>
-                          )}
+                          </div>
                         </div>
+
                         {/* Academic Qualifications */}
-                        <h3 className="font-bold text-lg mt-4 mb-2">
-                          {t("common.academicQualifications")}
-                        </h3>
-                        <div>
-                          <label>{t("common.degree")}</label>
-                          <input
-                            name="degree"
-                            value={enrollFields.degree}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1"
-                          />
-                          {enrollFieldErrors.degree && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.degree}
+                        <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-100">
+                          <h3 className="font-bold text-xl mb-4 text-gray-800 flex items-center gap-2">
+                            <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                            {t("common.academicQualifications")}
+                          </h3>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.degree")}
+                              </label>
+                              <input
+                                name="degree"
+                                value={enrollFields.degree}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              />
+                              {enrollFieldErrors.degree && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.degree}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        <div>
-                          <label>{t("common.major")}</label>
-                          <input
-                            name="major"
-                            value={enrollFields.major}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1"
-                          />
-                          {enrollFieldErrors.major && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.major}
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.major")}
+                              </label>
+                              <input
+                                name="major"
+                                value={enrollFields.major}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              />
+                              {enrollFieldErrors.major && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.major}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        <div>
-                          <label>{t("common.university")}</label>
-                          <input
-                            name="university"
-                            value={enrollFields.university}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1"
-                          />
-                          {enrollFieldErrors.university && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.university}
+                            <div className="md:col-span-2">
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.university")}
+                              </label>
+                              <input
+                                name="university"
+                                value={enrollFields.university}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              />
+                              {enrollFieldErrors.university && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.university}
+                                </div>
+                              )}
                             </div>
-                          )}
+                          </div>
                         </div>
+
                         {/* Work Experience */}
-                        <h3 className="font-bold text-lg mt-4 mb-2">
-                          {t("common.workExperience")}
-                        </h3>
-                        <div>
-                          <label>{t("common.currentJob")}</label>
-                          <input
-                            name="currentJob"
-                            value={enrollFields.currentJob}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1"
-                          />
-                          {enrollFieldErrors.currentJob && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.currentJob}
+                        <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-xl p-6 border border-orange-100">
+                          <h3 className="font-bold text-xl mb-4 text-gray-800 flex items-center gap-2">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                            {t("common.workExperience")}
+                          </h3>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.currentJob")}
+                              </label>
+                              <input
+                                name="currentJob"
+                                value={enrollFields.currentJob}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              />
+                              {enrollFieldErrors.currentJob && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.currentJob}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        <div>
-                          <label>{t("common.company")}</label>
-                          <input
-                            name="company"
-                            value={enrollFields.company}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1"
-                          />
-                          {enrollFieldErrors.company && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.company}
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.company")}
+                              </label>
+                              <input
+                                name="company"
+                                value={enrollFields.company}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              />
+                              {enrollFieldErrors.company && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.company}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        <div>
-                          <label>{t("common.yearsExperience")}</label>
-                          <input
-                            name="yearsExperience"
-                            value={enrollFields.yearsExperience}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1"
-                          />
-                          {enrollFieldErrors.yearsExperience && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.yearsExperience}
+                            <div className="md:col-span-2">
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.yearsExperience")}
+                              </label>
+                              <input
+                                name="yearsExperience"
+                                value={enrollFields.yearsExperience}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                              />
+                              {enrollFieldErrors.yearsExperience && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.yearsExperience}
+                                </div>
+                              )}
                             </div>
-                          )}
+                          </div>
                         </div>
+
                         {/* Scholarship */}
-                        <h3 className="font-bold text-lg mt-4 mb-2">
-                          {t("common.scholarship")}
-                        </h3>
-                        <div>
-                          <label>{t("common.wantScholarship")}</label>
-                          <select
-                            name="wantScholarship"
-                            value={enrollFields.wantScholarship}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1 ltr"
-                          >
-                            <option value="">{t("common.pleaseSelect")}</option>
-                            <option value="yes">{t("common.yes")}</option>
-                            <option value="no">{t("common.no")}</option>
-                          </select>
-                          {enrollFieldErrors.wantScholarship && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.wantScholarship}
-                            </div>
-                          )}
-                        </div>
-                        {enrollFields.wantScholarship === "yes" && (
+                        <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-6 border border-indigo-100">
+                          <h3 className="font-bold text-xl mb-4 text-gray-800 flex items-center gap-2">
+                            <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                            {t("common.scholarship")}
+                          </h3>
                           <div>
-                            <label>{t("common.scholarshipReason")}</label>
-                            <textarea
-                              name="scholarshipReason"
-                              value={enrollFields.scholarshipReason}
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              {t("common.wantScholarship")}
+                            </label>
+                            <select
+                              name="wantScholarship"
+                              value={enrollFields.wantScholarship}
                               onChange={handleEnrollFormChange}
-                              className="w-full border rounded px-2 py-1 "
-                            />
-                            {enrollFieldErrors.scholarshipReason && (
-                              <div className="text-red-500 text-xs">
-                                {enrollFieldErrors.scholarshipReason}
+                              className="w-full border border-gray-300 rounded-lg px-4 py-3 ltr bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                            >
+                              <option value="">
+                                {t("common.pleaseSelect")}
+                              </option>
+                              <option value="yes">{t("common.yes")}</option>
+                              <option value="no">{t("common.no")}</option>
+                            </select>
+                            {enrollFieldErrors.wantScholarship && (
+                              <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                {enrollFieldErrors.wantScholarship}
                               </div>
                             )}
                           </div>
-                        )}
-                        {/* Payment */}
-                        <h3 className="font-bold text-lg mt-4 mb-2">
-                          {t("common.payment")}
-                        </h3>
-                        <div>
-                          <label>{t("common.paymentMethod")}</label>
-                          <select
-                            name="paymentMethod"
-                            value={enrollFields.paymentMethod}
-                            onChange={handleEnrollFormChange}
-                            className="w-full border rounded px-2 py-1 ltr"
-                          >
-                            <option value="">{t("common.pleaseSelect")}</option>
-                            <option value="bankTransfer">
-                              {t("common.bankTransfer")}
-                            </option>
-                            <option value="installment">
-                              {t("common.installment")}
-                            </option>
-                            <option value="companyDelivery">
-                              {t("common.companyDelivery")}
-                            </option>
-                          </select>
-                          {enrollFieldErrors.paymentMethod && (
-                            <div className="text-red-500 text-xs">
-                              {enrollFieldErrors.paymentMethod}
+                          {enrollFields.wantScholarship === "yes" && (
+                            <div className="mt-4">
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t("common.scholarshipReason")}
+                              </label>
+                              <textarea
+                                name="scholarshipReason"
+                                value={enrollFields.scholarshipReason}
+                                onChange={handleEnrollFormChange}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm resize-none"
+                                rows="4"
+                              />
+                              {enrollFieldErrors.scholarshipReason && (
+                                <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                  <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                  {enrollFieldErrors.scholarshipReason}
+                                </div>
+                              )}
                             </div>
                           )}
                         </div>
+
+                        {/* Payment */}
+                        <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-6 border border-emerald-100">
+                          <h3 className="font-bold text-xl mb-4 text-gray-800 flex items-center gap-2">
+                            <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+                            {t("common.payment")}
+                          </h3>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              {t("common.paymentMethod")}
+                            </label>
+                            <select
+                              name="paymentMethod"
+                              value={enrollFields.paymentMethod}
+                              onChange={handleEnrollFormChange}
+                              className="w-full border border-gray-300 rounded-lg px-4 py-3 ltr bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                            >
+                              <option value="">
+                                {t("common.pleaseSelect")}
+                              </option>
+                              <option value="bankTransfer">
+                                {t("common.bankTransfer")}
+                              </option>
+                              <option value="installment">
+                                {t("common.installment")}
+                              </option>
+                              <option value="companyDelivery">
+                                {t("common.companyDelivery")}
+                              </option>
+                            </select>
+                            {enrollFieldErrors.paymentMethod && (
+                              <div className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                                <div className="w-1 h-1 bg-red-500 rounded-full"></div>
+                                {enrollFieldErrors.paymentMethod}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
                         {/* Agreement */}
-                        <div className="flex items-center mt-4">
-                          <input
-                            type="checkbox"
-                            name="agree"
-                            checked={enrollFields.agree}
-                            onChange={handleEnrollFormChange}
-                            className="mr-2"
-                          />
-                          <label>{t("common.agreeTerms")}</label>
+                        <div className="bg-gradient-to-r from-gray-50 to-slate-50 rounded-xl p-6 border border-gray-200">
+                          <div className="flex items-center gap-3">
+                            <input
+                              type="checkbox"
+                              name="agree"
+                              checked={enrollFields.agree}
+                              onChange={handleEnrollFormChange}
+                              className="w-5 h-5 text-blue-600 border-2 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+                            />
+                            <label className="text-sm font-medium text-gray-700">
+                              {t("common.agreeTerms")}
+                            </label>
+                          </div>
                           {enrollFieldErrors.agree && (
-                            <div className="text-red-500 text-xs ml-2">
+                            <div className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                              <div className="w-1 h-1 bg-red-500 rounded-full"></div>
                               {enrollFieldErrors.agree}
                             </div>
                           )}
                         </div>
-                        <div className="flex gap-2 mt-4">
+
+                        <div className="flex gap-4 mt-8 justify-center">
                           <Button
                             type="submit"
                             variant="primary"

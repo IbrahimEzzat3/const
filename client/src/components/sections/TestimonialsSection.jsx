@@ -101,9 +101,7 @@ const TestimonialsSection = () => {
   }
 
   return (
-    <section
-      className={`bg-[#F5EFE6] py-16 mt-16  sm:py-24 ${direction}`}
-    >
+    <section className={`bg-[#F5EFE6] py-16 mt-16  sm:py-24 ${direction}`}>
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-base font-semibold text-accent-teal tracking-wide uppercase">
@@ -124,7 +122,7 @@ const TestimonialsSection = () => {
             .slice(0, 4)
             .map((testimonial) => (
               <Card
-                key={testimonial._id}
+                key={testimonial?._id}
                 className="group relative flex flex-col overflow-hidden bg-white hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex-1 p-6">
@@ -137,17 +135,17 @@ const TestimonialsSection = () => {
                           ? `https://const-production.up.railway.app/${testimonial.user.avatar}`
                           : `https://const-production.up.railway.app/public/images/default.png`
                       }
-                      alt={testimonial.user.name}
+                      alt={testimonial?.user?.name}
                       loading="lazy"
                       crossOrigin="anonymous"
                       referrerPolicy="no-referrer"
                     />
                     <div className={direction === "rtl" ? "mr-4" : "ml-4"}>
                       <h3 className="text-lg font-medium text-primary-900">
-                        {testimonial.user.name}
+                        {testimonial?.user?.name}
                       </h3>
                       <div className="flex items-center mt-1">
-                        {[...Array(testimonial.rating)].map((_, i) => (
+                        {[...Array(testimonial?.rating)].map((_, i) => (
                           <svg
                             key={i}
                             className="h-5 w-5 text-yellow-400"
@@ -162,7 +160,7 @@ const TestimonialsSection = () => {
                   </div>
                   <div className="mt-4">
                     <p className="text-base text-accent-teal line-clamp-3">
-                      {testimonial.content}
+                      {testimonial?.content}
                     </p>
                   </div>
                   <div className="mt-6 flex items-center justify-between">

@@ -1,5 +1,9 @@
 import React from "react";
 import { useLanguage } from "../../shared/context/LanguageContext";
+import { useAuth } from "../../shared/context/AuthContext";
+import { whyImageService } from "../../shared/services/whyImageService";
+import { useState, useEffect } from "react";
+import CustomAlert from "../../shared/components/CustomAlert";
 
 // Custom SVG Icons
 const AwardIcon = ({ className = "w-10" }) => (
@@ -179,23 +183,123 @@ const WhyChooseUsSection = () => {
     },
   ];
 
+  const { user } = useAuth();
+  const isAdmin = user?.role === "admin";
+  const [whyImage, setWhyImage] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [file, setFile] = useState(null);
+  const [alert, setAlert] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "info",
+    onConfirm: null,
+    showCancelButton: false,
+  });
+
+  useEffect(() => {
+    whyImageService.getWhyImage().then((res) => {
+      setWhyImage(res.data[0] || null);
+      setLoading(false);
+    });
+  }, []);
+
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const imageData = { image: reader.result };
+      if (whyImage) {
+        await whyImageService.updateWhyImage(whyImage._id, imageData);
+      } else {
+        await whyImageService.createWhyImage(imageData);
+      }
+      const res = await whyImageService.getWhyImage();
+      setWhyImage(res.data[0] || null);
+      setFile(null);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleDelete = () => {
+    setAlert({
+      isOpen: true,
+      title: "Delete Image",
+      message: "Are you sure you want to delete this image?",
+      type: "error",
+      showCancelButton: true,
+      onConfirm: async () => {
+        await whyImageService.deleteWhyImage(whyImage._id);
+        setWhyImage(null);
+      },
+    });
+  };
+  console.log(whyImage);
+
   return (
-    <section className="bg-primary-50 mt-16 relative py-20 text-accent-teal overflow-hidden animate-fadein-up">
+    <section
+      id="Why"
+      className="bg-primary-50 mt-16  relative py-20 text-accent-teal overflow-hidden animate-fadein-up"
+    >
       {/* Decorative gold accent behind title */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-accent-gold/10 rounded-full blur-2xl z-0" />
-      <div className="container mx-auto px-4 relative z-10 flex flex-col lg:flex-row items-center gap-12">
+      <div className="container mx-auto px-4 relative z-10 flex flex-col h-full lg:flex-row items-stretch gap-12">
         {/* Left: Main Image */}
-        <div className="flex-1 flex justify-center items-center w-full max-w-lg">
-          <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-accent-gold/30">
-            <img
-              src="/images/projects/main/feature2.webp"
-              alt="Why Choose Us"
-              className="w-full h-full object-cover object-center scale-105 hover:scale-110 transition-transform duration-700"
-              loading="lazy"
-              decoding="async"
+        <div className="flex-1 flex justify-center items-center w-full">
+          <div className="relative w-full h-full min-h-[600px] lg:min-h-[700px] overflow-hidden shadow-2xl border-4 border-accent-gold/30 flex flex-col items-center justify-center">
+            {loading ? (
+              <div>Loading...</div>
+            ) : whyImage && whyImage.image ? (
+              <img
+                src={whyImage.image}
+                alt="Why Choose Us"
+                className="w-full h-full object-cover object-center scale-105 hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <div className="text-center text-accent-gold">
+                No image uploaded
+              </div>
+            )}
+            {isAdmin && (
+              <form
+                onSubmit={handleUpload}
+                className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/80 p-4 rounded-lg flex gap-2 items-center shadow-lg"
+              >
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  className=""
+                />
+                <button
+                  type="submit"
+                  className="bg-accent-gold text-white px-4 py-2 rounded-lg font-bold"
+                >
+                  {whyImage ? "Update" : "Upload"}
+                </button>
+                {whyImage && (
+                  <button
+                    type="button"
+                    className="bg-red-500 text-white px-4 py-2 rounded-lg font-bold"
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </button>
+                )}
+              </form>
+            )}
+            <CustomAlert
+              isOpen={alert.isOpen}
+              onClose={() => setAlert((a) => ({ ...a, isOpen: false }))}
+              title={alert.title}
+              message={alert.message}
+              type={alert.type}
+              onConfirm={alert.onConfirm}
+              showCancelButton={alert.showCancelButton}
             />
-            {/* Decorative overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-accent-teal/30 to-transparent" />
           </div>
         </div>
         {/* Right: Content */}

@@ -1,8 +1,6 @@
 // Image imports
-export const FEATURE2_IMAGE = "/images/projects/main/feature2.webp";
-
-// You can add more image imports here as needed
-export const FEATURE1_IMAGE = "/images/projects/main/feature1.webp";
+export const FEATURE2_IMAGE = "/images/projects/main/feature2.png";
+export const FEATURE1_IMAGE = "/images/projects/main/feature1.png";
 
 //project 1
 export const Main1_Project = "/images/projects/project1/16_1.jpg";
@@ -25,7 +23,7 @@ export const inside7_2 = "/images/projects/project2/32.jpg";
 export const inside8_2 = "/images/projects/project2/40.jpg";
 
 //project 3
-export const Main3_Project = "/images/projects/project3/20.jpg";
+export const Main3_Project = "/images/projects/project3/6.jpg";
 export const inside1_3 = "/images/projects/project3/4.jpg";
 export const inside2_3 = "/images/projects/project3/5.jpg";
 export const inside3_3 = "/images/projects/project3/6.jpg";

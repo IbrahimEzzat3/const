@@ -1,17 +1,17 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLanguage } from "../../shared/context/LanguageContext";
-import { Main1_Project, Main2_Project } from "../../constants/images";
+import { Main3_Project, Main2_Project } from "../../constants/images";
 
 const FeaturedWorkSection = () => {
   const { t, direction } = useLanguage();
   const navigate = useNavigate();
   const projects = [
     {
-      image: Main1_Project,
+      image: Main3_Project,
       title: t("sections.featuredWork.projects.villa.title"),
       description: t("sections.featuredWork.projects.villa.description"),
-      slug: "project1",
+      slug: "project3",
     },
     {
       image: Main2_Project,
@@ -49,7 +49,7 @@ const FeaturedWorkSection = () => {
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-96 object-cover transition duration-500 group-hover:scale-110"
+                className="w-full h-full object-cover transition duration-500 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition duration-300">
                 <Link

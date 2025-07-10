@@ -20,6 +20,7 @@ const userRoutes = require("./routes/users");
 const sliderRoutes = require("./routes/sliders");
 const projectRoutes = require("./routes/projects");
 const enrollmentRoutes = require("./routes/enrollments");
+const whyImageRoutes = require("./routes/whyImage");
 const app = express();
 
 // Security middleware
@@ -77,6 +78,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/sliders", sliderRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/enrollments", enrollmentRoutes);
+app.use("/api/whyImage", whyImageRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

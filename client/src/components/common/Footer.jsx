@@ -129,9 +129,7 @@ const Footer = () => {
         "شركة Ecosus هي شركة مقاولات احترافية تبدأ من التصميم مروراً بالتشطيب الى التأثيث تحت مظلة واحدة، ومتخصصة في الديكور. وفي Ecosus تعتبر مشاريع عملائنا سكني كان أو تجاري هي في الأساس محور عملنا سنوات طويلة، لذا نحاول دائماً أن نكون في مستوى تطلعات وأحلام عملائنا.",
       contactUs: "تواصل معنا",
       riyadhAddress:
-        "الرياض . حي الربيع . طريق الامير محمد بن سلمان . ابراج الربيع . الدور الثالث . المملكة العربية السعودية",
-      dhahranAddress:
-        "الظهران . حي القصور . طريق الامير محمد بن فهد . مبنى ديوان الاداري . الدور الثالث . مكتب 6 . المملكة العربية السعودية",
+        "اعمار سكوير, برج E10 , طريق الملك عبدالله, الفيحاء , جدة 22241 , المملكة العربية السعودية",
       mobile: "جوال",
       phone: "هاتف",
       email: "بريد إلكتروني",
@@ -153,9 +151,7 @@ const Footer = () => {
         "Ecosus Company is a professional contracting company, starting from design through finishing to furnishing under one umbrella, specializing in interior design. In Ecosus, our clients' residential or commercial projects are essentially the focus of our long-term work, so we always strive to be at the level of their aspirations and dreams.",
       contactUs: "Contact Us",
       riyadhAddress:
-        "Riyadh. Al Rabie District. Prince Mohammed bin Salman Road. Al Rabie Towers. 3rd Floor. Kingdom of Saudi Arabia",
-      dhahranAddress:
-        "Dhahran. Al Qusour District. Prince Mohammed bin Fahd Road. Administrative Office Building. 3rd Floor. Office 6. Kingdom of Saudi Arabia",
+        "Emaar Square, Tower E10, King Abdullah Road, Al Fayhaa, Jeddah 22241, Saudi Arabia",
       mobile: "Mobile",
       phone: "Phone",
       email: "Email",
@@ -198,13 +194,7 @@ const Footer = () => {
     },
   ];
 
-  const importantLinksData = [
-    { text: t.commercialDesign, to: "services/commercial-design" },
-    { text: t.exteriorDesign, to: "services/exterior-design" },
-    { text: t.interiorDesign, to: "services/interior-design" },
-    { text: t.landscapeDesign, to: "services/garden-design" },
-    { text: t.decorationImplementation, to: "services/decoration-design" },
-  ];
+
 
   const legalLinksData = [
     { text: t.termsOfService, to: "/terms" },
@@ -357,25 +347,6 @@ const Footer = () => {
               direction === "rtl" ? "text-right" : "text-left"
             } space-y-6 md:space-y-8`}
           >
-            <div className="space-y-4">
-              <h4 className="text-lg md:text-xl font-bold">
-                {t.importantLinks}
-              </h4>
-              <ul className="space-y-2 text-sm md:text-base">
-                {importantLinksData.map((link, index) => (
-                  <li key={index}>
-                    <RouterLink
-                      to={link.to}
-                      onClick={handleLinkClick}
-                      className="text-accent-gold hover:text-accent-gold/90 block py-1"
-                    >
-                      {link.text}
-                    </RouterLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
             <div className="space-y-4">
               <h4 className="text-lg md:text-xl font-bold">{t.legal}</h4>
               <ul className="space-y-2 text-sm md:text-base">

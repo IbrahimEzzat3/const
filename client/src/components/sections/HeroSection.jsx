@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useLanguage } from "../../shared/context/LanguageContext";
 import { Button } from "../ui";
-import { FEATURE2_IMAGE } from "../../constants/images";
+import { FEATURE2_IMAGE, FEATURE1_IMAGE } from "../../constants/images";
 import { useAuth } from "../../shared/context/AuthContext";
 import { sliderService } from "../../shared/services/sliderService";
+import CustomAlert from "../../shared/components/CustomAlert";
 
 const HeroSection = ({ slides, loadingSlides }) => {
   const { language } = useLanguage();
@@ -18,6 +19,14 @@ const HeroSection = ({ slides, loadingSlides }) => {
   const [addMode, setAddMode] = useState(false);
   const [newSlide, setNewSlide] = useState({ text: "", image: "" });
   const [adding, setAdding] = useState(false);
+  const [alert, setAlert] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "info",
+    onConfirm: null,
+    showCancelButton: false,
+  });
 
   // Define 2 static slides (not editable)
   const staticSlides = [
@@ -26,18 +35,18 @@ const HeroSection = ({ slides, loadingSlides }) => {
       image: FEATURE2_IMAGE,
       text:
         language === "ar"
-          ? "الرمال ممكن أن تصبح جنة تستمتع بها"
-          : "The sand can become a paradise to enjoy",
+          ? "ندرس، نحسب، ننفّذ بثقة وأمان "
+          : "We study, we calculate, we implement with confidence and security",
       isStatic: true,
     },
 
     {
       id: "static-2",
-      image: FEATURE2_IMAGE,
+      image: FEATURE1_IMAGE,
       text:
         language === "ar"
-          ? "نحول رؤيتك إلى واقع ملموس"
-          : "We turn your vision into a tangible reality",
+          ? "التنفيذ الواقعي يبدأ من نموذج دقيق"
+          : "Realistic implementation starts with an accurate model.",
       isStatic: true,
     },
   ];
@@ -165,7 +174,7 @@ const HeroSection = ({ slides, loadingSlides }) => {
   };
 
   return (
-    <section className="w-screen mt-16">
+    <section className="w-screen h-full mt-20">
       {/* Always show the slider, but only static slides while loading */}
       <>
         {isAdmin && !addMode && (
@@ -222,7 +231,7 @@ const HeroSection = ({ slides, loadingSlides }) => {
         )}
         {/* Custom Slider */}
         <div
-          className="relative h-[600px] overflow-hidden w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]"
+          className="relative h-[1000px] overflow-hidden w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]"
           style={{
             position: "relative",
             left: "50%",
@@ -290,15 +299,38 @@ const HeroSection = ({ slides, loadingSlides }) => {
                       </h1>
                       {/* Only allow edit button for backend slides, not static */}
                       {isAdmin && !editMode && !slide.isStatic && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() =>
-                            handleEditClick(index - staticSlides.length)
-                          }
-                        >
-                          Edit
-                        </Button>
+                        <div className="flex gap-2 justify-center mt-4">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() =>
+                              handleEditClick(index - staticSlides.length)
+                            }
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            variant="danger"
+                            size="sm"
+                            onClick={() => {
+                              setAlert({
+                                isOpen: true,
+                                title: "Delete Slide",
+                                message:
+                                  "Are you sure you want to delete this slide?",
+                                type: "error",
+                                showCancelButton: true,
+                                onConfirm: async () => {
+                                  await sliderService.deleteSlider(slide._id);
+                                  if (typeof window.reloadSlides === "function")
+                                    window.reloadSlides();
+                                },
+                              });
+                            }}
+                          >
+                            Delete
+                          </Button>
+                        </div>
                       )}
                     </>
                   )}
@@ -367,6 +399,15 @@ const HeroSection = ({ slides, loadingSlides }) => {
           </div>
         </div>
       </>
+      <CustomAlert
+        isOpen={alert.isOpen}
+        onClose={() => setAlert((a) => ({ ...a, isOpen: false }))}
+        title={alert.title}
+        message={alert.message}
+        type={alert.type}
+        onConfirm={alert.onConfirm}
+        showCancelButton={alert.showCancelButton}
+      />
     </section>
   );
 };

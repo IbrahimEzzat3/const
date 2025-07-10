@@ -121,19 +121,15 @@ const Header = () => {
       onClick: () => {
         if (location.pathname !== "/") {
           navigate("/");
-          setTimeout(() => scrollToSection("about"), 100);
+          setTimeout(() => scrollToSection("Why"), 100);
         } else {
-          scrollToSection("about");
+          scrollToSection("Why");
         }
       },
       isScrollLink: true,
     },
     { label: t.courses, path: "/courses" },
-    {
-      label: t.waterFarmingAssociation,
-      path: "https://www.aesweb.org/about",
-      external: true,
-    },
+
     {
       label: t.registration,
       path: "https://www.aesweb.org/members/join2",
@@ -330,7 +326,7 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="size-6"  
+                className="size-6"
               >
                 <path
                   strokeLinecap="round"

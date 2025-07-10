@@ -325,18 +325,22 @@ const CourseManager = () => {
                 <tr key={course._id}>
                   <td className="px-6 py-4">
                     <div className="flex items-center">
-                      <img
-                        src={
-                          course.photo
-                            ? `https://const-production.up.railway.app/uploads/${course.photo}`
-                            : "/default-course.jpg"
-                        }
-                        alt={course.title}
-                        className="h-14 w-24 object-cover rounded-md border"
-                        loading="lazy"
-                        crossOrigin="anonymous"
-                        referrerPolicy="no-referrer"
-                      />
+                      {course.photo ? (
+                        <img
+                          src={`https://const-production.up.railway.app/uploads/${course.photo}`}
+                          alt={course.title}
+                          className="h-14 w-24 object-cover rounded-md border"
+                          loading="lazy"
+                          crossOrigin="anonymous"
+                          referrerPolicy="no-referrer"
+                        />
+                      ) : (
+                        <div className="h-14 w-24 flex items-center justify-center bg-indigo-100">
+                          <span className="text-indigo-500 text-lg font-medium">
+                            No Photo
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </td>
                   <td className="px-6 py-4">
