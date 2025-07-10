@@ -5,6 +5,7 @@ import { whyImageService } from "../../shared/services/whyImageService";
 import { useState, useEffect } from "react";
 import CustomAlert from "../../shared/components/CustomAlert";
 import LoadingSpinner from "../common/LoadingSpinner";
+import { inside1_3 } from "../../constants/images";
 // Custom SVG Icons
 const AwardIcon = ({ className = "w-10" }) => (
   <svg
@@ -275,9 +276,13 @@ const WhyChooseUsSection = () => {
                 decoding="async"
               />
             ) : (
-              <div className="text-center text-accent-gold">
-                No image uploaded
-              </div>
+              <img
+                src={inside1_3}
+                alt="Why Choose Us"
+                className="w-full h-full object-cover object-center scale-105 hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+                decoding="async"
+              />
             )}
             {isAdmin && (
               <form
