@@ -154,7 +154,6 @@ const FeaturedBlogsSection = () => {
                     </p>
                   </Link>
                   <div className="mt-6 flex items-center justify-between">
-                    </div>
                     <Link
                       to={`/blogs/${blog._id}`}
                       className="inline-flex items-center text-sm font-medium text-accent-teal hover:text-accent-gold"
