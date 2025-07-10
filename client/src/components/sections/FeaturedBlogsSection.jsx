@@ -154,25 +154,6 @@ const FeaturedBlogsSection = () => {
                     </p>
                   </Link>
                   <div className="mt-6 flex items-center justify-between">
-                    <div className="flex items-center">
-                      <img
-                        className="h-10 w-10 rounded-full"
-                        src={
-                          blog.author?.avatar &&
-                          blog.author?.avatar !== "public/images/default.png"
-                            ? `https://const-production.up.railway.app/${blog.author.avatar}`
-                            : `https://const-production.up.railway.app/public/images/default.png`
-                        }
-                        alt={blog.author?.name || t("blogDetail.unknownAuthor")}
-                        loading="lazy"
-                        crossOrigin="anonymous"
-                        referrerPolicy="no-referrer"
-                      />
-                      <div className="ml-3">
-                        <p className="text-sm font-medium text-accent-teal">
-                          {blog.author?.name || t("blogDetail.unknownAuthor")}
-                        </p>
-                      </div>
                     </div>
                     <Link
                       to={`/blogs/${blog._id}`}
