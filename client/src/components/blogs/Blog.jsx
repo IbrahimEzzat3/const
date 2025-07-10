@@ -93,23 +93,6 @@ const Blog = ({ blog }) => {
 
           {/* Meta Information */}
           <div className="flex items-center justify-between text-sm text-secondary-500 pt-4 border-t border-gray-100">
-            <div className="flex items-center gap-4">
-              {blog.author?.name && (
-                <div className="flex items-center gap-2">
-                  <img
-                    className="h-8 w-8 object-cover rounded-full"
-                    src={`https://const-production.up.railway.app/${blog.author?.avatar}`}
-                    alt={t("blogDetail.unknownAuthor")}
-                    loading="lazy"
-                    crossOrigin="anonymous"
-                    referrerPolicy="no-referrer"
-                  />
-                  <span>
-                    {blog.author.name || t("blogDetail.unknownAuthor")}
-                  </span>
-                </div>
-              )}
-            </div>
             {blog.publishedAt && (
               <div className="flex items-center gap-2">
                 <svg
