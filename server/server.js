@@ -26,7 +26,6 @@ const app = express();
 // Security middleware
 app.use(helmet());
 app.use(compression());
-console.log("CLIENT_URL from env:", process.env.CLIENT_URL);
 
 // CORS configuration
 app.use(
@@ -174,7 +173,6 @@ const validateAdminCredentials = () => {
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(async () => {
-    console.log("Connected to MongoDB");
 
     // Validate admin credentials before attempting to create admin
     validateAdminCredentials();
@@ -192,9 +190,7 @@ mongoose
           password: process.env.INITIAL_ADMIN_PASSWORD,
           role: process.env.INITIAL_ADMIN_ROLE,
         });
-        console.log("Initial admin user created successfully");
       } else {
-        console.log("Admin user already exists");
       }
     } catch (error) {
       console.error("Error creating initial admin user:", error);
@@ -205,14 +201,10 @@ mongoose
     // Start server
     const PORT = process.env.PORT || 5000;
     const server = app.listen(PORT, () => {
-      console.log(
-        `🚀 Server running on port ${PORT} in ${process.env.NODE_ENV} mode`
-      );
     });
 
     // Handle unhandled promise rejections
     process.on("unhandledRejection", (err, promise) => {
-      console.log(`Error: ${err.message}`);
       server.close(() => {
         process.exit(1);
       });
@@ -220,15 +212,12 @@ mongoose
 
     // Handle uncaught exceptions
     process.on("uncaughtException", (err) => {
-      console.log(`Error: ${err.message}`);
       process.exit(1);
     });
 
     // Graceful shutdown
     process.on("SIGTERM", () => {
-      console.log("SIGTERM received. Shutting down gracefully...");
       server.close(() => {
-        console.log("Process terminated");
       });
     });
   })

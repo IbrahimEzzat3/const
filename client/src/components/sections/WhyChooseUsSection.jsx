@@ -4,7 +4,7 @@ import { useAuth } from "../../shared/context/AuthContext";
 import { whyImageService } from "../../shared/services/whyImageService";
 import { useState, useEffect } from "react";
 import CustomAlert from "../../shared/components/CustomAlert";
-
+import LoadingSpinner from "../common/LoadingSpinner";
 // Custom SVG Icons
 const AwardIcon = ({ className = "w-10" }) => (
   <svg
@@ -204,6 +204,18 @@ const WhyChooseUsSection = () => {
     });
   }, []);
 
+  const showSuccess = (msg) => {
+    setAlert({
+      isOpen: true,
+      title: "Success",
+      message: msg,
+      type: "success",
+      showCancelButton: false,
+      onConfirm: null,
+    });
+    setTimeout(() => setAlert((a) => ({ ...a, isOpen: false })), 2000);
+  };
+
   const handleUpload = async (e) => {
     e.preventDefault();
     if (!file) return;
@@ -212,8 +224,10 @@ const WhyChooseUsSection = () => {
       const imageData = { image: reader.result };
       if (whyImage) {
         await whyImageService.updateWhyImage(whyImage._id, imageData);
+        showSuccess("Image updated successfully!");
       } else {
         await whyImageService.createWhyImage(imageData);
+        showSuccess("Image uploaded successfully!");
       }
       const res = await whyImageService.getWhyImage();
       setWhyImage(res.data[0] || null);
@@ -232,10 +246,10 @@ const WhyChooseUsSection = () => {
       onConfirm: async () => {
         await whyImageService.deleteWhyImage(whyImage._id);
         setWhyImage(null);
+        showSuccess("Image deleted successfully!");
       },
     });
   };
-  console.log(whyImage);
 
   return (
     <section
@@ -249,7 +263,9 @@ const WhyChooseUsSection = () => {
         <div className="flex-1 flex justify-center items-center w-full">
           <div className="relative w-full h-full min-h-[600px] lg:min-h-[700px] overflow-hidden shadow-2xl border-4 border-accent-gold/30 flex flex-col items-center justify-center">
             {loading ? (
-              <div>Loading...</div>
+              <div className="p-6 flex justify-center items-center min-h-[200px]">
+                <LoadingSpinner size="lg" variant="primary" />
+              </div>
             ) : whyImage && whyImage.image ? (
               <img
                 src={whyImage.image}
