@@ -262,7 +262,7 @@ export const translations = {
         writeAReview: "Write a Review",
         noFeedback: "No feedback yet. Be the first to review!",
         noImage: "No Image",
-        hoursOfContent: "{{count}} hours of content",
+        hoursOfContent: "{{count}} - {{endCount}} hours of content",
         studentsEnrolled: "{{count}} students enrolled",
         status: "Active",
         tab: {
@@ -397,7 +397,7 @@ export const translations = {
             note4: "For an accurate quote, please contact us",
             invalidArea: "Please enter a valid area",
             noteEstimationOnly:
-              "This price is an estimated cost for construction works only and may increase or decrease by 25% depending on site conditions.",
+              "This is an estimated cost for construction work, and it varies depending on the nature of the site and work requirements. It may increase or decrease by 25%.",
           },
           moreDetails: "More Details",
         },
@@ -563,7 +563,7 @@ export const translations = {
             address: {
               title: "Address",
               details: [
-                "Emaar Square, Tower E10, King Abdullah Road, Al Fayhaa, Jeddah 22241, Saudi Arabia",
+                "Emaar Square, Tower E8, King Abdullah Road, Al Fayhaa, Jeddah 22241, Saudi Arabia",
               ],
             },
             phone: {
@@ -937,7 +937,7 @@ export const translations = {
         writeAReview: "اكتب مراجعة",
         noFeedback: "لا توجد تعليقات حتى الآن. كن أول من يراجع!",
         noImage: "لا توجد صورة",
-        hoursOfContent: "{{count}} ساعة من المحتوى",
+        hoursOfContent: "{{count}} - {{endCount}} ساعة من المحتوى",
         studentsEnrolled: "{{count}} طالب مسجل",
         status: "نشط",
         tab: {
@@ -1067,7 +1067,7 @@ export const translations = {
             note3: "يمكن أن تختلف التكلفة حسب الموقع والمواصفات",
             note4: "للحصول على عرض سعر دقيق، يرجى التواصل معنا",
             noteEstimationOnly:
-              "هذا السعر تكلفة تقديرية للأعمال الإنشائية فقط وقد يزيد أو يقل بنسبة 25% حسب ظروف الموقع.",
+              "هذه تكلفة تقديرية لأعمال الإنشاء وتختلف على حسب طبيعة الموقع ومتطلبات العمل. وقد تزيد او تقل بنسبة 25%.",
           },
           moreDetails: "المزيد من التفاصيل",
         },
@@ -1232,7 +1232,7 @@ export const translations = {
             address: {
               title: "العنوان",
               details: [
-                "اعمار سكوير، برج E10، طريق الملك عبدالله، الفيحاء، جدة 22241، المملكة العربية السعودية",
+                "اعمار سكوير، برج E8، طريق الملك عبدالله، الفيحاء، جدة 22241، المملكة العربية السعودية",
               ],
             },
             phone: {

@@ -220,21 +220,17 @@ const WhyChooseUsSection = () => {
   const handleUpload = async (e) => {
     e.preventDefault();
     if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = async () => {
-      const imageData = { image: reader.result };
-      if (whyImage) {
-        await whyImageService.updateWhyImage(whyImage._id, imageData);
-        showSuccess("Image updated successfully!");
-      } else {
-        await whyImageService.createWhyImage(imageData);
-        showSuccess("Image uploaded successfully!");
-      }
-      const res = await whyImageService.getWhyImage();
-      setWhyImage(res.data[0] || null);
-      setFile(null);
-    };
-    reader.readAsDataURL(file);
+    const imageData = { image: file };
+    if (whyImage) {
+      await whyImageService.updateWhyImage(whyImage._id, imageData);
+      showSuccess("Image updated successfully!");
+    } else {
+      await whyImageService.createWhyImage(imageData);
+      showSuccess("Image uploaded successfully!");
+    }
+    const res = await whyImageService.getWhyImage();
+    setWhyImage(res.data[0] || null);
+    setFile(null);
   };
 
   const handleDelete = () => {

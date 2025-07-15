@@ -13,6 +13,9 @@ exports.getWhyImage = async (req, res) => {
 // Create a new whyImage
 exports.createWhyImage = async (req, res) => {
   try {
+    if (req.file) {
+      req.body.image = `/uploads/${req.file.filename}`;
+    }
     const whyImage = await WhyImage.create(req.body);
     res.status(201).json({ success: true, data: whyImage });
   } catch (err) {
@@ -23,6 +26,9 @@ exports.createWhyImage = async (req, res) => {
 // Update a whyImage
 exports.updateWhyImage = async (req, res) => {
   try {
+    if (req.file) {
+      req.body.image = `/uploads/${req.file.filename}`;
+    }
     const whyImage = await WhyImage.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });

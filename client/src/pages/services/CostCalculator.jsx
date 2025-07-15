@@ -6,18 +6,17 @@ import { useLanguage } from "../../shared/context/LanguageContext";
 
 const CostCalculator = () => {
   const [estimatedCost, setEstimatedCost] = useState(null);
-  const [areaPerFloor, setAreaPerFloor] = useState("");
+  const [landArea, setLandArea] = useState("");
   const [numFloors, setNumFloors] = useState("");
-  const [areaAnnex, setAreaAnnex] = useState("");
   const navigate = useNavigate();
   const { t, direction } = useLanguage();
   usePageTitle("costCalculator");
 
   const calculateCost = () => {
-    const areaPerFloorNum = parseFloat(areaPerFloor);
+    const landAreaNum = parseFloat(landArea);
     const numFloorsNum = parseFloat(numFloors);
-    const areaAnnexNum = parseFloat(areaAnnex);
-    if ((!areaPerFloorNum && areaPerFloor !== "0") || areaPerFloorNum < 0) {
+
+    if ((!landAreaNum && landArea !== "0") || landAreaNum < 0) {
       alert(t("sections.services.costCalculator.invalidArea"));
       return;
     }
@@ -25,11 +24,10 @@ const CostCalculator = () => {
       alert(t("sections.services.costCalculator.invalidArea"));
       return;
     }
-    if ((!areaAnnexNum && areaAnnex !== "0") || areaAnnexNum < 0) {
-      alert(t("sections.services.costCalculator.invalidArea"));
-      return;
-    }
-    const cost = 1800 * (areaPerFloorNum * numFloorsNum + areaAnnexNum);
+
+    // الحسبة الجديدة: مساحة الارض x 1600 x [عدد الادوار x60% +30 %]
+    const percentage = numFloorsNum * 0.6 + 0.3;
+    const cost = landAreaNum * 1600 * percentage;
     setEstimatedCost(cost);
   };
 
@@ -42,6 +40,7 @@ const CostCalculator = () => {
       }
     }, 100);
   };
+
   return (
     <>
       <Helmet>
@@ -68,28 +67,26 @@ const CostCalculator = () => {
             <section className="bg-gray-50 p-6 rounded-lg mb-8">
               <div className="mb-6">
                 <label className="block text-accent-gold font-semibold mb-2">
-                  {t("sections.services.costCalculator.areaPerFloor")}
+                  مساحة الأرض (متر مربع)
                 </label>
                 <input
                   type="number"
-                  value={areaPerFloor}
+                  value={landArea}
                   onChange={(e) => {
                     const value = e.target.value;
                     if (value === "" || parseFloat(value) >= 0) {
-                      setAreaPerFloor(value);
+                      setLandArea(value);
                     }
                   }}
                   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder={t(
-                    "sections.services.costCalculator.enterAreaPerFloorPlaceholder"
-                  )}
+                  placeholder="أدخل مساحة الأرض"
                   min="0"
                   dir={direction}
                 />
               </div>
               <div className="mb-6">
                 <label className="block text-accent-gold font-semibold mb-2">
-                  {t("sections.services.costCalculator.numFloors")}
+                  عدد الأدوار
                 </label>
                 <input
                   type="number"
@@ -101,30 +98,7 @@ const CostCalculator = () => {
                     }
                   }}
                   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder={t(
-                    "sections.services.costCalculator.enterNumFloorsPlaceholder"
-                  )}
-                  min="0"
-                  dir={direction}
-                />
-              </div>
-              <div className="mb-6">
-                <label className="block text-accent-gold font-semibold mb-2">
-                  {t("sections.services.costCalculator.areaAnnex")}
-                </label>
-                <input
-                  type="number"
-                  value={areaAnnex}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (value === "" || parseFloat(value) >= 0) {
-                      setAreaAnnex(value);
-                    }
-                  }}
-                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder={t(
-                    "sections.services.costCalculator.enterAreaAnnexPlaceholder"
-                  )}
+                  placeholder="أدخل عدد الأدوار"
                   min="0"
                   dir={direction}
                 />
@@ -140,7 +114,7 @@ const CostCalculator = () => {
 
             {estimatedCost !== null && (
               <article
-                className={`bg-yellow-50 p-6 rounded-lg text-center ${
+                className={`bg-[#F5EFE6] p-6 rounded-lg text-center ${
                   direction === "rtl" ? "text-right" : "text-left"
                 }`}
               >
@@ -152,9 +126,6 @@ const CostCalculator = () => {
                   {t("sections.smartHomePackages.currency")}
                 </p>
                 <p className="text-gray-600 mt-2">
-                  {t("sections.services.costCalculator.disclaimer")}
-                </p>
-                <p className="text-red-600 mt-2 font-semibold">
                   {t("sections.services.costCalculator.noteEstimationOnly")}
                 </p>
               </article>

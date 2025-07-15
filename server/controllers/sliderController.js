@@ -15,6 +15,9 @@ exports.getSliders = async (req, res) => {
 // Create a new slider
 exports.createSlider = async (req, res) => {
   try {
+    if (req.file) {
+      req.body.image = `/uploads/${req.file.filename}`;
+    }
     const slider = await Slider.create(req.body);
     res.status(201).json({ success: true, data: slider });
   } catch (err) {
@@ -25,6 +28,9 @@ exports.createSlider = async (req, res) => {
 // Update a slider
 exports.updateSlider = async (req, res) => {
   try {
+    if (req.file) {
+      req.body.image = `/uploads/${req.file.filename}`;
+    }
     const slider = await Slider.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });

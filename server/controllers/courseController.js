@@ -115,6 +115,7 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
     req.body.instructor = {
       name: instructorData.name || req.user.name,
       email: instructorData.email || req.user.email,
+      dis: instructorData.dis || req.user.dis,
     };
 
     // Handle uploaded instructor avatar
@@ -215,15 +216,6 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // Make sure user is course instructor or admin
-  if (course.instructor.email !== req.user.email && req.user.role !== "admin") {
-    return next(
-      new ErrorResponse(
-        `User ${req.user.id} is not authorized to update this course`,
-        401
-      )
-    );
-  }
 
   // Helper to parse JSON string fields
   const parseJsonField = (field) => {

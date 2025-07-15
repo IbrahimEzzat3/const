@@ -25,6 +25,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
     instructor: {
       name: "",
       email: "",
+      dis: "",
     },
   });
 
@@ -62,6 +63,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
     instructor: Yup.object().shape({
       name: Yup.string().required("Instructor name is required"),
       email: Yup.string().email("Invalid email address").nullable(),
+      dis: Yup.string().required("Instructor disc is required").nullable(),
     }),
     avatar: Yup.mixed().nullable(),
     photo: Yup.mixed().nullable(),
@@ -93,6 +95,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         instructor: course.instructor || {
           name: "",
           email: "",
+          dis: "",
         },
       });
     } catch (error) {
@@ -188,6 +191,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
         const instructorData = {
           name: values.instructor.name,
           email: values.instructor.email,
+          dis: values.instructor.dis,
         };
         formData.append("instructor", JSON.stringify(instructorData));
 
@@ -571,6 +575,22 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
           {getFieldError("instructor.email") && (
             <div className="text-red-500 text-xs md:text-sm mt-1">
               {getErrorMessage("instructor.email")}
+            </div>
+          )}
+          <input
+            type="text"
+            name="instructor.dis"
+            placeholder="Instructor Dis"
+            {...formik.getFieldProps("instructor.dis")}
+            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold text-sm md:text-base ${
+              getFieldError("instructor.dis")
+                ? "border-red-300"
+                : "border-gray-300"
+            }`}
+          />
+          {getFieldError("instructor.dis") && (
+            <div className="text-red-500 text-xs md:text-sm mt-1">
+              {getErrorMessage("instructor.dis")}
             </div>
           )}
           <input

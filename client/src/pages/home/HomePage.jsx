@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HeroSection from "../../components/sections/HeroSection";
 import AboutSection from "../../components/sections/AboutSection";
-import FeaturedBlogsSection from "../../components/sections/FeaturedBlogsSection";
 import ServicesSection from "../../components/sections/ServicesSection";
 import WhyChooseUsSection from "../../components/sections/WhyChooseUsSection";
 import FeaturedWorkSection from "../../components/sections/FeaturedWorkSection";
@@ -69,7 +68,6 @@ const HomePage = () => {
           <WhyChooseUsSection />
           <SmartHomePackagesSection />
           <VRDemoSection />
-          <FeaturedBlogsSection />
           <TestimonialsSection />
           <CallToActionSection />
           <ContactSection />

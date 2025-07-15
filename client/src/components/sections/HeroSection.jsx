@@ -17,7 +17,11 @@ const HeroSection = ({ slides, loadingSlides }) => {
   const [editIndex, setEditIndex] = useState(null);
   const [saving, setSaving] = useState(false);
   const [addMode, setAddMode] = useState(false);
-  const [newSlide, setNewSlide] = useState({ text: "", image: "" });
+  const [newSlide, setNewSlide] = useState({
+    text: "",
+    image: null,
+    preview: "",
+  });
   const [adding, setAdding] = useState(false);
   const [alert, setAlert] = useState({
     isOpen: false,
@@ -105,15 +109,13 @@ const HeroSection = ({ slides, loadingSlides }) => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setEditedSlides((prev) =>
-          prev.map((slide, idx) =>
-            idx === editIndex ? { ...slide, image: reader.result } : slide
-          )
-        );
-      };
-      reader.readAsDataURL(file);
+      setEditedSlides((prev) =>
+        prev.map((slide, idx) =>
+          idx === editIndex
+            ? { ...slide, image: file, preview: URL.createObjectURL(file) }
+            : slide
+        )
+      );
     }
   };
 
@@ -149,7 +151,7 @@ const HeroSection = ({ slides, loadingSlides }) => {
         order: editedSlides.length,
       });
       setAddMode(false);
-      setNewSlide({ text: "", image: "" });
+      setNewSlide({ text: "", image: null, preview: "" });
       // Optionally, you may want to trigger a refetch in HomePage after add
     } catch (err) {
       // handle error
@@ -165,11 +167,11 @@ const HeroSection = ({ slides, loadingSlides }) => {
   const handleNewSlideImage = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setNewSlide((prev) => ({ ...prev, image: reader.result }));
-      };
-      reader.readAsDataURL(file);
+      setNewSlide((prev) => ({
+        ...prev,
+        image: file,
+        preview: URL.createObjectURL(file),
+      }));
     }
   };
 
@@ -205,9 +207,9 @@ const HeroSection = ({ slides, loadingSlides }) => {
               className="w-screen "
               required
             />
-            {newSlide.image && (
+            {newSlide.preview && (
               <img
-                src={newSlide.image}
+                src={newSlide.preview}
                 alt="Preview"
                 className="w-64 h-32 object-cover rounded-lg"
               />
@@ -221,7 +223,7 @@ const HeroSection = ({ slides, loadingSlides }) => {
                 type="button"
                 onClick={() => {
                   setAddMode(false);
-                  setNewSlide({ text: "", image: "" });
+                  setNewSlide({ text: "", image: null, preview: "" });
                 }}
               >
                 Cancel
@@ -231,7 +233,7 @@ const HeroSection = ({ slides, loadingSlides }) => {
         )}
         {/* Custom Slider */}
         <div
-          className="relative h-[1000px] overflow-hidden w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]"
+          className="relative h-[750px] overflow-hidden w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]"
           style={{
             position: "relative",
             left: "50%",
@@ -279,6 +281,13 @@ const HeroSection = ({ slides, loadingSlides }) => {
                         onChange={handleImageChange}
                         className="mb-2"
                       />
+                      {slide.preview ? (
+                        <img
+                          src={slide.preview}
+                          alt="Preview"
+                          className="w-64 h-32 object-cover rounded-lg mb-2"
+                        />
+                      ) : null}
                       <div className="flex gap-2">
                         <Button
                           variant="primary"

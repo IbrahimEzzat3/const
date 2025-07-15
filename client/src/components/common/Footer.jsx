@@ -129,7 +129,7 @@ const Footer = () => {
         "شركة Ecosus هي شركة مقاولات احترافية تبدأ من التصميم مروراً بالتشطيب الى التأثيث تحت مظلة واحدة، ومتخصصة في الديكور. وفي Ecosus تعتبر مشاريع عملائنا سكني كان أو تجاري هي في الأساس محور عملنا سنوات طويلة، لذا نحاول دائماً أن نكون في مستوى تطلعات وأحلام عملائنا.",
       contactUs: "تواصل معنا",
       riyadhAddress:
-        "اعمار سكوير, برج E10 , طريق الملك عبدالله, الفيحاء , جدة 22241 , المملكة العربية السعودية",
+        "اعمار سكوير, برج E8 , طريق الملك عبدالله, الفيحاء , جدة 22241 , المملكة العربية السعودية",
       mobile: "جوال",
       phone: "هاتف",
       email: "بريد إلكتروني",
@@ -151,7 +151,7 @@ const Footer = () => {
         "Ecosus Company is a professional contracting company, starting from design through finishing to furnishing under one umbrella, specializing in interior design. In Ecosus, our clients' residential or commercial projects are essentially the focus of our long-term work, so we always strive to be at the level of their aspirations and dreams.",
       contactUs: "Contact Us",
       riyadhAddress:
-        "Emaar Square, Tower E10, King Abdullah Road, Al Fayhaa, Jeddah 22241, Saudi Arabia",
+        "Emaar Square, Tower E8, King Abdullah Road, Al Fayhaa, Jeddah 22241, Saudi Arabia",
       mobile: "Mobile",
       phone: "Phone",
       email: "Email",

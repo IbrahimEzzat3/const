@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { courseService } from "../../shared/services/courseService";
 import { useAuth } from "../../shared/context/AuthContext";
-import { Button } from "../ui";
 import FeedbackForm from "../ui/FeedbackForm";
 import StarRating from "../ui/StarRating";
 import { useLanguage } from "../../shared/context/LanguageContext";
@@ -25,44 +24,6 @@ const ClockIcon = ({ className = "h-5 w-5", direction }) => (
     />
     <path
       d="M12 6V12L16 14"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-const UsersIcon = ({ className = "h-5 w-5", direction }) => (
-  <svg
-    className={`${className} ${direction === "rtl" ? "ml-2" : "mr-2"}`}
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
@@ -433,40 +394,40 @@ const CourseDetail = () => {
     }
   };
 
-    const Button = ({
-      type,
-      variant,
-      isLoading,
-      disabled,
-      onClick,
-      children,
-    }) => {
-      const baseClasses =
-        "px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed";
-      const variants = {
-        primary:
-          "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700",
-        secondary: "bg-gray-200 text-gray-700 hover:bg-gray-300",
-      };
-
-      return (
-        <button
-          type={type}
-          disabled={disabled || isLoading}
-          onClick={onClick}
-          className={`${baseClasses} ${variants[variant]}`}
-        >
-          {isLoading ? (
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-              Loading...
-            </div>
-          ) : (
-            children
-          )}
-        </button>
-      );
+  const Button = ({
+    type,
+    variant,
+    isLoading,
+    disabled,
+    onClick,
+    children,
+  }) => {
+    const baseClasses =
+      "px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed";
+    const variants = {
+      primary:
+        "bg-accent-teal text-white hover:from-blue-700 hover:to-purple-700",
+      secondary: "bg-gray-200 text-gray-700 hover:bg-gray-300",
     };
+
+    return (
+      <button
+        type={type}
+        disabled={disabled || isLoading}
+        onClick={onClick}
+        className={`${baseClasses} ${variants[variant]}`}
+      >
+        {isLoading ? (
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+            Loading...
+          </div>
+        ) : (
+          children
+        )}
+      </button>
+    );
+  };
 
   if (isLoading) {
     return (
@@ -549,43 +510,48 @@ const CourseDetail = () => {
               <h3 className="text-xl font-semibold text-primary-900 mb-4">
                 {t("courseDetail.tab.curriculum")}
               </h3>
-              <div className="space-y-6">
-                {course.modules && course.modules.length > 0 ? (
-                  course.modules.map((module, index) => (
-                    <div
-                      key={index}
-                      className="bg-white border border-gray-100 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
-                    >
-                      <div className="flex justify-between items-center mb-4">
-                        <h3 className="text-lg font-semibold text-primary-900">
-                          {module.title}
-                        </h3>
-                        {module.duration && (
-                          <span className="text-sm text-secondary-500 bg-secondary-50 px-3 py-1 rounded-full">
-                            {t("courseDetail.minutes", {
-                              count: module.duration,
-                            })}
-                          </span>
-                        )}
-                      </div>
-                      {module.description && (
-                        <p className="text-secondary-600 mb-4">
-                          {module.description}
-                        </p>
-                      )}
-                      {module.videoUrl && (
-                        <a target="_blank" href={module.videoUrl}>
-                          {t("courseDetail.videoLink")}
-                        </a>
-                      )}
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-secondary-500 text-center py-8 bg-white rounded-lg shadow-sm">
-                    {t("courseDetail.noCurriculum")}
-                  </p>
-                )}
-              </div>
+              {course.modules && course.modules.length > 0 && (
+                <div>
+                  <ul className="grid grid-cols-1">
+                    {course.modules.map((module, index) => (
+                      <li
+                        key={index}
+                        className="flex items-start gap-3 bg-white p-4 rounded-lg shadow-sm"
+                      >
+                        <div className="w-2 h-2 bg-primary-600 rounded-full mt-2 flex-shrink-0"></div>
+                        <div className="flex-1">
+                          <div className="flex justify-between items-start ">
+                            <h4 className="text-lg font-semibold text-secondary-600">
+                              {module.title}
+                            </h4>
+                            {module.duration && (
+                              <span className="text-sm text-secondary-500 bg-secondary-50 px-2 py-1 rounded-full ml-2">
+                                {t("courseDetail.minutes", {
+                                  count: module.duration,
+                                })}
+                              </span>
+                            )}
+                          </div>
+                          {module.description && (
+                            <p className="text-secondary-600 mb-2 text-sm">
+                              {module.description}
+                            </p>
+                          )}
+                          {module.videoUrl && (
+                            <a
+                              target="_blank"
+                              href={module.videoUrl}
+                              className="text-primary-600 hover:text-primary-700 text-sm underline"
+                            >
+                              {t("courseDetail.videoLink")}
+                            </a>
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
             {/* Instructor Section (moved from instructor tab) */}
@@ -618,6 +584,10 @@ const CourseDetail = () => {
                       {course.instructor?.name ||
                         t("courseDetail.unknownInstructor")}
                     </h3>
+                    <p className="text-secondary-600">
+                      {" "}
+                      {course.instructor?.dis}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -808,7 +778,10 @@ const CourseDetail = () => {
               <div className="flex items-center gap-2">
                 <ClockIcon className="h-4 w-4 text-primary-400" />
                 <span>
-                  {t("courseDetail.hoursOfContent", { count: course.duration })}
+                  {t("courseDetail.hoursOfContent", {
+                    count: course.duration,
+                    endCount: course.duration + 5,
+                  })}
                 </span>
               </div>
             </div>
@@ -1377,6 +1350,7 @@ const CourseDetail = () => {
                     <span className="text-secondary-600">
                       {t("courseDetail.hoursOfContent", {
                         count: course.duration,
+                        endCount: course.duration + 5,
                       })}
                     </span>
                   </div>
@@ -1385,7 +1359,7 @@ const CourseDetail = () => {
                     <BookIcon className="h-5 w-5 text-primary-600" />
                     <span className="text-secondary-600">
                       {t("courseDetail.modulesCount", {
-                        count: course.modules?.length || 0,
+                        count: course.modules?.length + 7 || 0,
                       })}
                     </span>
                   </div>

@@ -56,6 +56,11 @@ const courseSchema = new mongoose.Schema(
         required: false,
         trim: true,
       },
+      dis: {
+        type: String,
+        required: false,
+        trim: true,
+      },
     },
     modules: [
       {
