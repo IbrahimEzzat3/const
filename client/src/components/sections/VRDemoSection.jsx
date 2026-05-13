@@ -17,7 +17,7 @@ const VRDemoSection = () => {
   return (
     <section
       id="vr-demo"
-      className={`py-12 bg-accent-teal text-white h-[600px] mt-16 ${direction} w-full relative px-4 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center`}
+      className={`py-12 bg-accent-teal text-white mt-16 ${direction} w-full relative px-4 grid sm:grid-cols-1 lg:grid-cols-2 gap-8 items-center lg:h-[600px]`}
     >
       <div className={direction === "rtl" ? "text-right" : "text-left"}>
         <h2 className="text-2xl md:text-3xl font-bold mb-4">
@@ -68,11 +68,19 @@ const VRDemoSection = () => {
           {t("sections.vrDemo.bookNow")}
         </Button>
       </div>
-
-      <div className=" bg-[#CF9F57] overflow-hidden absolute left-0 w-[650px] flex items-center justify-center h-full">
-        {/* Video Demo Container */}
+      <div
+        className="
+      bg-[#CF9F57]
+      overflow-hidden
+      w-[100%] sm:w-[100%] lg:w-[600px]
+      h-[400px] sm:h-[400px] lg:h-full
+      relative sm:relative lg:absolute
+      lg:left-0
+      flex items-center justify-center
+    "
+      >
         <img
-          className="w-full h-full  object-cover"
+          className="w-full h-full object-cover"
           src="/images/vr.png"
           alt="VR Demo"
         />

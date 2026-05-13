@@ -79,9 +79,9 @@ const BlogDetail = () => {
     if (!imagePath) return null;
     if (imagePath.startsWith("http")) return imagePath;
     if (imagePath.startsWith("/uploads")) {
-      return `${"https://const-production.up.railway.app"}${imagePath}`;
+      return `${"https://ecosus-production.up.railway.app"}${imagePath}`;
     }
-    return `${"https://const-production.up.railway.app"}/uploads/${imagePath}`;
+    return `${"https://ecosus-production.up.railway.app"}/uploads/${imagePath}`;
   };
 
   const imageUrl = getImageUrl(blog?.coverImage);

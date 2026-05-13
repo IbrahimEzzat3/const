@@ -292,8 +292,8 @@ const Header = () => {
           direction === "rtl" ? "rtl" : "ltr"
         }`}
       >
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
+        <div className="container mx-auto flex justify-between  items-center">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-20">
             <Button
               variant="ghost"
               onClick={handleConsultationClick}
@@ -317,7 +317,7 @@ const Header = () => {
               {t.freeConsultation}
             </Button>
             <Link
-              to="/services/cost-calculator"
+              to="/cost-calculator"
               className="text-center bg-transparent hover:bg-accent-teal hover:text-white text-white px-2 py-1 md:px-3 md:py-1 text-sm md:text-base rounded-full flex items-center justify-center whitespace-nowrap transition-colors duration-300"
             >
               <svg
@@ -365,6 +365,26 @@ const Header = () => {
                 className="w-6 h-6 mr-2 text-accent-gold"
               />
               {t.requestPrice}
+            </a>
+            <a
+              href="tel:+966558813386"
+              className="text-center bg-transparent hover:bg-accent-teal hover:text-white text-white px-2 py-1 md:px-3 md:py-1 text-sm md:text-base rounded-full flex items-center justify-center whitespace-nowrap transition duration-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6 mr-2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a1.5 1.5 0 001.5-1.5v-2.25a1.5 1.5 0 00-1.5-1.5h-3.75a1.5 1.5 0 00-1.5 1.5v.75c-3.866-1.035-6.965-4.134-8-8h.75a1.5 1.5 0 001.5-1.5V4.5a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 4.5v2.25z"
+                />
+              </svg>
+              3386 881 55 966+
             </a>
           </div>
         </div>
@@ -474,7 +494,7 @@ const Header = () => {
                         src={
                           user?.avatar &&
                           user.avatar !== "public/images/default.png"
-                            ? `https://const-production.up.railway.app/${user.avatar}`
+                            ? `https://ecosus-production.up.railway.app/${user.avatar}`
                             : `/public/images/default.png`
                         }
                         alt=""
@@ -593,7 +613,7 @@ const Header = () => {
                             src={
                               user?.avatar &&
                               user.avatar !== "public/images/default.png"
-                                ? `https://const-production.up.railway.app/${user.avatar}`
+                                ? `https://ecosus-production.up.railway.app/${user.avatar}`
                                 : `/public/images/default.png`
                             }
                             alt=""

@@ -389,7 +389,7 @@ const BlogForm = ({ isEdit = false, blogId = null }) => {
                   src={
                     imagePreview.startsWith("http") ||
                     imagePreview.startsWith("/uploads")
-                      ? `https://const-production.up.railway.app${imagePreview}`
+                      ? `https://ecosus-production.up.railway.app${imagePreview}`
                       : URL.createObjectURL(formik.values.coverImage)
                   }
                   alt="Cover Preview"

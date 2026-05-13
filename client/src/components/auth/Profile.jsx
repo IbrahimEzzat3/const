@@ -192,7 +192,7 @@ const Profile = () => {
                   {userData?.avatar && (
                     <img
                       className="h-full w-full object-cover"
-                      src={`https://const-production.up.railway.app/${userData.avatar}`}
+                      src={`https://ecosus-production.up.railway.app/${userData.avatar}`}
                       alt={t("sections.profile.userAvatar")}
                       onLoad={handleImageLoad}
                       onError={handleImageError}

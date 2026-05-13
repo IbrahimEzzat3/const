@@ -258,7 +258,8 @@ const WhyChooseUsSection = () => {
       <div className="container mx-auto px-4 relative z-10 flex flex-col h-full lg:flex-row items-stretch gap-12">
         {/* Left: Main Image */}
         <div className="flex-1 flex justify-center items-center w-full">
-          <div className="relative w-full h-full min-h-[600px] lg:min-h-[700px] overflow-hidden shadow-2xl border-4 border-accent-gold/30 flex flex-col items-center justify-center">
+          {" "}
+          <div className="relative w-full h-full min-h-[400px] sm:min-h-[600px] lg:min-h-[700px] overflow-hidden shadow-2xl border-4 border-accent-gold/30 flex flex-col items-center justify-center">
             {loading ? (
               <div className="p-6 flex justify-center items-center min-h-[200px]">
                 <LoadingSpinner size="lg" variant="primary" />
@@ -267,7 +268,7 @@ const WhyChooseUsSection = () => {
               <img
                 src={whyImage.image}
                 alt="Why Choose Us"
-                className="w-full h-full object-cover object-center scale-105 hover:scale-110 transition-transform duration-700"
+                className="w-full h-full object-cover object-center scale-150 hover:scale-150 transition-transform duration-700"
                 loading="lazy"
                 decoding="async"
               />
@@ -275,7 +276,7 @@ const WhyChooseUsSection = () => {
               <img
                 src={inside1_3}
                 alt="Why Choose Us"
-                className="w-full h-full object-cover object-center scale-105 hover:scale-110 transition-transform duration-700"
+                className="w-full h-full object-cover object-center scale-150 hover:scale-150 transition-transform duration-700"
                 loading="lazy"
                 decoding="async"
               />

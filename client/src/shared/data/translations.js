@@ -369,6 +369,7 @@ export const translations = {
             description:
               "Get an initial estimate of your home construction cost based on area and type of finishing you want.",
             calculateButton: "Calculate Cost",
+            calculateButton2: "Contact Us to Calculate Cost",
             courseButton: "Training Courses",
             area: "Area in square meters",
             enterAreaPlaceholder: "Enter area in square meters",
@@ -1041,6 +1042,7 @@ export const translations = {
             description:
               "احصل على تقدير أولي لتكلفة بناء منزلك بناءً على المساحة ونوع التشطيب الذي تريده.",
             calculateButton: "احسب التكلفة",
+            calculateButton2: "تواصل معنا لحساب التكلفة",
             courseButton: "الدورات التدريبية",
             area: "المساحة بالمتر المربع",
             enterAreaPlaceholder: "أدخل المساحة بالمتر المربع",
@@ -1068,6 +1070,7 @@ export const translations = {
             note4: "للحصول على عرض سعر دقيق، يرجى التواصل معنا",
             noteEstimationOnly:
               "هذه تكلفة تقديرية لأعمال الإنشاء وتختلف على حسب طبيعة الموقع ومتطلبات العمل. وقد تزيد او تقل بنسبة 25%.",
+            invalidArea: "يرجى إدخال مساحة صحيحة",
           },
           moreDetails: "المزيد من التفاصيل",
         },

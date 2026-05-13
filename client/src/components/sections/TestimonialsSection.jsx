@@ -132,8 +132,8 @@ const TestimonialsSection = () => {
                       src={
                         testimonial?.user?.avatar &&
                         testimonial.user.avatar !== "public/images/default.png"
-                          ? `https://const-production.up.railway.app/${testimonial.user.avatar}`
-                          : `https://const-production.up.railway.app/public/images/default.png`
+                          ? `https://ecosus-production.up.railway.app/${testimonial.user.avatar}`
+                          : `https://ecosus-production.up.railway.app/public/images/default.png`
                       }
                       alt={testimonial?.user?.name}
                       loading="lazy"

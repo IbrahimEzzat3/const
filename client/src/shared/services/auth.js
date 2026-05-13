@@ -54,12 +54,6 @@ export const authService = {
   getMe: async () => {
     try {
       const response = await api.get("/me", {
-        headers: {
-          "Cache-Control":
-            "no-store, no-cache, must-revalidate, proxy-revalidate",
-          Pragma: "no-cache",
-          Expires: "0",
-        },
         withCredentials: true,
       });
       return response.data.user;

@@ -13,7 +13,7 @@ const NotFoundPage = () => {
   return (
     <>
       <Helmet>
-        <title>404 - Page Not Found | Shad</title>
+        <title>404 - Page Not Found | Ecosus</title>
         <meta
           name="description"
           content="The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."

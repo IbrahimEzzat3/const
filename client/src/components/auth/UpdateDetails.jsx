@@ -158,7 +158,7 @@ const UpdateDetails = () => {
                 >
                   <img
                     className="h-16 w-16 rounded-full object-cover border-2 border-secondary-200"
-                    src={`https://const-production.up.railway.app/${formData.avatar}`}
+                    src={`https://ecosus-production.up.railway.app/${formData.avatar}`}
                     alt={t("updateDetailsPage.profilePreviewAlt")}
                     loading="lazy"
                     crossOrigin="anonymous"

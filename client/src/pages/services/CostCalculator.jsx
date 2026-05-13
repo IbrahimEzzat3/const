@@ -3,11 +3,18 @@ import { useNavigate } from "react-router-dom";
 import usePageTitle from "../../shared/hooks/usePageTitle";
 import { Helmet } from "react-helmet-async";
 import { useLanguage } from "../../shared/context/LanguageContext";
-
+import CustomAlert from "../../shared/components/CustomAlert";
 const CostCalculator = () => {
   const [estimatedCost, setEstimatedCost] = useState(null);
   const [landArea, setLandArea] = useState("");
   const [numFloors, setNumFloors] = useState("");
+  const [alert, setAlert] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "info",
+    onConfirm: null,
+  });
   const navigate = useNavigate();
   const { t, direction } = useLanguage();
   usePageTitle("costCalculator");
@@ -17,11 +24,21 @@ const CostCalculator = () => {
     const numFloorsNum = parseFloat(numFloors);
 
     if ((!landAreaNum && landArea !== "0") || landAreaNum < 0) {
-      alert(t("sections.services.costCalculator.invalidArea"));
+      setAlert({
+        isOpen: true,
+        title: t("sections.services.costCalculator.invalidArea"),
+        type: "warning",
+        onConfirm: () => setAlert((prev) => ({ ...prev, isOpen: false })),
+      });
       return;
     }
     if ((!numFloorsNum && numFloors !== "0") || numFloorsNum < 0) {
-      alert(t("sections.services.costCalculator.invalidArea"));
+      setAlert({
+        isOpen: true,
+        title: t("sections.services.costCalculator.invalidFloors"),
+        type: "warning",
+        onConfirm: () => setAlert((prev) => ({ ...prev, isOpen: false })),
+      });
       return;
     }
 
@@ -44,7 +61,7 @@ const CostCalculator = () => {
   return (
     <>
       <Helmet>
-        <title>{t("pageTitle.costCalculator")} | Shad</title>
+        <title>{t("pageTitle.costCalculator")} | Ecosus</title>
         <meta
           name="description"
           content={t("sections.services.costCalculator.description")}
@@ -137,11 +154,18 @@ const CostCalculator = () => {
               onClick={handleContactClick}
               className="bg-accent-gold hover:bg-accent-gold/80 text-white font-bold py-3 px-8 rounded-lg transition duration-300"
             >
-              {t("sections.services.costCalculator.calculateButton")}
+              {t("sections.services.costCalculator.calculateButton2")}
             </button>
           </div>
         </section>
       </main>
+      <CustomAlert
+        isOpen={alert.isOpen}
+        title={alert.title}
+        message={alert.message}
+        type={alert.type}
+        onConfirm={alert.onConfirm}
+      />
     </>
   );
 };

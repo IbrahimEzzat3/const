@@ -39,11 +39,11 @@ const BlogManager = () => {
     let finalUrl;
     // Ensure proper URL construction
     if (imagePath.startsWith("/uploads/")) {
-      finalUrl = `https://const-production.up.railway.app${imagePath}`;
+      finalUrl = `https://ecosus-production.up.railway.app${imagePath}`;
     } else if (imagePath.startsWith("uploads/")) {
-      finalUrl = `https://const-production.up.railway.app/${imagePath}`;
+      finalUrl = `https://ecosus-production.up.railway.app/${imagePath}`;
     } else {
-      finalUrl = `https://const-production.up.railway.app/uploads/${imagePath}`;
+      finalUrl = `https://ecosus-production.up.railway.app/uploads/${imagePath}`;
     }
 
     return finalUrl;
@@ -208,7 +208,9 @@ const BlogManager = () => {
   return (
     <main className="space-y-4 md:space-y-6 px-2 md:px-0">
       <header className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 md:gap-0">
-        <h1 className="text-xl md:text-2xl font-semibold text-accent-teal">Manage Blogs</h1>
+        <h1 className="text-xl md:text-2xl font-semibold text-accent-teal">
+          Manage Blogs
+        </h1>
         <Button
           variant="primary"
           onClick={() => navigate("/admin/blogs/new")}

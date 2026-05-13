@@ -49,7 +49,7 @@ const HomePage = () => {
         />
         <meta
           name="keywords"
-          content="Shad, contracting, interior design, exterior design, smart automation, Saudi Arabia"
+          content="Ecosus, contracting, interior design, exterior design, smart automation, Saudi Arabia"
         />
         <meta property="og:title" content="Ecosus- Home" />
         <meta

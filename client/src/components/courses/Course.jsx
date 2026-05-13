@@ -13,7 +13,7 @@ const Course = ({ course }) => {
       <div className="relative h-48 bg-gray-200 flex items-center justify-center">
         {course.photo ? (
           <img
-            src={`https://const-production.up.railway.app/uploads/${course.photo}`}
+            src={`https://ecosus-production.up.railway.app/uploads/${course.photo}`}
             alt={course.title}
             className="h-full w-full object-cover rounded-t-lg"
             loading="lazy"

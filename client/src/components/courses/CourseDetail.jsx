@@ -565,8 +565,8 @@ const CourseDetail = () => {
                     <img
                       src={
                         course?.avatar
-                          ? `https://const-production.up.railway.app/uploads/${course.avatar}`
-                          : `https://const-production.up.railway.app/public/images/defaultCourse.png`
+                          ? `https://ecosus-production.up.railway.app/uploads/${course.avatar}`
+                          : `https://ecosus-production.up.railway.app/public/images/defaultCourse.png`
                       }
                       alt={course.instructor?.name}
                       className="w-24 h-24 rounded-full object-cover ring-4 ring-primary-50"
@@ -575,7 +575,7 @@ const CourseDetail = () => {
                       referrerPolicy="no-referrer"
                       onError={(e) => {
                         e.target.src =
-                          "https://const-production.up.railway.app/public/images/defaultCourse.png";
+                          "https://ecosus-production.up.railway.app/public/images/defaultCourse.png";
                       }}
                     />
                   </div>
@@ -637,7 +637,7 @@ const CourseDetail = () => {
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
                         <img
-                          src={`https://const-production.up.railway.app/public/images/default.png`}
+                          src={`https://ecosus-production.up.railway.app/public/images/default.png`}
                           alt={t("common.visitor")}
                           className="w-10 h-10 rounded-full"
                           loading="lazy"
@@ -689,7 +689,7 @@ const CourseDetail = () => {
     const [videoError, setVideoError] = React.useState(false);
     const [videoLoading, setVideoLoading] = React.useState(true);
     const videoUrl = video
-      ? `https://const-production.up.railway.app/uploads/${video}`
+      ? `https://ecosus-production.up.railway.app/uploads/${video}`
       : null;
     const handleVideoError = () => {
       setVideoError(true);
@@ -1385,11 +1385,8 @@ const CourseDetail = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
           <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-8 text-center">
             <h2 className="text-2xl font-bold mb-4 text-green-700">
-              Enrollment Successful!
+              تم تسجيلكم بنجاح !
             </h2>
-            <p className="mb-6 text-green-700">
-              "You have been enrolled successfully."
-            </p>
             <Button onClick={() => setEnrollSuccess(false)} variant="primary">
               OK
             </Button>

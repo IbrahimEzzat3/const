@@ -531,7 +531,7 @@ const CourseForm = ({ isEdit = false, courseId = null }) => {
                   src={
                     initialValues.avatar.startsWith("http")
                       ? initialValues.avatar
-                      : `https://const-production.up.railway.app/uploads/${initialValues.avatar}`
+                      : `https://ecosus-production.up.railway.app/uploads/${initialValues.avatar}`
                   }
                   alt="Instructor Avatar"
                   className="h-16 w-16 object-cover rounded-full border"

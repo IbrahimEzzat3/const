@@ -65,7 +65,7 @@ const AppRoutes = () => {
       <Route path="/" element={<HomePage />} />
 
       {/* Service Routes */}
-      <Route path="/services/cost-calculator" element={<CostCalculator />} />
+      <Route path="/cost-calculator" element={<CostCalculator />} />
 
       {/* Project Routes */}
       <Route path="/projects/:projectSlug" element={<ProjectDetailPage />} />

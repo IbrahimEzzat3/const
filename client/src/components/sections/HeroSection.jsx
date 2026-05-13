@@ -211,7 +211,7 @@ const HeroSection = ({ slides, loadingSlides }) => {
               <img
                 src={newSlide.preview}
                 alt="Preview"
-                className="w-64 h-32 object-cover rounded-lg"
+                className="absolute inset-0 w-full h-full object-cover object-center"
               />
             )}
             <div className="flex gap-2">

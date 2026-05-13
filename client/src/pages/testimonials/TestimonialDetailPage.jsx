@@ -238,7 +238,7 @@ const TestimonialDetailPage = () => {
           {testimonial
             ? `Testimonial by ${testimonial.user.name}`
             : "Testimonial Not Found"}{" "}
-          | Shad
+          | Ecosus
         </title>
         <meta
           name="description"
@@ -264,8 +264,8 @@ const TestimonialDetailPage = () => {
                           testimonial?.user?.avatar &&
                           testimonial.user.avatar !==
                             "public/images/default.png"
-                            ? `https://const-production.up.railway.app/${testimonial.user.avatar}`
-                            : `https://const-production.up.railway.app/public/images/default.png`
+                            ? `https://ecosus-production.up.railway.app/${testimonial.user.avatar}`
+                            : `https://ecosus-production.up.railway.app/public/images/default.png`
                         }
                         alt={testimonial.user.name}
                         loading="lazy"

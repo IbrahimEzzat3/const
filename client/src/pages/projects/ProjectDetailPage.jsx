@@ -185,7 +185,7 @@ const ProjectDetailPage = () => {
     return (
       <>
         <Helmet>
-          <title>{staticProject.title} | Shad</title>
+          <title>{staticProject.title} | Ecosus</title>
           <meta name="description" content={staticProject.description} />
           <meta property="og:title" content={staticProject.title} />
           <meta property="og:description" content={staticProject.description} />
@@ -276,7 +276,7 @@ const ProjectDetailPage = () => {
   return (
     <>
       <Helmet>
-        <title>{backendProject.slug} | Shad</title>
+        <title>{backendProject.slug} | Ecosus</title>
         <meta name="description" content={backendProject.slug} />
         <meta property="og:title" content={backendProject.slug} />
         <meta property="og:description" content={backendProject.slug} />

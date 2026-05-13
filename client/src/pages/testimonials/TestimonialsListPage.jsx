@@ -13,7 +13,7 @@ const TestimonialsListPage = () => {
   return (
     <>
       <Helmet>
-        <title>{t("testimonials.title", "Testimonials")} | Shad</title>
+        <title>{t("testimonials.title", "Testimonials")} | Ecosus</title>
         <meta
           name="description"
           content={

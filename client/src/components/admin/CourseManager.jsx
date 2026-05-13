@@ -327,7 +327,7 @@ const CourseManager = () => {
                     <div className="flex items-center">
                       {course.photo ? (
                         <img
-                          src={`https://const-production.up.railway.app/uploads/${course.photo}`}
+                          src={`https://ecosus-production.up.railway.app/uploads/${course.photo}`}
                           alt={course.title}
                           className="h-14 w-24 object-cover rounded-md border"
                           loading="lazy"
